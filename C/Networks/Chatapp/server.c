@@ -1,37 +1,32 @@
 #include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <unistd.h>
-#define BUFFER 1000;
+#define PORT 3440
+#define BUFFER_SIZE 100
 int main() {
   int server_fd;
-  struct addrinfo hints, *res;
-  // essentially sockaddr is just the address we are binding the socket to.
-  // We are adding the details of the address. in this case
-  memset(&hints, 0, sizeof hints); // get rid of garbage values, structs are
-                                   // contiguous, essentially arrays.
-  hints.ai_family = AF_UNSPEC;     // use IPv4 or IPv6, whichever
-  hints.ai_socktype = SOCK_STREAM; // stream socket
-  hints.ai_flags = AI_PASSIVE;     // fill in my IP for me
-  int addr = getaddrinfo(NULL, "3490", &hints, &res); // local host, port 3490,
-  if ((server_fd =
-           socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == 0) {
+  char msg[BUFFER_SIZE];
+  if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
     perror("socket failed");
     exit(EXIT_FAILURE);
   }
-  bind(server_fd, res->ai_addr, res->ai_addrlen);
+
+  struct sockaddr_in address = {AF_INET, htons(PORT), 0};
+  // IPv4, convert port to network byte order, localhost ip.
+  bind(server_fd, (struct sockaddr *)&address, sizeof(address));
+  // the socket fd is now bound to the localhost address on PORT.
   int backlog = 5; // Maximum length of the queue of pending connections
   listen(server_fd, backlog);
+  while (msg != "Close") {
+    int client_fd = accept(server_fd, 0, 0);
+    int bytes_recieved = recv(client_fd, msg, BUFFER_SIZE, 0);
+    msg[bytes_recieved] = '\0';
+    printf("Received data from client: %s\n", msg);
+    close(client_fd);
+  }
 
-  char message[50];
-  fgets(message, BUFFER, );
-
-  printf("Client says: %s\n", message);
-
+  close(server_fd);
   return 0;
 }
