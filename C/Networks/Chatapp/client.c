@@ -42,12 +42,10 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-  // while (strcmp(message, "Close")) {
   strcpy(message, "");
   printf("Type message to server: \n");
   fgets(message, BUFFER, stdin);
   send(client_fd, message, strlen(message), 0);
-  //}
 
   freeaddrinfo(address_info);
 
