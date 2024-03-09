@@ -1,2 +1,0 @@
-gcc -o Client Client.c
-./Client
