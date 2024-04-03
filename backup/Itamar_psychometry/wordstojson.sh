@@ -1,5 +1,5 @@
-grep -v '^words_options' non-advanced.txt > modified_words.js
-rm psychometry_words.txt
+grep -v '^words_options' hebrew_5.txt > modified_words.js
+rm hebrew_5.txt
 prepend_text="
 const fs = require('fs');
 var words=new Array;"
@@ -33,10 +33,8 @@ cat "$original_file" >> "$temp_file"
 # Overwrite the original file with the contents of the temporary file
 mv "$temp_file" "$original_file"
 
-# Remove the temporary file
-rm "$temp_file"
 
 echo $append_text >> $original_file
 node modified_words.js
-#rm modified_words.js
+# rm modified_words.js
 python3 anki_api.py
