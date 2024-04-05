@@ -47,6 +47,6 @@ def main():
             if line:
                 print(line)
                 # print(get_word_definitions(line),type(get_word_definitions(line)))
-                add_flashcard("psychometry_deck",line,get_word_definitions(line))
+                add_flashcard("hebrew_psychometry",line," ")
 if __name__ == "__main__":
     main()

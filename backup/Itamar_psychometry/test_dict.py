@@ -14,8 +14,8 @@ def get_word_definitions(word):
         # Get the definitions of all synsets
         definitions = [synset.definition() for synset in synsets]
         for index, definition in enumerate(definitions):
-            definitions_string +=f"{index + 1}. {definition}"
-            return definitions_string.strip()  # Strip trailing newline
+            definitions_string +=f"{index + 1}. {definition}<br>"
+        return definitions_string  # Strip trailing newline
     else:
         return ["No definition found for the word '{}'.".format(word)]
 
@@ -23,8 +23,4 @@ def get_word_definitions(word):
 word = "table"
 
 if __name__ == "__main__":
-# Get and print the definitions of the word
-    definitions = get_word_definitions(word)
-    print("Definitions of '{}':".format(word))
-    for index, definition in enumerate(definitions):
-        print(f"{index + 1}. {definition}")
+    get_word_definitions(word)
