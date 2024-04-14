@@ -41,7 +41,11 @@ class Counter {
       appendKanjiDigit(res, man / 1000, "千");
       appendKanjiDigit(res, (man / 100) % 10, "百");
       appendKanjiDigit(res, (man / 10) % 10, "十");
-      appendKanjiDigit(res, man % 10, "万");
+      if (man % 10 == 0) {
+        res.append("万");
+      } else {
+        appendKanjiDigit(res, man % 10, "万");
+      }
     }
 
     appendKanjiDigit(res, sen, "千");
