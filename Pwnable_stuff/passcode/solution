@@ -1,0 +1,21 @@
+For brevity's sake, we will start the logic from login, though unchronological.
+login asks for passcode1-> it takes user input and stores it at the first 8 bytes (int* size) of the uninitiliazed value passcode
+
+login's ebp register is stored in 0xFFFFD518 , so we can deduct that passcode1's correct address is: ebp - 0x4 = 0xFFFFD514,
+and passcode2's: ebp-0x8 = 0xFFFFD510
+now we can check which values are stored at those addresses.
+passcode 1 = 0xFFFFD560
+passcode 2 = 0xea2d9b00
+
+
+GOAL:
+set *(EBP -0x10) = 0x528e6
+set *(EBP -0xc) = 0xcc07c9
+
+FACT:
+EBP -0x10 (-16) = 0xFFFFD508
+EBP -0xc (-12)= 0xFFFFD50C
+
+
+it will jump to :0x804a02c
+address of bin/cat call: 0x80485d7
