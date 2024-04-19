@@ -14,10 +14,12 @@ int main(int argc, char *argv[], char *envp[]) {
     printf("args: %d\n", argc);
     return 0;
   }
-  if (strcmp(argv['A'], "\x00"))
-    return 0;
+  // if (strcmp(argv['A'], "\x00"))
+  //   printf("Failed. argv['A']: %x\n", argv['A']);
+  // return 0;
   if (strcmp(argv['B'], "\x20\x0a\x0d"))
-    return 0;
+    printf("%s", argv['B']);
+  return 0;
   printf("Stage 1 clear!\n");
 
   // stdio
