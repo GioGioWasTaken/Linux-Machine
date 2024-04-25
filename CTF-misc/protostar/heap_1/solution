@@ -1,0 +1,5 @@
+the difference between the two mallocs is 32. the size of each object is 14. we are writing from name, so we 
+
+We will begin by writing 32 chars of padding. AAAA....
+then, we will begin the attack. Our objective is switching the value of puts in the GOT table, with the function that'll print the flag.
+
