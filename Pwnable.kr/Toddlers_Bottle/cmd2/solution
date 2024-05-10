@@ -1,0 +1,10 @@
+./cmd2 "echo $(<flag)"
+when it's like this, bash evaluates it first, so no permissions.
+./cmd2 "echo \$(<flag)"
+when it's like this, bash ignores it, but the filter catches flag.
+./cmd2 "echo \$(<fl*g)"
+when it's like this, bash ignores it, the filter misses it, but sh fails to recognize * as a wildcard.
+./cmd2 "echo $(<$(\printf %s%s fl ag))"
+filter misses it, flag is indeed registered, but recognized by bash.
+./cmd2 'echo $(<$(printf %s%s fl ag))'
+'' prevent bash from escaping characters.

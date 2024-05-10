@@ -1,0 +1,2 @@
+gcc -Wall -ansi -pedantic -o partialSums partialSums.c
+./partialSums

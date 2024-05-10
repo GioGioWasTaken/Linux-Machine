@@ -1,0 +1,10 @@
+Seemingly, this number is always generated: 0x6B8B4567
+binary: 1101011100010110100010101100111
+
+so we need to find the xor compliment for this in order to get 0xdeadbeef
+
+rand: 11011110101011011011111011101111
+complement: 0000100111101001011101000011000 (one digit is missing)
+0xdeadbeef: 1011110101011011011111011101111
+
+3039230856

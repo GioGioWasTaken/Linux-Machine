@@ -1,0 +1,2 @@
+gcc -o advent_1 advent_1.c
+./advent_1

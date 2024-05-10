@@ -1,0 +1,31 @@
+1. main:
+entrance sequence, printf, scanf...
+into r4, return value of key1
+into r3, return value of key2
+then: r4= r4+ r3
+into r3, return value of key3
+
+then: r2= r4+r3
+
+
+our final value is r2. to know its value we just have to add the total that r0 of each of the key functions, adds to.
+
+
+KEY 1:
+
+R0 = PC = 0x00008ce0 +0x4
+
+KEY 2:
+
+R0 = PC+0x4 = 0x00008d06 + 0x4 + 0x2 (two instruction ahead!)
+
+KEY 3:
+
+R0 = lr = 0x00008d80
+
+
+Conclusion:
+PC points two instructions after the current instruction. 
+
+
+solution: 108400
