@@ -1,2 +1,0 @@
-gcc -Wall -ansi -pedantic -o my_suffix my_suffix.c
-./my_suffix

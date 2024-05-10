@@ -1,5 +1,0 @@
-REQUIREMENTS FOR INPUT:
-1. must be shorter than 100 chars
-2. 65th argument has to be null
-('A' 65, so argv[65] not including execution)
-3. 66th argument has to "\n\r". 

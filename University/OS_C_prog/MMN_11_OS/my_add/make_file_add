@@ -1,2 +1,0 @@
-gcc -Wall -ansi -pedantic -o my_add my_add.c
-./my_add

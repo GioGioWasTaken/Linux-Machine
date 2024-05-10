@@ -1,6 +1,0 @@
-echo "Fetching arguments..."
-python3 arguments.py > arguments.txt
-echo "Compiling...."
-gcc -o my_input my_input.c
-echo "Running my_input with arguments.txt"
-./my_input $(cat arguments.txt) 
