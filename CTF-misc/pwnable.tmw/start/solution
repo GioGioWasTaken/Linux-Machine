@@ -1,0 +1,6 @@
+> look into _start
+> realize that int 0x80 is calling a syscall, according to linux 0x86 32 bit convention, 0x4value stored in eax) is a sys write, it pritns out the message we see
+> the next one is a sys read. It reads up to 20 chars. by utilizing some padding:
+
+payload = AAAAAAAAAAAAAAAAAAAA (20 chars)
+payload+= return_address_to_malicious_code
