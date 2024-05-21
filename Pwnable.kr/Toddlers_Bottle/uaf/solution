@@ -1,0 +1,8 @@
+0x40117A = address of shell function
+
+observe that before new is called, data is moved to the EIP register. This is the size of the class.
+
+
+look at RAX register to find malloc return value. 
+each vtable entry ptr is 8 bytes long. Therefore the offset will be 8 bytes.
+0x00401570 -8 = 0x00401568

@@ -1,0 +1,4 @@
+ First, let's set a breakpoint before the if statement
+ b *0x400868
+ observe that we still can input 28 more characters than the buffer size, despite the safe fgets usage.
+ let's look around the stack for interesting values we might be able to overwrite.
