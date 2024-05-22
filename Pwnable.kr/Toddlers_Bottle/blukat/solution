@@ -2,3 +2,5 @@
  b *0x400868
  observe that we still can input 28 more characters than the buffer size, despite the safe fgets usage.
  let's look around the stack for interesting values we might be able to overwrite.
+
+ Ok this exercise was a troll. But there is still (?) an actually working method to bypass it, by directly inspecting memory while the program is running , and looking for the string passed as variable to strcmp.
