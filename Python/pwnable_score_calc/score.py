@@ -1,5 +1,4 @@
 import sys
-
 if __name__ == "__main__":
     # Check command line arguments
     if len(sys.argv) != 2:

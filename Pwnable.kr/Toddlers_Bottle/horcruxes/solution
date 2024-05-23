@@ -1,0 +1,6 @@
+address for process interaction: nc 0 9032
+keep out for this address. 
+Seems like thiste e is the one we need to overwrite. 80A0170
+b *main+221
+pattern create 300 input
+1094271297 found at offset: 121
