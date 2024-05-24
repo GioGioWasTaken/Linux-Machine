@@ -1,0 +1,30 @@
+Unlink is vulnrable, since we can write to the heap!
+the first step is to observe that unlink gives us the ability to write a value from the heap, to another pointer, that's stored on the heap...
+we can control both of these. This means that we have a read-what-where primitive. We can write anything we want, to wherever we want! Oh. But wait, the next section, "BK -> fd = FD" would write to an offset of our write address primitive, which means that BK cannot be any code segment, otherwise the program would segfault...
+But we do have a stack address! the stack is writeable, and then the second line would just write something to an offset of the stack we don't care about!
+
+We need to find 
+1. B - > BK = write address 
+2. B - >FD = write value
+
+
+
+here is stack address leak: 0xffffd6e4
+here is heap address leak: 0x804b5b0 +0x4= write location. 8 bytes of padding, a
+x/5xw 0x804b5b0 -0x4
+b *0x08048565
+
+Check from A, to B: x/27xw 0x804b5b0 -0x4
+
+from this we can defer that we need to overwrite two contiguous addrsses after B starts
+the first one is B->FD, the next is B->BK
+
+
+maybe we can overwrite the return address of unlink to winner
+it returns to: 0x080485F7, which is stored at offset +20 from ESP at that point in execution.
+
+this is the offset between the leaked addr, and retr address for unlink
+distance 0xffffd6e4 0xffffd6cc
+From 0xffffd6e4 to 0xffffd6cc: -24 bytes, -6 dwords
+
+might be -36? check
