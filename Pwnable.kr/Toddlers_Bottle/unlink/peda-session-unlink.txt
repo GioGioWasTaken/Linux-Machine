@@ -1,6 +1,2 @@
-break *0x08048555
-break *0x08048565
-break *0x08048575
-break *main+181
-break * 0x08048602
+break *shell
 

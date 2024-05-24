@@ -10,11 +10,10 @@ We need to find
 
 
 here is stack address leak: 0xffffd6e4
-here is heap address leak: 0x804b5b0 +0x4= write location. 8 bytes of padding, a
-x/5xw 0x804b5b0 -0x4
-b *0x08048565
+here is heap address leak: 0x804b5b0 
 
 Check from A, to B: x/27xw 0x804b5b0 -0x4
+
 
 from this we can defer that we need to overwrite two contiguous addrsses after B starts
 the first one is B->FD, the next is B->BK
@@ -27,4 +26,9 @@ this is the offset between the leaked addr, and retr address for unlink
 distance 0xffffd6e4 0xffffd6cc
 From 0xffffd6e4 to 0xffffd6cc: -24 bytes, -6 dwords
 
-might be -36? check
+
+but... this doesn't work. So instead we'll utilize the added assembly
+that dereferences, and now measure the distance between leadkaddr and main's return addr
+
+gdb-peda$ distance 0xffffd6e4 0xffffd6f4
+From 0xffffd6e4 to 0xffffd6f4: 16 bytes, 4 dwords
