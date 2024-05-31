@@ -12,10 +12,17 @@ void shell() { system("/bin/sh"); }
 void unlink(OBJ *P) {
   OBJ *BK;
   OBJ *FD;
+<<<<<<< HEAD
   BK = P->bk;  // offset 4, address in stack
   FD = P->fd;  // offset 8, address of location of shell
   FD->bk = BK; // offset 4
   BK->fd = FD; // offset 8
+=======
+  BK = P->bk;
+  FD = P->fd;
+  FD->bk = BK;
+  BK->fd = FD;
+>>>>>>> 1c76dcad71ac0b508686bb6e3dcd29cd5a77a8dd
 }
 int main(int argc, char *argv[]) {
   malloc(1024);

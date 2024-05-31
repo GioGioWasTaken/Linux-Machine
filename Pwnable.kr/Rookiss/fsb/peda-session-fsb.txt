@@ -1,3 +1,5 @@
 break *0x8048603
 break *0x8048615
+break *0x08048791
+break *0x0804867b
 
