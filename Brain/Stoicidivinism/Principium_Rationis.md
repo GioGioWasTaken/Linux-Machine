@@ -6,7 +6,7 @@ To take blame in the actions of a man is reproachable --
 
 for all is controlled by circumstances, and brought upon by the divine and the unfathomable. 
 
-A war might rage on for a millenia, and it is of no consequence whether it is just or unjust
+A war might rage on for a millennia, and it is of no consequence whether it is just or unjust
 
 A flower bed much beloved by children and horse is set aflame
 
