@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set default commit message if none provided
-COMMIT_MESSAGE=${COMMIT_MESSAGE:-"Automatic commit, used auto save shortcut provided by bash script."}
+COMMIT_MESSAGE=${COMMIT_MESSAGE:-"Automatic commit, used auto save shortcut provided by bash script. 
+This is an obsidian notes utillity, as I use git as my backup solution between machines."}
 
-# Navigate to the specified directory
-cd ~/Desktop/Programming/ || { echo "Directory not found"; exit 1; }
+cd ~/Desktop/Programming/Brain/ || { echo "Directory not found"; exit 1; }
 
 # Check for changes
 if ! git diff-index --quiet HEAD --; then
