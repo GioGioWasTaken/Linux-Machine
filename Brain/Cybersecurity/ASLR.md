@@ -1,1 +1,1 @@
-Differently from the other protections, ASLR is an OS level protection
+Differently from the other protections, ASLR is a kernel level protection. It's enabled per system as opposed to [[PIE]] which is enabled per binary.n
