@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Set default commit message if none provided
 COMMIT_MESSAGE=${COMMIT_MESSAGE:-"Automatic commit, used auto save shortcut provided by bash script."}
 
