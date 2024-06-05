@@ -6,10 +6,9 @@ also referred to as XN and DEP, no execute. The stack cannot be executed.
 
 **Mitigation:** 
 
-pie and libc memory regions have some executable memory spaces where instructions are stored.
+Use [ROP](ROP)  to redirect code exection. 
 
 **mmap with NX:** 
 
 0x00007ffffffde000 0x00007ffffffff000 0x0000000000000000 rw- \[stack\]
 
-but observe:

@@ -1,0 +1,1 @@
+Differently from the other protections, ASLR is an OS level protection

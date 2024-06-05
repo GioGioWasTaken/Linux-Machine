@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cybersecurity/Cybersecurity.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "mode": "source",
                 "source": false
               }
@@ -36,9 +36,11 @@
             "id": "4c4e2a803677e591",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
+              "type": "markdown",
               "state": {
-                "sortOrder": "alphabetical"
+                "file": "Cybersecurity/RELRO.md",
+                "mode": "source",
+                "source": false
               }
             }
           },
@@ -64,12 +66,22 @@
               "type": "bookmarks",
               "state": {}
             }
+          },
+          {
+            "id": "40454aacf2cb2ad4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 914.5
   },
   "right": {
     "id": "e704a3e97697baeb",
@@ -85,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cybersecurity/Cybersecurity.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cybersecurity/Cybersecurity.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cybersecurity/Cybersecurity.md"
+                "file": "Cybersecurity/Stack Exploitation.md"
               }
             }
           }
@@ -147,14 +159,24 @@
   },
   "active": "20d949170d9d6859",
   "lastOpenFiles": [
-    "Cybersecurity/Buffer Overflows.md",
-    "Cybersecurity/Cybersecurity.md",
-    "Me.md",
-    "Cybersecurity/NX.md",
-    "Stoicidivinism/FrontMatter.md",
     "Cybersecurity/RELRO.md",
-    "Cybersecurity.md",
+    "Cybersecurity/Stack Exploitation.md",
+    "Cybersecurity/ROP.md",
+    "Binary exploitation.md",
+    "Cybersecurity/Cybersecurity.md",
     "Cybersecurity/ASLR.md",
+    "Process interaction.md",
+    "Me.md",
+    "Stoicidivinism/Poems & Shortstories.md",
+    "Algorithms.md",
+    "Networking.md",
+    "Reverse Engineering.md",
+    "SYSCALL exploits.md",
+    "Compilation process and ASM.md",
+    "Cybersecurity/NX.md",
+    "Cybersecurity/NX.md~",
+    "Cybersecurity/ROP.md~",
+    "Cybersecurity.md",
     "Cybersecurity",
     "RELRO.md",
     "Buffer Overflows.md",
@@ -172,10 +194,7 @@
     "[[Stoicidivnism.FrontMatter]].md",
     "Stoicidivnism.FrontMatter.md",
     "Stoicidivnism.md",
-    "[[]].md",
-    "url.md",
     "Stoicidivinism/FrontMatter",
-    "Untitled.canvas",
-    "Stoicidivinism/test.md"
+    "Untitled.canvas"
   ]
 }

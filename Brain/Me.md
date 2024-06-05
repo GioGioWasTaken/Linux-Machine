@@ -2,13 +2,12 @@
 
 
 **Writing** 
-- (Writing) [[FrontMatter]]
+-  [[Poems & Shortstories]]
 
 **Programming notes**
 
 - [[Cybersecurity]]
-- Algorithmics
-- OOP
+- [[Algorithms]]
 - 
 
 
