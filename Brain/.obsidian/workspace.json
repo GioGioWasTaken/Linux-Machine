@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Compilation process and ELF.md",
+                "file": "Programming tooling.md",
                 "mode": "source",
                 "source": false
               }
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Compilation process and ELF.md",
+                "file": "Programming tooling.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Compilation process and ELF.md",
+                "file": "Programming tooling.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Compilation process and ELF.md"
+                "file": "Programming tooling.md"
               }
             }
           }
@@ -161,11 +161,13 @@
   },
   "active": "20d949170d9d6859",
   "lastOpenFiles": [
+    "VIM.md",
+    "Programming tooling.md",
+    "Me.md",
     "Compilation process and ELF.md",
     "Cybersecurity/Cybersecurity.md",
     "Cybersecurity/Stack Exploitation.md",
     "Binary exploitation.md",
-    "Me.md",
     "Cybersecurity/ASLR.md",
     "Cybersecurity/RELRO.md",
     "Cybersecurity/ROP.md",
@@ -194,8 +196,6 @@
     "().md",
     "Stoicidivinism/FrontMatter.md~",
     "Me.md~",
-    "[[Stoicidivnism.FrontMatter]].md",
-    "Stoicidivnism.FrontMatter.md",
     "Stoicidivinism/FrontMatter",
     "Untitled.canvas"
   ]

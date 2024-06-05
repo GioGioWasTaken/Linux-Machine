@@ -1,0 +1,1 @@
+- A neat trick is using regular expressions with vim search and replace. :s/thingtoreplace/thingtoreplacewith/g
