@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cybersecurity/ASLR.md",
+                "file": "Compilation process and ELF.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,11 +77,13 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 914.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "e704a3e97697baeb",
@@ -97,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cybersecurity/ASLR.md",
+                "file": "Compilation process and ELF.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cybersecurity/ASLR.md",
+                "file": "Compilation process and ELF.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cybersecurity/ASLR.md"
+                "file": "Compilation process and ELF.md"
               }
             }
           }
@@ -159,14 +161,15 @@
   },
   "active": "20d949170d9d6859",
   "lastOpenFiles": [
+    "Compilation process and ELF.md",
+    "Cybersecurity/Cybersecurity.md",
     "Cybersecurity/Stack Exploitation.md",
+    "Binary exploitation.md",
+    "Me.md",
+    "Cybersecurity/ASLR.md",
     "Cybersecurity/RELRO.md",
     "Cybersecurity/ROP.md",
-    "Binary exploitation.md",
-    "Cybersecurity/Cybersecurity.md",
-    "Cybersecurity/ASLR.md",
     "Process interaction.md",
-    "Me.md",
     "Stoicidivinism/Poems & Shortstories.md",
     "Algorithms.md",
     "Networking.md",
@@ -193,7 +196,6 @@
     "Me.md~",
     "[[Stoicidivnism.FrontMatter]].md",
     "Stoicidivnism.FrontMatter.md",
-    "Stoicidivnism.md",
     "Stoicidivinism/FrontMatter",
     "Untitled.canvas"
   ]
