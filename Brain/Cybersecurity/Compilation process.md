@@ -18,3 +18,6 @@ When a file is executed, the OS runs `the loader` which:
 4. clear registers and set ESP in place
 5. 
 
+
+
+Finally, the file is compiled into an [[ELF]] (executable and linkable format) binary. 

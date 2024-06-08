@@ -3,6 +3,7 @@ class Solution {
     int[] nums = { 1, 3, 5, 6 };
     int res = searchInsert(nums, 7);
     System.out.println(res);
+    
   }
 
   static public int searchInsert(int[] nums, int target) {

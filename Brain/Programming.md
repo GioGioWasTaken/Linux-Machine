@@ -1,0 +1,2 @@
+- useful tools:  [[Programming tooling]]
+- [[C notes]]

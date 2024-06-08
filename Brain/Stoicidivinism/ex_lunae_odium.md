@@ -35,5 +35,5 @@ The goddess again fell for his words
 
 
 
-Dantamiya jealous with the attention and care always given to Theramesius by his followers, and thereby turned once of Theramesius' priests into a turtle. Hearing of his rage, Dantamiya laments his fate and is rescued by the moon, who is one-sided-ly in love with him. Theramesius who takes pity on her, does not kill her nor Dantamiya. But, still feeling much sadness for the fate of his follower, he curses Tsukigami to only appear at night, in her full glory only once a month, and 
+Dantamiya was jealous with the attention and care always given to Theramesius by his followers, so he turned one of Theramesius' priests into a turtle. Hearing of his rage, Dantamiya laments his fate and is rescued by the moon, who is one-sided-ly in love with him. Theramesius who takes pity on her, does not kill her nor Dantamiya. But, still feeling much sadness for the fate of his follower, he curses Tsukigami to only appear at night, in her full glory only once a month, and 
 

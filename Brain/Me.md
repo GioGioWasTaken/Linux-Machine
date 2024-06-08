@@ -8,7 +8,7 @@
 
 - [[Cybersecurity]]
 - [[Algorithms]]
-- [[Programming tooling]]
+- [[Programming]]
 
 
 
