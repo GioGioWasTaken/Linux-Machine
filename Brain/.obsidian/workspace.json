@@ -4,45 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "37c89da670205831",
+        "id": "0599ca5c7ba9174f",
         "type": "tabs",
         "children": [
           {
-            "id": "20d949170d9d6859",
+            "id": "3fa2093ffb423b15",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming tooling.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "mode": "source",
                 "source": false
-              }
-            }
-          },
-          {
-            "id": "8b7c3baa4eeed88c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Cybersecurity/ELF.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6d2cecde48d1c3b6",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.6.2"
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -55,18 +32,6 @@
         "id": "86b0172c522467f8",
         "type": "tabs",
         "children": [
-          {
-            "id": "4c4e2a803677e591",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Cybersecurity/RELRO.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
           {
             "id": "df9473c27c97f616",
             "type": "leaf",
@@ -100,12 +65,11 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 217.5
   },
   "right": {
     "id": "e704a3e97697baeb",
@@ -121,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cybersecurity/ELF.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cybersecurity/ELF.md",
+                "file": "Cybersecurity/Stack Exploitation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cybersecurity/ELF.md"
+                "file": "Cybersecurity/Stack Exploitation.md"
               }
             }
           },
@@ -189,19 +153,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8b7c3baa4eeed88c",
+  "active": "3fa2093ffb423b15",
   "lastOpenFiles": [
-    "Cybersecurity/Binary exploitation.md",
-    "Programming tooling.md",
+    "Untitled.md",
     "Cybersecurity/Stack Exploitation.md",
+    "Cybersecurity/ASLR.md",
+    "Cybersecurity/RELRO.md",
+    "Cybersecurity/Binary exploitation.md",
+    "Cybersecurity/Cybersecurity.md",
+    "Cybersecurity/NX.md",
     "Cybersecurity/ELF.md",
+    "Cybersecurity/PIE.md",
+    "Virtual memory.md",
+    "Memory.md",
+    "4913",
+    "RAM.md",
+    "Virtual memory.md~",
+    "Pasted image 20240610174759.png",
+    "Cybersecurity/Networking.md",
+    "Programming tooling.md",
     "ARM assembly.md",
     "Cybersecurity/Assembly and RE.md",
-    "Cybersecurity/Cybersecurity.md",
     "Stoicidivinism/Principium_Rationis.md",
     "Me.md",
-    "Cybersecurity/RELRO.md",
-    "Untitled.md",
     "C notes.md",
     "Programming.md",
     "Pasted image 20240607151555.png",
@@ -210,24 +184,15 @@
     "Cybersecurity/4913",
     "Cybersecurity/Reverse Engineering.md",
     "Cybersecurity/Compilation process.md",
-    "Cybersecurity/ASLR.md",
     "[Programming.md",
     "[[Programming.md",
     "Cybersecurity/Process interaction.md",
-    "Cybersecurity/PIE.md",
     "Cybersecurity/SYSCALL exploits.md",
-    "VIM.md",
-    "Cybersecurity/ROP.md",
-    "Stoicidivinism/Poems & Shortstories.md",
-    "Algorithms.md",
-    "Cybersecurity/Networking.md",
     "Cybersecurity/NX.md~",
     "Cybersecurity/ROP.md~",
     "Cybersecurity",
     "RELRO.md~",
-    "4913",
     "Buffer Overflows.md~",
-    "NX.md~",
     "Untitled.canvas"
   ]
 }
