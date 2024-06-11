@@ -4,6 +4,7 @@ This is a collection of different poems, or really any kind of texts, That I wro
 
 **Philosophy** 
 - [Basis of logic](Principium_Rationis) 
+- [[Miscellaneous_Thoughts_On_Existence]]
 
 
 **Myths** 

@@ -128,6 +128,15 @@ alias ll='lsd -la --group-directories-first'
 
 # PERSONAL CHANGES AND SETTINGS -- ADDED AFTER INITIAL RICE
 
+# ENV variable
+export PROGRAMMING_DIR=~/Desktop/Programming/Linux-Machine # machine specific.
+# this is machine specific unfortunately, so we will have 2.
+# export PROGRAMMING_DIR=~/Desktop/Programming/
+
+# Below is the definition for the ep (enter Programming) command. This command uses the ENV variable defined above in order to make CD'ing into my programming directory more comfortable.
+
+
+
 
 # nvim switch
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"

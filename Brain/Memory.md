@@ -2,6 +2,6 @@
 - The theoretical limit of 32 bit, and 64 bit architectures is respectively, 2^32 and 2^64 bytes of memory.  (4GB for 32 bit.)
 
 
-
+- "Another neat fact is libc.so and ld.so are consistently spaced in memory. They'll be at consistent offsets from each other! This is a byproduct of something known as mmap relativity, where pages allocated by mmap are usually adjacent, and if not, always at a relative offset. This will be useful later."
 - [[Virtual memory]]
 - [[RAM]] 

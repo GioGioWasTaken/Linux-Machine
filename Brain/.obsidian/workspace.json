@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cybersecurity/Stack Exploitation.md",
+                "file": "Miscellaneous_Thoughts_On_Existence.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cybersecurity/Stack Exploitation.md",
+                "file": "Miscellaneous_Thoughts_On_Existence.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cybersecurity/Stack Exploitation.md",
+                "file": "Miscellaneous_Thoughts_On_Existence.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cybersecurity/Stack Exploitation.md"
+                "file": "Miscellaneous_Thoughts_On_Existence.md"
               }
             }
           },
@@ -155,12 +155,24 @@
   },
   "active": "3fa2093ffb423b15",
   "lastOpenFiles": [
-    "Untitled.md",
-    "Cybersecurity/Stack Exploitation.md",
-    "Cybersecurity/ASLR.md",
-    "Cybersecurity/RELRO.md",
+    "Stoicidivinism/Poems & Shortstories.md",
+    "Miscellaneous_Thoughts_On_Existence.md",
+    "Me.md",
+    "Cybersecurity/Assembly_and_RE.md",
+    "Untitled 1.md",
+    "Pasted image 20240611120537.png",
     "Cybersecurity/Binary exploitation.md",
+    "Cybersecurity/Writing_Shellcode.md",
+    "Assembly and RE.md",
     "Cybersecurity/Cybersecurity.md",
+    "Programming tooling.md",
+    "Programming.md",
+    "Cybersecurity/Stack Exploitation.md",
+    "gdb.md",
+    "Cybersecurity/ASLR.md",
+    "Virtual memory.md~",
+    "Untitled.md",
+    "Cybersecurity/RELRO.md",
     "Cybersecurity/NX.md",
     "Cybersecurity/ELF.md",
     "Cybersecurity/PIE.md",
@@ -168,26 +180,15 @@
     "Memory.md",
     "4913",
     "RAM.md",
-    "Virtual memory.md~",
     "Pasted image 20240610174759.png",
     "Cybersecurity/Networking.md",
-    "Programming tooling.md",
     "ARM assembly.md",
     "Cybersecurity/Assembly and RE.md",
     "Stoicidivinism/Principium_Rationis.md",
-    "Me.md",
-    "C notes.md",
-    "Programming.md",
     "Pasted image 20240607151555.png",
     "Programming.md~",
     "Cybersecurity/ELF.md~",
     "Cybersecurity/4913",
-    "Cybersecurity/Reverse Engineering.md",
-    "Cybersecurity/Compilation process.md",
-    "[Programming.md",
-    "[[Programming.md",
-    "Cybersecurity/Process interaction.md",
-    "Cybersecurity/SYSCALL exploits.md",
     "Cybersecurity/NX.md~",
     "Cybersecurity/ROP.md~",
     "Cybersecurity",

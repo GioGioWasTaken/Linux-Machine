@@ -4,13 +4,13 @@
 _start:
   mov rax, 1
   mov rdi, 1
-  lea rsi, [hello_world]
-  mov rdx, 14
+  lea rsi, [schizo]
+  mov rdx, 101 
   syscall
 
   mov rax, 60
   mov rdi, 69
   syscall
 
-hello_world:
-  .asciz "Hello, World!\n"
+schizo:
+  .asciz "BORN TO WRITE WORLD IS A CHUNK 鬼神 LSB Em All 1972 I am THE mov man 410,757,864,530 CORRUPTED POINTERS"
