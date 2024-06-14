@@ -7,7 +7,6 @@
 **Programming notes**
 
 - [[Cybersecurity]]
-- [[Algorithms]]
 - [[Programming]]
 
 

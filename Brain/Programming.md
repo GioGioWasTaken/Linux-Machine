@@ -1,2 +1,4 @@
 - useful tools:  [[Programming tooling]]
 - [[C notes]]
+- [[Computation_theory]]
+- [[Algorithms]]
