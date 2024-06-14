@@ -11,12 +11,8 @@
             "id": "3fa2093ffb423b15",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Miscellaneous_Thoughts_On_Existence.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -69,7 +65,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 217.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "e704a3e97697baeb",
@@ -85,7 +82,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Miscellaneous_Thoughts_On_Existence.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +98,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Miscellaneous_Thoughts_On_Existence.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +119,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Miscellaneous_Thoughts_On_Existence.md"
-              }
+              "state": {}
             }
           },
           {
@@ -141,7 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -155,36 +148,39 @@
   },
   "active": "3fa2093ffb423b15",
   "lastOpenFiles": [
-    "Stoicidivinism/Poems & Shortstories.md",
-    "Miscellaneous_Thoughts_On_Existence.md",
+    "HTTP.md",
+    "Cybersecurity/Networking.md",
+    "TCP.md",
+    "Recursion.md",
+    "Binary Search, Sliding Window.md",
+    "Algorithms.md",
+    "Programming.md",
+    "Cybersecurity/Cybersecurity.md",
+    "gdb.md",
     "Me.md",
+    "Computation_theory.md",
+    "Untitled 2.canvas",
+    "Untitled 1.canvas",
+    "Miscellaneous_Thoughts_On_Existence.md",
+    "Untitled.canvas",
+    "2024-06-14.md",
+    "C notes.md",
+    "Stoicidivinism/Poems & Shortstories.md",
     "Cybersecurity/Assembly_and_RE.md",
     "Untitled 1.md",
     "Pasted image 20240611120537.png",
     "Cybersecurity/Binary exploitation.md",
     "Cybersecurity/Writing_Shellcode.md",
     "Assembly and RE.md",
-    "Cybersecurity/Cybersecurity.md",
     "Programming tooling.md",
-    "Programming.md",
     "Cybersecurity/Stack Exploitation.md",
-    "gdb.md",
     "Cybersecurity/ASLR.md",
     "Virtual memory.md~",
     "Untitled.md",
     "Cybersecurity/RELRO.md",
     "Cybersecurity/NX.md",
-    "Cybersecurity/ELF.md",
-    "Cybersecurity/PIE.md",
-    "Virtual memory.md",
-    "Memory.md",
     "4913",
-    "RAM.md",
     "Pasted image 20240610174759.png",
-    "Cybersecurity/Networking.md",
-    "ARM assembly.md",
-    "Cybersecurity/Assembly and RE.md",
-    "Stoicidivinism/Principium_Rationis.md",
     "Pasted image 20240607151555.png",
     "Programming.md~",
     "Cybersecurity/ELF.md~",
@@ -193,7 +189,6 @@
     "Cybersecurity/ROP.md~",
     "Cybersecurity",
     "RELRO.md~",
-    "Buffer Overflows.md~",
-    "Untitled.canvas"
+    "Buffer Overflows.md~"
   ]
 }

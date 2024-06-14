@@ -7,5 +7,5 @@
 - RFC stands for Request For comments. It delineates all the rules different protocols follow.
 - Websites have to build their on protocols on top of HTTP, everything is just layers on top of layers of abstraction.
 - Learn more about how these protocols work:
-    - [TCP]
-    - [HTTP]
+    - [[TCP]]
+    - [[HTTP]]
