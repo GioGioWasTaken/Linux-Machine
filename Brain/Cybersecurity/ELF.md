@@ -7,9 +7,9 @@ A compiled program’s memory is divided into five segments: `text`, `data`, `bs
         3. Executes the instruction that was read in step 1
         4. Goes back to step 1
     - the `text` segment is not writable. Attempts to write to it would result in a segfault and warning. Since it's not writable, it has a fixed size.
-- the `data` and `bss` segments are used to store global and `static` variables.
-    - `static variables` are variables that are only intiliazed once, and their value is retained through subsequent functions calls. They exist, of course, only inside the scope of the function that calls them. 
-    - `data` has intiliazed globals, while `bss` has globals that are not initiliazed with any data. 
+- the `data` and `bss` segments are used to store `global` and `static` variables(each one stores both. See the below).
+    - `static variables` are variables that are only initialized once, and their value is retained through subsequent functions calls. They exist, of course, only inside the scope of the function that calls them. 
+    - `data` has initialized globals, while `bss` has uninitiliazed globals (globals that are not initiliazed with any data.)
     - this is why global and static variables persist throughout the lifetime of the program -- they have their own memory segments.
     - the `data` and `bss` segments, also have a fixed size. `If it has a fixed size, it can be overflowed.`
 - You are already very familiar with `The Heap` and `The Stack` so there is no need to mention them.

@@ -19,7 +19,7 @@ vim.api.nvim_set_keymap("n", "ss", ":noh<CR>", {noremap=true})
 
 
 -- Noice
-vim.api.nvim_set_keymap("n", "<leader>nn", ":Noice dismiss<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<C-y>", ":Noice dismiss<CR>", {noremap=true})
 
 vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>",
   {silent = true, noremap = true}

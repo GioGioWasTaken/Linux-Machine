@@ -1,3 +1,4 @@
 - useful tools:  [[Programming tooling]]
 - [[C notes]]
 - [recursion]
+- [Computation_theory]
