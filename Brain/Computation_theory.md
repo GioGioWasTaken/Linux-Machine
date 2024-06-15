@@ -53,9 +53,10 @@ satisfactorily the part of A in the imitation game, the part of B being taken by
 
 - # (1) The Theological Objection  (as opposed from a theological, and not an atheistic, perspective)
 
-Thinking is a function of man's immortal soul. God has given an immortal soul to every 
+"Thinking is a function of man's immortal soul. God has given an immortal soul to every 
 man and woman, but not to any other animal or to machines. Hence no animal or 
-machine can think. 
+machine can think. "
+
 I am unable to accept any part of this, but will attempt to reply in theological terms. I 
 should find the argument more convincing if animals were classed with men, for there is 
 a greater difference, to my mind, between the typical animate and the inanimate than 

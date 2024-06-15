@@ -21,6 +21,11 @@ super + alt + Return
 super + r
 	OpenApps --menu
 
+# Dictionary
+super + d
+  sh Dictionary.sh
+
+
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
@@ -28,11 +33,6 @@ super + {_,shift + }{h,j,k,l}
 # focus the next/previous window in the current desktop
 super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
-
-# Japanese dictionary
-super + d
-  sh Dictionary.sh
-
 
 #### Music ####
 {super + p, XF86AudioPlay}

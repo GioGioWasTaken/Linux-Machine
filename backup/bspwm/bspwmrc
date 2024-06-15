@@ -16,7 +16,7 @@ export RICETHEME
 PATH="$HOME/.config/bspwm/scripts:$PATH"
 rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
 export XDG_CURRENT_DESKTOP='bspwm'
-
+export LC_ALL = C
 ## Fix java applications
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -38,11 +38,17 @@ done
 
 bspc config external_rules_command "$HOME"/.config/bspwm/scripts/ExternalRules
 
-bspc config window_gap                6
+bspc config window_gap                4
 bspc config split_ratio               0.51
 bspc config single_monocle            true
 bspc config borderless_monocle        false
 bspc config gapless_monocle           false
+
+# Border colors
+bspc config normal_border_color "#484848"
+bspc config focused_border_color "#1F8999"
+bspc config urgent_border_color "#B58900"
+bspc config presel_border_color "#26E2FF"
 
 bspc config focus_follows_pointer     true
 bspc config pointer_follows_focus     false
@@ -51,10 +57,6 @@ bspc config pointer_modifier          mod4
 bspc config pointer_action1           move
 bspc config pointer_action2           resize_side
 bspc config pointer_action3           resize_corner
-
-bspc config focused_border_color "#ff9000"
-
-
 #bspc wm --adopt-orphans
 bspc rule -a scratch sticky=on state=floating focus=on
 
@@ -83,11 +85,8 @@ sxhkd -c "$HOME"/.config/bspwm/sxhkdrc &
 
 # Launch picom // If you have old hardware or encounter problems
 # uncomment the picom "--legacy-backends" line and comment the current one.
-#
-
-#pidof -q picom || { picom --config "$HOME"/.config/bspwm/picom.conf & }
-picom &
-
+# pidof -q picom || { picom --config "$HOME"/.config/bspwm/picom.conf & }
+ picom &
 #pidof -q picom || { picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf & }
 
 # Launch dunst notification daemon

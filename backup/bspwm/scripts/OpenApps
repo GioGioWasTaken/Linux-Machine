@@ -34,7 +34,7 @@ case "$1" in
         alacritty --class FloaTerm,FloaTerm -o window.dimensions.lines=14 window.dimensions.columns=90 -e ranger
         ;;
     --nvim)
-      (cd ~/Desktop/Programming/; alacritty -e nvim)
+        (cd ~/Desktop/Programming; alacritty -e nvim)
         ;;
     --music)
         alacritty --class FloaTerm,FloaTerm -o window.dimensions.lines=18 window.dimensions.columns=67 -e ncmpcpp
