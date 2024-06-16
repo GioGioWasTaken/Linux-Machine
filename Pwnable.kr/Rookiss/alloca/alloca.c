@@ -70,3 +70,11 @@ int main(){
 	return 0;
 }
 
+
+
+ // look for this addr 0xf7d91a77
+// return address is stored at: 0xffffd6dc
+// the difference at the point where fgets executes:
+//  ESP is 15 dwords below our target, let's go up by -(16*4)
+//  we have to be careful to write the same value to the canary as it had before.
+//

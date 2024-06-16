@@ -1,3 +1,9 @@
+# Misc
+- There is such a thing as distcc, which allows speeding up of compiliation speed by using distirbuted computing over a network.
+
+
+
+# The compiliation process
 There are 3 main stages to compilation. 
 
 The first one is compiling source code to assembly (.s file extension).

@@ -121,7 +121,7 @@ alias vim="nvim"
 alias vm-on="sudo systemctl start libvirtd.service"
 alias vm-off="sudo systemctl stop libvirtd.service"
 
-alias musica="ncmpcpp"
+alias ongaku="ncmpcpp"
 
 alias ls='lsd -a --group-directories-first'
 alias ll='lsd -la --group-directories-first'
@@ -141,8 +141,12 @@ export PROGRAMMING_DIR=~/Desktop/Programming/Linux-Machine # machine specific.
 # Personal aliases
 
 
-alias ytfzf='ytfzf -t'
 
+man2() {
+  curl cheat.sh/"$1"
+}
+alias ytfzf='ytfzf -t'
+alias ytmusic='ytfzf -t -m -s'
 
 
 # ENV variable
