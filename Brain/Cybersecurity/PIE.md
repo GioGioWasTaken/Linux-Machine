@@ -1,0 +1,1 @@
+PIE, or position independent code , is a compilation option that allows executables to be loaded at any address in memory, making them independent of their load address. However, PIE alone does not provide randomization of the memory layout; it requires ASLR at the system level to achieve that.

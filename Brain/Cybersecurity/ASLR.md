@@ -1,3 +1,4 @@
-Differently from the other protections, ASLR is a kernel level protection. It's enabled per system as opposed to [[PIE]] which is enabled per binary.
+Differently from the other protections, ASLR is a kernel level protection. It's enabled per system and not per binary.
+if [[PIE]] is enabled, the OS will do ASLR on the binary. If ASLR is turned off in the OS, the binary wouldn't have PIE  even if it was compiled as to have it.
 
 It stands for "Address space layout randomization"

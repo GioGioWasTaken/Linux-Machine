@@ -65,9 +65,11 @@ byte into the corresponding extended register without creating any null bytes in
 - [[Writing_Shellcode]]
 
 - Possible reasons for segfaults:
-	- In assembly, the OS expects some values, depending on their size, to be aligned in some specific manner. 4 byte values must end in a hex digit that's divisible by 4, and the same goes for 8 byte values such as ESP.
+	- In assembly, the OS expects some values, depending on their size, to be aligned in some specific manner. 4 byte values must end in a hex digit that's divisible by 4, and the same goes for 8 byte values such as ESP. More info about stack alignment right below
 		- This can be beat by chaining a return addresses into the payload, before the target address, thus moving ESP to a location so that it's properly aligned and a segfault doesn't occur.
 	- Remember that not only stack allignment matters, but also ESP. In some rare instances, your shellcode has potential to move ESP to a locatio nsuch that it overwrites itself on the stack. 
+
+
 
 
 
