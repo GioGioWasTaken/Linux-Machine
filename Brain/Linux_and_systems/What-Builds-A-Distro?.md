@@ -1,0 +1,8 @@
+- [[The Linux Kernel]]
+[[Bootloaders]]
+[[System managers like systemd]]
+[[Window and\or tiling managers]]
+[[Display Servers]]
+[[Package Managers]]
+[[Repositories]]
+[[Packages]]

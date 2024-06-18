@@ -1,0 +1,8 @@
+return pointer = 0xffffd6d4
+we can write a value to = 0xffffd684
+
+
+at test time i moved the stack by 0x20. i allocated properly, which means we can treat this like -32.
+ we also need to take into account, that whatever value i input, +34 is added to it due to stack allignment. so overall +2
+and it was off by 80. conclusion: we need to add 82, or in other words give the input -82.
+
