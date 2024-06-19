@@ -42,7 +42,3 @@ vim.o.conceallevel=2
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-
--- These settings were made by me.
-
-vim.opt.wrap = false 

@@ -1,13 +1,22 @@
 public class print_groups {
-  public static void CountGroupSum(int index, int[] arr, int sum, int target) {
-    if (sum == target) {
-      System.out.println();
+
+  public static void PrintGroupSum(int[] arr, int target) {
+    PrintGroupSum(0, arr, target,"");
+  }
+  public static void PrintGroupSum(int index, int[] arr, int sum, String s) {
+    if (sum == 0) {
+      System.out.println(s);
     }
     if (index == arr.length) {
-      return sum == target;
+      return;
     }
+    // Include the current element
+    PrintGroupSum(index + 1, arr, sum + arr[index], s + arr[index] + " ");
 
-    return CountGroupSum(index + 1, arr, sum + arr[index], target) +
-        CountGroupSum(index + 1, arr, sum, target);
+    // Exclude the current element
+    PrintGroupSum(index + 1, arr, sum, s);
+
+
+
   }
 }

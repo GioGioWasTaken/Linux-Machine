@@ -19,3 +19,6 @@ distance = 72/4  + (0xffffd6d8 - EBP)/4
 
 First, leak EBP : %18$x
 Then, write to offset (the value 0x0a=10=ENTER): %10x%distance$n
+
+
+
