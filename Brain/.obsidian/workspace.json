@@ -1,18 +1,22 @@
 {
   "main": {
-    "id": "82560c1918532835",
+    "id": "f01826ee9e5124eb",
     "type": "split",
     "children": [
       {
-        "id": "0599ca5c7ba9174f",
+        "id": "ef15fbae6b6ad89a",
         "type": "tabs",
         "children": [
           {
-            "id": "3fa2093ffb423b15",
+            "id": "f8b28105dd135792",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Linux_and_systems/Linux.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -21,15 +25,25 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "a7cf25769f64e17a",
+    "id": "41e27f84b9bd77d2",
     "type": "split",
     "children": [
       {
-        "id": "86b0172c522467f8",
+        "id": "af8a5bd770ec0d36",
         "type": "tabs",
         "children": [
           {
-            "id": "df9473c27c97f616",
+            "id": "d840563db809a218",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "69df57c2f83bc1dd",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -44,49 +58,43 @@
             }
           },
           {
-            "id": "38e127d8e2b5551f",
+            "id": "eef38d758a26ac13",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
               "state": {}
-            }
-          },
-          {
-            "id": "40454aacf2cb2ad4",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical"
-              }
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-<<<<<<< HEAD
-    "width": 217.5
-=======
-    "width": 200,
-    "collapsed": true
->>>>>>> efa246f8145eb127b6a67821ba834936f8b0f556
+    "width": 300
   },
   "right": {
-    "id": "e704a3e97697baeb",
+    "id": "8365ce03ca6886a6",
     "type": "split",
     "children": [
       {
-        "id": "8b5e24a1aaa26a3e",
+        "id": "552996a467cf4440",
         "type": "tabs",
         "children": [
           {
-            "id": "e6b6a9beb3e198b5",
+            "id": "1c4cd984b1ec71ee",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "551c3f4e54500491",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": true,
+                "file": "Linux_and_systems/Linux.md",
+                "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -97,18 +105,19 @@
             }
           },
           {
-            "id": "14f4b500eac67744",
+            "id": "b6aae11c0991fd0f",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Linux_and_systems/Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "b0bb4f776865004c",
+            "id": "de08c76fe789a319",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -119,26 +128,21 @@
             }
           },
           {
-            "id": "5d3ff4c833e676b6",
+            "id": "29bd1dbf3cbfb818",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
-            }
-          },
-          {
-            "id": "203ef7d65fe82b29",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {}
+              "state": {
+                "file": "Linux_and_systems/Linux.md"
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -150,52 +154,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3fa2093ffb423b15",
+  "active": "f8b28105dd135792",
   "lastOpenFiles": [
-    "HTTP.md",
-    "Cybersecurity/Networking.md",
-    "TCP.md",
-    "Recursion.md",
-    "Binary Search, Sliding Window.md",
-    "Algorithms.md",
-    "Programming.md",
-    "Cybersecurity/Cybersecurity.md",
-    "gdb.md",
     "Me.md",
-    "Computation_theory.md",
-    "Untitled 2.canvas",
-    "Untitled 1.canvas",
+    "Linux_and_systems/Linux.md",
+    "Linux_and_systems/Building from Source.md",
+    "Linux_and_systems/Tarballs and Compression.md",
+    "Linux_and_systems/Virtual memory.md",
+    "Linux_and_systems/What-Builds-A-Distro?.md",
+    "Linux_and_systems/Systemd.md",
+    "Linux_and_systems/Docker.md",
+    "The Linux Kernel.md",
     "Miscellaneous_Thoughts_On_Existence.md",
-    "Untitled.canvas",
-    "2024-06-14.md",
-    "C notes.md",
-    "Stoicidivinism/Poems & Shortstories.md",
-    "Cybersecurity/Assembly_and_RE.md",
-    "Untitled 1.md",
-    "Pasted image 20240611120537.png",
-    "Cybersecurity/Binary exploitation.md",
-    "Cybersecurity/Cybersecurity.md",
-    "Miscellaneous_Thoughts_On_Existence.md",
-    "Stoicidivinism/Poems & Shortstories.md",
-    "Me.md",
-    "Cybersecurity/Assembly_and_RE.md",
-    "Untitled 1.md",
-    "Pasted image 20240611120537.png",
-    "gdb.md",
-    "Cybersecurity/ELF.md",
-    "Cybersecurity/PIE.md",
-    "Virtual memory.md",
-    "Memory.md",
-    "4913",
-    "RAM.md",
-    "Pasted image 20240610174759.png",
+    "obsidian.vimrc~",
+    "Programming/VIM.md",
+    "Linux_and_systems/Compilation_and_compilers.md",
+    "Linux_and_systems/Privacy when browsing.md",
+    "Linux_and_systems/RAM.md",
+    "Formal_CS/Computation_theory.md",
+    "Formal_CS/Computation_theory.md~",
+    "Linux_and_systems/tarballs_and_buildingFromSRC.md~",
+    "Linux_and_systems/4913",
+    "obsidian.vimrc",
+    "Cybersecurity/Stack Exploitation.md",
     "Cybersecurity/Networking.md",
-    "ARM assembly.md",
-    "Cybersecurity/Assembly and RE.md",
-    "Stoicidivinism/Principium_Rationis.md",
-    "4913",
-    "Pasted image 20240610174759.png",
-    "Buffer Overflows.md~",
-    "Untitled.canvas"
+    "Wireshark.md",
+    "Cybersecurity/ROP.md",
+    "Cybersecurity/Stack_facts.md",
+    "Cybersecurity/NX.md",
+    "Cybersecurity/RELRO.md",
+    "Untitled.md"
   ]
 }

@@ -1,1 +1,3 @@
 - A neat trick is using regular expressions with vim search and replace. :s/thingtoreplace/thingtoreplacewith/g
+- Make some command remaps
+	- for example :cd %:h to change dir to current buffer

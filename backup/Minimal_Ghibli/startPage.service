@@ -1,0 +1,11 @@
+[Unit]
+Description= Docker startpage container
+After=docker.service network.target
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a my-container
+ExecStop=/usr/bin/docker stop -t 2 my-container
+
+[Install]
+WantedBy=multi-user.target
