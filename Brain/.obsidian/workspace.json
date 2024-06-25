@@ -17,8 +17,7 @@
                 "mode": "source",
                 "source": false
               }
-            },
-            "group": "a32913b8a47ba303"
+            }
           },
           {
             "id": "09db37114cbc744f",
@@ -26,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Hamming distance.md",
+                "file": "Cybersecurity/ELF.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,48 +33,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "19326ec8d612f46a",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "66cd3d37d8f5165c",
-            "type": "leaf",
-            "state": {
-              "type": "localgraph",
-              "state": {
-                "file": "Cybersecurity/RSA.md",
-                "options": {
-                  "collapse-filter": true,
-                  "search": "",
-                  "localJumps": 1,
-                  "localBacklinks": true,
-                  "localForelinks": true,
-                  "localInterlinks": false,
-                  "showTags": false,
-                  "showAttachments": false,
-                  "hideUnresolved": false,
-                  "collapse-color-groups": true,
-                  "colorGroups": [],
-                  "collapse-display": true,
-                  "showArrow": false,
-                  "textFadeMultiplier": 0,
-                  "nodeSizeMultiplier": 1,
-                  "lineSizeMultiplier": 1,
-                  "collapse-forces": true,
-                  "centerStrength": 0.518713248970312,
-                  "repelStrength": 10,
-                  "linkStrength": 1,
-                  "linkDistance": 250,
-                  "scale": 1,
-                  "close": true
-                }
-              }
-            },
-            "group": "a32913b8a47ba303"
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -149,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Hamming distance.md",
+                "file": "Cybersecurity/ELF.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -166,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Hamming distance.md",
+                "file": "Cybersecurity/ELF.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -189,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Hamming distance.md"
+                "file": "Cybersecurity/ELF.md"
               }
             }
           }
@@ -212,8 +169,10 @@
   },
   "active": "09db37114cbc744f",
   "lastOpenFiles": [
-    "Cybersecurity/RSA.md",
+    "Cybersecurity/Stack Exploitation.md",
+    "Cybersecurity/Stack_facts.md",
     "Hamming distance.md",
+    "Cybersecurity/RSA.md",
     "Pasted image 20240624003135.png",
     "Cybersecurity/Cryptography.md",
     "Media/Pasted image 20240624002219.png",
@@ -235,7 +194,6 @@
     "Mathematics/Number_Theory",
     "Mathematics",
     "Cybersecurity/Cybersecurity.md",
-    "Cybersecurity/Stack Exploitation.md",
     "Cybersecurity/Binary exploitation.md",
     "Me.md",
     "Linux_and_systems/Linux.md",
@@ -252,7 +210,6 @@
     "Linux_and_systems/Compilation_and_compilers.md",
     "Linux_and_systems/Privacy when browsing.md",
     "Linux_and_systems/RAM.md",
-    "Formal_CS/Computation_theory.md",
     "Formal_CS/Computation_theory.md~",
     "Linux_and_systems/tarballs_and_buildingFromSRC.md~",
     "Linux_and_systems/4913"
