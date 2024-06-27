@@ -9,7 +9,7 @@ export VISUAL="${EDITOR}"
 export EDITOR='nvim'
 export TERM='alacritty'
 export TERMINAL='alacritty'
-export BROWSER='firefox'
+export BROWSER='librewolf'
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 
 if [ -d "$HOME/.local/bin" ] ;
@@ -140,7 +140,8 @@ export PROGRAMMING_DIR=~/Desktop/Programming/Linux-Machine # machine specific.
 
 # Personal aliases
 
-
+# get rid of AT&T syntax for the far superior intel syntax.
+alias objdump='objdump -M intel'
 
 man2() {
   curl cheat.sh/"$1"
