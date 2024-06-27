@@ -1,0 +1,1 @@
+- Currently only conceptual and will not learn these to a deep level. In the future!

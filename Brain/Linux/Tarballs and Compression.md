@@ -22,17 +22,6 @@ zip files are built for windows, and are not made to hold all the custom proprit
 
 
 
-## Building from source
-
-Whenever I install something using pacman, I am installing a pre-compiled binary. Someone already put in the computation power needed to compile *this* binary, and i'm using their efofrts. Building from source, is compiling it on your own.
-
-### Why should you build from SRC?
-1. **Customization**: You can enable or disable specific compiliation features and optimizations tailored to your needs.
-2. **Security**: Building from source allows you to inspect the code and ensure there are no hidden vulnerabilities or backdoors.
-3. **Optimization**: You can optimize the software for your specific hardware, potentially improving performance.
-4. **Learning**: It provides insight into the software’s structure and build process, which can be educational.
-5. **Latest Features**: Access to the latest features and bug fixes that may not yet be available in precompiled binaries.
-
 ### Why Do Files Weigh So Much Before Finishing Compilation?
 1. **Intermediate Files**: The build process generates many intermediate files, such as object files (`.o`), precompiled headers, and temporary files.
 2. **Debug Information**: Compiling with debug information (`-g` flag) creates larger files to store symbols and other debugging data.

@@ -1,6 +1,33 @@
+-- Use qq as a way to go to normal mode from all modes.
 vim.api.nvim_set_keymap("i", "qq", "<Esc>", {noremap=false})
 vim.api.nvim_set_keymap("v", "qq", "<Esc>", {noremap=false})
 vim.api.nvim_set_keymap("t", "qq", "<Esc>", {noremap=false})
+
+      -- Thanks ThePrimeAgen!!
+
+--  No terminal needed.
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+
+
+-- this remap is awesome, and i will use it eventually, but for now I like being forced to learn replacing stuff manually
+--  it's a necessary step to improve my find and replace skills.
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- move text with J and K
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")
+
+vim.keymap.set("n","J","msJ`z")
+vim.keymap.set("n","<C-D","<C-D>zz")
+vim.keymap.set("n","<C-U>","<C-U>zz")
+
+-- void register magic
+vim.keymap.set("v","D","\"_d")
+-- this same behaviour for P already exists in NeoVim.
+-- Just paste with P in visual mode to not replace the unnamed register (see :help v_P). 
+
+
 -- twilight
 vim.api.nvim_set_keymap("n", "tw", ":Twilight<enter>", {noremap=false})
 -- buffers
