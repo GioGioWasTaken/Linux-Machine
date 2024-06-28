@@ -51,16 +51,20 @@ Using the AL, BL, CL, or DL register will put the correct least significant
 byte into the corresponding extended register without creating any null bytes in the machine code. This makes them ideal for shellcode writing.
 # C Code as it is seen in assembly
 - Function arguments follow the following rule:
-    RDI: First argument
-    RSI: Second argument
-    RDX: Third argument
-    RCX: Fourth argument
-    R8: Fifth argument
-    R9: Sixth argument
+    `RDI`: First argument
+    `RSI`: Second argument
+    `RDX`: Third argument
+    `RCX`: Fourth argument
+    `R8`: Fifth argument
+    `R9`: Sixth argument
 - GDB has an option to deobscuify CPP function names. Use it.
 
 - Since function arguments are also passed on the stack, there needs to be space for any that this function wants to pass to another.  So while a function might only need x amount of bytes for local variables, $esp is often decremented by a bigger bytesize so that there is space for function arguments.
+# More assembly instructions
 
+- `sete`, `setl`, `setge`, all check the result of the previous `cmp` operation, and respectively store the result in the operand passed to it(set equal, set less, set greater equal )
+- `shl` and `shr` are used to shift bits left and right. 
+- `movzx` is a mov instruction that also pads the remaining bytes with zeros. 
 
 - [[Writing_Shellcode]]
 

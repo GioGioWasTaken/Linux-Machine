@@ -37,3 +37,10 @@ Each program gets its own `virtual memory space`. From henceforth `RAM` (See [[R
 - The trade-off is that instead of moving a single word out of memory at a time, 4 kilobytes of data are moved, but this works well in practice because nearby memory locations are often accessed at the same time.
 
 - There is a special piece of hardware called the TLB whose job is translating these page table entries into physical memory when a process attempts to write to them. Virtual memory, is divided into segments. See: [[ELF]]
+
+# Page files/ swap files
+Even if a program exhausts all of the virtual memory assigned to it, we can use something called a swap file or swap space, in order to use more storage. This is yet another benefit of virtual memory
+
+A swap file extends the virtual memory available to the system by using disk space. When the system's RAM is fully utilized, inactive pages of memory are moved to the swap file to free up RAM for active processes. This helps to prevent the system from running out of memory and potentially crashing.
+
+However, swap space is much slower than RAM because it involves disk I/O operations. Therefore, it should be used as a fallback mechanism and not as a replacement for adequate physical memory.
