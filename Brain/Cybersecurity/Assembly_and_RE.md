@@ -64,15 +64,16 @@ byte into the corresponding extended register without creating any null bytes in
 
 - `sete`, `setl`, `setge`, all check the result of the previous `cmp` operation, and respectively store the result in the operand passed to it(set equal, set less, set greater equal )
 - `shl` and `shr` are used to shift bits left and right. 
-- `movzx` is a mov instruction that also pads the remaining bytes with zeros. 
+- `movzx` is a `mov` instruction that also pads the remaining bytes with zeros. 
 
 - [[Writing_Shellcode]]
 
-- Possible reasons for segfaults:
-	- In assembly, the OS expects some values, depending on their size, to be aligned in some specific manner. 4 byte values must end in a hex digit that's divisible by 4, and the same goes for 8 byte values such as ESP. More info about stack alignment right below
-		- This can be beat by chaining a return addresses into the payload, before the target address, thus moving ESP to a location so that it's properly aligned and a segfault doesn't occur.
-	- Remember that not only stack allignment matters, but also ESP. In some rare instances, your shellcode has potential to move ESP to a locatio nsuch that it overwrites itself on the stack. 
+# Possible reasons for segfaults:
+- Read more about data alignment and its role [here](Data_alignment).
 
+- In assembly, the OS expects some values, depending on their size, to be aligned in some specific manner. 4 byte values must end in a hex digit that's divisible by 4, and the same goes for 8 byte values such as ESP. More info about stack alignment right below.  
+	- This can be beaten by chaining a return addresses into the payload, before the target address, thus moving ESP to a location so that it's properly aligned and a segfault doesn't occur.
+- Remember that not only stack allignment matters, but also ESP. In some rare instances, your shellcode has potential to move ESP to a location such that it overwrites itself on the stack. 
 
 
 
