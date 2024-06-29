@@ -30,12 +30,14 @@ vim.keymap.set("v","D","\"_d")
 
 -- twilight
 vim.api.nvim_set_keymap("n", "tw", ":Twilight<enter>", {noremap=false})
+
 -- buffers
 vim.api.nvim_set_keymap("n", "tG", ":blast<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "tgg", ":bfirst<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "th", ":bprev<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "tl", ":bnext<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "td", ":bdelete<enter>", {noremap=false})
+
 -- files
 vim.api.nvim_set_keymap("n", "QQ", ":q!<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "WW", ":w!<enter>", {noremap=false})
@@ -51,7 +53,7 @@ vim.api.nvim_set_keymap("n", "<C-c>", ":%y<CR>", {noremap=true, silent=true})
 -- my terminal shortcuts
 vim.api.nvim_set_keymap("n", "vv", ":rightbelow vertical terminal<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap ('t', '<Esc>', "<C-\\><C-N>",  {silent = true })
-
+-- map this to escape and qq to escape above, for simplicity.
 
 
 -- Move to the left split
