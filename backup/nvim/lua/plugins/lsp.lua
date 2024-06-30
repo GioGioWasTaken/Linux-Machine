@@ -30,6 +30,22 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
+
+-- Quit telescope remap
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["qq"] = actions.close,
+            },
+        },
+    },
+})
+
+
+
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
@@ -57,7 +73,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls','bashls','jdtls'}
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls','bashls','jdtls','asm_lsp'}
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
