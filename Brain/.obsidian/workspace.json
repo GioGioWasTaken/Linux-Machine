@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Operating_Systems/Anatomy of an assembly instruction.md",
+                "file": "Linux/Packages.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Operating_Systems/Anatomy of an assembly instruction.md",
+                "file": "Linux/Packages.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Operating_Systems/Anatomy of an assembly instruction.md",
+                "file": "Linux/Packages.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Operating_Systems/Anatomy of an assembly instruction.md"
+                "file": "Linux/Packages.md"
               }
             }
           }
@@ -169,13 +169,18 @@
   },
   "active": "782871990ec94234",
   "lastOpenFiles": [
+    "Tarballs.md",
+    "Linux/Packages.md",
+    "[[Tarballs.md",
+    "Linux/Building from Source.md",
+    "Linux/Virtual memory.md",
+    "Operating_Systems/Anatomy of an assembly instruction.md",
     "Pasted image 20240627180329.png",
     "Pasted image 20240627175656.png",
     "Pasted image 20240627175121.png",
     "Pasted image 20240627174919.png",
     "Pasted image 20240627174501.png",
     "Cybersecurity/Assembly_and_RE.md",
-    "Operating_Systems/Anatomy of an assembly instruction.md",
     "Operating_Systems/Below_Software/CPU.md",
     "Programming/Programming.md",
     "Operating_Systems/Below_Software/Computers.md",
@@ -184,7 +189,6 @@
     "Media/Pasted image 20240627145622.png",
     "Media/Pasted image 20240627135125.png",
     "Media/Pasted image 20240624003135.png",
-    "Linux/Building from Source.md",
     "Programming/Abstraction.md",
     "Abstraction.md",
     "Operating_Systems/Below_Software/Transistor.md",
@@ -197,7 +201,6 @@
     "[[Abstraction]].md",
     "Untitled",
     "BINARY_DECODERS.md",
-    "Pasted image 20240627145622.png",
     "CPU.md",
     "Transistor.md",
     "LOGIC_GATES.md",
@@ -206,10 +209,7 @@
     "Cybersecurity/RSA.md",
     "Linux_and_systems/Compilation_and_compilers.md",
     "Linux/What-Builds-A-Distro?.md",
-    "Linux/Virtual memory.md",
     "Linux/The Linux Kernel.md",
-    "Linux/Tarballs and Compression.md",
-    "Linux/Systemd.md",
     "Linux",
     "Operating_Systems",
     "Cybersecurity/RSA.md~",
