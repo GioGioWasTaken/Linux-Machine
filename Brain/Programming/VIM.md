@@ -1,3 +1,6 @@
-- A neat trick is using regular expressions with vim search and replace. :s/thingtoreplace/thingtoreplacewith/g
+- using regular expressions with vim search and replace. :s/thingtoreplace/thingtoreplacewith/g
+- using ) after writing  () for example, to go after the brackets.
+-  use . to repeat the last change. 
+-  use <C-V> to go visual block mode, and press `I` to go to insert mode on all marked lines.
 - Make some command remaps
 	- for example :cd %:h to change dir to current buffer

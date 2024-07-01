@@ -3,6 +3,31 @@ vim.api.nvim_set_keymap("i", "qq", "<Esc>", {noremap=false})
 vim.api.nvim_set_keymap("v", "qq", "<Esc>", {noremap=false})
 vim.api.nvim_set_keymap("t", "qq", "<Esc>", {noremap=false})
 
+-- Disable 'q' and 'Q' keys
+vim.api.nvim_set_keymap("n", "q", "<NOP>", { noremap = true })
+vim.api.nvim_set_keymap("n", "Q", "<NOP>", { noremap = true })
+
+-- Remap macro recording to 'm' and playing macros to 'M'
+vim.api.nvim_set_keymap("n", "m", "q", { noremap = true })
+vim.api.nvim_set_keymap("n", "M", "@", { noremap = true })
+
+
+-- -- Create a command to change directory to the currently focused buffer's directory
+-- vim.api.nvim_create_user_command('CDToBuffer', function()
+--   local buf_path = vim.fn.expand('%:p:h')
+--   vim.cmd('cd ' .. buf_path)
+--   local new_cwd = vim.fn.getcwd()
+--   print('Changed directory to ' .. new_cwd)
+-- end, {})
+--
+-- -- Optional: Create a key mapping to quickly execute the command
+-- vim.api.nvim_set_keymap('n', '<leader>cd', ':CDToBuffer<CR>', { noremap = true, silent = true })
+
+--NOTE: might use this later. For now it's disabled.
+
+
+
+
       -- Thanks ThePrimeAgen!!
 
 --  No terminal needed.
@@ -30,12 +55,14 @@ vim.keymap.set("v","D","\"_d")
 
 -- twilight
 vim.api.nvim_set_keymap("n", "tw", ":Twilight<enter>", {noremap=false})
+
 -- buffers
 vim.api.nvim_set_keymap("n", "tG", ":blast<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "tgg", ":bfirst<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "th", ":bprev<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "tl", ":bnext<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "td", ":bdelete<enter>", {noremap=false})
+
 -- files
 vim.api.nvim_set_keymap("n", "QQ", ":q!<enter>", {noremap=false})
 vim.api.nvim_set_keymap("n", "WW", ":w!<enter>", {noremap=false})
@@ -51,7 +78,7 @@ vim.api.nvim_set_keymap("n", "<C-c>", ":%y<CR>", {noremap=true, silent=true})
 -- my terminal shortcuts
 vim.api.nvim_set_keymap("n", "vv", ":rightbelow vertical terminal<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap ('t', '<Esc>', "<C-\\><C-N>",  {silent = true })
-
+-- map this to escape and qq to escape above, for simplicity.
 
 
 -- Move to the left split

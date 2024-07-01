@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/Packages.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux/Packages.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux/Packages.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Linux/Packages.md"
+                "file": "Operating_Systems/Below_Software/floppy_disk.md"
               }
             }
           }
@@ -169,47 +169,47 @@
   },
   "active": "782871990ec94234",
   "lastOpenFiles": [
-    "Tarballs.md",
+    "Programming/VIM.md~",
+    "Pasted image 20240630114454.png",
+    "Data_alignment.md",
+    "Cybersecurity/Assembly_and_RE.md",
+    "Pasted image 20240628222545.png",
+    "Cybersecurity/Stack Exploitation.md",
+    "Cybersecurity/ELF.md",
+    "Operating_Systems/Below_Software/CPU_OPERATING_MODES.md",
+    "Media/Pasted image 20240628195931.png",
+    "Operating_Systems/Below_Software/CPU.md",
+    "Programming/gdb.md",
+    "Untitled.md",
+    "Linux/Compilation_and_compilers.md",
+    "Media/Pasted image 20240628191009.png",
+    "Media/Pasted image 20240628190409.png",
+    "Cybersecurity/Networking.md",
+    "Operating_Systems/Anatomy of an assembly instruction.md",
+    "Operating_Systems/Below_Software/Transistor.md",
+    "Operating_Systems/Below_Software/LOGIC_GATES.md",
+    "Operating_Systems/Below_Software/Computers.md",
     "Linux/Packages.md",
+    "Tarballs.md",
     "[[Tarballs.md",
     "Linux/Building from Source.md",
     "Linux/Virtual memory.md",
-    "Operating_Systems/Anatomy of an assembly instruction.md",
-    "Pasted image 20240627180329.png",
-    "Pasted image 20240627175656.png",
-    "Pasted image 20240627175121.png",
-    "Pasted image 20240627174919.png",
-    "Pasted image 20240627174501.png",
-    "Cybersecurity/Assembly_and_RE.md",
-    "Operating_Systems/Below_Software/CPU.md",
+    "Media/Pasted image 20240627180329.png",
+    "Media/Pasted image 20240627175656.png",
+    "Media/Pasted image 20240627175121.png",
+    "Media/Pasted image 20240627174919.png",
+    "Media/Pasted image 20240627174501.png",
     "Programming/Programming.md",
-    "Operating_Systems/Below_Software/Computers.md",
     "Operating_Systems/Below_Software/Computers",
-    "Media/Pasted image 20240627154454.png",
-    "Media/Pasted image 20240627145622.png",
-    "Media/Pasted image 20240627135125.png",
-    "Media/Pasted image 20240624003135.png",
     "Programming/Abstraction.md",
     "Abstraction.md",
-    "Operating_Systems/Below_Software/Transistor.md",
-    "Operating_Systems/Below_Software/LOGIC_GATES.md",
     "Operating_Systems/Below_Software/BINARY_DECODERS.md",
     "Operating_Systems/Below_Software",
-    "Pasted image 20240627154454.png",
     "Operating_Systems/Problem_Domains.md",
     "Operating_Systems/Problem_Domains.md~",
     "[[Abstraction]].md",
     "Untitled",
-    "BINARY_DECODERS.md",
-    "CPU.md",
-    "Transistor.md",
-    "LOGIC_GATES.md",
-    "Operating_Systems/Electricity/Ohms_Law.md",
     "Operating_Systems/Electricity/Ohms_Law.md~",
-    "Cybersecurity/RSA.md",
-    "Linux_and_systems/Compilation_and_compilers.md",
-    "Linux/What-Builds-A-Distro?.md",
-    "Linux/The Linux Kernel.md",
     "Linux",
     "Operating_Systems",
     "Cybersecurity/RSA.md~",

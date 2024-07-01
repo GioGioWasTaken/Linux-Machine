@@ -6,11 +6,12 @@
 # The compiliation process
 There are 3 main stages to compilation. 
 
-The first one is compiling source code to assembly (.s file extension).
+- The first one is compiling source code to assembly (.s file extension).
 
-The second stage is assembling `.s` files to .so (shared object) files. 
+- The second stage is assembling `.s` files to .so (shared object) files. 
 
-The third is the linking stage, where `.so` files and dynamically fetched library functions are all combined to one binary (depending on the type of linking, the used libraries might get attached to the binary file during compile time, or they might just be located during runtime)
+- The third is the linking stage, where `.so` files and dynamically fetched library functions are all combined to one binary 
+	- depending on the type of linking, the used libraries might get attached to the binary file during compile time(`static linking`) , or they might just be located during runtime(`dynamic linking`)
 
 TL;DR : `the linker` resolves references to undefined symbols.
 
