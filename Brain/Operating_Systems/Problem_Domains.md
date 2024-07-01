@@ -8,3 +8,8 @@ Documents are essential for learning a problem domain (and actually, anything) s
     - New people will find it much harder to join a project.
     - It is harder to maintain a project because people may forget important unresolved bugs or quirks in their system.
     - It is challenging for customers to understand the product they are going to use. However, documents do not need to be written in book for- mat. It can be anything from HTML format to database format to be displayed by a graphical user interface. Important information must be stored somewhere safe, readily accessible.
+
+
+## Opearting systems:
+
+Operating systems simply make developing easier, by removing parts unrelated to the problem domain. There's no need for a developer to focus on making keyboard drives, a basic necessity for practically any applicaiton, when an interface that works for 99% of cases may be suitable. OSes make the devloping part of of software far easier.

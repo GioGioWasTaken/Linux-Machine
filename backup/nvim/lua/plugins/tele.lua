@@ -1,6 +1,10 @@
 require('telescope').load_extension('harpoon')
 require('telescope').load_extension('git_worktree')
 
+
+
+
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -27,6 +31,7 @@ require('telescope').setup {
         ["<C-j>"] = require('telescope.actions').move_selection_next,
         ["<C-k>"] = require('telescope.actions').move_selection_previous,
         ["<C-d>"] = require('telescope.actions').move_selection_previous,
+        ["qq"] = require('telescope.actions').close,
       },
     },
   },
