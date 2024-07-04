@@ -4,7 +4,7 @@ After=docker.service network.target
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/docker start -a my-container
+ExecStart=/usr/bin/docker start my-container
 ExecStop=/usr/bin/docker stop -t 2 my-container
 
 [Install]
