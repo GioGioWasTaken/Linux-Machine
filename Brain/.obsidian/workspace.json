@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Operating_Systems/Below_Software/BINARY_DECODERS.md",
+                "file": "Linux/What-Builds-A-Distro?.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Operating_Systems/Below_Software/BINARY_DECODERS.md",
+                "file": "Linux/What-Builds-A-Distro?.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Operating_Systems/Below_Software/BINARY_DECODERS.md",
+                "file": "Linux/What-Builds-A-Distro?.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Operating_Systems/Below_Software/BINARY_DECODERS.md"
+                "file": "Linux/What-Builds-A-Distro?.md"
               }
             }
           }
@@ -169,6 +169,7 @@
   },
   "active": "782871990ec94234",
   "lastOpenFiles": [
+    "Operating_Systems/Below_Software/BINARY_DECODERS.md",
     "Operating_Systems/Below_Software/CPU.md",
     "Stoicidivinism/ex_lunae_odium.md",
     "Operating_Systems/Below_Software/floppy_disk.md",
@@ -205,7 +206,6 @@
     "Operating_Systems/Below_Software/Computers",
     "Programming/Abstraction.md",
     "Abstraction.md",
-    "Operating_Systems/Below_Software/BINARY_DECODERS.md",
     "Operating_Systems/Below_Software",
     "Operating_Systems/Problem_Domains.md",
     "Operating_Systems/Problem_Domains.md~",
