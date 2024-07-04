@@ -47,10 +47,10 @@ case "$1" in
         thunar
         ;;
     --browser)
-        firefox
+        librewolf
         ;;
     --editor)
-        geany
+        obsidian
         ;;
     --telegram)
         telegram-desktop

@@ -24,7 +24,9 @@ super + r
 # Dictionary
 super + d
   sh Dictionary.sh
-
+# Awesome OCR
+super + o
+  sh OCR.sh
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -66,8 +68,9 @@ super + period
     rofi -modi "emoji:/usr/bin/rofimoji" -show emoji -display-emoji "󰞅" 
 
 # Apps (browser, editor, filemanager)
-shift + alt + {b,g,n}
+shift + alt + {b,o,n}
 	OpenApps {--browser,--editor,--filemanager}
+	# modified "editor" to be obsidian.
 
 # Terminal apps (ranger, nvim, ncmpcpp)
 shift + alt + {r,v,k}
