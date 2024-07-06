@@ -187,4 +187,5 @@ bindkey -s ^a "nvims\n"
 #  ┌─┐┬ ┬┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
 #  ├─┤│ │ │ │ │  └─┐ │ ├─┤├┬┘ │ 
 #  ┴ ┴└─┘ ┴ └─┘  └─┘ ┴ ┴ ┴┴└─ ┴ 
-$HOME/.local/bin/colorscript -r
+# $HOME/.local/bin/colorscript -r
+python ~/.config/bspwm/scripts/Quotes/quotes.py

@@ -15,3 +15,8 @@ Use with `hermes`, or `hs`.
 - switch two marks by doing ```hs -s n m```, where n and m are two numbers. They don't have to both be bounded, so this command is also used for rebounding a mark to a different number.
 - use ```hs dirname``` for hs to search all of your marks for a directory, and enter it. If there are any conflicts, use fzf to resolve them.
 - use ```hs -f -freq n``` to get a list of your n most used directories, in a fzf menu.
+
+
+
+Hermes will require that you add this line to your ~/.zshrc file.
+`<insert logic>`

@@ -6,5 +6,3 @@
  ![[Pasted image 20240630114454.png]]
  - The drive has 2 `heads`  
  - We can map sectors of disk into `RAM` using BIOS services.
-
-

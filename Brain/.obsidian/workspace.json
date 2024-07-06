@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux/What-Builds-A-Distro?.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Linux/What-Builds-A-Distro?.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Linux/What-Builds-A-Distro?.md",
+                "file": "Operating_Systems/Below_Software/floppy_disk.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Linux/What-Builds-A-Distro?.md"
+                "file": "Operating_Systems/Below_Software/floppy_disk.md"
               }
             }
           }
@@ -167,8 +167,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "782871990ec94234",
+  "active": "d840563db809a218",
   "lastOpenFiles": [
+    "Operating_Systems/Below_Software/LOGIC_GATES.md",
+    "Linux/Virtual memory.md",
+    "Operating_Systems/Software/Paging.md",
+    "Operating_Systems/Anatomy of an assembly instruction.md",
+    "Cybersecurity/SYSCALL exploits.md",
+    "Linux/What-Builds-A-Distro?.md",
     "Operating_Systems/Below_Software/BINARY_DECODERS.md",
     "Operating_Systems/Below_Software/CPU.md",
     "Stoicidivinism/ex_lunae_odium.md",
@@ -188,15 +194,12 @@
     "Media/Pasted image 20240628191009.png",
     "Media/Pasted image 20240628190409.png",
     "Cybersecurity/Networking.md",
-    "Operating_Systems/Anatomy of an assembly instruction.md",
     "Operating_Systems/Below_Software/Transistor.md",
-    "Operating_Systems/Below_Software/LOGIC_GATES.md",
     "Operating_Systems/Below_Software/Computers.md",
     "Linux/Packages.md",
     "Tarballs.md",
     "[[Tarballs.md",
     "Linux/Building from Source.md",
-    "Linux/Virtual memory.md",
     "Media/Pasted image 20240627180329.png",
     "Media/Pasted image 20240627175656.png",
     "Media/Pasted image 20240627175121.png",
@@ -204,10 +207,7 @@
     "Media/Pasted image 20240627174501.png",
     "Programming/Programming.md",
     "Operating_Systems/Below_Software/Computers",
-    "Programming/Abstraction.md",
-    "Abstraction.md",
     "Operating_Systems/Below_Software",
-    "Operating_Systems/Problem_Domains.md",
     "Operating_Systems/Problem_Domains.md~",
     "Untitled",
     "Operating_Systems/Electricity/Ohms_Law.md~",

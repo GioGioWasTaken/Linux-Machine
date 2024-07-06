@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include "../include/Exit.h"
-#include "../include/Help.h"
+#include "../include/Hermes.h"
 
 int main(int argc, char ** argv){
-	if(argc == 0) {
+	if(argc == 1) {
 		HermesHelp();
-		exit(EXIT_SUCCESS);
+		return EXIT_FAILURE;
 	}
-
+	ReadFlags(argc, argv);
+	return EXIT_SUCCESS;
 }
