@@ -1,0 +1,3 @@
+- The CMOS, is a componant in the motherboard whose job is to store non volatile BIOS settings. It stores them via a battery that constantly supplies it with power, even when the computer is off.
+- Some such settings include the date and time, or the boot sequence.
+- So, if the battery is removed, the BIOS will return to the manufacturer default.

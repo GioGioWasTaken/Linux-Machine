@@ -1,0 +1,3 @@
+- The UEFI or Unified Extensible Firmware interface, is a new type of BIOS.
+- It has several advantages over a tradiontal BIOS. A mouse can be used, it offers GUI, and it supports secure boot.
+	-  secure boot is a boot sequence such that a device is only allowed to boot, if it is digitally signed. This helps mitigate attack vectors at the hardware level, from say, [[Rootkits]].

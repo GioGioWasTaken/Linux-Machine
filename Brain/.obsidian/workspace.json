@@ -30,9 +30,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "6cf2fe818ccaa703",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Operating_Systems/CMOS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2781bab6a7b30e1b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cybersecurity/ELF.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -106,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Operating_Systems/Below_Software/floppy_disk.md",
+                "file": "Cybersecurity/ELF.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Operating_Systems/Below_Software/floppy_disk.md",
+                "file": "Cybersecurity/ELF.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Operating_Systems/Below_Software/floppy_disk.md"
+                "file": "Cybersecurity/ELF.md"
               }
             }
           }
@@ -167,10 +191,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d840563db809a218",
+  "active": "2781bab6a7b30e1b",
   "lastOpenFiles": [
-    "Operating_Systems/Below_Software/LOGIC_GATES.md",
     "Linux/Virtual memory.md",
+    "Media/Pasted image 20240630114454.png",
+    "Cybersecurity/Rootkits.md",
+    "Operating_Systems/UEFI.md",
+    "Operating_Systems/CMOS.md",
+    "Linux/Building from Source.md",
+    "Operating_Systems/Below_Software/LOGIC_GATES.md",
     "Operating_Systems/Software/Paging.md",
     "Operating_Systems/Anatomy of an assembly instruction.md",
     "Cybersecurity/SYSCALL exploits.md",
@@ -180,16 +209,14 @@
     "Stoicidivinism/ex_lunae_odium.md",
     "Operating_Systems/Below_Software/floppy_disk.md",
     "Programming/VIM.md~",
-    "Pasted image 20240630114454.png",
     "Data_alignment.md",
     "Cybersecurity/Assembly_and_RE.md",
-    "Pasted image 20240628222545.png",
+    "Media/Pasted image 20240628222545.png",
     "Cybersecurity/Stack Exploitation.md",
     "Cybersecurity/ELF.md",
     "Operating_Systems/Below_Software/CPU_OPERATING_MODES.md",
     "Media/Pasted image 20240628195931.png",
     "Programming/gdb.md",
-    "Untitled.md",
     "Linux/Compilation_and_compilers.md",
     "Media/Pasted image 20240628191009.png",
     "Media/Pasted image 20240628190409.png",
@@ -197,15 +224,11 @@
     "Operating_Systems/Below_Software/Transistor.md",
     "Operating_Systems/Below_Software/Computers.md",
     "Linux/Packages.md",
-    "Tarballs.md",
-    "[[Tarballs.md",
-    "Linux/Building from Source.md",
     "Media/Pasted image 20240627180329.png",
     "Media/Pasted image 20240627175656.png",
     "Media/Pasted image 20240627175121.png",
     "Media/Pasted image 20240627174919.png",
     "Media/Pasted image 20240627174501.png",
-    "Programming/Programming.md",
     "Operating_Systems/Below_Software/Computers",
     "Operating_Systems/Below_Software",
     "Operating_Systems/Problem_Domains.md~",

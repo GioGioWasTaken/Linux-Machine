@@ -1,22 +1,20 @@
 ## General information
-If a binary file were to only consist of `data` and `code`, from the perspective of the OS the file is undefined. Which region is code? which region is `protected`? This is why we have file formats.
+- If a binary file were to only consist of `data` and `code`, from the perspective of the OS the file is undefined. Which region is code? which region is `protected`? This is why we have file formats.
 
-When a source file is compiled, the generated machine code is stored in in an `object file`, which is just a block of binary. `Object Files` can be combined to produce an executable binary, which is a complete binary program runnable in an operating system.
+- When a source file is compiled, the generated machine code is stored in in an `object file`, which is just a block of binary. `Object Files` can be combined to produce an executable binary, which is a complete binary program runnable in an operating system.
 
-ELF is a common file format for all: `executables, object code, shared libraries`, and `core dumps`.
+- ELF is a common file format for all: `executables, object code, shared libraries`, and `core dumps`.
 
-Segments and sections are the main content of an ELF binary, which are the code and data, divided into chunks of different purposes.
+- Segments and sections are the main content of an ELF binary, which are the code and data, divided into chunks of different purposes.
 
-A `segment` is a composition of zero or more `sections` and is directly loaded
-by an operating system at runtime.
+- A `segment` is a composition of zero or more `sections` and is directly loaded by an operating system at runtime.
 
-A section is a block of binary that is either:
--  actual program code and data that is available in memory when a
-program runs.
--  metadata about other sections used only in the linking process, and
-disappear from the final executable.
+- A section is a block of binary that is either:
+	-  actual program code and data that is available in memory when a
+	program runs.
+	-  metadata about other sections used only in the linking process, that disappears from the final executable.
 
-The linker uses `sections` to build `segments`. Object files, are ELFs before the linking stage. They are made of `sections`.
+- The linker uses `sections` to build `segments`. Object files, are ELFs before the linking stage. They are made of `sections`.
 
 
 ## ELF header
@@ -24,7 +22,7 @@ The linker uses `sections` to build `segments`. Object files, are ELFs before th
 
 ![[Pasted image 20240628190409.png]]
 To be more easy on the eyes, let's treat it as a struct (which is how it's implemented either way). 
-- It starts with a sequence of 4 `'magic'` bytes. the value `0x7f` followed by ELF in hex this lets the OS (or any program that would like to know) that the file is the ELF type. 
+- It starts with a sequence of 4 `'magic'` bytes. the value `0x7f` followed by ELF in ascii this lets the OS (or any program that would like to know) that the file is the ELF type. 
 - After that, We have the filetype halfword(here a word is defined as 4 bytes)which defines the type of the file. 
 	- `0x0001` is used for `object` files.
 	- `0x0002` is used for binaries without ASLR.

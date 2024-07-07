@@ -8,7 +8,7 @@ How do we access an array index here? How do we not accidentally read values out
 If multiple programs attempt to write to the same location, they will constantly corrupt each other's state, and may lead to undefined behaviour, and crushes.
 
 # Problem 3: There's simply not enough memory
-And we don't have enough memory, the program crashes. This is why old 20th century programs crushed all the time.
+When we don't have enough memory, the program crashes. This is why old 20th century programs crushed all the time. We can use SWAP files if we run out of RAM.
 
 
 # To summarise:
