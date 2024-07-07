@@ -39,10 +39,12 @@ void ReadFlags(int argc, char **argv){
 						printf("getcwd failed, can't set current dir as mark.");
 						 exit(EXIT_FAILURE);
 					} else{
-						SetMark(mark_number,strcat(current_dir, "\n"));
+						char * dir_newline = strcat(current_dir, "\n");
+						SetMark(mark_number,dir_newline);
 					}
 				} else{
-					SetMark(mark_number,strcat(dir, "\n"));
+					char * dir_newline = strcat(dir, "\n");
+					SetMark(mark_number,dir_newline);
 				}
 				break;
 			case 'l':

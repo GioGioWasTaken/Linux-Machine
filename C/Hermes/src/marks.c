@@ -1,6 +1,10 @@
 #include "../include/Hermes.h"
 #include "../include/Exit.h"
 #include <stdio.h>
+#include <string.h>
+
+// NOTE: Revamp setMark function completely. Implement Marks as an array of a struct, whose only member is a char array of size 1024. Every "mark" is now gotten by the location of the mark in the array, and the directory.
+
 
 
 
@@ -37,6 +41,12 @@ const char* GetMarksFilePath() {
 
 
 /* Firstly, we'll want to load marks from previous sessions, if there are any. */
+/* we will need to consume new lines characters, since those are our terminators. */
+
+void consumeNewline(){
+
+}
+
 
 int LoadMarks() {
     const char *MARKS_FILE_PATH = GetMarksFilePath();
@@ -69,6 +79,10 @@ int LoadMarks() {
             }
 
             mark_count++;
+            int ch = fgetc(MarkFilePath);
+            if(ch !="\n" || ch ==EOF){
+                ungetc(ch, MarkFilePath);
+            }
         }
 
         fclose(MarkFilePath);
@@ -98,30 +112,31 @@ int SaveMarks(){
 	return EXIT_SUCCESS;
 }
 
-int SetMark(int mark_number, const char *dir) {
-	LoadMarks();
-    for (int i = 0; i < mark_count; i++) {
-        if (Marks[i].mark_num == mark_number) {
-            strncpy(Marks[i].directory, dir, sizeof(Marks[i].directory));
-            if(SaveMarks() ==EXIT_FAILURE){
-			fprintf(stderr, "Failed to save new mark to .Hermes_marks");
-		}
-            return EXIT_SUCCESS;
-        }
-    }
-    if (mark_count < MAX_MARKS) {
-        Marks[mark_count].mark_num = mark_number;
-        strncpy(Marks[mark_count].directory, dir, sizeof(Marks[mark_count].directory));
-        mark_count++;
-	if(SaveMarks() ==EXIT_FAILURE){
-		fprintf(stderr, "Failed to save new mark to .Hermes_marks");
-			return EXIT_FAILURE;
-		}
-    } else if(mark_count>=MAX_MARKS){
-        fprintf(stderr, "Max Marks limit reached.\n");
-		return EXIT_FAILURE;
-    }
-}
+// int SetMark(int mark_number, const char *dir) {
+//     LoadMarks();
+//
+//     strncpy(Marks[mark_number].directory, dir, strlen(Marks[mark_number].directory)+1);
+//     Marks[mark_number].mark_num= mark_number;
+//
+//     if(SaveMarks() ==EXIT_FAILURE){
+//         fprintf(stderr, "Failed to save new mark to .Hermes_marks");
+//     }
+//     
+//     if (mark_count < MAX_MARKS) {
+//         strncpy(Marks[mark_count].directory, dir, sizeof(Marks[mark_count].directory));
+//         mark_count++;
+//         if(SaveMarks() ==EXIT_FAILURE){
+//             fprintf(stderr, "Failed to save new mark to .Hermes_marks");
+//             return EXIT_FAILURE;
+//         }
+//     } else if(mark_count>=MAX_MARKS){
+//         fprintf(stderr, "Max Marks limit reached.\n");
+//         return EXIT_FAILURE;
+//     }
+//
+//
+//     return EXIT_SUCCESS;
+// }
 
 int JumpToMark(int mark_number) {
     LoadMarks();
@@ -129,6 +144,8 @@ int JumpToMark(int mark_number) {
     for (int i = 0; i < mark_count; i++) { 
         printf("i: \"%d\"\n" ,i);
         printf("mark: \"%d\"\n" ,mark_number);
+        printf("mark count: %d\n", mark_count);
+        fflush(stdout);
         if (Marks[i].mark_num == mark_number) {
             printf("cd %s\n", Marks[i].directory);
             return EXIT_SUCCESS;
