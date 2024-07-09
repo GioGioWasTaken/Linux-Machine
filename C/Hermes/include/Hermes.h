@@ -17,7 +17,7 @@ void HermesHelp(void);
 void ReadFlags(int argc, char **argv);
 
 int SetMark(int mark_number, const char *dir);
-int LoadMarks(void);
+int LoadMarksFile(void);
 int SaveMarks(void);
 
 int JumpToMark(int mark_number);

@@ -1,4 +1,5 @@
 #include "../include/Hermes.h"
+#include <bits/getopt_core.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -27,11 +28,13 @@ void ReadFlags(int argc, char **argv){
 		switch (opt) {
 			case 'n':
 				mark_number = atoi(optarg);
+				printf("atoi: %d\n", mark_number);
+
+
 				if (optind < argc && argv[optind][0] != '-') {
 					dir = argv[optind]; // Next argument is the directory path
 					optind++; // Move to the next argument
 				}
-				// BUG: when setting directory a new line is not inserted properly, causing many issues.
 				if(strcmp("CURRENT", dir) ==0){
 					printf("Setting current directory as mark.\n");
 					char current_dir[MAX_DIR_LENGTH];
