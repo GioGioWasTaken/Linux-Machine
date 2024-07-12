@@ -47,16 +47,24 @@
             "id": "2781bab6a7b30e1b",
             "type": "leaf",
             "state": {
+              "type": "graph",
+              "state": {}
+            }
+          },
+          {
+            "id": "207df879080defc8",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "Cybersecurity/ELF.md",
+                "file": "D&D Character.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -130,7 +138,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cybersecurity/ELF.md",
+                "file": "D&D Character.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +155,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cybersecurity/ELF.md",
+                "file": "D&D Character.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +178,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cybersecurity/ELF.md"
+                "file": "D&D Character.md"
               }
             }
           }
@@ -191,8 +199,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2781bab6a7b30e1b",
+  "active": "207df879080defc8",
   "lastOpenFiles": [
+    "Race.md",
+    "D&D Character.md",
+    "Class.md",
+    "Cybersecurity/ELF.md",
     "Linux/Virtual memory.md",
     "Media/Pasted image 20240630114454.png",
     "Cybersecurity/Rootkits.md",
@@ -213,7 +225,6 @@
     "Cybersecurity/Assembly_and_RE.md",
     "Media/Pasted image 20240628222545.png",
     "Cybersecurity/Stack Exploitation.md",
-    "Cybersecurity/ELF.md",
     "Operating_Systems/Below_Software/CPU_OPERATING_MODES.md",
     "Media/Pasted image 20240628195931.png",
     "Programming/gdb.md",
@@ -222,8 +233,6 @@
     "Media/Pasted image 20240628190409.png",
     "Cybersecurity/Networking.md",
     "Operating_Systems/Below_Software/Transistor.md",
-    "Operating_Systems/Below_Software/Computers.md",
-    "Linux/Packages.md",
     "Media/Pasted image 20240627180329.png",
     "Media/Pasted image 20240627175656.png",
     "Media/Pasted image 20240627175121.png",
