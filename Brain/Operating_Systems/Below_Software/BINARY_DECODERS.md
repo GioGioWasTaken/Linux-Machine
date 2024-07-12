@@ -23,3 +23,4 @@ code is represented by an if statement that is close to human language.
 Programming is all about generalizing and abstracting.
 
 ![[Pasted image 20240627145622.png]]
+

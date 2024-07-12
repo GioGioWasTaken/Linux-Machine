@@ -70,6 +70,9 @@ vim.api.nvim_set_keymap("n", "<C-e>", "$", {noremap=false})
 vim.api.nvim_set_keymap("n", "<C-b>", "^", {noremap=false})
 vim.api.nvim_set_keymap("n", "TT", ":TransparentToggle<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "ss", ":noh<CR>", {noremap=true})
+
+
+
 -- stop highlighting of words (for example by / or ?)
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n", "<C-c>", ":%y<CR>", {noremap=true, silent=true})
