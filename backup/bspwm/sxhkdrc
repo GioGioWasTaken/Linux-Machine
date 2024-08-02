@@ -23,7 +23,7 @@ super + r
 
 # Dictionary
 super + d
-  sh Dictionary.sh
+  sh ~/.config/bspwm/scripts/Dictionary.sh
 # Awesome OCR
 super + o
   sh OCR.sh
@@ -69,7 +69,7 @@ super + period
 
 # Apps (browser, editor, filemanager)
 shift + alt + {b,o,n}
-	OpenApps {--browser,--editor,--filemanager}
+	OpenApps {--browser,--obsidian,--filemanager}
 	# modified "editor" to be obsidian.
 
 # Terminal apps (ranger, nvim, ncmpcpp)
@@ -82,7 +82,7 @@ shift + alt + {r,v,k}
 #|||----- System Keybindings -----|||#
 
 # Show keybindings help
-alt + F1
+alt + `
 	KeybindingsHelp
 
 # Theme Selector
@@ -110,7 +110,8 @@ super + {h,u}
 super +{_,shift + }{1-9,0}
 	bspc {desktop -f, node -d} '^{1-9,10}'
 
-
+super + m
+	lobster
 
 # Change transparency on focused window
 ctrl + alt + {plus,minus,t}
@@ -165,9 +166,6 @@ super + Escape
 
 #####
 
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
 
 # set the window state
 super + {t,shift + t,s,f}
