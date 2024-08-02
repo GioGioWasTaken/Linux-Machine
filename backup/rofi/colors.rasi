@@ -1,0 +1,21 @@
+* {
+    base00: #1e1e2e;
+    base01: #1e1e2e;
+    base02: #1e1e2e;
+    base03: #1e1e2e;
+    base04: #a5a195;
+    base05: #d8cdbd;
+    base06: #e8e4cf;
+    base07: #fefbf8;
+    base08: #ff3128;
+    base09: #fba922;
+    base0A: #fdbd2f;
+    base0B: #519f50;
+    base0C: #0aaeb3;
+    base0D: #2c78bf;
+    base0E: #e02c6d;
+    base0F: #c96765;
+
+    background: #1e1e2e; /* Background color */
+    text:       #d8cdbd; /* Text color */
+}
