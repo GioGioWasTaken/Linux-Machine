@@ -6,7 +6,7 @@ int main(int argc, char ** argv){
     /* Step 1: fetch source file(s)*/
     while(--argc > 0){ /* So long as there are files to process...*/
 
-    /* Step 2: preprocess it*/
+    /* Step 1: preprocess it*/
     FILE * processed = preprocessor(argv[argc]); // placeholder until I read the instructions properly
 
     /*Step 3: First pass */

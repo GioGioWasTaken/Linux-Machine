@@ -62,9 +62,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "1416922ac6e724eb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cybersecurity/ELF.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -138,7 +150,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "D&D Character.md",
+                "file": "Cybersecurity/ELF.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -155,7 +167,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "D&D Character.md",
+                "file": "Cybersecurity/ELF.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -178,7 +190,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "D&D Character.md"
+                "file": "Cybersecurity/ELF.md"
               }
             }
           }
@@ -199,8 +211,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "207df879080defc8",
+  "active": "1416922ac6e724eb",
   "lastOpenFiles": [
+    "Operating_Systems/Software/Segmentation.md",
+    "Operating_Systems/Software/Protected_Mode.md",
+    "Operating_Systems/Software/Paging.md",
+    "Operating_Systems/Software/Kernel.md",
+    "Data_alignment.md",
+    "Operating_Systems/UEFI.md",
+    "Operating_Systems/Problem_Domains.md",
+    "Operating_Systems/CMOS.md",
+    "Operating_Systems/Anatomy of an assembly instruction.md",
+    "Operating_Systems/Below_Software/floppy_disk.md",
+    "Operating_Systems/Below_Software/CPU_OPERATING_MODES.md",
+    "Operating_Systems/Below_Software/CPU.md",
+    "Operating_Systems/Below_Software/Computers.md",
+    "Operating_Systems/Below_Software/BINARY_DECODERS.md",
+    "Linux/Tarballs and Compression.md",
     "Race.md",
     "D&D Character.md",
     "Class.md",
@@ -208,31 +235,16 @@
     "Linux/Virtual memory.md",
     "Media/Pasted image 20240630114454.png",
     "Cybersecurity/Rootkits.md",
-    "Operating_Systems/UEFI.md",
-    "Operating_Systems/CMOS.md",
     "Linux/Building from Source.md",
     "Operating_Systems/Below_Software/LOGIC_GATES.md",
-    "Operating_Systems/Software/Paging.md",
-    "Operating_Systems/Anatomy of an assembly instruction.md",
     "Cybersecurity/SYSCALL exploits.md",
     "Linux/What-Builds-A-Distro?.md",
-    "Operating_Systems/Below_Software/BINARY_DECODERS.md",
-    "Operating_Systems/Below_Software/CPU.md",
     "Stoicidivinism/ex_lunae_odium.md",
-    "Operating_Systems/Below_Software/floppy_disk.md",
     "Programming/VIM.md~",
-    "Data_alignment.md",
-    "Cybersecurity/Assembly_and_RE.md",
     "Media/Pasted image 20240628222545.png",
-    "Cybersecurity/Stack Exploitation.md",
-    "Operating_Systems/Below_Software/CPU_OPERATING_MODES.md",
     "Media/Pasted image 20240628195931.png",
-    "Programming/gdb.md",
-    "Linux/Compilation_and_compilers.md",
     "Media/Pasted image 20240628191009.png",
     "Media/Pasted image 20240628190409.png",
-    "Cybersecurity/Networking.md",
-    "Operating_Systems/Below_Software/Transistor.md",
     "Media/Pasted image 20240627180329.png",
     "Media/Pasted image 20240627175656.png",
     "Media/Pasted image 20240627175121.png",

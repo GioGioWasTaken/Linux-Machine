@@ -17,5 +17,9 @@ FILE * preprocessor(char * src);
 
 FILE * Trim_file(FILE * src);
 
-int Save_macros(Macro *Macros, FILE* clean_file);
+int Save_macros(Macro *Macros, FILE* clean_file, int * Macro_count);
+
+
+
+int isStatement(char * macroName);
 #endif

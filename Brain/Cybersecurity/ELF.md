@@ -1,7 +1,7 @@
 ## General information
 - If a binary file were to only consist of `data` and `code`, from the perspective of the OS the file is undefined. Which region is code? which region is `protected`? This is why we have file formats.
 
-- When a source file is compiled, the generated machine code is stored in in an `object file`, which is just a block of binary. `Object Files` can be combined to produce an executable binary, which is a complete binary program runnable in an operating system.
+- When a source file is compiled, the generated machine code is stored in an `object file`, which is just a block of binary. `Object Files` can be combined to produce an executable binary, which is a complete binary program runnable in an operating system.
 
 - ELF is a common file format for all: `executables, object code, shared libraries`, and `core dumps`.
 
@@ -48,7 +48,7 @@ As we know already, code and data compose a program. However, not all types of c
 -  An object file may have inactive space. The various headers and the sections might not “cover” every byte in an object file. The contents of the inactive data are unspecified.
 #### Relocation
 - `Relocation` is the process of adjusting addresses within a program so that it can execute correctly when loaded into memory. During compilation, the compiler generates object files with placeholder addresses for functions and variables. The linker combines these object files into an executable or shared library, creating relocation entries for addresses that need adjustment.
-	- this is the reason why object file sections address info is not set.
+	- this is the reason why object file sections address info are not set.
 
 
 - When the program is loaded into memory, the loader uses these relocation entries to modify addresses so they point to the correct memory locations. This ensures that all references within the program are accurate, allowing it to run correctly. For dynamic linking, mechanisms like the Global Offset Table (GOT) and Procedure Linkage Table (PLT) handle runtime relocation, resolving addresses of global variables and functions in shared libraries. The dynamic linker updates the GOT and PLT entries, enabling the program to access shared library symbols efficiently.

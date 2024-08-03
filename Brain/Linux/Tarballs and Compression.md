@@ -13,7 +13,7 @@ Since modern CPU's are much faster than internet connection, it is more efficien
 
 ### Why tar over zip?
 
-zip files are built for windows, and are not made to hold all the custom proprities a linux file might have (think about what you see when you use `ls -l` on a file.)
+zip files are built for windows, and are not made to hold all the custom proprities a Linux file might have (think about what you see when you use `ls -l` on a file.)
 ### Why zip over tar?
 
 .zip files are more like .gz.tar files. They append already compressed versions. Which means we can decompress files by index.

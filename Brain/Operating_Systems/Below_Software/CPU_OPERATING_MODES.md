@@ -24,6 +24,8 @@ hex((0x2000 << 4) + 0x0010)
 
 ### Protected mode
 *NOTE* : `virtual-8086` mode isn't actually a mode. It's an attribute that can be enabled from within protected mode. It allows running `Real Mode` inside `protected mode`, for backwards comptability with older programs.
+
+
 Characterized by:
 - 32-bit addressing, allowing access to 4 GB of memory (and up to 64 GB with PAE).
  - Memory protection, enabling isolation of processes to prevent them from interfering with each other. 
@@ -32,6 +34,5 @@ Characterized by:
  Read more at:
 [[Protected_Mode]]
 ### Unreal mode
-
 
 **Use Case:** Modern operating systems, applications that require memory protection and multitasking.
