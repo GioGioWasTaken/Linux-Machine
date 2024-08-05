@@ -1,0 +1,11 @@
+#ifndef EXIT_H
+#define EXIT_H
+
+#define INVALID_MACRO_ERROR -2
+
+#define PREPROCESSOR_EXIT_SUCESSS 1
+
+#define INVALID_MACRO_FORMAT_ERROR -3
+
+
+#endif
