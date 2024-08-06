@@ -5,11 +5,9 @@
 
 #include "../Headers/utils.h"
 
-FILE * create_file(const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-		fprintf(stderr, "Error while creating file:  %s\n", filename);
-		// currently not defined what happens when one of the input files of the assembler fails to assemble.
-    }
-    return file;
+
+void create_file(FILE *file) {
+    fflush(file);  /* Flush the file stream buffer to the file */
+    int fd = fileno(file);  /* Get the file descriptor from the FILE* pointer */
+    fsync(fd);  /* Sync the file descriptor to disk */
 }

@@ -13,13 +13,14 @@ typedef struct {
 } Macro;
 
 
-FILE * preprocessor(char * src);
-
-FILE * Trim_file(FILE * src);
-
-int Save_macros(Macro *Macros, FILE* clean_file, int * Macro_count);
+int preprocessor(char * src);
 
 
+int Save_macros(Macro *Macros,int * Macro_count,FILE* src_file);
+
+int MacroAlreadyExists(Macro * Macros, int *Macro_count, char * macroName);
+
+FILE * writeMacros(Macro *Macros,int * Macro_count,FILE* src_file);
 
 int isStatement(char * macroName);
 #endif

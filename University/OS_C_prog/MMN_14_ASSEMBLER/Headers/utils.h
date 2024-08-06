@@ -4,7 +4,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
-FILE * create_file(const char *filename);
+
+
+void create_file(FILE *file);
 
 void exit_current_file();
 #endif
