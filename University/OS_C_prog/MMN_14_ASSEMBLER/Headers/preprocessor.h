@@ -5,11 +5,13 @@
 #include <string.h>
 #include "globals.h"
 #include <stdlib.h>
+#include <stdlib.h>
 
 typedef struct {
     char name[MAX_MACRO_NAME];
     char **lines; /* Will hold all lines that make a macro*/
     int line_count;
+    int line_capacity;
 } Macro;
 
 /* Forward declaration of Macro_node */
@@ -30,7 +32,7 @@ int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName);
 
 FILE * writeMacros(Macro_node *Head,int * Macro_count,FILE* src_file);
 
-int isStatement(char * macroName);
+int isIllegalName(char * macroName);
 
 void freeMacros(Macro_node * Head);
 

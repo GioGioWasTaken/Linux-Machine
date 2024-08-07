@@ -1,7 +1,9 @@
 #include "../Headers/preprocessor.h"
 #include "../Headers/globals.h"
 #include "../Headers/exit.h"
+#include <complex.h>
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 /*
  * This is the "main" function of the preprocessor. It will return 0 on a sucess, and -1 on a failure.
@@ -66,7 +68,7 @@ int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
 
 	    if(sscanf(line, "macr %s", macroName) == 1){
 
-		if(isStatement(macroName)){
+		if(isIllegalName(macroName)){
 		    return INVALID_MACRO_ERROR;
 		    /* Macro cannot be an opcode*/
 		}
@@ -84,9 +86,15 @@ int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
 
 
 	/* Initiliaze inside macro state */
+
+
 	    insideMacro = 1; /* Boolean state flag*/
 	    current_macro->macro.line_count = 0;
-	    current_macro->macro.lines = malloc(MAX_LINE_LENGTH * sizeof(char *));
+	    current_macro->macro.line_capacity = Initial_lines;
+	    current_macro->macro.lines = malloc(Initial_lines * sizeof(char *));
+
+
+
 	} else if(strncmp(line, "endmacr", 7) == 0){
 	    insideMacro = 0;
 	    /* go to next macro*/
@@ -95,9 +103,42 @@ int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
 	    current_macro= current_macro->Next;
 	    currentMacroIndex++;
 	} else if(insideMacro){
-	    int current_line = current_macro->macro.line_count;
-	    current_macro->macro.lines[current_line] = strdup(line);
+	    /* Memory allocation check */
+	    if(current_macro->macro.line_capacity<=current_macro->macro.line_count){
+		size_t new_capacity = current_macro->macro.line_capacity + 10;
+		char **new_lines = realloc(current_macro->macro.lines, new_capacity * sizeof(char *));
+
+		if (new_lines == NULL) {
+		    fprintf(stderr, "Error reallocating memory for new lines. Allocation size: %zu\n", new_capacity);
+		    return MEMORY_ALLOCATION_ERROR;
+		}
+
+		 /*  Update the lines pointer and capacity */
+		current_macro->macro.lines = new_lines;
+		current_macro->macro.line_capacity = new_capacity;
+	    }
+	    if(current_macro->macro.lines ==NULL){
+		fprintf(stderr, "Error reallocating memory for new lines. Allcoation size: %d\n",current_macro->macro.line_capacity);
+		return MEMORY_ALLOCATION_ERROR;
+	    }
 	    /*NOTE: strdup is a malloc */
+
+	    int current_line = current_macro->macro.line_count;
+	    /* BUG: This length check causes a segfault. Fix later*/
+	    /*     char * line_to_copy = strdup(line); */
+	    /*     if(line_to_copy==NULL){ */
+	    /*  printf("wtf\n"); */
+	    /*  exit(EXIT_FAILURE); */
+	    /*     } */
+	    /*     printf("%s\n", line_to_copy); */
+	    /*     if(strlen(line_to_copy) > 80){ */
+	    /*  fprintf(stderr, "Maximum length of line (excluding the null terminator) is 80. Line #%d is of length %lu\n",current_line,strlen(line_to_copy)); */
+	    /*  return LINE_TOO_LONG_ERROR; */
+	    /*     } */
+	    current_macro->macro.lines[current_line] = strdup(line);
+	    if (current_macro->macro.lines[current_macro->macro.line_count] == NULL) {
+		return MEMORY_ALLOCATION_ERROR;
+	    };
 	    current_macro->macro.line_count++;
 	}
 
@@ -162,7 +203,15 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
 		macro_found = 1;
 
 		/* Replace macro call with macro definition */
+		/*  BUG: any attempt to reference the lines memory cause a segfault*/
 
+		printf("First macro line %p\n", Current_macro->macro.lines);
+
+
+
+		printf("First macro line %s\n", Current_macro->macro.lines[0]);
+		printf("Second macro line %s\n", Current_macro->macro.lines[1]);
+		printf("Third macro line %s\n", Current_macro->macro.lines[2]);
 		int j;
 		for (j = 0; j < Current_macro->macro.line_count; j++) {
 		    fprintf(temp_file, "%s\n", Current_macro->macro.lines[j]);
@@ -210,7 +259,7 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
 
 
 
-int isStatement(char * macroName){
+int isIllegalName(char * macroName){
     /* NOTE: For now we'll just return false. */
     return 0;
 }
@@ -224,5 +273,17 @@ int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName){
 
 
 void freeMacros(Macro_node *Head){
+    Macro_node * current = Head;
+    Macro_node * next;
+    while(current!=NULL){
+	next = current->Next;
+	int i;
+	for(i=0;i<current->macro.line_count;i++){
+	    free(current->macro.lines[i]);
+	}
 
+	free(current->macro.lines);
+	free(current);
+	current = next;
+    }
 }

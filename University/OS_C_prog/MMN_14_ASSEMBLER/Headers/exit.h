@@ -13,5 +13,8 @@
 
 #define NO_SUCH_FILE -5
 
+#define MEMORY_ALLOCATION_ERROR -6
+
+#define LINE_TOO_LONG_ERROR -7
 
 #endif

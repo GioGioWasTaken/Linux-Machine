@@ -1,4 +1,12 @@
+#!/bin/bash
 make
-cp /home/Ningen/Desktop/Linux-Machine/University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler ~/.local/bin
+cp $HOME/Desktop/Linux-Machine/University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler ~/.local/bin
+
+if [ $? -eq 0 ]; then
+    echo "Copy succeeded."
+else
+    echo "Copy failed."
+fi
+
 make clean
 source ~/.zshrc
