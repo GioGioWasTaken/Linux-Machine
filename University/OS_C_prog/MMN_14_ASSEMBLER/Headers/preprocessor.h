@@ -12,15 +12,26 @@ typedef struct {
     int line_count;
 } Macro;
 
+/* Forward declaration of Macro_node */
+typedef struct Macro_node Macro_node;
+
+typedef struct Macro_node {
+    int index;
+    Macro macro;
+    Macro_node *Next;
+} Macro_node;
 
 int preprocessor(char * src);
 
 
-int Save_macros(Macro *Macros,int * Macro_count,FILE* src_file);
+int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file);
 
-int MacroAlreadyExists(Macro * Macros, int *Macro_count, char * macroName);
+int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName);
 
-FILE * writeMacros(Macro *Macros,int * Macro_count,FILE* src_file);
+FILE * writeMacros(Macro_node *Head,int * Macro_count,FILE* src_file);
 
 int isStatement(char * macroName);
+
+void freeMacros(Macro_node * Head);
+
 #endif

@@ -1,4 +1,4 @@
 make
 cp /home/Ningen/Desktop/Linux-Machine/University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler ~/.local/bin
-source ~/.zshrc
 make clean
+source ~/.zshrc

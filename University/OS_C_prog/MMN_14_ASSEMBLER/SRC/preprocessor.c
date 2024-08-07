@@ -2,6 +2,7 @@
 #include "../Headers/globals.h"
 #include "../Headers/exit.h"
 #include <stdio.h>
+#include <time.h>
 /*
  * This is the "main" function of the preprocessor. It will return 0 on a sucess, and -1 on a failure.
  * Note that there is no need to return a file discriptor or pointer,
@@ -23,34 +24,40 @@ int preprocessor(char * src){
     printf("Preprocessing file\n");
     /* Clean file */
 
-    Macro* Macros = malloc(sizeof(Macro) * MAX_MACRO_AMOUNT);
+    Macro_node Head;
+    Head.Next=NULL;
+
+
     /* Step 1: find all macros and add them to the array if and only if they are all valid.*/
     int macro_count = 0;
 
-    int status_save_macros = Save_macros(Macros,  &macro_count, src_file);
+    int status_save_macros = Save_macros(&Head,  &macro_count, src_file);
 
     if(status_save_macros == INVALID_MACRO_ERROR || status_save_macros == INVALID_MACRO_FORMAT_ERROR || status_save_macros == DUPLICATE_MACRO_ERROR){
-	free(Macros);
+	freeMacros(&Head);
 	free(src_file);
-	/* #NOTE: code this function. It is instructed that if an error is found in this step we discard the file and process the next one. */
+	/* #NOTE: It is instructed that if an error is found in the preprocessing step we discard the file and process the next one. */
 	return PREPROCESSOR_EXIT_FAIL;
     } 
 
-    /* Step 2 & 3 : Remove all macro declerations and Replace all macro calls with the macro definitions */
+    /* Step 2 & 3 : Remove all macro declerations && Replace all macro calls with the macro definitions */
     
-    FILE * preprocessed_file = writeMacros(Macros,  &macro_count, src_file);
+    FILE * preprocessed_file = writeMacros(&Head,  &macro_count, src_file);
     create_file(preprocessed_file);
+    freeMacros(&Head);
     return PREPROCESSOR_EXIT_SUCESSS;
 }
 
 
 
 
-int Save_macros(Macro *Macros,  int * Macro_count,FILE* src_file){
+int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     int currentMacroIndex = 0;
+    Macro_node * current_macro = Head;
 
+    printf("Saving Macros...\n");
 
     /* So long as lines can be read*/
     while(fgets(line, sizeof(line), src_file)){
@@ -63,50 +70,60 @@ int Save_macros(Macro *Macros,  int * Macro_count,FILE* src_file){
 		    return INVALID_MACRO_ERROR;
 		    /* Macro cannot be an opcode*/
 		}
-		if(MacroAlreadyExists(Macros, Macro_count, macroName)){
+		if(MacroAlreadyExists(Head, Macro_count, macroName)){
 		    return DUPLICATE_MACRO_ERROR;
+		} else{
+		    strncpy(current_macro->macro.name, macroName, MAX_MACRO_NAME - 1);
+		    current_macro->macro.name[MAX_MACRO_NAME - 1] = '\0'; /* Ensure null-termination */
 		}
 	    } else {
+		/* Handle case where macro name is not provided*/
 		    return INVALID_MACRO_FORMAT_ERROR;
-		    /* Handle case where macro name is not provided*/
 		}
 
-	    strncpy(Macros[currentMacroIndex].name, macroName, MAX_MACRO_NAME - 1);
-	    Macros[currentMacroIndex].name[MAX_MACRO_NAME - 1] = '\0'; /* Ensure null-termination */
 
 
 	/* Initiliaze inside macro state */
 	    insideMacro = 1; /* Boolean state flag*/
-	    Macros[currentMacroIndex].line_count = 0;
-	    Macros[currentMacroIndex].lines = malloc(MAX_LINE_LENGTH * sizeof(char *));
+	    current_macro->macro.line_count = 0;
+	    current_macro->macro.lines = malloc(MAX_LINE_LENGTH * sizeof(char *));
 	} else if(strncmp(line, "endmacr", 7) == 0){
 	    insideMacro = 0;
+	    /* go to next macro*/
+	    current_macro->index = currentMacroIndex;
+
+	    current_macro= current_macro->Next;
+	    currentMacroIndex++;
 	} else if(insideMacro){
-	    int current_line = Macros[currentMacroIndex].line_count;
-	    Macros[currentMacroIndex].lines[current_line] = strdup(line);
-	    /* NOTE: strdup is a malloc */
-	    Macros[currentMacroIndex].line_count++;
+	    int current_line = current_macro->macro.line_count;
+	    current_macro->macro.lines[current_line] = strdup(line);
+	    /*NOTE: strdup is a malloc */
+	    current_macro->macro.line_count++;
 	}
 
-	*Macro_count = currentMacroIndex + 1;
-	/* We will keep src_file open for the time being */
     } 
+	/* We will keep src_file open for the time being */
+    *Macro_count = currentMacroIndex + 1;
     rewind(src_file);
     return PREPROCESSOR_EXIT_SUCESSS;
 }
 
 
-FILE * writeMacros(Macro *Macros, int *Macro_count, FILE* src_file) {
+FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
+    Macro_node * Current_macro = Head;
+
+
+
     if (!temp_file) {
         fprintf(stderr, "Could not create temporary file for preprocessing.\n");
         return NULL;
     }
 
     /* Iterate through each line of the source file */
-    printf("writeMacros: \n");
+    printf("Writing Macros: \n");
     while (fgets(line, sizeof(line), src_file)) {
 	printf("%s\n", line);
         int macro_found = 0;
@@ -132,31 +149,43 @@ FILE * writeMacros(Macro *Macros, int *Macro_count, FILE* src_file) {
         }
 
         /* Check if the line contains a macro call and replace it */
-	int i;
-        for (i = 0; i < *Macro_count; i++) {
-            if (strstr(line, Macros[i].name) != NULL) {
-		printf("Call to macro %s detected\nIt has %d lines\n",Macros[i].name, Macros[i].line_count );
+	if(Current_macro ==NULL){
+	    printf("No macros detected. Continuing....\n");
+	}
+	while(Current_macro!=NULL){
+	    printf("Checking for macro : %s\n",Current_macro->macro.name);
+	    fflush(stdout);
+
+	    if (strstr(line, Current_macro->macro.name) != NULL) {
+		printf("Call to macro %s detected\nIt has %d lines\n",Current_macro->macro.name, Current_macro->macro.line_count );
 		fflush(stdout);
 		macro_found = 1;
 
-                /* Replace macro call with macro definition */
-
+		/* Replace macro call with macro definition */
 
 		int j;
-                for (j = 0; j < Macros[i].line_count; j++) {
-                    fprintf(temp_file, "%s\n", Macros[i].lines[j]);
-                }
+		for (j = 0; j < Current_macro->macro.line_count; j++) {
+		    fprintf(temp_file, "%s\n", Current_macro->macro.lines[j]);
+		}
 
-                break;
-            }
-        }
+		break;
+	    } else{
+		if(Current_macro->Next!=NULL){
+		    Current_macro = Current_macro->Next;
+		} else{
+		    break;
+		}
+	    }
+	}
+	Current_macro = Head;
 
-        /* If no macro call was found, and we are not inside a macro definition, write the original line to the temp file */
-        if (!macro_found) {
+	/* If no macro call was found, and we are not inside a macro definition, write the original line to the temp file */
+	if (!macro_found) {
 	    printf("code line: %s\n", line);
-            fprintf(temp_file, "%s\n", line);
-        }
+	    fprintf(temp_file, "%s\n", line);
+	}
     }
+
 
     /* Reset the source file pointer and copy from temp file */
     rewind(src_file);
@@ -166,7 +195,7 @@ FILE * writeMacros(Macro *Macros, int *Macro_count, FILE* src_file) {
     printf("Preprocessed file: \n");
     while (fgets(line, sizeof(line), temp_file)) {
 	printf("%s\n",line );
-        fprintf(fully_processed_file, "%s", line);
+	fprintf(fully_processed_file, "%s", line);
     }
 
 
@@ -179,6 +208,8 @@ FILE * writeMacros(Macro *Macros, int *Macro_count, FILE* src_file) {
 
 
 
+
+
 int isStatement(char * macroName){
     /* NOTE: For now we'll just return false. */
     return 0;
@@ -186,7 +217,12 @@ int isStatement(char * macroName){
 
 
 
-int MacroAlreadyExists(Macro * Macros, int *Macro_count, char * macroName){
+int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName){
     /* NOTE: For now we'll just return false. */
     return 0;
+}
+
+
+void freeMacros(Macro_node *Head){
+
 }
