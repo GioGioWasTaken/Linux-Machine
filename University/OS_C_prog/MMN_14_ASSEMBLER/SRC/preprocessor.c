@@ -37,7 +37,7 @@ int preprocessor(char * src){
 
     if(status_save_macros == INVALID_MACRO_ERROR || status_save_macros == INVALID_MACRO_FORMAT_ERROR || status_save_macros == DUPLICATE_MACRO_ERROR){
 	freeMacros(&Head);
-	free(src_file);
+	fclose(src_file);
 	/* #NOTE: It is instructed that if an error is found in the preprocessing step we discard the file and process the next one. */
 	return PREPROCESSOR_EXIT_FAIL;
     } 
@@ -48,6 +48,11 @@ int preprocessor(char * src){
     create_file(preprocessed_file);
     fclose(preprocessed_file);
     freeMacros(&Head);
+
+    fclose(src_file);
+
+    fclose(preprocessed_file);
+
     return PREPROCESSOR_EXIT_SUCESSS;
 }
 
@@ -248,9 +253,7 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
 	fprintf(fully_processed_file, "%s", line);
     }
 
-
     fclose(temp_file);
-    fclose(src_file);
     return fully_processed_file; /* Return the preprocessed file  */
 }
 
@@ -268,18 +271,22 @@ int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName){
 }
 
 
-void freeMacros(Macro_node *Head){
-    Macro_node * current = Head;
-    Macro_node * next;
-    while(current!=NULL){
-	next = current->Next;
-	int i;
-	for(i=0;i<current->macro.line_count;i++){
-	    free(current->macro.lines[i]);
-	}
+/* void freeMacros(Macro_node *Head){*/
+/*     Macro_node * current = Head;*/
+/*     Macro_node * next;*/
+/*     while(current!=NULL){*/
+/* 	next = current->Next;*/
+/* 	int i;*/
+/* 	for(i=0;i<current->macro.line_count;i++){*/
+/* 	    free(current->macro.lines[i]);*/
+/* 	}*/
+/**/
+/* 	free(current->macro.lines);*/
+/* 	free(current);*/
+/* 	current = next;*/
+/*     }*/
+/* }*/
 
-	free(current->macro.lines);
-	free(current);
-	current = next;
-    }
+void freeMacros(Macro_node *Head){
+
 }
