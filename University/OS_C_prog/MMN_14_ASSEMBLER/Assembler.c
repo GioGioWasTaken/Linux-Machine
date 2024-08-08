@@ -15,7 +15,7 @@ int main(int argc, char ** argv){
     while(--argc > 0){ /* So long as there are files to process...*/
 
     /* Step 1: preprocess it*/
-    char filename[259]; /* 255 is actually the maximum file name for most file systems, so 255 + .as + \0 = 260 */
+    char filename[259]; /* 255 is actually the maximum file name for most file systems, so 255 + .as + \0 = 259 */
     snprintf(filename, sizeof(filename), "%s.as", argv[file_index]); 
     int preprocessor_status = preprocessor(filename);
 

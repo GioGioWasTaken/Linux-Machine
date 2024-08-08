@@ -4,8 +4,15 @@ LET'S ALL LOVE LAIN
 hamlet
 shakespeare
 endmacr
+clr
+macr friends
+yeheli
+shani
+neta
+roei
+endmacr
+
 bro
-bro
-mov r1, 0x14
-bro
-mov 
+mov eax, 4
+friends
+friends

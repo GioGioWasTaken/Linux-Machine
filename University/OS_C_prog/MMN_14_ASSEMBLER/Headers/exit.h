@@ -17,4 +17,6 @@
 
 #define LINE_TOO_LONG_ERROR -7
 
+#define OPEN_ENDED_MACRO_ERROR -8
+
 #endif

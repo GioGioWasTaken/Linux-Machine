@@ -3,9 +3,13 @@ make
 cp $HOME/Desktop/Linux-Machine/University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler ~/.local/bin
 
 if [ $? -eq 0 ]; then
-    echo "Copy succeeded."
+    echo "--------------------------------------------
+    Copy succeeded.
+    --------------------------------------------"
 else
-    echo "Copy failed."
+    echo "--------------------------------------------
+    Copy failed.
+    --------------------------------------------"
 fi
 
 make clean

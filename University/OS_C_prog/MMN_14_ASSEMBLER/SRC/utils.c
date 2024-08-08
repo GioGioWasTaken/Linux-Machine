@@ -5,6 +5,7 @@
 
 #include "../Headers/utils.h"
 
+#include <stdio.h>
 
 void create_file(FILE *file) {
     fflush(file);  /* Flush the file stream buffer to the file */
