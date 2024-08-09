@@ -105,7 +105,6 @@ int Save_macros(Macro_node **Head,  int * Macro_count, FILE* src_file){
 }
 
 
-/* BUG: Add macro doesn't have sideeffects. fix tomorrow*/
 
 int Add_macro(Macro_node **Head,  char * macr_name, FILE* src_file){
     char macr_line[MAX_LINE_LENGTH];
