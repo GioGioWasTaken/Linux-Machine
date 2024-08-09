@@ -4,7 +4,7 @@ LET'S ALL LOVE LAIN
 hamlet
 shakespeare
 endmacr
-clr
+mov r2, 0x20
 macr friends
 yeheli
 shani

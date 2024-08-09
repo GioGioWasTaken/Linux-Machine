@@ -1,68 +1,75 @@
 #include "../Headers/preprocessor.h"
 #include "../Headers/globals.h"
 #include "../Headers/exit.h"
+#include <stdio.h>
 #include <string.h>
 
 
 int preprocessor(char * src){
-    /* Step 0: clean whitespaces for proper parsing */
 
+    /* Step 0: clean whitespaces for proper parsing */
 
     /* Load file */
     FILE *src_file = fopen(src, "r");
     if (!src_file) {
-        fprintf(stderr,"Source file %s doesn't exist.\n",src);
-	return PREPROCESSOR_EXIT_FAIL; /* It is easier in smaller scale projects to use custom error codes.  */
-    } 
+        fprintf(stderr, "Source file %s doesn't exist.\n", src);
+        return PREPROCESSOR_EXIT_FAIL;
+    }
     printf("Preprocessing file\n");
+
     /* Clean file */
+    Macro_node *Head = NULL;
 
-    Macro_node * Head = NULL;
-
-    /* Step 1: find all macros and add them to the linked list if and only if they are all valid.*/
-
+    /* Step 1: find all macros and add them to the linked list if and only if they are all valid. */
     int macro_count = 0;
-
-    int status_save_macros = Save_macros(Head,  &macro_count, src_file);
+    int status_save_macros = Save_macros(&Head, &macro_count, src_file);
 
     switch (status_save_macros) {
-	    /* #NOTE: It is instructed that if an error is found in the
-	   preprocessing step we discard the file and process the next one. */
-
-	case OPEN_ENDED_MACRO_ERROR:
-	case INVALID_MACRO_ERROR:
-	case INVALID_MACRO_FORMAT_ERROR:
-	case DUPLICATE_MACRO_ERROR:
-	case MEMORY_ALLOCATION_ERROR:
-	    printf("Some error occurred.\n");
-	    freeMacros(Head);
-	    fclose(src_file);
-	    return PREPROCESSOR_EXIT_FAIL;
-	default:
-	    /* No errors, continue processing */
-	    break;
+        case OPEN_ENDED_MACRO_ERROR:
+            printf("Error: Open-ended macro detected.\n");
+            goto cleanup;
+        case INVALID_MACRO_ERROR:
+            printf("Error: Invalid macro.\n");
+            goto cleanup;
+        case INVALID_MACRO_FORMAT_ERROR:
+            printf("Error: Invalid macro format.\n");
+            goto cleanup;
+        case DUPLICATE_MACRO_ERROR:
+            printf("Error: Duplicate macro.\n");
+            goto cleanup;
+        case MEMORY_ALLOCATION_ERROR:
+            printf("Error: Memory allocation failure.\n");
+            goto cleanup;
+        default:
+            /* No errors, continue processing */
+            break;
     }
 
-    /* Step 2 & 3 : Remove all macro declerations && Replace all macro calls with the macro definitions */
-    
+    /* Step 2 & 3: Remove all macro declarations and replace all macro calls with macro definitions */
     printf("Current Head: %p\n", Head);
-    FILE * preprocessed_file = writeMacros(Head,  &macro_count, src_file);
+    FILE *preprocessed_file = writeMacros(&Head, &macro_count, src_file);
+    if (!preprocessed_file) {
+        fprintf(stderr, "Failed to create preprocessed file.\n");
+        goto cleanup;
+    }
     create_file(preprocessed_file);
-    freeMacros(Head);
 
+cleanup:
+    freeMacros(&Head);
     fclose(src_file);
-
-    fclose(preprocessed_file); 
-
-    return PREPROCESSOR_EXIT_SUCESSS;
+    if (preprocessed_file) {
+        fclose(preprocessed_file);
+	return status_save_macros;
+    } else{
+	return PREPROCESSOR_EXIT_FAIL;
+    }
 }
 
 
-int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
+int Save_macros(Macro_node **Head,  int * Macro_count, FILE* src_file){
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     int currentMacroIndex = 0;
-    Macro_node * current_macro = Head;
 
     printf("Saving Macros...\n");
 
@@ -84,7 +91,10 @@ int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
 		return INVALID_MACRO_FORMAT_ERROR;
 	    }
     
-	    Add_macro(current_macro, macroName, src_file);
+	    int add_macro_status = Add_macro(Head, macroName, src_file);
+	    if(add_macro_status!=PREPROCESSOR_EXIT_SUCESSS){
+		return add_macro_status;
+	    }
 	} else{
 	    continue;
 	}
@@ -96,73 +106,91 @@ int Save_macros(Macro_node *Head,  int * Macro_count, FILE* src_file){
 
 
 /* BUG: Add macro doesn't have sideeffects. fix tomorrow*/
-int Add_macro(Macro_node *Head,  char * macr_name, FILE* src_file){
-    char macr_line[MAX_LINE_LENGTH];
-    if(Head ==NULL){
-	printf("I should only be triggered once\n");
-	/* This is the first node, not a memory allocation error, those are handled.*/
-	Macro_node * newNode = (Macro_node *) malloc(sizeof(Macro_node));
-	newNode->Next = Head;
-	Head = newNode;
-    } 
-    Macro_node * current_macro = Head;
 
-    /* We have some nodes to iterate through*/
-    while(current_macro->Next !=NULL){
-	printf("Former macro %s %s\n", current_macro->macro.name, Head->macro.name);
-	current_macro=current_macro->Next;
+int Add_macro(Macro_node **Head,  char * macr_name, FILE* src_file){
+    char macr_line[MAX_LINE_LENGTH];
+    Macro_node * newNode = (Macro_node *) malloc(sizeof(Macro_node));
+    if(newNode==NULL){
+	return MEMORY_ALLOCATION_ERROR;
     }
 
-    /* Macro Name */
-    strncpy(current_macro->macro.name, macr_name, MAX_MACRO_NAME - 1);
-    current_macro->macro.name[MAX_MACRO_NAME - 1] = '\0'; /* Ensure null-termination */
-    printf("Macro name: %s\n", current_macro->macro.name);
+    /* Set new node data*/
 
-    current_macro->macro.line_count = 0;
-    current_macro->macro.line_capacity = Initial_lines;
-    current_macro->macro.lines = malloc(Initial_lines * sizeof(char *));
-    if(current_macro->macro.lines == NULL){
+    /* Macro Name */
+    strncpy(newNode->macro.name, macr_name, MAX_MACRO_NAME - 1);
+    newNode->macro.name[MAX_MACRO_NAME - 1] = '\0'; /* Ensure null-termination */
+    printf("Macro name: %s\n", newNode->macro.name);
+
+    newNode->macro.line_count = 0;
+    newNode->macro.line_capacity = Initial_lines;
+    newNode->macro.lines = malloc(Initial_lines * sizeof(char *));
+    if(newNode->macro.lines == NULL){
 	return MEMORY_ALLOCATION_ERROR;
     }
     /* src_file is currently winded to the line after macr macrname */
     int lines_until_end = 0;	
     while(fgets(macr_line,sizeof(macr_line), src_file)){
-	if(strncmp(macr_line, "endmacr", 7) == 0){
+	if(strncmp(macr_line, "endmacr\n", 8) == 0){
 	    printf("Macro length in lines: %d\n", lines_until_end);
 	    puts("macro end encountered\n");
 	    break;
 	}
-	int i = current_macro->macro.line_count;
-	if(i==current_macro->macro.line_capacity){
+	int i = newNode->macro.line_count;
+	if(i==newNode->macro.line_capacity){
 	    /* Allocated space for 40 more lines if needed*/
-	    current_macro->macro.lines= realloc(current_macro->macro.lines, i + 40);
-	    if(current_macro->macro.lines == NULL){
+	    newNode->macro.lines= realloc(newNode->macro.lines, i + 40);
+	    if(newNode->macro.lines == NULL){
 		return MEMORY_ALLOCATION_ERROR;
 	    }
 	}
-	current_macro->macro.lines[i] = malloc(sizeof(char) * MAX_LINE_LENGTH);
-	if(current_macro->macro.lines[i]==NULL){
+	newNode->macro.lines[i] = malloc(sizeof(char) * MAX_LINE_LENGTH);
+	if(newNode->macro.lines[i]==NULL){
 	    return MEMORY_ALLOCATION_ERROR;
 	}
-	strcpy(current_macro->macro.lines[i], macr_line);
-	printf("macro line: %s\n",current_macro->macro.lines[i]);
-	current_macro->macro.line_count++;
+	strcpy(newNode->macro.lines[i], macr_line);
+	printf("macro line: %s\n",newNode->macro.lines[i]);
+	newNode->macro.line_count++;
 	lines_until_end++;
     }
-    if(strcmp("endmacr",macr_line) != 0){
+    if(strcmp("endmacr\n",macr_line) != 0){
+	printf("expected endmacr but got '%s' instead.\n",macr_line);
 	return OPEN_ENDED_MACRO_ERROR;
     }
-    Head = current_macro;
-    return PREPROCESSOR_EXIT_SUCESSS;
+
+
+    /* Determine position of new node based on head */
+
+    /* If head does not exist: */
+    if(*Head==NULL){
+	printf("Head should now point to: %p\n", newNode);
+	*Head = newNode;
+	return PREPROCESSOR_EXIT_SUCESSS;
+    } else{
+	printf("Head found at address %p\n",Head);
+
+	/* Otherwise if it does exist: */
+
+	Macro_node * current_macro = *Head;
+
+	/* We have some nodes to iterate through*/
+	while(current_macro->Next !=NULL){
+	    current_macro=current_macro->Next;
+	}
+
+	/* this produces the effect that Head's last node is now newNode, without modifying Head.*/
+	printf("The last node that was added has an address: %p\n", newNode);
+	current_macro->Next = newNode;
+	return PREPROCESSOR_EXIT_SUCESSS;
+    }
 }
 
 
 
-FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
+FILE * writeMacros(struct Macro_node **Head, int *Macro_count, FILE* src_file) {
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
-    Macro_node * Current_macro = Head;
+    Macro_node * Current_macro = *Head;
 
 
 
@@ -197,7 +225,7 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
         /* Check if the line contains a macro call and replace it */
 	if(Current_macro ==NULL){
 	    printf("No macros detected. Continuing....\n");
-	    break;
+	    continue;
 	}
 	while(Current_macro!=NULL){
 	    printf("Checking for macro : %s\n",Current_macro->macro.name);
@@ -221,7 +249,7 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
 		}
 	    }
 	}
-	Current_macro = Head;
+	Current_macro = *Head;
 
 	/* If no macro call was found, and we are not inside a macro definition, write the original line to the temp file */
 	if (!macro_found) {
@@ -249,20 +277,21 @@ FILE * writeMacros(struct Macro_node *Head, int *Macro_count, FILE* src_file) {
 
 
 
-int MacroAlreadyExists(Macro_node *Head, int *Macro_count, char * macroName){
+int MacroAlreadyExists(Macro_node **Head, int *Macro_count, char * macroName){
     return  0;
 }
 
+/* It is the responsiblity of the label processor to check if there exists any macros with the same name as labels*/
 int isIllegalName(char * macroName) {
     return 0;
 }
 
-void freeMacros(Macro_node *Head){
-    Macro_node * current = Head;
+void freeMacros(Macro_node **Head){
+    Macro_node * current = *Head;
     Macro_node * next;
     while(current!=NULL){
-	next = current->Next;
 	int i;
+	next = current->Next;
 	for(i=0;i<current->macro.line_count;i++){
 	    free(current->macro.lines[i]);
 	}
@@ -271,3 +300,5 @@ void freeMacros(Macro_node *Head){
 	current = next;
     }
 }
+
+
