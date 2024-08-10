@@ -12,3 +12,12 @@ void create_file(FILE *file) {
     int fd = fileno(file);  /* Get the file descriptor from the FILE* pointer */
     fsync(fd);  /* Sync the file descriptor to disk */
 }
+
+
+int isIllegalName(char * macroName) {
+    return 0;
+}
+
+int line_too_long_exists(char * file_name){
+    return 0;
+}

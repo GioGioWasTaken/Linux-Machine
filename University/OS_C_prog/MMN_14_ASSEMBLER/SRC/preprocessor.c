@@ -277,13 +277,9 @@ FILE * writeMacros(struct Macro_node **Head, int *Macro_count, FILE* src_file) {
 
 
 int MacroAlreadyExists(Macro_node **Head, int *Macro_count, char * macroName){
-    return  0;
-}
-
-/* It is the responsiblity of the label processor to check if there exists any macros with the same name as labels*/
-int isIllegalName(char * macroName) {
     return 0;
 }
+
 
 void freeMacros(Macro_node **Head){
     Macro_node * current = *Head;
