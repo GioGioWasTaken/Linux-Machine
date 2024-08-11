@@ -4,6 +4,8 @@
  * and only serve my comfort and your ease of reading through my code. */
 
 #include "../Headers/utils.h"
+#include "../Headers/exit.h"
+#include "../Headers/first_pass.h"
 
 #include <stdio.h>
 
@@ -20,4 +22,13 @@ int isIllegalName(char * macroName) {
 
 int line_too_long_exists(char * file_name){
     return 0;
+}
+
+void print_assemble_time_error(int error_code, code_location am_file){
+    printf("Error found in %s", am_file.filename);
+    switch (error_code) {
+    
+    };
+
+    printf("in line %d\n", am_file.line_number);
 }

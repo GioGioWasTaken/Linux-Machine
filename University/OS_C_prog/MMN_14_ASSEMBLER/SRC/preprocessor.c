@@ -18,7 +18,7 @@ int preprocessor(char * src){
     printf("Preprocessing file\n");
 
     /* Clean file */
-    Macro_node *Head = NULL;
+    Macro_node_t *Head = NULL;
 
     /* Step 1: find all macros and add them to the linked list if and only if they are all valid. */
     int macro_count = 0;
@@ -35,8 +35,7 @@ int preprocessor(char * src){
             printf("Error: Invalid macro format.\n");
             goto cleanup;
         case DUPLICATE_MACRO_ERROR:
-            printf("Error: Duplicate macro.\n");
-            goto cleanup;
+            printf("Error: Duplicate macro.\n"); goto cleanup;
         case MEMORY_ALLOCATION_ERROR:
             printf("Error: Memory allocation failure.\n");
             goto cleanup;
@@ -66,7 +65,7 @@ cleanup:
 }
 
 
-int Save_macros(Macro_node **Head,  int * Macro_count, FILE* src_file){
+int Save_macros(Macro_node_t **Head,  int * Macro_count, FILE* src_file){
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     int currentMacroIndex = 0;
@@ -106,9 +105,9 @@ int Save_macros(Macro_node **Head,  int * Macro_count, FILE* src_file){
 
 
 
-int Add_macro(Macro_node **Head,  char * macr_name, FILE* src_file){
+int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
     char macr_line[MAX_LINE_LENGTH];
-    Macro_node * newNode = (Macro_node *) malloc(sizeof(Macro_node));
+    Macro_node_t * newNode = (Macro_node_t *) malloc(sizeof(Macro_node_t));
     if(newNode==NULL){
 	return MEMORY_ALLOCATION_ERROR;
     }
@@ -169,7 +168,7 @@ int Add_macro(Macro_node **Head,  char * macr_name, FILE* src_file){
 
 	/* Otherwise if it does exist: */
 
-	Macro_node * current_macro = *Head;
+	Macro_node_t * current_macro = *Head;
 
 	/* We have some nodes to iterate through*/
 	while(current_macro->Next !=NULL){
@@ -185,11 +184,11 @@ int Add_macro(Macro_node **Head,  char * macr_name, FILE* src_file){
 
 
 
-FILE * writeMacros(struct Macro_node **Head, int *Macro_count, FILE* src_file) {
+FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file) {
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
-    Macro_node * Current_macro = *Head;
+    Macro_node_t * Current_macro = *Head;
 
 
 
@@ -276,14 +275,14 @@ FILE * writeMacros(struct Macro_node **Head, int *Macro_count, FILE* src_file) {
 
 
 
-int MacroAlreadyExists(Macro_node **Head, int *Macro_count, char * macroName){
+int MacroAlreadyExists(Macro_node_t **Head, int *Macro_count, char * macroName){
     return 0;
 }
 
 
-void freeMacros(Macro_node **Head){
-    Macro_node * current = *Head;
-    Macro_node * next;
+void freeMacros(Macro_node_t **Head){
+    Macro_node_t * current = *Head;
+    Macro_node_t * next;
     while(current!=NULL){
 	int i;
 	next = current->Next;
