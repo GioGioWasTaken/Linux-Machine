@@ -1,16 +1,26 @@
 
-macr bro
-LET'S ALL LOVE LAIN
-hamlet
-shakespeare
-endmacr
+
+
+
 
 
 mov r1, 0x14
+
 mov r2, 0x20
-bro
+
+LET'S ALL LOVE LAIN
+
+hamlet
+
+shakespeare
+
 mov eax, 4
+
 HELLO: .extern
+
 LAIN: .string "LAINNNN"
+
 HI: .entry
+
 BOO: .data
+

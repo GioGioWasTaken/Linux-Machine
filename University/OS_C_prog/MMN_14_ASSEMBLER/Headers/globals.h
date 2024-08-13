@@ -17,6 +17,6 @@
 
 #define IC_INITIAL 100
 
-#define IC_MAX
+#define IC_MAX 1200
 
 #endif

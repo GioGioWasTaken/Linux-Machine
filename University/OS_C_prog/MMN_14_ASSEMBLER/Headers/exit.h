@@ -1,6 +1,8 @@
 #ifndef EXIT_H
 #define EXIT_H
 
+/* Exit codes for different parts of the assembler*/
+
 #define PREPROCESSOR_EXIT_SUCESSS 1
 
 #define FIRST_PASS_EXIT_SUCESSS 1
@@ -8,6 +10,8 @@
 #define PREPROCESSOR_EXIT_FAIL -1
 
 #define FIRST_PASS_EXIT_FAIL -1
+
+/* Errors: */
 
 #define INVALID_MACRO_ERROR -2
 
@@ -24,5 +28,9 @@
 #define OPEN_ENDED_MACRO_ERROR -8
 
 #define INVALID_DIRECTIVE_ERROR -9
+
+
+/* Warnings: */
+#define UNDEFINED_LABEL_WARNING -100
 
 #endif

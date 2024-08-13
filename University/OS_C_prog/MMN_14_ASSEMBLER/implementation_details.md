@@ -32,8 +32,8 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
 
 # Lexer details
 - Needs to ignore all whitespaces, tabs, etc.
-- a number is defined as an option + or - symbol followed by numbers in decimal
-- printable ascii characters
+- a number is defined as a + or - symbol followed by numbers in decimal
+- printable ascii characters only
 
 # General info
 

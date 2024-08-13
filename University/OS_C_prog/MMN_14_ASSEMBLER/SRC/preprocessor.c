@@ -15,7 +15,6 @@ int preprocessor(char * src){
         fprintf(stderr, "Source file %s doesn't exist.\n", src);
         return PREPROCESSOR_EXIT_FAIL;
     }
-    printf("Preprocessing file\n");
 
     /* Clean file */
     Macro_node_t *Head = NULL;
@@ -33,12 +32,13 @@ int preprocessor(char * src){
             goto cleanup;
         case INVALID_MACRO_FORMAT_ERROR:
             printf("Error: Invalid macro format.\n");
-            goto cleanup;
+	    goto cleanup;
         case DUPLICATE_MACRO_ERROR:
-            printf("Error: Duplicate macro.\n"); goto cleanup;
+	    printf("Error: Duplicate macro.\n"); 
+	    goto cleanup;
         case MEMORY_ALLOCATION_ERROR:
             printf("Error: Memory allocation failure.\n");
-            goto cleanup;
+	    goto cleanup;
         default:
             /* No errors, continue processing */
             break;
@@ -46,7 +46,7 @@ int preprocessor(char * src){
 
     /* Step 2 & 3: Remove all macro declarations and replace all macro calls with macro definitions */
     printf("Current Head: %p\n", Head);
-    FILE *preprocessed_file = writeMacros(&Head, &macro_count, src_file);
+    FILE *preprocessed_file = writeMacros(&Head, &macro_count, src_file,src);
     if (!preprocessed_file) {
         fprintf(stderr, "Failed to create preprocessed file.\n");
         goto cleanup;
@@ -70,11 +70,9 @@ int Save_macros(Macro_node_t **Head,  int * Macro_count, FILE* src_file){
     int insideMacro = 0;
     int currentMacroIndex = 0;
 
-    printf("Saving Macros...\n");
 
     while(fgets(line,sizeof(line), src_file)){
         if (strncmp(line, "macr ", 5) == 0){
-	    puts("Macro start encountered.\n");
 	    char macroName[MAX_MACRO_NAME];
 
 	    if(sscanf(line, "macr %s", macroName) == 1){
@@ -117,7 +115,6 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
     /* Macro Name */
     strncpy(newNode->macro.name, macr_name, MAX_MACRO_NAME - 1);
     newNode->macro.name[MAX_MACRO_NAME - 1] = '\0'; /* Ensure null-termination */
-    printf("Macro name: %s\n", newNode->macro.name);
 
     newNode->macro.line_count = 0;
     newNode->macro.line_capacity = Initial_lines;
@@ -129,8 +126,6 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
     int lines_until_end = 0;	
     while(fgets(macr_line,sizeof(macr_line), src_file)){
 	if(strncmp(macr_line, "endmacr\n", 8) == 0){
-	    printf("Macro length in lines: %d\n", lines_until_end);
-	    puts("macro end encountered\n");
 	    break;
 	}
 	int i = newNode->macro.line_count;
@@ -146,7 +141,6 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
 	    return MEMORY_ALLOCATION_ERROR;
 	}
 	strcpy(newNode->macro.lines[i], macr_line);
-	printf("macro line: %s\n",newNode->macro.lines[i]);
 	newNode->macro.line_count++;
 	lines_until_end++;
     }
@@ -160,11 +154,9 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
 
     /* If head does not exist: */
     if(*Head==NULL){
-	printf("Head should now point to: %p\n", newNode);
 	*Head = newNode;
 	return PREPROCESSOR_EXIT_SUCESSS;
     } else{
-	printf("Head found at address %p\n",Head);
 
 	/* Otherwise if it does exist: */
 
@@ -176,7 +168,6 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
 	}
 
 	/* this produces the effect that Head's last node is now newNode, without modifying Head.*/
-	printf("The last node that was added has an address: %p\n", newNode);
 	current_macro->Next = newNode;
 	return PREPROCESSOR_EXIT_SUCESSS;
     }
@@ -184,7 +175,7 @@ int Add_macro(Macro_node_t **Head,  char * macr_name, FILE* src_file){
 
 
 
-FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file) {
+FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* src_name) {
     char line[MAX_LINE_LENGTH];
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
@@ -222,14 +213,11 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file) {
 
         /* Check if the line contains a macro call and replace it */
 	if(Current_macro ==NULL){
-	    printf("No macros detected. Continuing....\n");
 	    continue;
 	}
 	while(Current_macro!=NULL){
-	    printf("Checking for macro : %s\n",Current_macro->macro.name);
 
 	    if (strstr(line, Current_macro->macro.name) != NULL) {
-		printf("Call to macro %s detected\nIt has %d lines\n",Current_macro->macro.name, Current_macro->macro.line_count );
 		macro_found = 1;
 
 
@@ -251,7 +239,6 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file) {
 
 	/* If no macro call was found, and we are not inside a macro definition, write the original line to the temp file */
 	if (!macro_found) {
-	    printf("code line: %s\n", line);
 	    fprintf(temp_file, "%s\n", line);
 	}
     }
@@ -261,7 +248,20 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file) {
     rewind(src_file);
     rewind(temp_file);
 
-    FILE * fully_processed_file = fopen("preprocessed.am", "w");
+    char * fileName;
+
+
+    size_t len = (int)strlen(src_name);
+
+    strncpy(fileName, src_name, len-3);
+    fileName[len-3] = '\0';  
+
+    /* Append the new extension ".am" */
+    strcat(fileName, ".am");
+
+
+
+    FILE * fully_processed_file = fopen(fileName, "w");
     printf("Preprocessed file: \n");
     while (fgets(line, sizeof(line), temp_file)) {
 	printf("%s\n",line );
