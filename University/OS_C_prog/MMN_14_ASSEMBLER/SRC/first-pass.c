@@ -124,7 +124,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	    if(directive_type==DATA_DIRECTIVE){
 		newNode->symbol.is_data_line =1;
 		cleanCommas(&directive_definition);
-		addData(DC, data,directive_definition);
+		addNumbers(DC, Data,directive_definition);
 	    }  else if(directive_type==EXTERNAL_DIRECTIVE){
 		/* The .extern is still added to the symbol table, but the label referencing it has no meaning.*/
 		newNode->symbol.is_external_line =1;

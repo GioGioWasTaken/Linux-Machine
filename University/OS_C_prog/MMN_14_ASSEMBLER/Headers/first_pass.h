@@ -1,8 +1,6 @@
 #ifndef FIRST_PASS_H
 #define FIRST_PASS_H
 
-#include "lexer.h"
-#include "tables.h"
 
 typedef struct code_location{
 char * filename;

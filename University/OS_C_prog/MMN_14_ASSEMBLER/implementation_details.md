@@ -37,7 +37,7 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
 
 # General info
 
-- All data structures except (exception) are to be implemented as a linked list or some other data structure whose size is not predetermined.
+- All data structures except the data and instruction memory images , are to be implemented as a linked list or some other data structure whose size is not predetermined.
 
 # Macro/ preprocessor details
 - Assume no macro calls are made before the decleration (if there are such calls this is undefined)
@@ -53,3 +53,6 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
     - if it's a code label, the address will be the address of the first word of the instruction. 
     - if it's a data label, the address will be the current DC address 
 - 
+
+
+

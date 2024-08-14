@@ -11,6 +11,10 @@
 
 #define FIRST_PASS_EXIT_FAIL -1
 
+#define LEXER_EXIT_SUCESS 1
+
+#define LEXER_EXIT_FAIL -1
+
 /* Errors: */
 
 #define INVALID_MACRO_ERROR -2
@@ -29,6 +33,7 @@
 
 #define INVALID_DIRECTIVE_ERROR -9
 
+#define INVALID_DIRECTIVE_DEFINITION -10
 
 /* Warnings: */
 #define UNDEFINED_LABEL_WARNING -100
