@@ -12,7 +12,7 @@
 - Financial situation
    - I lost all my money and I am completely and utterly broke
    - I barely have any food
-   - still dressed in a very expansive suit, and have horrible priorities when spending money)
+   - still dressed in a very expansive suit, and have horrible priorities when spending money
 
 I am advanturing to retrieve my lost wealth, to spread my name under the heavens in great glory with good comrades, and of course, to collect magic.
 
@@ -23,7 +23,7 @@ I am advanturing to retrieve my lost wealth, to spread my name under the heavens
 
 Ah, my esteemed comrades, gather 'round and witness the future of greatness standing before you! Yes, yes, I know you are captivated by the sight of my finely-tailored attire. A masterpiece of fabric and wealth—oh, and let’s not forget the power radiating from me, though I admit, it’s difficult not to notice. Hah! Bless your hearts, you simple creatures.
 
-Now, you may notice the occasional… ah…wear and tear on these elegant threads. Oh, don’t mistake it for poverty —hah!— but rather, adventure's toll. I cannot be bothered with such trivial matters as "replacing" garments every time I slay a beast or rescue a village! After all, I’m far too busy plotting my glorious return to wealth, which, as we all know, is simply a matter of time.
+Now, you may notice the occasional… ah…wear and tear on these elegant threads. Oh, don’t mistake it for poverty —hah!— but rather… adventure's toll. I cannot be bothered with such trivial matters as "replacing" garments every time I slay a beast or rescue a village! After all, I’m far too busy plotting my glorious return to wealth, which, as we all know, is simply a matter of time.
 
 I, the one and only noble heir of fortunes (lost and to be regained) am embarking on this glorious adventure not for coin or petty fame, but for destiny. A destiny that will see my name etched into the annals of history, for generations to tremble before!
 
@@ -36,9 +36,6 @@ Oh, and did I mention my magical prowess? Of course, you are aware. Look at this
 Why, just last week, I graced the finest tavern with my presence—of course they recognized me on sight. I placed my order: roasted pheasant, rare wine, the works! It wasn’t until they asked for payment that they seemed to, ah, misunderstand my situation. "Sir, perhaps you have misplaced your wallet again?" How quaint! As if I would be so careless! I merely told them to add it to my immense tab, which, I assure you, is an investment they will cherish once I restore my fortunes!
 
 And who could forget the delightful moment when I entered the grand bazaar, eyeing the finest magical tomes, only to be told, "Sir, perhaps you'd like to try something in your price range... over there... by the discount potions?" [laugh] As if I—I—would stoop so low! Please! Those merchants will be begging me to return once my inevitable rise to power is complete. The riches of kingdoms will be at my fingertips soon enough.
-
-And who could forget the delightful moment when I entered the grand bazaar, eyeing the finest magical tomes, only to be told, "Sir, perhaps you'd like to try something in your price range... over there... by the discount potions?" [laugh] As if I—I—would stoop so low! Please! Those merchants will be begging me to return once my *inevitable* rise to power is complete. The riches of kingdoms will be at my fingertips soon enough.
-
 
 So, comrades, fear not! Though the world may tremble at the thought of me, ah, "struggling," it’s merely a temporary misunderstanding. For soon, we shall bask in the riches I am destined to reclaim! And when I do, I shall dine like a king, dressed like an emperor, and I might even throw a coin or two to those who doubted me.
 

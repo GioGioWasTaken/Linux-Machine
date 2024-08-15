@@ -55,3 +55,21 @@ Let's say that my character got rich by selling weapons to one political faction
 - Fog Cloud: eliminating opposing advantage, eliminating allied disadvantage, disrupting opponents at range, imagine if i combine it with mold earth. 
 - Magic Missile (obligatory attack spells, i wanted to take `Silent Image` , might go the illusion route but oh well.)
 - Sleep 	
+
+
+# Custom background : 
+
+- The DM officially promises that (within reason) I am allowed to choose 2 skills in which I will have proficiency.
+- and (within reason) proficiency in 1 language of my choice.
+
+## Equipment:
+
+- Money: 10 GP , 7 Silver
+- A Navy coloured suit with golden straps. It shines gloriously as it basks in the sun, as if Jove himself wills my overwhelming rein over the heavens
+- A golden pocket watch
+- Explorer's pack (and some paper!)
+- Spellbook 
+
+
+
+
