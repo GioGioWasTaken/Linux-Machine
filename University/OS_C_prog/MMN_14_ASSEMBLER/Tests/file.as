@@ -11,6 +11,4 @@ mov r2, 0x20
 bro
 mov eax, 4
 HELLO: .extern
-LAIN: .string "LAINNNN"
-HI: .entry
-BOO: .data
+BOO: .data 353, 267   ,43 	,214

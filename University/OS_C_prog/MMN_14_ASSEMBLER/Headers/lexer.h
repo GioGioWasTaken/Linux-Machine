@@ -1,8 +1,11 @@
 #ifndef LEXER_H
 #define LEXER_H
-#include "../Headers/memory.h"
-#include "../Headers/first_pass.h"
-
+#include "memory.h"
+#include "memory.h"
+#include "exit.h"
+#include "utils.h"
+#include "globals.h"
+#include <fcntl.h>
 #include <string.h>
 typedef struct {
     const char *mnemonic;
@@ -19,5 +22,8 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
  * and after it's called, it's the job of the caller to properly add DC to the label, 
  * if the directive is part of a a label definition */
 int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_location am_file);
+
+
+void cleanCommas(char *instruction);
 
 #endif

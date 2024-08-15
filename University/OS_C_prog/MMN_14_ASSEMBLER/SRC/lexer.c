@@ -1,8 +1,5 @@
 #include "../Headers/lexer.h"
-#include "../Headers/memory.h"
-#include "../Headers/exit.h"
-#include "../Headers/utils.h"
-#include <cstring>
+#include <stdio.h>
 #include <string.h>
 int determine_opcode(char * str){
     const instruction_t OPCODES[16] = {
@@ -28,27 +25,45 @@ int determine_opcode(char * str){
 
 
 
-char * removeDirectiveType(char * directive_definition){
+char * removeDirectiveType(char * directive_definition,code_location am_file){
     char * Token;
+    char * res;
     Token = strtok(directive_definition, " ");
-    skipWhitespace(&directive_definition);
-    return Token;
+    if(Token!=NULL){
+	res = directive_definition+strlen(Token);
+	skipWhitespace(&res);
+	/* Move the pointer after the directive definition including the spaces */
+    } else {
+	print_assemble_time_error(INVALID_DIRECTIVE_DEFINITION_NO_SPACE, am_file);
+	return NULL;
+    }
+    return res;
 }
 
 
 int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_location am_file){
     char * Token;
-    Token = removeDirectiveType(directive_definition);
-    if(Token== NULL || *Token=='\0'){
+
+    if (*directive_definition=='\0'){
 	/* invalid .data definition
-	* .data     isn't valid.*/
-	print_assemble_time_error(INVALID_DIRECTIVE_DEFINITION,  am_file);
-	return INVALID_DIRECTIVE_DEFINITION;
+	* .data     (without any arguments) isn't valid.*/
+	print_assemble_time_error(INVALID_DIRECTIVE_DEFINITION_NO_ARGS,  am_file);
+	return INVALID_DIRECTIVE_DEFINITION_NO_ARGS;
+    } else if(directive_definition==NULL){
+	/* .data4,3,  is invalid */
+	print_assemble_time_error(INVALID_DIRECTIVE_DEFINITION_NO_SPACE, am_file);
+	return INVALID_DIRECTIVE_DEFINITION_NO_SPACE;
     }
-    Token = strtok(NULL, ",");
+
+    Token = strtok(directive_definition, ",");
+    printf("Token %s\n",Token);
     while(Token != NULL){
-	printf("Debug, Token value: %s",Token );
-	addNumber(DC,Data,Token);
+	printf("Debug, Token value: %s\n",Token );
+	int status_add = addNumber(DC,Data,Token);
+	if(status_add==INTEGER_OVERFLOW){
+	    print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
+
+	}
 	Token = strtok(NULL, ",");
     }
     return LEXER_EXIT_SUCESS;
@@ -59,3 +74,42 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
 
 }
 
+
+void cleanCommas(char *instruction) {
+    char buffer[MAX_LINE_LENGTH] = "";   /* Temporary buffer for the cleaned string */
+    char *result = buffer;
+    char *Token;
+
+     /* Skip leading whitespace */
+    char *instr = instruction;
+    skipWhitespace(&instr);
+
+     /* Extract the directive (e.g., .data) and skip it */
+    Token = strtok(instr, " ");
+    Token = strtok(NULL, ",");   
+    skipWhitespace(&Token);
+
+     /* Rebuild the string with commas cleaned */
+    while (Token != NULL) {
+         /* Add the token to the result buffer */
+        while (*Token) {
+            if (!isspace((unsigned char)*Token)) {
+                *result++ = *Token;   /* Copy the character to the result */
+            }
+            Token++;
+        }
+        Token = strtok(NULL, ",");   /* Get the next token, splitting by commas */
+
+         /* If there's another token, add a comma without spaces */
+        if (Token != NULL) {
+            *result++ = ',';
+        }
+    }
+
+     /* Null-terminate the result string */
+    *result = '\0';
+
+     /* Copy the cleaned string back to the original instruction */
+    strcpy(instruction, buffer);
+    printf("Cleaned: %s\n", instruction);
+}

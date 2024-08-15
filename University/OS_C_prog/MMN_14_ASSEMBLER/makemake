@@ -6,11 +6,14 @@ if [ $? -eq 0 ]; then
     echo "--------------------------------------------
     Copy succeeded.
     --------------------------------------------"
+
+    make clean
+    source ~/.zshrc
+    AwesomeAssembler Tests/file
 else
+    make clean
     echo "--------------------------------------------
     Copy failed.
     --------------------------------------------"
 fi
 
-make clean
-source ~/.zshrc

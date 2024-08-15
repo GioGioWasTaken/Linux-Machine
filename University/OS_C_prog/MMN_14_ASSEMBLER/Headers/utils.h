@@ -1,12 +1,18 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "first_pass.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+
+
+typedef struct code_location{
+char * filename;
+int line_number;
+} code_location;
+
 
 void create_file(FILE *file);
 

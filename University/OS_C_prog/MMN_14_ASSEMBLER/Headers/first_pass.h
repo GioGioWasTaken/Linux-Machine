@@ -2,10 +2,15 @@
 #define FIRST_PASS_H
 
 
-typedef struct code_location{
-char * filename;
-int line_number;
-} code_location;
+#include "exit.h"
+#include "utils.h"
+#include "globals.h"
+#include "memory.h"
+#include "lexer.h"
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 typedef struct label_t {
     int address;
@@ -30,11 +35,13 @@ typedef struct symbol_node {
 
 #define DATA_DIRECTIVE 1
 
-#define EXTERNAL_DIRECTIVE 2
+#define STRING_DIRECTIVE 2
 
-#define ENTRY_DIRECTIVE 3
+#define EXTERNAL_DIRECTIVE 3
 
-#define NO_DIRECTIVE 4
+#define ENTRY_DIRECTIVE 4
+
+#define NO_DIRECTIVE 5
 
 
 
@@ -43,7 +50,12 @@ int first_pass(char * file_name);
 
 int isValidDirective(char * str);
 
-int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition);
+int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition, int * exit_code, MemoryCell Data[], MemoryCell Instructions[], char * label_name);
+
+
+void freeSymbols(symbol_node ** Head);
+
+int isValidLabel(char * label_definition);
 
 #endif
 
