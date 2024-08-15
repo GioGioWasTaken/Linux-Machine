@@ -174,13 +174,6 @@ function nvims() {
 
 bindkey -s ^a "tmux attach\n"
 #
-# Define a function to start tmux
-function start_tmux() {
-    tmux attach
-}
-
-# Bind the Home key to the function
-bindkey -M viins '\e[1~' start_tmux
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
