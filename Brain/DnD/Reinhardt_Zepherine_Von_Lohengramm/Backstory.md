@@ -3,7 +3,7 @@
    -  Superiority complex
    -  Picky with food. Picky with clothes. Picky with everything
    -  narcicisstic: "Me? Lose to you? Hah! Bless your delusional heart!"
--  War-Obssesed:
+-  Conquer all! spread thy name across the realm!
    - Illusions of grandeur
    - hearty laughter : https://www.youtube.com/watch?v=yxqc2zA08m4
 -  Huge Magic Nerd:
@@ -40,3 +40,22 @@ And who could forget the delightful moment when I entered the grand bazaar, eyei
 So, comrades, fear not! Though the world may tremble at the thought of me, ah, "struggling," it’s merely a temporary misunderstanding. For soon, we shall bask in the riches I am destined to reclaim! And when I do, I shall dine like a king, dressed like an emperor, and I might even throw a coin or two to those who doubted me.
 
 Now, onward! To glory! To victory! And to the inevitable restoration of my vast fortunes! [Loud, hearty laughter that drowns out the sounds of a grumbling stomach]
+
+
+
+# Backstory
+Once, Reinhardt Zepherine Von Lohengramm was known as 'The Prodigy of the Arcane Court'. Born into a house revered for its mastery of destructive and combative magic, he was expected to follow in the footsteps of his ancestors, who led armies with flames and lightning at their fingertips. Reinhardt, however, had a different vision of greatness. While his family valued might and power, Reinhardt was entranced by the more eccentric aspects of magic—spells no one ever bothered with, seemingly trivial, useless to most… but fascinating to him.
+
+(changing tone here)
+
+Born into a house of so-called "masters" of destructive magic, I was expected to follow their brutish footsteps. Lead armies with flames and lightning, they said! Hah! As if I would stoop to such mundane pursuits.
+
+In my youth, while lesser minds busied themselves with explosions and lightning bolts, I delved into the secrets of real power. Spells to make my hair glisten under moonlight! Enchantments to perfectly align the stars in my bathwater! Magic to summon a breeze that would lift my cape dramatically upon entering a room! Oh, the expressions on my parents' faces—priceless!
+
+"Why would you learn this drivel when you could master the arcane arts of war?" they'd ask. To which I, of course, replied with a chuckle and a wave of my hand, "Pshaw, esteemed father! Anyone can blow up a tower. It takes true talent to summon a perfectly chilled goblet of wine."
+
+Now, picture if you will, my coming-of-age ceremony. The Arcane Court gathered, expecting some dreary display of destruction. Instead, I gifted them with true magic! An illusion that transformed their dull chamber into a wonderland of refinement! Dancing teacups! Self-playing instruments! "Behold!" I proclaimed, "True magic isn't about puny explosions, but about elegance and refinement!"
+
+Some were enchanted, others appalled—clearly, their simple minds couldn't grasp my genius. And my family? Oh, they were beside themselves! My father, face as red as a tomato, had the audacity to cast me out! "If you wish to squander your talents on parlor tricks, you shall do so without the backing of this house!" he bellowed.
+
+But did I falter? Did I cower? Hah! Perish the thought! I declared, "You'll see! I shall build an empire of elegance and wonder that will make our family's brutal magic look positively barbaric!"
