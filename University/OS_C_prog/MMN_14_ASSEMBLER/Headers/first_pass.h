@@ -50,12 +50,13 @@ int first_pass(char * file_name);
 
 int isValidDirective(char * str);
 
-int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition, int * exit_code, MemoryCell Data[], MemoryCell Instructions[], char * label_name);
+int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition, int * exit_fail,MemoryCell Data[], MemoryCell Instructions[], char * label_name);
 
 
 void freeSymbols(symbol_node ** Head);
 
-int isValidLabel(char * label_definition);
+int isValidLabel(char * label_definition, symbol_node ** Head );
+
+int allocateDirective(int directive_type , int * DC, code_location am_file, char* directive_definition, int * exit_fail, MemoryCell Data[] );
 
 #endif
-

@@ -17,6 +17,8 @@ int setMemoryCell(int * DC, MemoryCell * Cell, int value){
 	Cell->SecondByte|= 0x40; /* 0x40 = 0100 00*/
     }
     (*DC)++;
+
+    printf("Set memory: FirstByte: 0x%02X, SecondByte: 0x%02X\n", Cell->FirstByte, Cell->SecondByte);
     return 1;
 }
 
@@ -45,8 +47,41 @@ int getMemoryCell(int DC, MemoryCell Data[]) {
 
 int addNumber(int * DC,MemoryCell Data[], char * Number){
     int number = atoi(Number);
-    if(setMemoryCell(DC, &Data[*DC], number) == INTEGER_OVERFLOW){
+    if(setMemoryCell(DC, &(Data[*DC]), number) == INTEGER_OVERFLOW){
 	return INTEGER_OVERFLOW;
     }
     return 1;
 }
+
+int addChar(int * DC,MemoryCell Data[], char chara){
+    /* ascii values are just the normal values of chars. chars at the end of the day are just a 1 bit integer that we choose to interpret as a letter.*/
+    if(setMemoryCell(DC, &Data[*DC], chara) == INTEGER_OVERFLOW){
+	printf("Integer overflow with a char. This should NEVER happen");
+	return INTEGER_OVERFLOW;
+    }
+    return 1;
+}
+
+int setInstructionBits(int * IC, MemoryCell * Cell, int opcode, int address_src, int address_dest, int ARE){
+    /* The bits we need to set for each one of these values passed*/
+    int address_src_bit = 7+address_src;
+    int address_dest_bit = 3+address_dest;
+    int ARE_bit = ARE;
+
+
+}
+
+int addInstruction(int * IC,MemoryCell Instructions[], int op_code,int arg_count, int args_addressing[], int ARE){
+    if(arg_count==0){
+
+
+	(*IC)++;
+    } else if(arg_count==1){
+
+	(*IC)+=2;
+    } else if(arg_count==2){
+
+	(*IC)+=3;
+    } 
+}
+

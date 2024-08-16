@@ -54,5 +54,26 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
     - if it's a data label, the address will be the current DC address 
 - 
 
+# Anatomy of an instruction (binary) 
+## first word
+in little endian: 
+- (14-11): OPCODE in binary
+- (10-7): Toggle the correct bit according to the addressing type of the source operand.
+# Addressing: 
+bit number | rule
+4 --> 10
+- 0 | prepended by a pound symbol
+- 2 | prepended by an asterisk
+- 3 | is the name of a register
+- 1 | is none of the above (assumed to be a label, either defined or to be defined)
 
+
+
+- (6-3): Toggle the correct bit according to the addressing type of the source operand.
+- (2-0): ARE:
+    - the first word (of a statement, not a .data or .string directive) will always have A (absolute) toggled on.
+
+## Second and third words
+- Depending on how many arguments the instruction takes
+- 
 

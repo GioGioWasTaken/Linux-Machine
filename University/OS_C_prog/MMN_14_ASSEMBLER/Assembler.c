@@ -17,6 +17,7 @@ int main(int argc, char ** argv){
         /* Step 1: preprocess it*/
         char filename[259]; /* 255 is actually the maximum file name for most file systems, so 255 + .as (or .am) + \0 = 259 */
         snprintf(filename, sizeof(filename), "%s.as", argv[file_index]); 
+        /* TODO:  modify this function to also take a pointer to a linked list of strings so that we can keep track of macro names after they were free'd as well. */
         int preprocessor_status = preprocessor(filename);
 
         if(preprocessor_status == PREPROCESSOR_EXIT_FAIL){

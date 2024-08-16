@@ -1,22 +1,14 @@
 
 
-
-
-
-
 mov r1, 0x14
-
-mov r2, 0x20
-
-LET'S ALL LOVE LAIN
-
-hamlet
-
-shakespeare
 
 mov eax, 4
 
-HELLO: .extern
-
 BOO: .data 353, 267   ,43 	,214
+
+
+
+.entry LOL
+
+Steins: .string "AAAAA"
 

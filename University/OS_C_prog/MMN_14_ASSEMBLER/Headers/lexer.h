@@ -26,4 +26,10 @@ int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_loc
 
 void cleanCommas(char *instruction);
 
+
+char * addExternEntry(char * directive_definition , code_location am_file);
+
+
+int parseInstruction(int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file);
+
 #endif

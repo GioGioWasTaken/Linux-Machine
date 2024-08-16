@@ -25,11 +25,40 @@ int line_too_long_exists(char * file_name){
 }
 
 void print_assemble_time_error(int error_code, code_location am_file){
-    printf("Error found in %s", am_file.filename);
-    printf("in line %d\n", am_file.line_number);
+    printf("\n\nError found in %s", am_file.filename);
+    printf(" in line %d\n\n", am_file.line_number);
     switch (error_code) {
-    
-    };
+        case INVALID_DIRECTIVE_DEFINITION_NO_SPACE:
+            printf("Error: Invalid directive definition - no space after directive.\n");
+            break;
+        case INVALID_DIRECTIVE_DEFINITION_NO_ARGS:
+            printf("Error: Invalid directive definition - no arguments provided.\n");
+            break;
+        case UNCLOSED_STRING_ERROR:
+            printf("Error: Unclosed string encountered.\n");
+            break;
+        case INTEGER_OVERFLOW:
+            printf("Error: Integer overflow detected.\n");
+            break;
+        case MEMORY_ALLOCATION_ERROR:
+            printf("Error: Memory allocation failed.\n");
+            break;
+        case NO_SUCH_DIRECTIVE:
+            printf("Error: No such directive exists.\n");
+            break;
+        case INVALID_DIRECTIVE:
+            printf("Error: Invalid directive encountered.\n");
+            break;
+        case INVALID_LABEL_ERROR:
+            printf("Error: Invalid label found.\n");
+            break;
+        case NO_SUCH_OPCODE:
+        printf("Error: this instruction does not exist.\n");
+        break;
+        default:
+            printf("Error: Unknown error code.\n");
+            break;
+    }
 }
 
 void print_assembler_warning(int error_code, code_location am_file){

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+/* BUG: if no macros are made, the program won't write anything to the .am file, leaving it empty*/
 int preprocessor(char * src){
 
     /* Step 0: clean whitespaces for proper parsing */
