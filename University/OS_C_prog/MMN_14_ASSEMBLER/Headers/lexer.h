@@ -30,6 +30,9 @@ void cleanCommas(char *instruction);
 char * addExternEntry(char * directive_definition , code_location am_file);
 
 
-int parseInstruction(int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file);
+int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file);
+
+
+int isRegister(char * instruction, const char * Registers[]);
 
 #endif

@@ -7,6 +7,8 @@
 #include "globals.h"
 #include "memory.h"
 #include "lexer.h"
+
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -50,6 +52,8 @@ int first_pass(char * file_name);
 
 int isValidDirective(char * str);
 
+int isComment(char * instruction);
+
 int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition, int * exit_fail,MemoryCell Data[], MemoryCell Instructions[], char * label_name);
 
 
@@ -58,5 +62,11 @@ void freeSymbols(symbol_node ** Head);
 int isValidLabel(char * label_definition, symbol_node ** Head );
 
 int allocateDirective(int directive_type , int * DC, code_location am_file, char* directive_definition, int * exit_fail, MemoryCell Data[] );
+
+void updateDataSymbols(symbol_node ** Head, int IC);
+
+void mergeMemoryImages(MemoryCell Data[],MemoryCell Instructions[], int IC, int DC);
+
+int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_location am_file, FILE * proc_src );
 
 #endif

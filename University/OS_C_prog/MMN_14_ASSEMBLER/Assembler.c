@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "Headers/first_pass.h"
-#include "Headers/preprocessor.h"
 #include "Headers/exit.h"
+#include "Headers/preprocessor.h"
+#include "Headers/first_pass.h"
 
 int main(int argc, char ** argv){
     if (argc != 2) {
@@ -27,9 +27,9 @@ int main(int argc, char ** argv){
 
         /*Step 3: First pass && Second pass (which gets called by the first_pass function as needed)*/
         snprintf(filename, sizeof(filename), "%s.am", argv[file_index]); 
-        int first_pass_exit =first_pass(filename);
+        int first_pass_exit = first_pass(filename);
         if(first_pass_exit == FIRST_PASS_EXIT_FAIL){
-            /* All errors were reporeted and a binary cannot be generated. Continue to the next file*/
+            /* All errors were reported and a binary cannot be generated. Continue to the next file*/
             continue;
         }
 

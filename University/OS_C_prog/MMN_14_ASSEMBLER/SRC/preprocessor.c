@@ -274,7 +274,7 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 
 
 
-
+/* TODO: code this*/
 int MacroAlreadyExists(Macro_node_t **Head, int *Macro_count, char * macroName){
     return 0;
 }

@@ -30,33 +30,51 @@ void print_assemble_time_error(int error_code, code_location am_file){
     switch (error_code) {
         case INVALID_DIRECTIVE_DEFINITION_NO_SPACE:
             printf("Error: Invalid directive definition - no space after directive.\n");
+            fflush(stdout);
             break;
         case INVALID_DIRECTIVE_DEFINITION_NO_ARGS:
             printf("Error: Invalid directive definition - no arguments provided.\n");
+            fflush(stdout);
             break;
         case UNCLOSED_STRING_ERROR:
             printf("Error: Unclosed string encountered.\n");
+            fflush(stdout);
             break;
         case INTEGER_OVERFLOW:
             printf("Error: Integer overflow detected.\n");
+            fflush(stdout);
             break;
         case MEMORY_ALLOCATION_ERROR:
             printf("Error: Memory allocation failed.\n");
+            fflush(stdout);
             break;
         case NO_SUCH_DIRECTIVE:
             printf("Error: No such directive exists.\n");
+            fflush(stdout);
             break;
         case INVALID_DIRECTIVE:
             printf("Error: Invalid directive encountered.\n");
+            fflush(stdout);
             break;
         case INVALID_LABEL_ERROR:
             printf("Error: Invalid label found.\n");
+            fflush(stdout);
             break;
         case NO_SUCH_OPCODE:
-        printf("Error: this instruction does not exist.\n");
-        break;
+            printf("Error: this instruction does not exist.\n");
+            fflush(stdout);
+            break;
+        case NO_SUCH_REGISTER:
+            printf("Error: This register does not exist. The registers available for use are:\nr0-r7 (inclusive)\n");
+            fflush(stdout);
+            break;
+        case TOO_MANY_ARGUMENTS:
+            printf("Error: Too many arguments provided. \n");
+            fflush(stdout);
+            break;
         default:
             printf("Error: Unknown error code.\n");
+            fflush(stdout);
             break;
     }
 }

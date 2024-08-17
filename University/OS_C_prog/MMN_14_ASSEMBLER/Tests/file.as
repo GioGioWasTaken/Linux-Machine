@@ -1,10 +1,10 @@
 macr bro
-xor eax, eax
+   add    *r1  ,	#0x14
 endmacr
 
-mov r1, 0x14
-mov eax, 4
 BOO: .data 353, 267   ,43 	,214
-
+bro
+stop
+dec *r9
 .entry LOL
 Steins: .string "AAAAA"

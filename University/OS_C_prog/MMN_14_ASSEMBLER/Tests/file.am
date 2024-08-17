@@ -1,12 +1,12 @@
 
 
-mov r1, 0x14
-
-mov eax, 4
-
 BOO: .data 353, 267   ,43 	,214
 
+   add    *r1  ,	#0x14
 
+stop
+
+dec *r9
 
 .entry LOL
 

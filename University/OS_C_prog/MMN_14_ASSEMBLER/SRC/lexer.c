@@ -1,35 +1,53 @@
 #include "../Headers/lexer.h"
-#include <complex>
 #include <stdio.h>
 #include <string.h>
 /* NOTE:  Might be broken if the addsymbols function doesn't expect the instruction to be without the label make sure lalter*/
 int determine_opcode(char *str, const instruction_t OPCODES[]) {
     char *mnemonic;
-    int opcode;
+    int opcode, i;
     char *instr = str;
-    skipWhitespace(&instr);  /*Skip leading whitespace*/
+    char delimiter = ' ';  /* Delimiter used in strtok*/
 
-    mnemonic = strtok(instr, " ");  /*Extract the mnemonic*/
+    skipWhitespace(&instr);  /* Skip leading whitespace */
 
-    /*Iterate through OPCODES to find a match*/
-    for (int i = 0; i < 16; i++) {
-        if (strcmp(mnemonic, OPCODES[i].mnemonic) == 0) {
+    /* Extract the mnemonic using strtok*/
+    mnemonic = strtok(instr, &delimiter);
+
+    /* Iterate through OPCODES to find a match */
+    for (i = 0; i < 16; i++) {
+        if (mnemonic && strcmp(mnemonic, OPCODES[i].mnemonic) == 0) {
             opcode = OPCODES[i].opcode;
-            return opcode;  /*Return the opcode for the matched mnemonic*/
+            printf("Opcode detected for line: %d\n", opcode);
+
+            /* Restore the delimiter by finding the end of the mnemonic token*/
+            char *end = mnemonic + strlen(mnemonic);
+            *end = delimiter;  /* Set the last character to the delimiter*/
+
+            return opcode;  /* Return the opcode for the matched mnemonic */
         }
     }
 
-    /*If no match is found, return an error code or handle as needed*/
-    return NO_SUCH_OPCODE;  /*Example error code for unknown mnemonic*/
+    /* If no match is found, return an error code or handle as needed */
+    return NO_SUCH_OPCODE;  /* Example error code for unknown mnemonic */
 }
 
-int parseInstruction(int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file){
-    char * mnemonic;
-    int opcode;
-    int arg_count;
-    int args_addressing[2] = {-1, -1};
-    int ARE;
+int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file){
+    char *mnemonic, *Token;
+    int opcode, arg_count, args_provided, ARE;
+    int args_addressing[2] = {-100, -100};
+    args_provided = 0;
     char * inst =  instruction_definition;
+
+    const char * Registers[8] = {
+	"r0",
+	"r1",
+	"r2",
+	"r3",
+	"r4",
+	"r5",
+	"r6",
+	"r7",
+    };
 
     const instruction_t OPCODES[16] = {
 	{"mov",  2, 0},
@@ -59,22 +77,50 @@ int parseInstruction(int *IC,MemoryCell Instructions[], char * instruction_defin
 
 
     /* Parse arguments */
+    cleanCommas(inst);
+    Token = strtok(inst,",");
     if(arg_count!=0){
-	skipWhitespace(&inst); 
-	/* inst is now pointing at the first char of the first argument*/
-	switch (*inst) {
-	    case '*':
-		break;
-	    case '#':
-	    	break;
+	while(Token !=NULL){
+	    if(args_provided+1 > arg_count){
+		print_assemble_time_error(TOO_MANY_ARGUMENTS, am_file);
+		return TOO_MANY_ARGUMENTS;
+	    }
 
+	    /* inst is now pointing at the first char of the first argument*/
+	    switch (*inst) {
+		case '*':
+		    /* Since we are using the same function for the other case as well,
+		    the function should assume the same state. We will pass the first char of the register in both instances*/
+		    if(isRegister(inst+1, Registers)){
+			printf("Treat register as pointer\n");
+			args_addressing[args_provided]=2;
+		    } else{
+			print_assemble_time_error(NO_SUCH_REGISTER, am_file);
+			return NO_SUCH_REGISTER;
+		    }
+		case '#':
+		    printf("Absolute value \n");
+		    args_addressing[args_provided]=0;
+		    break;
+		default:
+		    if(isRegister(inst+1, Registers)){
+			printf("Treat register as value");
+			args_addressing[args_provided]=3;
+		    } else{
+			args_addressing[args_provided]=1;
+		    }
+		    break;
+	    }
+	    args_provided++;
+	    Token = strtok(NULL, ",");
 	}
     } 
     
 
     /* Add the instruction to memory */
-    addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
-
+    ARE = 2; /*  This method will only be used for the first word of the instruction, so it's always going to be 2;*/
+    *Current_IC=addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
+    return LEXER_EXIT_SUCESS;
 }
 
 
@@ -158,10 +204,10 @@ void cleanCommas(char *instruction) {
     char *instr = instruction;
     skipWhitespace(&instr);
 
-     /* Extract the directive (e.g., .data) and skip it */
+     /* Extract the first part of the instruction (e.g. .data, mov, etc) and skip it */
     Token = strtok(instr, " ");
-    Token = strtok(NULL, ",");   
     skipWhitespace(&Token);
+    Token = strtok(NULL, ",");   
 
      /* Rebuild the string with commas cleaned */
     while (Token != NULL) {
@@ -185,7 +231,6 @@ void cleanCommas(char *instruction) {
 
      /* Copy the cleaned string back to the original instruction */
     strcpy(instruction, buffer);
-    printf("Cleaned: %s\n", instruction);
 }
 
 
@@ -198,3 +243,18 @@ char * addExternEntry(char * directive_definition , code_location am_file){
     Token = strtok(NULL, "\n");
     return Token;
 }
+
+int isRegister(char * instruction, const char * Registers[]){
+    char Register[2];
+    int i;
+    strncpy(Register, instruction, 2);
+    printf("Register detected is : %s\n", Register);
+    fflush(stdout);
+    for(i = 0; i<8; i++){
+	if(strcmp(Register, Registers[i]) == 0){
+	    return 1;
+	}
+    }
+    return 0;
+}
+

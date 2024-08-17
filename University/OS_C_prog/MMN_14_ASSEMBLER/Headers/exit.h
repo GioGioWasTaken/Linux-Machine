@@ -54,6 +54,10 @@
 
 #define TOO_MANY_ARGUMENTS -19
 
+#define NO_SUCH_REGISTER -20
+
+#define RUN_OUT_OF_MEMORY -21
+
 /* Warnings: */
 #define UNDEFINED_LABEL_WARNING -100
 
