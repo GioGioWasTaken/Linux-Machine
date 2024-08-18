@@ -6,4 +6,9 @@
 
 int setEntryAddress(char * directive_name, symbol_node ** Head);
 
+
+void createEntryOutput(symbol_node ** Head, char entryOUT[]);
+
+void writeEntry(FILE * entryOUT, char * entry_name, int addr );
+
 #endif

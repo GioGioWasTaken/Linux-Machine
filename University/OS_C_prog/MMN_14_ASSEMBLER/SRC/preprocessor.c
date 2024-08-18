@@ -256,9 +256,10 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 	    }
 	}
 	Current_macro = *Head;
+	/* Reset current_macro to point to Head. */
 
 	/* If no macro call was found, and we are not inside a macro definition (but there exists some macro) write the original line to the temp file */
-	if (!macro_found) {
+	if (!macro_found && Current_macro!=NULL) {
 	    fprintf(temp_file, "%s", line);
 	}
     }

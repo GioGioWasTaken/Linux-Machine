@@ -1,4 +1,5 @@
 #include "../Headers/first_pass.h"
+#include <stdio.h>
 
 int first_pass(char * file_name, macroNames ** StringHead){
     int exit_code, panic_mode, IC, DC;
@@ -106,6 +107,7 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	    int isDirective = temp!=NULL;
 	    if(isDirective){
 		strcpy(directive_definition, temp);
+		printf("this is a directive: %s\n", directive_definition);
 		int status = isValidDirective(temp);
 		if(status!=NO_SUCH_DIRECTIVE && status!=INVALID_DIRECTIVE){
 		    if(status == DATA_DIRECTIVE || status == STRING_DIRECTIVE){
@@ -117,7 +119,6 @@ int first_pass(char * file_name, macroNames ** StringHead){
 
 		    } else if(status ==EXTERNAL_DIRECTIVE || status == ENTRY_DIRECTIVE){
 			/* External and entry directives are added as symbols either way. This is the control path where they are properly defined */
-			printf("properly defined external or entry\n");
 			int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, directive_definition,&exit_code,Data, Instructions, NULL);
 
 			if(allocate_symbol_status == FIRST_PASS_EXIT_FAIL){
@@ -134,6 +135,7 @@ int first_pass(char * file_name, macroNames ** StringHead){
 		    panic_mode = 1;
 		}
 	    } else {
+		fflush(stdout);
 		int Current_IC = IC;
 		if(parseInstruction(&Current_IC,&IC, Instructions, instruction, am_file) != LEXER_EXIT_SUCESS){
 		    panic_mode= 1;
@@ -176,18 +178,21 @@ int isValidDirective(char * str){
     int directive_type = NO_SUCH_DIRECTIVE;
     if(strncmp(str, ".data",5) ==0){
 	directive_type = DATA_DIRECTIVE;
+	printf("directive type is .data\n");
     } else if(strncmp(str, ".string",7)==0){
 	directive_type = STRING_DIRECTIVE;
+	printf("directive type is .string\n");
     } else if(strncmp(str,".extern",7)==0){
 	directive_type=EXTERNAL_DIRECTIVE;
+	printf("directive type is .extern\n");
     } else if(strncmp(str,".entry",6) ==0){
 	directive_type=ENTRY_DIRECTIVE;
+	printf("directive type is .entry\n");
     }
     return directive_type;
 }
 
 int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* instruction_definition, int * exit_fail,MemoryCell Data[], MemoryCell Instructions[], char * label_name){
-    printf("allocatesymbols called with : %s\n.\nThe directive type is: %d\n",instruction_definition, directive_type);
 
     symbol_node * newNode = (symbol_node *) malloc(sizeof(symbol_node));
     if(newNode==NULL){
@@ -252,7 +257,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	}
 	newNode->symbol.is_entry_line =1;
 	strcpy(newNode->symbol.label_name, addExternEntry(instruction_definition,am_file));
-	printf("Entry name: %s\n", newNode->symbol.label_name);
+	printf("(en)Entry name: %s\n", newNode->symbol.label_name);
     }
 
     /* Write data to the linked list */
@@ -326,20 +331,25 @@ void freeSymbols(symbol_node ** Head){
 
 /* TODO: Modify this function to return proper error codes instead of a boolean value, so we can give the user meaningful feedback*/
 int isValidLabel(char * label_name, symbol_node ** Head, macroNames ** StringHead){
-    if(strlen(label_name) > 31){
+    if(strlen(label_name) > MAX_LABEL_LENGTH){
+	printf("Invalid Label: Label name exceeds maximum allowed length (%d)\n", MAX_LABEL_LENGTH);
 	return FALSE;
     }
     if(!isAlphaNumericString(label_name)){
+	printf("Invalid Label: Uses non alphanumeric characters.\n");
 	return FALSE;
     }
     if(labelExists(label_name,Head)){
+	printf("Invalid Label: Duplicate labels are not allowed.\n");
 	return FALSE;
     }
      if(MacroAlreadyExists(label_name, StringHead)){
 	/* In all likelihood this is redundant. A similar check was already made in the preprocessing step, but better to be safe I suppose.*/
+	printf("Invalid Label: Uses name saved for a macro\n");
 	return FALSE;
      }
     if(isSavedLanguageWord(label_name)){
+	printf("Invalid Label: Uses saved language words.\n");
 	return FALSE;
     }
     return TRUE;
@@ -394,7 +404,8 @@ void mergeMemoryImages(MemoryCell Data[], MemoryCell Instructions[], int IC, int
 int labelExists(char * label_query, symbol_node ** HEAD){
     symbol_node * current = *HEAD;
     while(current!=NULL){
-	if(strcmp(current->symbol.label_name,label_query) == 0){
+	if(strcmp(current->symbol.label_name,label_query) == 0 && current->symbol.is_entry_line==0){
+	    /* NOTE: An entry line decleration that comes before the label definition is perfectly legal.*/
 	    return TRUE;
 	}
 	current= current->Next;

@@ -61,6 +61,7 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
     }
 
     /* If no match is found, return an error code or handle as needed */
+    printf("Faulty Opcode mnemonic detected: '%s'\n", mnemonic);
     return NO_SUCH_OPCODE;  /* Example error code for unknown mnemonic */
 }
 
@@ -102,6 +103,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 			print_assemble_time_error(NO_SUCH_REGISTER, am_file);
 			return NO_SUCH_REGISTER;
 		    }
+		    break;
 		case '#':
 		    printf("Absolute value \n");
 		    args_addressing[args_provided]=0;
@@ -192,9 +194,7 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
 
     i = 0;
     /* We also want to pass the null byte into the function. So we'll use <= */
-    printf("AddString: Debug, Token value: %s\n",Token);
     while(i<=strlen(Token)){
-	printf("AddString: Debug, Token value: %c\n",Token[i]);
 	int status_add = addChar(DC,Data,Token[i]);
 	i++;
     }
