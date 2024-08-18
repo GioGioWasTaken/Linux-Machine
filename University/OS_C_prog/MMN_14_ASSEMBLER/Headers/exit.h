@@ -3,6 +3,15 @@
 
 /* Exit codes for different parts of the assembler*/
 
+#define GLOBAL_EXIT_SUCESSS 1
+
+#define GLOBAL_EXIT_FAILURE 0
+
+#define FALSE 0;
+
+#define TRUE 1;
+
+
 #define PREPROCESSOR_EXIT_SUCESSS 1
 
 #define FIRST_PASS_EXIT_SUCESSS 1
@@ -14,6 +23,10 @@
 #define LEXER_EXIT_SUCESS 1
 
 #define LEXER_EXIT_FAIL -1
+
+#define SECOND_PASS_EXIT_SUCESS 1
+
+#define SECOND_PASS_EXIT_FAIL -1
 
 /* Errors: */
 
@@ -57,6 +70,8 @@
 #define NO_SUCH_REGISTER -20
 
 #define RUN_OUT_OF_MEMORY -21
+
+#define NO_SUCH_LABEL -22
 
 /* Warnings: */
 #define UNDEFINED_LABEL_WARNING -100

@@ -7,6 +7,7 @@
 #include "../Headers/exit.h"
 #include "../Headers/first_pass.h"
 
+#include <ctype.h>
 #include <stdio.h>
 
 void create_file(FILE *file) {
@@ -101,4 +102,23 @@ void removeTrailingNewline(char *str) {
         str[len - 1] = '\0';
     }
 }
+
+/* This function takes a string as a parameter and returns a boolean value
+ * TRUE or 1 if it's only made out of alpha numeric characters, and FALSE or 0 otherwise.*/
+
+int isAlphaNumericString(char * str) {
+    char * local_str = str;
+    char current_char = *local_str;
+    
+    while (current_char != '\0') {
+        if (!isalnum((unsigned char) current_char)) {
+            return FALSE;  /* Return FALSE if any character is not alphanumeric*/
+        }
+        local_str++;
+        current_char = *local_str;
+    }
+
+    return TRUE;  /* Return TRUE if all characters are alphanumeric*/
+}
+
 

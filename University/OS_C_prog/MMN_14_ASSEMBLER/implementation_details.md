@@ -1,3 +1,6 @@
+The purpose of this file is to gather some details about the way the assembler should work in one central local file. This was used across my development process to reduce the overhead of checking my browser for details every time I want to code something.
+
+
 # targeted Architecture details
 
 8 registers: r0, r1, r2, r3, r4, r5, r6, r7.
@@ -32,7 +35,7 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
 
 # Lexer details
 - Needs to ignore all whitespaces, tabs, etc.
-- a number is defined as a + or - symbol followed by numbers in decimal
+- a number is defined as a + or - symbol followed by numbers in decimal -- C standard lib's atoi function complies under this.
 - printable ascii characters only
 
 # General info
@@ -52,7 +55,8 @@ memory size of 4096 cells, each cell has a size of 15 bytes. A word is defined a
 - when a label's address is stored in the tables (data and code respectively),
     - if it's a code label, the address will be the address of the first word of the instruction. 
     - if it's a data label, the address will be the current DC address 
-- 
+- A label may be composed out of no more than 31 characters
+- A la
 
 # Anatomy of an instruction (binary) 
 ## first word

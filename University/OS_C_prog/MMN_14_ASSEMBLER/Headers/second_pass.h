@@ -4,6 +4,6 @@
 
 #include "first_pass.h"
 
-void setEntryAddress(char * directive_name, symbol_node ** Head);
+int setEntryAddress(char * directive_name, symbol_node ** Head);
 
 #endif

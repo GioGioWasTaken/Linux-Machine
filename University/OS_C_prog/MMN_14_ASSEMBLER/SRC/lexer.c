@@ -2,6 +2,38 @@
 #include <stdio.h>
 #include <string.h>
 /* NOTE:  Might be broken if the addsymbols function doesn't expect the instruction to be without the label make sure lalter*/
+
+const char * Registers[8] = {
+    "r0",
+    "r1",
+    "r2",
+    "r3",
+    "r4",
+    "r5",
+    "r6",
+    "r7",
+};
+
+const instruction_t OPCODES[16] = {
+    {"mov",  2, 0},
+    {"cmp",  2, 1},
+    {"add",  2, 2},
+    {"sub",  2, 3},
+    {"lea",  1, 4},
+    {"clr",  1, 5},
+    {"not",  1, 6},
+    {"inc",  1, 7},
+    {"dec",  1, 8},
+    {"jmp",  1, 9},
+    {"bne",  1, 10},
+    {"red",  1, 11},
+    {"prn",  1, 12},
+    {"jsr",  1, 13},
+    {"rts",  0, 14},
+    {"stop", 0, 15}
+};
+
+
 int determine_opcode(char *str, const instruction_t OPCODES[]) {
     char *mnemonic;
     int opcode, i;
@@ -12,6 +44,7 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 
     /* Extract the mnemonic using strtok*/
     mnemonic = strtok(instr, &delimiter);
+    /* printf("Opcode mnemonic: '%s' ", mnemonic);*/
 
     /* Iterate through OPCODES to find a match */
     for (i = 0; i < 16; i++) {
@@ -38,35 +71,6 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
     args_provided = 0;
     char * inst =  instruction_definition;
 
-    const char * Registers[8] = {
-	"r0",
-	"r1",
-	"r2",
-	"r3",
-	"r4",
-	"r5",
-	"r6",
-	"r7",
-    };
-
-    const instruction_t OPCODES[16] = {
-	{"mov",  2, 0},
-	{"cmp",  2, 1},
-	{"add",  2, 2},
-	{"sub",  2, 3},
-	{"lea",  1, 4},
-	{"clr",  1, 5},
-	{"not",  1, 6},
-	{"inc",  1, 7},
-	{"dec",  1, 8},
-	{"jmp",  1, 9},
-	{"bne",  1, 10},
-	{"red",  1, 11},
-	{"prn",  1, 12},
-	{"jsr",  1, 13},
-	{"rts",  0, 14},
-	{"stop", 0, 15}
-    };
     /* Determine opcode*/
     opcode = determine_opcode(inst, OPCODES);
     if(opcode==NO_SUCH_OPCODE){
@@ -89,8 +93,8 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 	    /* inst is now pointing at the first char of the first argument*/
 	    switch (*inst) {
 		case '*':
-		    /* Since we are using the same function for the other case as well,
-		    the function should assume the same state. We will pass the first char of the register in both instances*/
+		    /* Since I am using the same function for the other case as well,
+		    the function should assume the same state. I will pass the first char of the register in both instances*/
 		    if(isRegister(inst+1, Registers)){
 			printf("Treat register as pointer\n");
 			args_addressing[args_provided]=2;
@@ -168,6 +172,9 @@ int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_loc
 }
 
 int addString(int * DC,MemoryCell Data[], char * directive_definition, code_location am_file){
+    /* NOTE: I heard some other sutdents saying that a string with a " character inside it is valid,
+     * but that seemed quite undefined to me so I decided to not include it in this implementation 
+     * I hope that wasn't the actual thing we were supposed to do as it wasn't directly included in the instructions :0 */
     char *Token;
     int i;
 
@@ -248,13 +255,35 @@ int isRegister(char * instruction, const char * Registers[]){
     char Register[2];
     int i;
     strncpy(Register, instruction, 2);
-    printf("Register detected is : %s\n", Register);
+    printf("Register detected is : '%s'\n", Register);
     fflush(stdout);
     for(i = 0; i<8; i++){
 	if(strcmp(Register, Registers[i]) == 0){
-	    return 1;
+	    return GLOBAL_EXIT_SUCESSS;
 	}
     }
-    return 0;
+    return GLOBAL_EXIT_FAILURE;
 }
 
+
+
+/* This function returns TRUE if the parameter word_to_check
+ * is a register name or opcode mnemonic, otherwise it returns FALSE. */
+int isSavedLanguageWord(char * word_to_check) {
+    /* Check if the word matches any register name*/
+    int i;
+    for (i = 0; i < 8; i++) {
+        if (strcmp(word_to_check, Registers[i]) == 0) {
+            return TRUE;
+        }
+    }
+
+    /* Check if the word matches any opcode mnemonic*/
+    for (i = 0; i < 16; i++) {
+        if (strcmp(word_to_check, OPCODES[i].mnemonic) == 0) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;  /* Return FALSE if no match is found*/
+}

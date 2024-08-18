@@ -8,6 +8,7 @@
 #include <string.h>
 
 
+
 typedef struct code_location{
 char * filename;
 int line_number;
@@ -28,6 +29,7 @@ int line_too_long_exists(char * file_name);
 
 void skipWhitespace(char** str);
 
+int isAlphaNumericString(char * str);
 
 void removeTrailingNewline(char *str);
 

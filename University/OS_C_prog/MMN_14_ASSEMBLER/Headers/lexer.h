@@ -35,4 +35,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 
 int isRegister(char * instruction, const char * Registers[]);
 
+
+int isSavedLanguageWord(char * word_to_check);
+
 #endif
