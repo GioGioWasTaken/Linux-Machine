@@ -71,6 +71,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
     int args_addressing[2] = {-100, -100};
     args_provided = 0;
     char * inst =  instruction_definition;
+    printf("Instruction definition: %s\n", inst);
 
     /* Determine opcode*/
     opcode = determine_opcode(inst, OPCODES);

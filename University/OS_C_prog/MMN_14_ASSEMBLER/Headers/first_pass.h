@@ -62,7 +62,7 @@ int isComment(char * instruction);
 
 int isValidLabel(char * label_name, symbol_node ** Head, macroNames ** StringHead);
 
-int labelExists(char * label_query, symbol_node ** HEAD);
+int labelExists(char * label_query,int directive_type, symbol_node ** HEAD);
 
 
 
@@ -74,6 +74,8 @@ int allocateDirective(int directive_type , int * DC, code_location am_file, char
 void updateDataSymbols(symbol_node ** Head, int IC);
 
 void mergeMemoryImages(MemoryCell Data[],MemoryCell Instructions[], int IC, int DC);
+
+char *skip_label(char *str);
 
 void freeSymbols(symbol_node ** Head);
 

@@ -3,10 +3,12 @@
 
 int first_pass(char * file_name, macroNames ** StringHead){
     int exit_code, panic_mode, IC, DC;
-    char instruction[MAX_LINE_LENGTH];
+    char raw_instruction[MAX_LINE_LENGTH]; /* This is the line read with no modifications*/
     char label_name[MAX_LINE_LENGTH];
     /* See my comment in the label struct definition(first_pass.h) as to why the label_name size is MAX_LINE_LENGTH and not 31. */
-    char directive_definition[MAX_LINE_LENGTH];
+    char directive_definition[MAX_LINE_LENGTH]; /* This is the definition of the directive, without the label*/
+
+    char * temp,*instruction_definition; /* This is an instruction definition, without the label*/
     MemoryCell Data[4096];
     MemoryCell Instructions[4096];
     memset(&Data, 0, sizeof(MemoryCell)* 4096);
@@ -40,42 +42,40 @@ int first_pass(char * file_name, macroNames ** StringHead){
     /* Allocate space for the symbol table*/
     symbol_node * Head = NULL;
 
-    while(fgets(instruction, sizeof(instruction), proc_src) !=NULL && IC+DC+1<=IC_MAX-IC_INITIAL){
+    while(fgets(raw_instruction, sizeof(raw_instruction), proc_src) !=NULL && IC+DC+1<=IC_MAX-IC_INITIAL){
 	/* + 1 because if IC is 100, since we use 0-based-indexing, it actually has allocated space for 100 words.*/
-	int is_label =0;
-	if(strcmp(instruction, "\n") ==0){
+	if(strcmp(raw_instruction, "\n") ==0){
 	    /* \n lines are allowed and are ignored*/
 	    continue;
 	}
-	if(isComment(instruction)){
+	if(isComment(raw_instruction)){
 	    continue;
 	}
 
-	char* ptr = instruction; 
+	char* ptr = raw_instruction; 
 	skipWhitespace(&ptr);  /* Modify the line so it's easier to parse without errors. */
-	removeTrailingNewline(instruction); /* Far easier to do parsing without the newline delimiter.*/
+	removeTrailingNewline(raw_instruction); /* Far easier to do parsing without the newline delimiter.*/
 	/* An implication of this is that when a label is preceeded by whitespaces it'll still be a valid label and those won't count as part of its definition
 	 * which seems valid to me*/
 
-	int Label_Definition  = (strchr(instruction, ':') && sscanf(instruction, "%[^:]:", label_name) == 1);
+	int Label_Definition  = (strchr(raw_instruction, ':') && sscanf(raw_instruction, "%[^:]:", label_name) == 1);
 
 	if(Label_Definition) { 
 	    int isValidLabelStatus = isValidLabel(label_name, &Head,StringHead);
 	    if(!isValidLabelStatus){
+		/* If the label is invalid, we skip it altogether and don't bother adding it to the table. */
 		print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
 		exit_code=FIRST_PASS_EXIT_FAIL;
 		panic_mode = 1;
 	    } else{
-		/* If the label is invalid, we skip it altogether and don't bother adding it to the table. */
-		is_label =1;
-		char * temp = strchr(instruction, '.');
+		temp = strchr(raw_instruction, '.');
 		int isDirective = temp!=NULL;
 		if(isDirective){
-		    /* There is a directive used in the label definition*/
+		    /* Directives with labels */
 		    strcpy(directive_definition,temp);
 		    int status = isValidDirective(directive_definition);
 		    if(status!=NO_SUCH_DIRECTIVE && status!=INVALID_DIRECTIVE){
-			/* NOTE: delegate all errors to the first caller. Error handeling is outside the scope of the functions' job.*/
+
 			int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, directive_definition,&exit_code,Data, Instructions, label_name);
 
 			if(allocate_symbol_status == FIRST_PASS_EXIT_FAIL || exit_code ==FIRST_PASS_EXIT_FAIL){
@@ -93,8 +93,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 			/* Code should no longer assemble*/
 		    }
 		} else{
+		    /* Instructions with labels*/
 		    int status = NO_DIRECTIVE;
-		    int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, directive_definition,&exit_code,Data, Instructions, label_name);
+		    instruction_definition = skip_label(&raw_instruction[0]);
+		    int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, instruction_definition,&exit_code,Data, Instructions, label_name);
 		    if(allocate_symbol_status == FIRST_PASS_EXIT_FAIL || exit_code == FIRST_PASS_EXIT_FAIL){
 			panic_mode = 1;
 		    }
@@ -103,9 +105,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 
 	    am_file.line_number++; /* We increment the line even if the label is invalid, to continue parsing.*/
 	} else{
-	    char * temp = strchr(instruction, '.');
+	    char * temp = strchr(raw_instruction, '.');
 	    int isDirective = temp!=NULL;
 	    if(isDirective){
+		/* Directives without labels */
 		strcpy(directive_definition, temp);
 		printf("this is a directive: %s\n", directive_definition);
 		int status = isValidDirective(temp);
@@ -135,9 +138,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 		    panic_mode = 1;
 		}
 	    } else {
+		/* Instructions without labels*/
 		fflush(stdout);
 		int Current_IC = IC;
-		if(parseInstruction(&Current_IC,&IC, Instructions, instruction, am_file) != LEXER_EXIT_SUCESS){
+		if(parseInstruction(&Current_IC,&IC, Instructions, raw_instruction, am_file) != LEXER_EXIT_SUCESS){
 		    panic_mode= 1;
 		}
 		printf("Current IC: %d\n",IC);
@@ -162,6 +166,8 @@ int first_pass(char * file_name, macroNames ** StringHead){
 
     rewind(proc_src);
     if(panic_mode!=1){
+	am_file.line_number= 0;
+	rewind(proc_src); 
 	secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
     } else{
 	printf("One or more errors have been detected in this file. Exiting without producing .obj .extern or .entry files.\n ");
@@ -209,6 +215,18 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
     /* Prepare directive */
     if(directive_type==NO_DIRECTIVE){	/* If this function is called with this value, these are code lines*/
+
+	if(labelExists(label_name,directive_type,Head)){
+	    /* This is a check we must perform after we know the type of the directive, because entry directives are special.
+	     * (Entry directives aren't saved as their label even if they are assigned one, but we still continue running the program)*/
+
+	    /* If the label is invalid, we skip it altogether and don't bother adding it to the table. */
+	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
+	    return FIRST_PASS_EXIT_FAIL;
+	} 
+
+
 	int Current_IC = *IC;
 	if(parseInstruction(&Current_IC,IC, Instructions, instruction_definition, am_file) != LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
@@ -218,6 +236,17 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
 	return FIRST_PASS_EXIT_SUCESSS;
     } else if(directive_type==DATA_DIRECTIVE){
+
+
+	if(labelExists(label_name,directive_type,Head)){
+	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
+	    return FIRST_PASS_EXIT_FAIL;
+	} 
+
+
+
+
 	newNode->symbol.is_data_line =1;
 	strcpy(newNode->symbol.label_name, label_name);
 
@@ -238,6 +267,15 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
     } else if(directive_type==STRING_DIRECTIVE){
 	newNode->symbol.is_data_line =1;
+
+	if(labelExists(label_name,directive_type,Head)){
+	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
+	    return FIRST_PASS_EXIT_FAIL;
+	} 
+
+
+
 	strcpy(newNode->symbol.label_name, label_name);
 	addString(DC, Data,instruction_definition,am_file);
 
@@ -248,7 +286,14 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	}
 	newNode->symbol.is_external_line =1;
 	strcpy(newNode->symbol.label_name, addExternEntry(instruction_definition,am_file));
-	printf("Extern name: %s\n", newNode->symbol.label_name);
+
+
+	if(labelExists(newNode->symbol.label_name,directive_type,Head)){
+	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
+	    return FIRST_PASS_EXIT_FAIL;
+	} 
+
 
     } else if(directive_type==ENTRY_DIRECTIVE){
 
@@ -257,13 +302,21 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	}
 	newNode->symbol.is_entry_line =1;
 	strcpy(newNode->symbol.label_name, addExternEntry(instruction_definition,am_file));
-	printf("(en)Entry name: %s\n", newNode->symbol.label_name);
+
+	if(labelExists(newNode->symbol.label_name,directive_type,Head)){
+	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
+	    return FIRST_PASS_EXIT_FAIL;
+	} 
+
+
     }
 
     /* Write data to the linked list */
 
     if(*Head==NULL){
 	*Head = newNode;
+	printf("node added: %s\n", newNode->symbol.label_name);
 	if(*exit_fail!=FIRST_PASS_EXIT_FAIL){
 	    return FIRST_PASS_EXIT_SUCESSS;
 	} else{
@@ -273,7 +326,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	/* Otherwise if it does exist: */
 
 	symbol_node* current_symbol = *Head;
-	printf("this should point to  something: %p\n", current_symbol);
 
 	/* We have some nodes to iterate through*/
 	while(current_symbol->Next !=NULL){
@@ -282,6 +334,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
 	/* this produces the effect that Head's last node is now newNode, without pointing Head elsewhere.*/
 	current_symbol->Next = newNode;
+	printf("node added: %s\n", newNode->symbol.label_name);
 	if(*exit_fail!=FIRST_PASS_EXIT_FAIL){
 	    return FIRST_PASS_EXIT_SUCESSS;
 	} else{
@@ -309,17 +362,17 @@ void freeSymbols(symbol_node ** Head){
     while(current!=NULL){
 	symbol_node * next_node = current->Next; /* set up a next node before we deallcoate the memory*/
 
-     /* Free any dynamically allocated members of the node*/
+	/* Free any dynamically allocated members of the node*/
 
-        if (current->symbol.label_name != NULL) {
-            free(current->symbol.label_name);  /* Free label_name if it was allocated*/
-        }
+	if (current->symbol.label_name != NULL) {
+	    free(current->symbol.label_name);  /* Free label_name if it was allocated*/
+	}
 
-        /* Free the current node itself*/
-        free(current);
+	/* Free the current node itself*/
+	free(current);
 
-        /* Move to the next node*/
-        current = next_node;
+	/* Move to the next node*/
+	current = next_node;
     }
 
 }
@@ -339,15 +392,11 @@ int isValidLabel(char * label_name, symbol_node ** Head, macroNames ** StringHea
 	printf("Invalid Label: Uses non alphanumeric characters.\n");
 	return FALSE;
     }
-    if(labelExists(label_name,Head)){
-	printf("Invalid Label: Duplicate labels are not allowed.\n");
-	return FALSE;
-    }
-     if(MacroAlreadyExists(label_name, StringHead)){
+    if(MacroAlreadyExists(label_name, StringHead)){
 	/* In all likelihood this is redundant. A similar check was already made in the preprocessing step, but better to be safe I suppose.*/
 	printf("Invalid Label: Uses name saved for a macro\n");
 	return FALSE;
-     }
+    }
     if(isSavedLanguageWord(label_name)){
 	printf("Invalid Label: Uses saved language words.\n");
 	return FALSE;
@@ -396,16 +445,25 @@ void updateDataSymbols(symbol_node ** Head, int IC){
 void mergeMemoryImages(MemoryCell Data[], MemoryCell Instructions[], int IC, int DC) {
     int i;
     for (i = 0; i < DC; i++) {
-        Instructions[IC + i + 1] = Data[i];  /* Adjusted indexing to start from IC*/
+	Instructions[IC + i + 1] = Data[i];  /* Adjusted indexing to start from IC*/
     }
 }
 
 
-int labelExists(char * label_query, symbol_node ** HEAD){
+int labelExists(char * label_query,int directive_type, symbol_node ** HEAD){
     symbol_node * current = *HEAD;
     while(current!=NULL){
-	if(strcmp(current->symbol.label_name,label_query) == 0 && current->symbol.is_entry_line==0){
-	    /* NOTE: An entry line decleration that comes before the label definition is perfectly legal.*/
+	if(strcmp(current->symbol.label_name,label_query) == 0){
+	    /* NOTE: An entry line decleration and a label that points to an instruction is the only two symbol combination that allows and even forces use of the same label name.*/
+	    if(current->symbol.is_entry_line==0 && directive_type==ENTRY_DIRECTIVE){
+		/* The current symbol is an instruction that an entry was already defined for*/
+		printf("An instruction was already defined for me\n");
+		return FALSE;
+	    }  else if(current->symbol.is_entry_line==1 && directive_type==NO_DIRECTIVE){
+		/* Current is entry, an instruction label was already defined.*/
+		printf("an entry was already defined for me\n");
+		return FALSE;
+	    }
 	    return TRUE;
 	}
 	current= current->Next;
@@ -413,4 +471,24 @@ int labelExists(char * label_query, symbol_node ** HEAD){
     return FALSE;
 }
 
+char *skip_label(char * str) {
+    /* Skip leading spaces*/
+    skipWhitespace(&str);
+    
+    /* Skip until the colon*/
+    while (*str != ':' && *str != '\0') {
+        str++;
+    }
+    
+    /* If the colon was found, move past it*/
+    if (*str == ':') {
+        str++;
+    }
+    
+    /* Skip any spaces after the colon*/
+    skipWhitespace(&str);
+    
+    /* Return pointer to the first character of content*/
+    return str;
+}
 
