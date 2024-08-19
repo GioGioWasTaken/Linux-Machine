@@ -66,6 +66,7 @@ int labelExists(char * label_query,int directive_type, symbol_node ** HEAD);
 
 
 
+symbol_node * allocateNewNode(void);
 
 int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* directive_definition, int * exit_fail,MemoryCell Data[], MemoryCell Instructions[], char * label_name);
 

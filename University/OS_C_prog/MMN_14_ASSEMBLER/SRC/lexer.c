@@ -38,13 +38,11 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
     char *mnemonic;
     int opcode, i;
     char *instr = str;
-    char delimiter = ' ';  /* Delimiter used in strtok*/
 
     skipWhitespace(&instr);  /* Skip leading whitespace */
 
     /* Extract the mnemonic using strtok*/
-    mnemonic = strtok(instr, &delimiter);
-    /* printf("Opcode mnemonic: '%s' ", mnemonic);*/
+    mnemonic = strtok(instr, " ");
 
     /* Iterate through OPCODES to find a match */
     for (i = 0; i < 16; i++) {
@@ -54,13 +52,12 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 
             /* Restore the delimiter by finding the end of the mnemonic token*/
             char *end = mnemonic + strlen(mnemonic);
-            *end = delimiter;  /* Set the last character to the delimiter*/
+            *end = ' ';  /* Set the last character to the delimiter*/
 
             return opcode;  /* Return the opcode for the matched mnemonic */
         }
     }
 
-    /* If no match is found, return an error code or handle as needed */
     printf("Faulty Opcode mnemonic detected: '%s'\n", mnemonic);
     return NO_SUCH_OPCODE;  /* Example error code for unknown mnemonic */
 }
@@ -110,7 +107,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    args_addressing[args_provided]=0;
 		    break;
 		default:
-		    if(isRegister(inst+1, Registers)){
+		    if(isRegister(inst, Registers)){
 			printf("Treat register as value");
 			args_addressing[args_provided]=3;
 		    } else{
@@ -260,10 +257,10 @@ int isRegister(char * instruction, const char * Registers[]){
     fflush(stdout);
     for(i = 0; i<8; i++){
 	if(strcmp(Register, Registers[i]) == 0){
-	    return GLOBAL_EXIT_SUCESSS;
+	    return TRUE;
 	}
     }
-    return GLOBAL_EXIT_FAILURE;
+    return FALSE;
 }
 
 

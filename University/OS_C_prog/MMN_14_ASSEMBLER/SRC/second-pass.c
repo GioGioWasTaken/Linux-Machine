@@ -1,3 +1,4 @@
+/* TODO: add comments before function and function prototypes.*/
 #include "../Headers/second_pass.h"
 #include <stdio.h>
 #include <string.h>
@@ -7,6 +8,7 @@
 #define is_not_instruction_label (Current_instruction->symbol.is_entry_line == 1 || \
                                   Current_instruction->symbol.is_data_line == 1 || \
                                   Current_instruction->symbol.is_external_line == 1)
+
 int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_location am_file, FILE * proc_src ){
     char raw_instruction[MAX_LINE_LENGTH];
     char label_name[MAX_LINE_LENGTH];
@@ -82,32 +84,36 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
     }
 }
 
-/* TODO: add comments before function and function prototypes.*/
 
 int setEntryAddress(char * directive_name, symbol_node ** Head){
     symbol_node * Current = *Head;
-    while(Current!=NULL){
-	if(Current->symbol.is_entry_line == 1){
-	    printf("entry name: %s\n", Current->symbol.label_name);
-	    symbol_node * Current_instruction= *Head;
-	    while(Current_instruction!=NULL){
-		if(is_not_instruction_label){
-		    printf("symbol name: %s     ", Current_instruction->symbol.label_name);
-		    printf("isExternal, isData, isEntry: %d ,%d, %d\n", Current_instruction->symbol.is_external_line,Current_instruction->symbol.is_data_line,Current_instruction->symbol.is_entry_line);
-		    Current_instruction= Current_instruction->Next;
-		} else if(strcmp(Current_instruction->symbol.label_name,Current->symbol.label_name)==0){
-		    Current->symbol.address = Current_instruction->symbol.address;
-		    printf("Found matching label for an entry call. The address %d was allocated.\n ",Current_instruction->symbol.address );
-		}
-	    }
-	    if(Current_instruction==NULL){
-		return NO_SUCH_LABEL;
-	    }
-	}
-	Current= Current->Next;
+
+    while (Current != NULL) {
+        if (Current->symbol.is_entry_line == 1) {
+            symbol_node * Current_instruction = *Head;
+            int label_found = 0;
+
+            while (Current_instruction != NULL) {
+                if (is_not_instruction_label) {
+                    Current_instruction = Current_instruction->Next;
+                } else if (strcmp(Current_instruction->symbol.label_name, Current->symbol.label_name) == 0) {
+                    /* Found matching label*/
+                    Current->symbol.address = Current_instruction->symbol.address;
+                    printf("Found matching label for entry %s. The address %d was allocated.\n", Current->symbol.label_name, Current_instruction->symbol.address);
+                    label_found = 1;
+                    break;
+                } else {
+                    Current_instruction = Current_instruction->Next;
+                }
+            }
+
+            if (!label_found) {
+                return NO_SUCH_LABEL;
+            }
+        }
+        Current = Current->Next;
     }
     return SECOND_PASS_EXIT_SUCESS;
-
 }
 
 void createEntryOutput(symbol_node **Head, char *entry_name) {
@@ -143,15 +149,9 @@ void createEntryOutput(symbol_node **Head, char *entry_name) {
 
 void writeEntry(FILE *entryOUT, char *entry_name, int addr) {
     /* Check if the file stream is valid*/
-    printf("Writing to file\n");
     if (entryOUT == NULL) {
         perror("Error opening entry file\n");
         return;
-    }
-    if(entry_name==NULL){
-	printf("FUCK");
-    } else{
-	printf("%s\n%d\n",entry_name,addr);
     }
 
     /* Write the entry in the format: entry_name  addr*/
