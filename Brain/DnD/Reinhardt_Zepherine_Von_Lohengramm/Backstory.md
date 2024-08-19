@@ -59,3 +59,5 @@ Now, picture if you will, my coming-of-age ceremony. The Arcane Court gathered, 
 Some were enchanted, others appalled—clearly, their simple minds couldn't grasp my genius. And my family? Oh, they were beside themselves! My father, face as red as a tomato, had the audacity to cast me out! "If you wish to squander your talents on parlor tricks, you shall do so without the backing of this house!" he bellowed.
 
 But did I falter? Did I cower? Hah! Perish the thought! I declared, "You'll see! I shall build an empire of elegance and wonder that will make our family's brutal magic look positively barbaric!"
+
+

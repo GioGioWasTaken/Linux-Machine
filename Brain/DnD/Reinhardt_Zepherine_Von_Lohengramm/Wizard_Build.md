@@ -1,7 +1,7 @@
 # Cantrips:
    - Prestidigitation *read note 1
    - Minor Illusion, trivially obvious why this cantrip is absolutely fantastic
-   -  Mold Earth *read  note 2
+   - Mold Earth *read  note 2
 
 # Feats
 
@@ -69,7 +69,3 @@ Let's say that my character got rich by selling weapons to one political faction
 - A golden pocket watch
 - Explorer's pack (and some paper!)
 - Spellbook 
-
-
-
-

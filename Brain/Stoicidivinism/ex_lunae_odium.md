@@ -16,7 +16,7 @@ wept the fate of his disciple, so terrible!
 
 and so when his tears dried and his woe, aside
 
-his rage grew, until yet untried
+his rage grew, until yet, untried
 
 Dantamiya who sensed the peril
 
