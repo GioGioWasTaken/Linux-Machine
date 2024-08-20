@@ -1,7 +1,6 @@
 #ifndef LEXER_H
 #define LEXER_H
 #include "memory.h"
-#include "memory.h"
 #include "exit.h"
 #include "utils.h"
 #include "globals.h"
@@ -37,5 +36,17 @@ int isRegister(char * instruction, const char * Registers[]);
 
 
 int isSavedLanguageWord(char * word_to_check);
+
+char * getAbsoluteNum(char * instruction_definition);
+
+
+char * getLabelName(char * instruction_definition);
+
+typedef struct symbol_node symbol_node; /* forward include*/
+
+int getLabelType(char * instruction_definition, symbol_node ** Head);
+
+int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head);
+
 
 #endif

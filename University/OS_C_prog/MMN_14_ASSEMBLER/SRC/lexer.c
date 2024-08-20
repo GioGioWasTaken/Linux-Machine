@@ -1,4 +1,5 @@
 #include "../Headers/lexer.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 /* NOTE:  Might be broken if the addsymbols function doesn't expect the instruction to be without the label make sure lalter*/
@@ -19,7 +20,7 @@ const instruction_t OPCODES[16] = {
     {"cmp",  2, 1},
     {"add",  2, 2},
     {"sub",  2, 3},
-    {"lea",  1, 4},
+    {"lea",  2, 4},
     {"clr",  1, 5},
     {"not",  1, 6},
     {"inc",  1, 7},
@@ -52,7 +53,7 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 
             /* Restore the delimiter by finding the end of the mnemonic token*/
             char *end = mnemonic + strlen(mnemonic);
-            *end = ' ';  /* Set the last character to the delimiter*/
+            *end = ' ';  /* Set the last character to the delimiter, so the state is preserved*/
 
             return opcode;  /* Return the opcode for the matched mnemonic */
         }
@@ -89,14 +90,14 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		return TOO_MANY_ARGUMENTS;
 	    }
 
-	    /* inst is now pointing at the first char of the first argument*/
-	    switch (*inst) {
+	    /* Token is now pointing at the first char of the first argument*/
+	    switch (*Token) {
 		case '*':
 		    /* Since I am using the same function for the other case as well,
-		    the function should assume the same state. I will pass the first char of the register in both instances*/
-		    if(isRegister(inst+1, Registers)){
+		    the function should assume the same state. I will pass the first char of the register in both Tokenances*/
+		    if(isRegister(Token+1, Registers)){
 			printf("Treat register as pointer\n");
-			args_addressing[args_provided]=2;
+			args_addressing[args_provided]=INDIRECT_REGISTER_ADDRESSING;
 		    } else{
 			print_assemble_time_error(NO_SUCH_REGISTER, am_file);
 			return NO_SUCH_REGISTER;
@@ -104,14 +105,15 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    break;
 		case '#':
 		    printf("Absolute value \n");
-		    args_addressing[args_provided]=0;
+		    args_addressing[args_provided]=ABSOLUTE_ADDRESSING;
 		    break;
 		default:
-		    if(isRegister(inst, Registers)){
-			printf("Treat register as value");
-			args_addressing[args_provided]=3;
+		    if(isRegister(Token, Registers)){
+			printf("Treat register as value\n");
+			args_addressing[args_provided]=DIRECT_REGISTER_ADDRESSING;
 		    } else{
-			args_addressing[args_provided]=1;
+			printf("treat as label\n");
+			args_addressing[args_provided]=DIRECT_ADDRESSING;
 		    }
 		    break;
 	    }
@@ -122,7 +124,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
     
 
     /* Add the instruction to memory */
-    ARE = 2; /*  This method will only be used for the first word of the instruction, so it's always going to be 2;*/
+    ARE = 2; /*  This method will only be used for the first word of the instruction, so it's always going to be 2*/
     *Current_IC=addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
     return LEXER_EXIT_SUCESS;
 }
@@ -254,9 +256,10 @@ int isRegister(char * instruction, const char * Registers[]){
     int i;
     strncpy(Register, instruction, 2);
     printf("Register detected is : '%s'\n", Register);
-    fflush(stdout);
     for(i = 0; i<8; i++){
 	if(strcmp(Register, Registers[i]) == 0){
+	    printf("comparing it with %s\n", Registers[i]);
+	    fflush(stdout);
 	    return TRUE;
 	}
     }
@@ -278,10 +281,75 @@ int isSavedLanguageWord(char * word_to_check) {
 
     /* Check if the word matches any opcode mnemonic*/
     for (i = 0; i < 16; i++) {
-        if (strcmp(word_to_check, OPCODES[i].mnemonic) == 0) {
-            return TRUE;
+        if (strcmp(word_to_check, OPCODES[i].mnemonic) == 0) { return TRUE;
         }
     }
 
     return FALSE;  /* Return FALSE if no match is found*/
+}
+
+
+
+/* NOTE: I refer to the current IC as PC here, since we are essentially going instruction by instruction now. */
+int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head){
+    int addressing_methods[] = {NO_OPERAND_ADDRESSING, NO_OPERAND_ADDRESSING}; 
+    /* If this value is read at the end, it means that either the source or dest operand don't exist. */
+    int read_status = readAddressingMethods(addressing_methods, Instructions, *PC);
+    int num_read, label_type;
+    char * label_name;
+    if(addressing_methods[0] == NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
+	(*PC)++;
+	return LEXER_EXIT_SUCESS;
+    } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
+	int source_addressing = addressing_methods[0];
+	switch (source_addressing) {
+		num_read = atoi(getAbsoluteNum(instruction_definition));
+
+		/* write the number to memory*/
+
+		break;
+	    case DIRECT_ADDRESSING:
+		label_name = getLabelName(instruction_definition);
+		label_type = getLabelType(label_name, Head);
+		 /* If it's an extern: write to the .ext file the location the symbols was referenced and the name of the symbol*/
+		/* if entry: write entry address in memory*/
+		break;
+	    /* NOTE: Intentional case fallthrough: Here the register is source , so bits 6-8 hold the register number for both 2 & 3. */
+	    case INDIRECT_REGISTER_ADDRESSING:
+	    case DIRECT_REGISTER_ADDRESSING:
+
+		break;
+	    default:
+		return INVALID_ADDRESSING_METHOD;
+	}
+	(*PC)+=2;
+    } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]!=NO_OPERAND_ADDRESSING){
+	int source_addressing = addressing_methods[0];
+	int destination_addressing = addressing_methods[1];
+	if(source_addressing == destination_addressing && source_addressing == 2 || source_addressing == destination_addressing&& source_addressing== 3 || source_addressing + destination_addressing == 5){
+	    /* If they are both 2, both 3, or either one of them is 2 with the other being 3: */
+	    /* They will share a word, and the instruction will be two words long. (The unused space that was allocated in advance, will be set 0)*/
+	    (*PC)+=2;
+	} else{
+	    /* Control flow gurantees that if this is reached, only one of the operands is a register*/
+	    /* set the bits according to to if it's the source or destination opernad.
+	     * 3-5 if it's a destination operand, 6-8 if it's source. */
+
+	    (*PC)+=3;
+	}
+    }
+
+    return LEXER_EXIT_SUCESS;
+}
+
+
+char * getAbsoluteNum(char * instruction_definition){
+}
+
+char * getLabelName(char * instruction_definition){
+    /* instead of creating 2 functions, use this one twice, with the second time being after a strtok*/
+}
+
+int getLabelType(char * instruction_definition, symbol_node ** Head){
+
 }

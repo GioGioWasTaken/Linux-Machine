@@ -208,6 +208,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	print_assemble_time_error(MEMORY_ALLOCATION_ERROR, am_file);
 	*exit_fail = FIRST_PASS_EXIT_FAIL;
     }
+    /* Set the label name, accordingly if it's an entry/external or isn't. */
     if(directive_type!=EXTERNAL_DIRECTIVE && directive_type!= ENTRY_DIRECTIVE){
 	newNode->symbol.label_name = (char *)malloc(strlen(label_name) * sizeof(char) +1);
 	strcpy(newNode->symbol.label_name, label_name);
@@ -229,9 +230,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
     }
 
 
-    /* Prepare directive */
     if(directive_type==NO_DIRECTIVE){	/* If this function is called with this value, these are code lines*/
-
 	int Current_IC = *IC;
 	if(parseInstruction(&Current_IC,IC, Instructions, instruction_definition, am_file) != LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
@@ -267,7 +266,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	if(label_name!=NULL){
 	    print_assembler_warning(UNDEFINED_LABEL_WARNING, am_file);
 	}
-	printf("THIS SHOULD SEGFAULT:%s\n", newNode->symbol.label_name);
 	newNode->symbol.is_entry_line =1;
     }
 
@@ -275,7 +273,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
     if(*Head==NULL){
 	*Head = newNode;
-	printf("node added as head: %s\n", newNode->symbol.label_name);
 	if(*exit_fail!=FIRST_PASS_EXIT_FAIL){
 	    return FIRST_PASS_EXIT_SUCESSS;
 	} else{
@@ -293,7 +290,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
 	/* this produces the effect that Head's last node is now newNode, without pointing Head elsewhere.*/
 	current_symbol->Next = newNode;
-	printf("node added: %s\n", newNode->symbol.label_name);
 	if(*exit_fail!=FIRST_PASS_EXIT_FAIL){
 	    return FIRST_PASS_EXIT_SUCESSS;
 	} else{
@@ -409,13 +405,9 @@ void mergeMemoryImages(MemoryCell Data[], MemoryCell Instructions[], int IC, int
 }
 
 
-/* BUG: false positives */
 int labelExists(char * label_query,int query_directive_type, symbol_node ** HEAD){
     symbol_node * current = *HEAD;
-    printf("label query: %s\n",label_query);
     while(current!=NULL){
-	printf("symbol name: %s\n",current->symbol.label_name);
-	printf("isEntry: %d\n",current->symbol.is_entry_line);
 	fflush(stdout);
 	if(strcmp(current->symbol.label_name,label_query) == 0){
 	    /* NOTE: An entry line decleration and a label that points to an instruction is the only two symbol combination that allows and even forces use of the same label name.*/
@@ -428,6 +420,7 @@ int labelExists(char * label_query,int query_directive_type, symbol_node ** HEAD
 		current= current->Next;
 		continue;
 	    }
+	    /* In all other cases, including an extern being defined for a label that was defined in the current file: */
 	    return TRUE;
 	}
 	current= current->Next;

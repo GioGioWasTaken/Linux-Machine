@@ -5,7 +5,6 @@
 
 #include "../Headers/utils.h"
 #include "../Headers/exit.h"
-#include "../Headers/first_pass.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -125,4 +124,9 @@ int isAlphaNumericString(char * str) {
     return TRUE;  /* Return TRUE if all characters are alphanumeric*/
 }
 
-
+void printBinary(char byte) {
+    int i;
+    for (i = 7; i >= 0; i--) {
+        printf("%d", (byte >> i) & 1);
+    }
+}

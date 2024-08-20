@@ -1,6 +1,7 @@
-#include "../Headers/exit.h"
 #include "../Headers/memory.h"
+#include "../Headers/exit.h"
 #include "../Headers/utils.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 
@@ -18,11 +19,10 @@ int setMemoryCell(int * DC, MemoryCell * Cell, int value){
     }
     (*DC)++;
 
-    /* printf("Set memory: FirstByte: 0x%02X, SecondByte: 0x%02X\n", Cell->FirstByte, Cell->SecondByte);  */
     return 1;
 }
 
-int getMemoryCell(int DC, MemoryCell Data[]) {
+int readWord(int DC, MemoryCell Data[]) {
     MemoryCell Cell = Data[DC];
     int LSB = Cell.FirstByte;          /* Least significant 8 bits */
     int MSB = Cell.SecondByte;         /* Most significant 6 bits */
@@ -77,12 +77,12 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     *LSB = 0;
     *MSB = 0;
 
-    /* Set the opcode bits (4 most significant bits in MSB) */
-    *MSB |= (opcode & 0x0F) << 4;
+    /* Set the opcode bits (4 second most significant bits in MSB 0(111 1)111 */
+    *MSB |= (opcode & 0x0F) << 3;
 
     /* Set the address_src_bit */
     if(address_src_bit<0){
-	printf("No arguments op code: Leave source set to 0. value: %d\n",address_src_bit);
+	printf("No arguments op code: Leave source set to 0.\n value: %d\n",address_src_bit);
     } else{
 
     if (address_src_bit < 8) {
@@ -103,25 +103,90 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     /* Set the ARE bit */
     *LSB |= (SET_BIT << ARE_bit);
 
+    printf("source: %d\ndestination: %d\n", address_src_bit, address_dest_bit);
+    printBinary(*MSB);
+    printBinary(*LSB);
+    printf("\n");
     /* Return success */
-    return 1;
+    return GLOBAL_EXIT_SUCESSS;
 }
 
 int addInstruction(int * IC,MemoryCell Instructions[], int op_code,int arg_count, int args_addressing[], int ARE){
     int FirstWordAddress;
+
+    FirstWordAddress = *IC;
+    setInstructionBits(&Instructions[*IC], op_code, args_addressing[0],args_addressing[1],ARE);
+
     if(arg_count==0){
-	FirstWordAddress = *IC;
-	setInstructionBits(&Instructions[*IC], op_code, args_addressing[0],args_addressing[1],ARE);
 	(*IC)++;
     } else if(arg_count==1){
-	FirstWordAddress = *IC;
-	setInstructionBits(&Instructions[*IC], op_code, args_addressing[0],args_addressing[1],ARE);
 	(*IC)+=2;
     } else if(arg_count==2){
-	FirstWordAddress = *IC;
-	setInstructionBits(&Instructions[*IC], op_code, args_addressing[0],args_addressing[1],ARE);
 	(*IC)+=3;
     } 
     return FirstWordAddress;
 }
 
+
+int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], int IC) {
+    printf("Checking address: %d\n", IC);
+    MemoryCell currentCell = Instructions[IC];
+    int address_dest_bit;
+    int address_src_bit;
+    char LSB = currentCell.FirstByte;  /* Least significant 8 bits */
+    char MSB = currentCell.SecondByte; /* Most significant 8 bits */
+
+    printBinary(MSB);
+    printBinary(LSB);
+    printf("\n");
+
+
+    /* Extract address_dest_bit from bits 3-6 in LSB */
+    address_dest_bit = (LSB >> 3) & 0x0F; /* Mask to get 4 bits (3-6) */
+
+    switch (address_dest_bit) {
+	/* Interpret the result of the bit mask as an addressing method referred to by index (same order given in the maman)*/
+	/* 0000 1000*/
+	case 8:
+	    address_dest_bit = DIRECT_REGISTER_ADDRESSING;
+	    break;
+	case 4: 
+	/* 0000 0100, etc... */ 
+	    address_dest_bit = INDIRECT_REGISTER_ADDRESSING;
+	    break;
+	case 2:
+	    address_dest_bit = DIRECT_ADDRESSING;
+	    break;
+	case 1:
+	    address_dest_bit = ABSOLUTE_ADDRESSING;
+	    break;
+	case 0:
+	    address_dest_bit = NO_OPERAND_ADDRESSING;
+	}
+    /* Extract address_src_bits from bits 7-10 in MSB */
+    if(LSB>>7 & 0xFF){
+	/* adressing method 0  of the source bit is kept in the LSB*/
+	address_src_bit = ABSOLUTE_ADDRESSING;
+    } else{
+	address_src_bit = (MSB << 5) & 0xFF; /* Mask to get 4 bits (7-10) */
+	switch (address_src_bit) {
+	    case 128:
+		address_src_bit = DIRECT_REGISTER_ADDRESSING;
+		break;
+	    case 64: 
+		address_src_bit = INDIRECT_REGISTER_ADDRESSING;
+		break;
+	    case 32:
+		address_src_bit = DIRECT_ADDRESSING;
+		break;
+	    case 0:
+		address_src_bit = NO_OPERAND_ADDRESSING;
+	}
+    }
+
+    /* Store the extracted bits in the addressing_methods array */
+    addressing_methods[0] = address_src_bit;
+    addressing_methods[1] = address_dest_bit;
+
+    return 0; 
+}

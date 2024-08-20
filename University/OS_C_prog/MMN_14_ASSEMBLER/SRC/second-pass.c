@@ -13,7 +13,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
     char raw_instruction[MAX_LINE_LENGTH];
     char label_name[MAX_LINE_LENGTH];
     char * instruction;
-
+    int PC = IC_INITIAL;
     char directive_definition[MAX_LINE_LENGTH];
     char * directive_name;
     char file_no_extension[256];  
@@ -44,30 +44,33 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 	}
 	    char * temp = strchr(instruction, '.');
 	    int isDirective = temp!=NULL;
-	    if(isDirective){
-		strcpy(directive_definition,temp);
-		int status = isValidDirective(directive_definition);
-		if(status!=ENTRY_DIRECTIVE){
-		    continue;
-		    /* We can do an else  block here immediately because if it was of any other undefined directive type,
+	if(isDirective){
+	    strcpy(directive_definition,temp);
+	    int status = isValidDirective(directive_definition);
+	    if(status!=ENTRY_DIRECTIVE){
+		continue;
+		/* We can do an else  block here immediately because if it was of any other undefined directive type,
 		     * it would have been discovered in the first pass.*/
-		} else{
-		    printf("entry detected! Looking for its address....\n");
-		    int entry_status = setEntryAddress(directive_name, Head);
-		    if(entry_status== NO_SUCH_LABEL){
-			print_assemble_time_error(NO_SUCH_LABEL, am_file);
-			panic_mode = 1;
-		    }
-		}
 	    } else{
-	    /* TODO: build the rest of the words of the instruction*/
-	    /* while i'm compelting the rest of words of the instruction, if I find that the label referenced is external (i will iterate through the symbol table and look for an equivalent label name to the one referenced in code ) I should also at that moment mark the external label with the address it was called from. */
-	    /* this address will be placed in the address field, even though it's not the address where it's defined. */
-	    /* We will modify the function behaviour, such that if it finds that the currently referenced label is external, the address it writes is special.*/
+		printf("entry detected! Looking for its address....\n");
+		int entry_status = setEntryAddress(directive_name, Head);
+		if(entry_status== NO_SUCH_LABEL){
+		    print_assemble_time_error(NO_SUCH_LABEL, am_file);
+		    panic_mode = 1;
+		}
 	    }
+	} else{
+	    printf("Current instruction: %s\n", raw_instruction);
+	    parseRemainingInstruction(&PC, Code, raw_instruction, am_file,Head);
+	    fflush(stdout);
+
+	    /* while i'm completing the rest of words of the instruction, if I find that the label referenced is external, I should also at that moment mark the external label with the address it was called from. */
+	    /* We will modify the function behaviour, such that if it finds that the currently referenced label is external, the address it writes is special.*/
+	}
 	am_file.line_number++;
 	} 
-    /* TODO: Create the output files*/ 
+    /* TODO: Create the output files
+     * External : setting the address of the external temporarily to where it was called from*/ 
 
     /* Copy filename and remove the ".am" extension*/
     strncpy(file_no_extension, am_file.filename, strlen(am_file.filename) - 3); 
@@ -81,6 +84,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 
     if(panic_mode!=1){
 	createEntryOutput(Head, entry_output_name);
+	deleteExternOutput(Head,extern_output_name);
     }
 }
 
@@ -156,4 +160,9 @@ void writeEntry(FILE *entryOUT, char *entry_name, int addr) {
 
     /* Write the entry in the format: entry_name  addr*/
     fprintf(entryOUT, "%-5s %04d\n", entry_name, addr);
+}
+
+void deleteExternOutput(symbol_node **Head, char *output_name){
+    /* if file doesn't exist return sucesss*/
+    /* else delete it */
 }

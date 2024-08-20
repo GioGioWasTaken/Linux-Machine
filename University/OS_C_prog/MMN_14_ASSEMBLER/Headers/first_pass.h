@@ -80,6 +80,7 @@ char *skip_label(char *str);
 
 void freeSymbols(symbol_node ** Head);
 
+
 int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_location am_file, FILE * proc_src );
 
 #endif

@@ -31,6 +31,8 @@ void skipWhitespace(char** str);
 
 int isAlphaNumericString(char * str);
 
+void printBinary(char byte);
+
 void removeTrailingNewline(char *str);
 
 #endif
