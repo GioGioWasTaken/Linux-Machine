@@ -22,14 +22,19 @@ Leaving me with 1 week to finish the rest of the project...
 -   Sometimes in comments I say "we" instead of I. This is not because I worked with another student, it simply feels like the more natural pronoun to use when explaining something.
     - Since i'm guiding you through my thinking process,  it's ought to be engaging, don't you think? :)
 
+- Sometimes you will see me declaring a fatal error and instantly exiting the program. If a memory allocation has failed, the entire state of the program is corrupted. This should practically never happen, but the program shouldn't continue execution in that state.
+
+- .ext file won't be created if a label is referenced, but never used.
 
 ## Things I would have done had I had more time:
 
 
 `first_pass.c`: 
 - Modify the isValidLabel function to return proper error codes instead of a boolean value, so we can give the user meaningful feedback.  ~10-20 minutes
-- Modify the way I handled labels: I put data string extern and entry labels all in the same table.  This would involve a lot of refactoring, so ~ 50 minutes - 1.5 hours
-- make a skip_label function and use that instead of custom parsing~ 30 minutes
+- Modify the way I handled labels: I put data string extern and entry labels all in the same table.  This would involve a lot of refactoring. Also: just have label type field instead of boolean fields.
+
+~ 50 minutes - 1.5 hours
+
 
 `second_pass.c`:
 - on top of the original modification I wanted to make in the first_pass to the way I handled externals, I would have liked to have a special field for them, instead of using the `address` field, which i typically used to store the address the label points to, and not the addresses. Not only is this unorganized, since there could be multiple declerations, I've had to write to the external file while i'm discovering references to the label, which makes the program harder to read. ~ 1 hour 

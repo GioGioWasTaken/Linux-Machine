@@ -184,16 +184,12 @@ int isValidDirective(char * str){
     int directive_type = NO_SUCH_DIRECTIVE;
     if(strncmp(str, ".data",5) ==0){
 	directive_type = DATA_DIRECTIVE;
-	printf("directive type is .data\n");
     } else if(strncmp(str, ".string",7)==0){
 	directive_type = STRING_DIRECTIVE;
-	printf("directive type is .string\n");
     } else if(strncmp(str,".extern",7)==0){
 	directive_type=EXTERNAL_DIRECTIVE;
-	printf("directive type is .extern\n");
     } else if(strncmp(str,".entry",6) ==0){
 	directive_type=ENTRY_DIRECTIVE;
-	printf("directive type is .entry\n");
     }
     return directive_type;
 }
@@ -201,12 +197,11 @@ int isValidDirective(char * str){
 int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, code_location am_file, char* instruction_definition, int * exit_fail,MemoryCell Data[], MemoryCell Instructions[], char * label_name){
 
     symbol_node * newNode = allocateNewNode();
-    printf("newNode: %p\n",newNode);
     char * extern_entry_name; 
     if(newNode==NULL){
 	/* This should practically never happen */
-	print_assemble_time_error(MEMORY_ALLOCATION_ERROR, am_file);
-	*exit_fail = FIRST_PASS_EXIT_FAIL;
+	printf("Fatal error: error allocating symbol table.\nCan't continue. Exiting.\n");
+	return GLOBAL_EXIT_FAILURE;
     }
     /* Set the label name, accordingly if it's an entry/external or isn't. */
     if(directive_type!=EXTERNAL_DIRECTIVE && directive_type!= ENTRY_DIRECTIVE){

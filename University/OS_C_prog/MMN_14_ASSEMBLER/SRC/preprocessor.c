@@ -103,7 +103,8 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
     Macro_node_t * newMacroNode = (Macro_node_t *) malloc(sizeof(Macro_node_t));
     macroNames * newStringNode = (macroNames *) malloc(sizeof(Macro_node_t));
     if(newMacroNode==NULL){
-	return MEMORY_ALLOCATION_ERROR;
+	printf("Fatal error: failed allocating macro node.\nCan't continue. Exiting.\n");
+	return GLOBAL_EXIT_FAILURE;
     }
 
     /* Set new node data*/
@@ -138,7 +139,8 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
 	}
 	newMacroNode->macro.lines[i] = malloc(sizeof(char) * MAX_LINE_LENGTH);
 	if(newMacroNode->macro.lines[i]==NULL){
-	    return MEMORY_ALLOCATION_ERROR;
+	    printf("Fatal error: failed allocating value for macro node.\nCan't continue. Exiting.\n");
+	    return GLOBAL_EXIT_FAILURE;
 	}
 	strcpy(newMacroNode->macro.lines[i], macr_line);
 	newMacroNode->macro.line_count++;

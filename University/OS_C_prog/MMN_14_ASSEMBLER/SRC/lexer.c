@@ -69,7 +69,6 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
     int args_addressing[2] = {-100, -100};
     args_provided = 0;
     char * inst =  instruction_definition;
-    printf("Instruction definition: %s\n", inst);
 
     /* Determine opcode*/
     opcode = determine_opcode(inst, OPCODES);
@@ -96,7 +95,6 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    /* Since I am using the same function for the other case as well,
 		    the function should assume the same state. I will pass the first char of the register in both Tokenances*/
 		    if(isRegister(Token+1, Registers)){
-			printf("Treat register as pointer\n");
 			args_addressing[args_provided]=INDIRECT_REGISTER_ADDRESSING;
 		    } else{
 			print_assemble_time_error(NO_SUCH_REGISTER, am_file);
@@ -104,16 +102,15 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    }
 		    break;
 		case '#':
-		    printf("Absolute value \n");
 		    args_addressing[args_provided]=ABSOLUTE_ADDRESSING;
+		    printf("absolute addressing\n");
 		    break;
 		default:
 		    if(isRegister(Token, Registers)){
-			printf("Treat register as value\n");
 			args_addressing[args_provided]=DIRECT_REGISTER_ADDRESSING;
 		    } else{
-			printf("treat as label\n");
 			args_addressing[args_provided]=DIRECT_ADDRESSING;
+			printf("label addressing\n");
 		    }
 		    break;
 	    }
@@ -184,7 +181,7 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
     char *string_definition = directive_definition;
     skipWhitespace(&string_definition);
 
-     /* Extract the directive (e.g., .data) and skip it */
+    /* Extract the directive (e.g., .data) and skip it */
     Token = strtok(string_definition, " ");
     Token = strtok(NULL, "\""); 
     if(Token==NULL){
@@ -202,6 +199,8 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
 }
 
 
+/* The cleanCommas function deletes every unneeded space of an instrction while modifying it in place. After using it, the state of the string passed, 
+ * would be only the operands of the instrction (if it has any), with proper commas (no unneeded whitespaces)*/
 void cleanCommas(char *instruction) {
     char buffer[MAX_LINE_LENGTH] = "";   /* Temporary buffer for the cleaned string */
     char *result = buffer;
@@ -211,32 +210,32 @@ void cleanCommas(char *instruction) {
     char *instr = instruction;
     skipWhitespace(&instr);
 
-     /* Extract the first part of the instruction (e.g. .data, mov, etc) and skip it */
+    /* Extract the first part of the instruction (e.g. .data, mov, etc) and skip it */
     Token = strtok(instr, " ");
     skipWhitespace(&Token);
     Token = strtok(NULL, ",");   
 
-     /* Rebuild the string with commas cleaned */
+    /* Rebuild the string with commas cleaned */
     while (Token != NULL) {
-         /* Add the token to the result buffer */
-        while (*Token) {
-            if (!isspace((unsigned char)*Token)) {
-                *result++ = *Token;   /* Copy the character to the result */
-            }
-            Token++;
-        }
-        Token = strtok(NULL, ",");   /* Get the next token, splitting by commas */
+	/* Add the token to the result buffer */
+	while (*Token) {
+	    if (!isspace((unsigned char)*Token)) {
+		*result++ = *Token;   /* Copy the character to the result */
+	    }
+	    Token++;
+	}
+	Token = strtok(NULL, ",");   /* Get the next token, splitting by commas */
 
-         /* If there's another token, add a comma without spaces */
-        if (Token != NULL) {
-            *result++ = ',';
-        }
+	/* If there's another token, add a comma without spaces */
+	if (Token != NULL) {
+	    *result++ = ',';
+	}
     }
 
-     /* Null-terminate the result string */
+    /* Null-terminate the result string */
     *result = '\0';
 
-     /* Copy the cleaned string back to the original instruction */
+    /* Copy the cleaned string back to the original instruction */
     strcpy(instruction, buffer);
 }
 
@@ -255,11 +254,8 @@ int isRegister(char * instruction, const char * Registers[]){
     char Register[2];
     int i;
     strncpy(Register, instruction, 2);
-    printf("Register detected is : '%s'\n", Register);
     for(i = 0; i<8; i++){
 	if(strcmp(Register, Registers[i]) == 0){
-	    printf("comparing it with %s\n", Registers[i]);
-	    fflush(stdout);
 	    return TRUE;
 	}
     }
@@ -274,15 +270,15 @@ int isSavedLanguageWord(char * word_to_check) {
     /* Check if the word matches any register name*/
     int i;
     for (i = 0; i < 8; i++) {
-        if (strcmp(word_to_check, Registers[i]) == 0) {
-            return TRUE;
-        }
+	if (strcmp(word_to_check, Registers[i]) == 0) {
+	    return TRUE;
+	}
     }
 
     /* Check if the word matches any opcode mnemonic*/
     for (i = 0; i < 16; i++) {
-        if (strcmp(word_to_check, OPCODES[i].mnemonic) == 0) { return TRUE;
-        }
+	if (strcmp(word_to_check, OPCODES[i].mnemonic) == 0) { return TRUE;
+	}
     }
 
     return FALSE;  /* Return FALSE if no match is found*/
@@ -291,33 +287,73 @@ int isSavedLanguageWord(char * word_to_check) {
 
 
 /* NOTE: I refer to the current IC as PC here, since we are essentially going instruction by instruction now. */
-int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head){
+int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head, char * extern_name, int * externOpened){
     int addressing_methods[] = {NO_OPERAND_ADDRESSING, NO_OPERAND_ADDRESSING}; 
     /* If this value is read at the end, it means that either the source or dest operand don't exist. */
     int read_status = readAddressingMethods(addressing_methods, Instructions, *PC);
-    int num_read, label_type;
-    char * label_name;
+    printf("Instruction definition: '%s'\n", instruction_definition);
+    cleanCommas(instruction_definition);
+    printf("operands definition: '%s'\n", instruction_definition);
     if(addressing_methods[0] == NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	(*PC)++;
 	return LEXER_EXIT_SUCESS;
     } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	int source_addressing = addressing_methods[0];
+	/* NOTE: the state expected is "Operand".*/
 	switch (source_addressing) {
-		num_read = atoi(getAbsoluteNum(instruction_definition));
-
-		/* write the number to memory*/
-
+	    case ABSOLUTE_ADDRESSING:
+		int num_read = atoi(instruction_definition+1);
+		int write_status = writeAbsoluteValue(&Instructions[*PC+1], am_file, num_read); /* PC +1 Since PC points to the first word. */
+		if(write_status==INTEGER_OVERFLOW){
+		    printf("Error when using absolute addressed value\n");
+		    print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
+		}
 		break;
 	    case DIRECT_ADDRESSING:
-		label_name = getLabelName(instruction_definition);
-		label_type = getLabelType(label_name, Head);
-		 /* If it's an extern: write to the .ext file the location the symbols was referenced and the name of the symbol*/
-		/* if entry: write entry address in memory*/
+		char * label_name = instruction_definition;
+		int label_address = getLabelAddress(label_name, Head);
+
+		if(label_address==NO_SUCH_LABEL){
+		    return INVALID_ADDRESSING_METHOD;
+		} 
+
+		if(label_address==-1){
+		    /* Extern label*/
+		    if(*externOpened==0){
+			/* File was not made yet*/
+			printf("Creating .ext file...\n");
+			FILE * extern_OUT = fopen(extern_name, "w");
+			if (extern_OUT == NULL) {
+			    perror("Fatal Error: Error creating .ext file\n");
+			    return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
+			}
+			writeExtern(extern_OUT, label_name, *PC);
+			*externOpened=1;
+			fclose(extern_OUT);
+		    } else if (*externOpened ==1){
+			/* File was made, so append to it.*/
+			FILE * extern_OUT = fopen(extern_name, "a");
+			if (extern_OUT == NULL) {
+			    perror("Fatal Error: .ext file cannot be found.\n");
+			    return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
+			}
+			writeExtern(extern_OUT, label_name, *PC);
+			fclose(extern_OUT);
+		    }
+		    writeExternAddress(&Instructions[*PC+1], am_file);
+		}
+		/* Otherwise we simply write the address to memory. */
+		writeLabelAddress(&Instructions[*PC+1], am_file, label_address);
 		break;
-	    /* NOTE: Intentional case fallthrough: Here the register is source , so bits 6-8 hold the register number for both 2 & 3. */
+	    /* NOTE: Intentional case fallthrough: Here the register is the first operand , so bits 6-8 hold the register number for both 2 & 3. */
 	    case INDIRECT_REGISTER_ADDRESSING:
 	    case DIRECT_REGISTER_ADDRESSING:
-
+		if(*instruction_definition=='*'){
+		    instruction_definition++;
+		}
+		instruction_definition+=1;
+		int register_num = atoi(instruction_definition);
+		writeRegisterNumber(&Instructions[*PC+1], register_num, -1);
 		break;
 	    default:
 		return INVALID_ADDRESSING_METHOD;
@@ -342,14 +378,24 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
     return LEXER_EXIT_SUCESS;
 }
 
+int buildOperand(int opernad_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head ){
 
-char * getAbsoluteNum(char * instruction_definition){
-}
+} 
 
-char * getLabelName(char * instruction_definition){
-    /* instead of creating 2 functions, use this one twice, with the second time being after a strtok*/
-}
 
-int getLabelType(char * instruction_definition, symbol_node ** Head){
-
+int getLabelAddress(char * label_name, symbol_node ** Head){
+    /* this function will iterate over all symbols and return the type of the first one it finds.
+     * If it finds it's a label, whether it's an entry or not is insignificant, because the address is the same.*/
+    symbol_node * current = *Head;
+    while(current!=NULL){
+	if(strcmp(label_name, current->symbol.label_name) == 0){
+	    if(current->symbol.is_external_line){
+		return -1;
+	    } else{
+		return current->symbol.address;
+	    }
+	}
+	current = current->Next;
+    }
+    return NO_SUCH_LABEL;
 }

@@ -24,4 +24,11 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
 
 int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], int IC);
 
+int writeAbsoluteValue(MemoryCell * Cell,  code_location am_file, int num_read);
+
+void writeExternAddress(MemoryCell * Cell,  code_location am_file);
+
+int writeLabelAddress(MemoryCell * Cell,  code_location am_file, int address);
+
+void writeRegisterNumber(MemoryCell * Cell,int source_num,int dest_num);
 #endif

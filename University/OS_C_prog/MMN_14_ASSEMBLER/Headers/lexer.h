@@ -1,6 +1,7 @@
 #ifndef LEXER_H
 #define LEXER_H
 #include "memory.h"
+#include "symbols.h"
 #include "exit.h"
 #include "utils.h"
 #include "globals.h"
@@ -42,11 +43,10 @@ char * getAbsoluteNum(char * instruction_definition);
 
 char * getLabelName(char * instruction_definition);
 
-typedef struct symbol_node symbol_node; /* forward include*/
+int getLabelAddress(char * label_name, symbol_node ** Head);
 
-int getLabelType(char * instruction_definition, symbol_node ** Head);
+int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head, char * extern_name, int * externOpened);
 
-int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head);
-
+char * skipOpCode(char * instruction_definition);
 
 #endif

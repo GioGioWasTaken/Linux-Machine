@@ -82,7 +82,7 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
 
     /* Set the address_src_bit */
     if(address_src_bit<0){
-	printf("No arguments op code: Leave source set to 0.\n value: %d\n",address_src_bit);
+	printf("Leave source set to 0.\n value: %d\n",address_src_bit);
     } else{
 
     if (address_src_bit < 8) {
@@ -94,7 +94,7 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     }
 
     if(address_dest_bit<0){
-	printf("no arguments op code: leave dest set to 0.\n");
+	printf("Leave dest set to 0.\n");
     } else{
 	/* Set the address_dest_bit */
 	*LSB |= (SET_BIT << address_dest_bit);
@@ -103,10 +103,6 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     /* Set the ARE bit */
     *LSB |= (SET_BIT << ARE_bit);
 
-    printf("source: %d\ndestination: %d\n", address_src_bit, address_dest_bit);
-    printBinary(*MSB);
-    printBinary(*LSB);
-    printf("\n");
     /* Return success */
     return GLOBAL_EXIT_SUCESSS;
 }
@@ -129,7 +125,6 @@ int addInstruction(int * IC,MemoryCell Instructions[], int op_code,int arg_count
 
 
 int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], int IC) {
-    printf("Checking address: %d\n", IC);
     MemoryCell currentCell = Instructions[IC];
     int address_dest_bit;
     int address_src_bit;
@@ -189,4 +184,103 @@ int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], i
     addressing_methods[1] = address_dest_bit;
 
     return 0; 
+}
+
+
+
+int writeAbsoluteValue(MemoryCell * Cell,  code_location am_file, int num_read){
+    int SET_BIT = 1;
+    int ARE = 2;
+
+    if(num_read > 2047 || num_read < -2048){
+	/* signed 12 bit number limit*/
+	return INTEGER_OVERFLOW;
+    }
+
+    char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    /* Set the ARE bit */
+    *LSB |= (SET_BIT << ARE);
+    if(num_read < 0){
+	*MSB |= (SET_BIT << 7);
+	num_read*=-1;
+    }
+    *LSB |= ((num_read & 0x1F) << 3 ); /* last five bits of the number*/
+    *MSB |= ((num_read>>5)); /* rest of the bits*/
+
+    printf("Absolutely addressed value written: ");
+    printBinary(*MSB);
+    printBinary(*LSB);
+    printf("\n");
+    return GLOBAL_EXIT_SUCESSS;
+}
+
+
+
+
+void writeExternAddress(MemoryCell * Cell,  code_location am_file){
+    int SET_BIT = 1;
+    int ARE = 0;
+
+    char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    /* Set the ARE bit */
+    *LSB |= (SET_BIT << ARE);
+
+    *LSB |= (SET_BIT << 3); /* set the address value(located right after the 3 ARE bits) to one.*/
+
+    printf("Extern value:");
+    printBinary(*MSB);
+    printBinary(*LSB);
+    printf("\n");
+}
+
+
+int writeLabelAddress(MemoryCell * Cell,  code_location am_file, int address){
+    int SET_BIT = 1;
+    int ARE = 1;
+
+    if(address > 4095 ){
+	/* signed 12 bit number limit*/
+	return INTEGER_OVERFLOW;
+    }
+
+    char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    /* Set the ARE bit */
+    *LSB |= (SET_BIT << ARE);
+
+    *LSB |= ((address & 0x1F) << 3 ); /* last five bits of the number*/
+    *MSB |= ((address>>5)); /* rest of the bits*/
+
+    printf("Relocatable address value: ");
+    printBinary(*MSB);
+    printBinary(*LSB);
+    printf("\n");
+    return GLOBAL_EXIT_SUCESSS;
+}
+
+
+
+void writeRegisterNumber(MemoryCell * Cell,int source_num,int dest_num){
+    int SET_BIT = 1;
+    int ARE = 2;
+
+    char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    /* Set the ARE bit */
+    *LSB |= (SET_BIT << ARE);
+
+    if(source_num!=-1){
+	*LSB |= (source_num<<3);
+    } if(dest_num!=-1){
+	*LSB |= ((source_num & 0b011)<<5 ) ;
+	*MSB |= ((source_num & 0b100) >> 2) ;
+    }
+
+    printf("Register num value: ");
+    printBinary(*MSB);
+    printBinary(*LSB);
+    printf("\n");
+
 }
