@@ -65,6 +65,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 		}
 	    }
 	} else{
+	    printf("PC: %d\n",PC);
 	    int parsing_status = parseRemainingInstruction(&PC, Code, instruction, am_file,Head, extern_output_name,&extern_opened);
 	    if(parsing_status==GLOBAL_EXIT_FAILURE){
 		return GLOBAL_EXIT_FAILURE;
@@ -79,6 +80,13 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
      * External : setting the address of the external temporarily to where it was called from*/ 
 
 
+    int i;
+    for(i =100 ; i<120; i++){
+	printf("%d: ",i);
+	printBinary(Code[i].SecondByte);
+	printBinary(Code[i].FirstByte);
+	printf("\n");
+    }
 
     if(panic_mode!=1){
 	createEntryOutput(Head, entry_output_name);

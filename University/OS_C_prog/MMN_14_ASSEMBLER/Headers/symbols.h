@@ -42,4 +42,5 @@ int setEntryAddress(char * directive_name, symbol_node ** Head);
 
 void deleteExternOutput(symbol_node **Head, char *output_name);
 
+void createObjectOutput();
 #endif

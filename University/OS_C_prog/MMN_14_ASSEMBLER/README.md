@@ -24,7 +24,7 @@ Leaving me with 1 week to finish the rest of the project...
 
 - Sometimes you will see me declaring a fatal error and instantly exiting the program. If a memory allocation has failed, the entire state of the program is corrupted. This should practically never happen, but the program shouldn't continue execution in that state.
 
-- .ext file won't be created if a label is referenced, but never used.
+- .ext file won't be created if a label is declared (.extern label), but never used.
 
 ## Things I would have done had I had more time:
 

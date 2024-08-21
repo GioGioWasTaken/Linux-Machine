@@ -291,29 +291,68 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
     int addressing_methods[] = {NO_OPERAND_ADDRESSING, NO_OPERAND_ADDRESSING}; 
     /* If this value is read at the end, it means that either the source or dest operand don't exist. */
     int read_status = readAddressingMethods(addressing_methods, Instructions, *PC);
-    printf("Instruction definition: '%s'\n", instruction_definition);
     cleanCommas(instruction_definition);
     printf("operands definition: '%s'\n", instruction_definition);
+    printf("source: %d, dest :%d\n", addressing_methods[0],addressing_methods[1]);
     if(addressing_methods[0] == NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	(*PC)++;
 	return LEXER_EXIT_SUCESS;
     } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	int source_addressing = addressing_methods[0];
 	/* NOTE: the state expected is "Operand".*/
-	switch (source_addressing) {
+	buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	(*PC)+=2;
+    } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]!=NO_OPERAND_ADDRESSING){
+	int source_addressing = addressing_methods[0];
+	int destination_addressing = addressing_methods[1];
+	if(source_addressing == destination_addressing && source_addressing == 2 || source_addressing == destination_addressing&& source_addressing== 3 || source_addressing + destination_addressing == 5){
+	    /* If they are both 2, both 3, or either one of them is 2 with the other being 3: */
+	    /* They will share a word, and the instruction will be two words long. (The unused space that was allocated in advance, will be set 0)*/
+	    printf("2 register operands used in one go\n");
+	    fflush(stdout);
+	    if(*instruction_definition=='*'){
+		instruction_definition++;
+	    }
+	    instruction_definition+=1;
+	    int first_register_num = (*instruction_definition) -'0';
+	    instruction_definition+=3;
+	    int second_register_num = (*instruction_definition) -'0';
+
+	    writeRegisterNumber(&Instructions[*PC+1], first_register_num, second_register_num);
+	    (*PC)+=3;
+	} else{
+	    char * Second_operand;
+	    buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	    (*PC)+=1;
+	    strtok(instruction_definition,",");
+	    Second_operand= strtok(NULL,",");
+	    buildOperand(destination_addressing, extern_name, Instructions, am_file, Head, externOpened, Second_operand, PC);
+	    (*PC)+=2;
+	}
+    }
+    return LEXER_EXIT_SUCESS;
+}
+
+int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC){
+    int num_read;
+    char * label_name;
+	switch (operand_addressing) {
 	    case ABSOLUTE_ADDRESSING:
-		int num_read = atoi(instruction_definition+1);
+		num_read = atoi(instruction_definition+1);
 		int write_status = writeAbsoluteValue(&Instructions[*PC+1], am_file, num_read); /* PC +1 Since PC points to the first word. */
 		if(write_status==INTEGER_OVERFLOW){
 		    printf("Error when using absolute addressed value\n");
 		    print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
+		return INTEGER_OVERFLOW;
 		}
 		break;
 	    case DIRECT_ADDRESSING:
-		char * label_name = instruction_definition;
+		label_name = instruction_definition;
 		int label_address = getLabelAddress(label_name, Head);
 
 		if(label_address==NO_SUCH_LABEL){
+		    printf("Error when using absolute addressed value\n");
+		    print_assemble_time_error(INVALID_ADDRESSING_METHOD ,am_file);
 		    return INVALID_ADDRESSING_METHOD;
 		} 
 
@@ -358,28 +397,7 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
 	    default:
 		return INVALID_ADDRESSING_METHOD;
 	}
-	(*PC)+=2;
-    } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]!=NO_OPERAND_ADDRESSING){
-	int source_addressing = addressing_methods[0];
-	int destination_addressing = addressing_methods[1];
-	if(source_addressing == destination_addressing && source_addressing == 2 || source_addressing == destination_addressing&& source_addressing== 3 || source_addressing + destination_addressing == 5){
-	    /* If they are both 2, both 3, or either one of them is 2 with the other being 3: */
-	    /* They will share a word, and the instruction will be two words long. (The unused space that was allocated in advance, will be set 0)*/
-	    (*PC)+=2;
-	} else{
-	    /* Control flow gurantees that if this is reached, only one of the operands is a register*/
-	    /* set the bits according to to if it's the source or destination opernad.
-	     * 3-5 if it's a destination operand, 6-8 if it's source. */
-
-	    (*PC)+=3;
-	}
-    }
-
     return LEXER_EXIT_SUCESS;
-}
-
-int buildOperand(int opernad_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head ){
-
 } 
 
 

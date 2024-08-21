@@ -49,4 +49,7 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
 
 char * skipOpCode(char * instruction_definition);
 
+
+int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC);
+
 #endif

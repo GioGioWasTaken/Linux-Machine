@@ -76,6 +76,10 @@ void print_assemble_time_error(int error_code, code_location am_file){
             printf("Error: .entry was defined but no such label was found.\n");
             fflush(stdout);
             break;
+        case INVALID_ADDRESSING_METHOD:
+            printf("Error: an unknown symbol was referenced.\n");
+            fflush(stdout);
+            break;
         default:
             printf("Error: Unknown error code.\n");
             fflush(stdout);

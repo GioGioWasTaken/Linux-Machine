@@ -130,7 +130,7 @@ int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], i
     int address_src_bit;
     char LSB = currentCell.FirstByte;  /* Least significant 8 bits */
     char MSB = currentCell.SecondByte; /* Most significant 8 bits */
-
+    printf("Read addressing methods:");
     printBinary(MSB);
     printBinary(LSB);
     printf("\n");
@@ -274,8 +274,8 @@ void writeRegisterNumber(MemoryCell * Cell,int source_num,int dest_num){
     if(source_num!=-1){
 	*LSB |= (source_num<<3);
     } if(dest_num!=-1){
-	*LSB |= ((source_num & 0b011)<<5 ) ;
-	*MSB |= ((source_num & 0b100) >> 2) ;
+	*LSB |= ((dest_num & 0b011)<<6 ) ;
+	*MSB |= ((dest_num & 0b100) >> 2) ;
     }
 
     printf("Register num value: ");

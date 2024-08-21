@@ -1,5 +1,7 @@
 #include "../Headers/symbols.h"
 
+/* The purpose of this file, is to manage all the output files.*/
+
 
 void writeEntry(FILE *entryOUT, char *entry_name, int addr) {
     /* Check if the file stream is valid*/
