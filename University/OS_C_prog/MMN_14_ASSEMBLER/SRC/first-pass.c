@@ -3,6 +3,11 @@
 
 int first_pass(char * file_name, macroNames ** StringHead){
     int exit_code, panic_mode, IC, DC;
+
+    /* If panic mode is set, an error has been encountered somewhere in the file and no output files shall be produced.*/
+    /* The assembler will do its best to report as many errors as possible before it exists. Hence, "Panic" mode.*/
+
+
     char raw_instruction[MAX_LINE_LENGTH]; /* This is the line read with no modifications*/
     char label_name[MAX_LINE_LENGTH];
     /* See my comment in the label struct definition(first_pass.h) as to why the label_name size is MAX_LINE_LENGTH and not 31. */
@@ -23,9 +28,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
     exit_code = FIRST_PASS_EXIT_SUCESSS;
 
     if(line_too_long_exists(file_name)){
-	/* If panic mode is set, an error has been encountered somewhere in the file and no output files shall be produced.*/
-	/* The assembler will do its best to report as many errors as possible before it exists. Hence, "Panic" mode.*/
+	printf("Error: A line longer than the max length of %d was detected. Will continue parsing but won't prduce output files.\n",MAX_LINE_LENGTH);
 	panic_mode = 1;
+    } else{
+	printf("proper length\n");
     }
 
     /* processed src file*/
@@ -34,10 +40,9 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	printf("am file %s doesn't exist. Can't continue. Exiting.\n",file_name);
 	return NO_SUCH_FILE;
     }
-    code_location am_file = {
-	.line_number = 1,
-	.filename=file_name,
-    };
+    code_location am_file;
+    am_file.line_number = 1;
+    am_file.filename=file_name;
 
     /* Allocate space for the symbol table*/
     symbol_node * Head = NULL;
@@ -165,16 +170,25 @@ int first_pass(char * file_name, macroNames ** StringHead){
     /* We will now start the second pass. All data was moved to one array, and the symbol table is all updated*/
 
     rewind(proc_src);
+
+
+    /* free the symbol table*/
+    freeSymbols(&Head);
+
+
     if(panic_mode!=1){
 	am_file.line_number= 0;
 	rewind(proc_src); 
-	secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
+	int second_pass_status = secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
+	if(second_pass_status!=SECOND_PASS_EXIT_SUCESS){
+	    printf("an error was encountered during the second-pass stage.\n");
+	    return SECOND_PASS_EXIT_FAIL;
+	}
     } else{
 	printf("One or more errors have been detected in this file. Exiting without producing .obj .extern or .entry files.\n ");
 	return FIRST_PASS_EXIT_FAIL;
     }
-
-    /* free the symbol table, as well as all other resources: */
+    return FIRST_PASS_EXIT_SUCESSS;
 }
 
 
@@ -332,7 +346,6 @@ void freeSymbols(symbol_node ** Head){
  * A label cannot be added twice
  * Modify this function after you have made the change of passing a linked list of all macro names as an argument to first_pass*/
 
-/* TODO: Modify this function to return proper error codes instead of a boolean value, so we can give the user meaningful feedback*/
 int isValidLabel(char * label_name, symbol_node ** Head, macroNames ** StringHead){
     if(strlen(label_name) > MAX_LABEL_LENGTH){
 	printf("Invalid Label: Label name exceeds maximum allowed length (%d)\n", MAX_LABEL_LENGTH);

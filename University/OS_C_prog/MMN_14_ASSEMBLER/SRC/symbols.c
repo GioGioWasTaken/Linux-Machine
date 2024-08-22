@@ -1,4 +1,5 @@
 #include "../Headers/symbols.h"
+#include <stdio.h>
 
 /* The purpose of this file, is to manage all the output files.*/
 
@@ -94,7 +95,27 @@ int setEntryAddress(char * directive_name, symbol_node ** Head){
 
 
 
-void deleteExternOutput(symbol_node **Head, char *output_name){
-    /* if file doesn't exist return sucesss*/
-    /* else delete it */
+void deleteExternOutput(symbol_node **Head, char *output_name) {
+    if (remove(output_name) != 0) {
+        perror("An error was encoutned during execution, but the extern file could not be deleted, even though it was produced.");
+    }
+}
+
+
+void createObjectOutput(char * object_name, MemoryCell Code[], int DC, int IC){
+    printf("Creating .ob file...\n");
+    FILE * obj_file = fopen(object_name, "w");
+    int i, value;
+    if (obj_file == NULL) {
+        perror("Error opening object file\n");
+        return;
+    }
+    /* Header of file: */
+    fprintf(obj_file, "   %d %d\n", IC-100, DC);
+    for(i=100; i<IC+DC; i++){
+        value = readWord(Code[i]);
+        printf("value: %d\n",value);
+        fprintf(obj_file, "%04d %05o\n", i, value);
+    }
+
 }

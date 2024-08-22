@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -IHeaders -Wall -Wextra -ansi -pedantic -g 
+CFLAGS = -Wall -ansi -pedantic -g 
 # Directories
 SRC_DIR = SRC
 OBJ_DIR = OBJ

@@ -5,21 +5,22 @@
 #include <string.h>
 
 int preprocessor(char * src, macroNames ** StringHead){
-
-    /* Step 0: clean whitespaces for proper parsing */
+    Macro_node_t *Head;
+    int macro_count, status_save_macros;
+    FILE *preprocessed_file, *src_file;
 
     /* Load file */
-    FILE *src_file = fopen(src, "r");
+    src_file = fopen(src, "r");
     if (!src_file) {
         fprintf(stderr, "Source file %s doesn't exist.\n", src);
         return PREPROCESSOR_EXIT_FAIL;
     }
 
-    Macro_node_t *Head = NULL;
+    Head = NULL;
 
     /* Step 1: find all macros and add them to the linked list if and only if they are all valid. */
-    int macro_count = 0;
-    int status_save_macros = Save_macros(&Head,StringHead ,&macro_count, src_file);
+    macro_count = 0;
+    status_save_macros = Save_macros(&Head,StringHead ,&macro_count, src_file);
 
     switch (status_save_macros) {
         case OPEN_ENDED_MACRO_ERROR:
@@ -44,7 +45,7 @@ int preprocessor(char * src, macroNames ** StringHead){
 
     /* Step 2 & 3: Remove all macro declarations and replace all macro calls with macro definitions */
     printf("Current Head: %p\n", Head);
-    FILE *preprocessed_file = writeMacros(&Head, &macro_count, src_file,src);
+    preprocessed_file = writeMacros(&Head, &macro_count, src_file,src);
     if (!preprocessed_file) {
         fprintf(stderr, "An error was encountered.\nFailed to create preprocessed file.\n Most likely attempted to create a label with a macro name, Or vise versa.\n");
         goto cleanup;
@@ -65,9 +66,7 @@ cleanup:
 
 int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count, FILE* src_file){
     char line[MAX_LINE_LENGTH];
-    int insideMacro = 0;
-    int currentMacroIndex = 0;
-
+    int add_macro_status;
 
     while(fgets(line,sizeof(line), src_file)){
         if (strncmp(line, "macr ", 5) == 0){
@@ -83,7 +82,7 @@ int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count,
 	    }
     
 	    /* BUG: is here, function to write to file is never called if no macro is detected*/
-	    int add_macro_status = Add_macro(Head,StringHead, macroName, src_file);
+	    add_macro_status = Add_macro(Head,StringHead, macroName, src_file);
 	    if(add_macro_status!=PREPROCESSOR_EXIT_SUCESSS){
 		return add_macro_status;
 	    }
@@ -102,6 +101,7 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
     char macr_line[MAX_LINE_LENGTH];
     Macro_node_t * newMacroNode = (Macro_node_t *) malloc(sizeof(Macro_node_t));
     macroNames * newStringNode = (macroNames *) malloc(sizeof(Macro_node_t));
+    int lines_until_end, i;
     if(newMacroNode==NULL){
 	printf("Fatal error: failed allocating macro node.\nCan't continue. Exiting.\n");
 	return GLOBAL_EXIT_FAILURE;
@@ -124,12 +124,12 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
 	return MEMORY_ALLOCATION_ERROR;
     }
     /* src_file is currently winded to the line after macr macrname */
-    int lines_until_end = 0;	
+    lines_until_end = 0;	
     while(fgets(macr_line,sizeof(macr_line), src_file)){
 	if(strncmp(macr_line, "endmacr\n", 8) == 0){
 	    break;
 	}
-	int i = newMacroNode->macro.line_count;
+	i = newMacroNode->macro.line_count;
 	if(i==newMacroNode->macro.line_capacity){
 	    /* Allocated space for 40 more lines if needed*/
 	    newMacroNode->macro.lines= realloc(newMacroNode->macro.lines, i + 40);
@@ -200,7 +200,8 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
     Macro_node_t * Current_macro = *Head;
-
+    FILE * fully_processed_file;
+    char * fileName; 
 
 
     if (!temp_file) {
@@ -212,7 +213,9 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     printf("Writing Macros: \n");
     while (fgets(line, sizeof(line), src_file)) {
         int macro_found = 0;
-
+	int j;
+	char * fileName;
+	/* BUG: fileName declared without malloc*/
 	if(Current_macro ==NULL){
 	    /* No macro was defined, so we should just write all the lines.*/
 	    fprintf(temp_file, "%s", line);
@@ -244,7 +247,6 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 	    }
 	    if (strstr(line, Current_macro->macro.name) != NULL) {
 		macro_found = 1;
-		int j;
 		for (j = 0; j < Current_macro->macro.line_count; j++) {
 		    fprintf(temp_file, "%s\n", Current_macro->macro.lines[j]);
 		}
@@ -271,7 +273,6 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     rewind(src_file);
     rewind(temp_file);
 
-    char * fileName;
 
 
     size_t len = (int)strlen(src_name);
@@ -284,7 +285,7 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 
 
 
-    FILE * fully_processed_file = fopen(fileName, "w");
+    fully_processed_file = fopen(fileName, "w");
     printf("Preprocessed file: \n");
     while (fgets(line, sizeof(line), temp_file)) {
 	printf("%s\n",line );
@@ -325,6 +326,10 @@ void freeMacros(Macro_node_t **Head){
 
 
 int isValidMacro(char * macro_name, macroNames ** StringHead){
+    if(strlen(macro_name) > MAX_MACRO_NAME){
+	printf("Invalid Label: Label name exceeds maximum allowed length (%d)\n", MAX_LABEL_LENGTH);
+	return FALSE;
+    }
     if(!isAlphaNumericString(macro_name)){
 	return FALSE;
     }

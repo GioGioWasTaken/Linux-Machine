@@ -15,32 +15,19 @@ int setMemoryCell(int * DC, MemoryCell * Cell, int value){
     /* Store the most significant 6 bits (without the sign bit )*/
     Cell->SecondByte = (value>>8) &0x3F; /* 0x3F=  00 1111 */
     if(value <0){
-	Cell->SecondByte|= 0x40; /* 0x40 = 0100 00*/
+	Cell->SecondByte|= 0x80; /* 0x80 = 1000 000*/
     }
     (*DC)++;
 
     return 1;
 }
 
-int readWord(int DC, MemoryCell Data[]) {
-    MemoryCell Cell = Data[DC];
+int readWord(MemoryCell Cell) {
     int LSB = Cell.FirstByte;          /* Least significant 8 bits */
     int MSB = Cell.SecondByte;         /* Most significant 6 bits */
 
-    /* Check if the sign bit is set */
-    int sign = (MSB & 0x40) >> 6;  /* Extract the sign bit */
-    
-    /* Remove the sign bit from MSB */
-    MSB &= 0x3F;  /* Mask out the sign bit */
-
     /* Reconstruct the 15-bit value */
     int value = (MSB << 8) | LSB;   /* Combine MSB and LSB */
-
-    /* If the sign bit is set, make the value negative */
-    if (sign) {
-        value |= 0x8000;  /* Set the sign bit in the 16-bit value */
-        value = (short)value;  /* Convert to signed 15-bit value */
-    }
 
     return value;
 }
@@ -124,7 +111,7 @@ int addInstruction(int * IC,MemoryCell Instructions[], int op_code,int arg_count
 }
 
 
-int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], int IC) {
+void readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], int IC) {
     MemoryCell currentCell = Instructions[IC];
     int address_dest_bit;
     int address_src_bit;
@@ -182,8 +169,6 @@ int readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], i
     /* Store the extracted bits in the addressing_methods array */
     addressing_methods[0] = address_src_bit;
     addressing_methods[1] = address_dest_bit;
-
-    return 0; 
 }
 
 
@@ -274,8 +259,8 @@ void writeRegisterNumber(MemoryCell * Cell,int source_num,int dest_num){
     if(source_num!=-1){
 	*LSB |= (source_num<<3);
     } if(dest_num!=-1){
-	*LSB |= ((dest_num & 0b011)<<6 ) ;
-	*MSB |= ((dest_num & 0b100) >> 2) ;
+	*LSB |= ((dest_num & 0x03) << 6);
+	*MSB |= ((dest_num & 0x04) >> 2);
     }
 
     printf("Register num value: ");

@@ -1,4 +1,3 @@
-/* TODO: add comments before function and function prototypes.*/
 #include "../Headers/second_pass.h"
 #include <stdio.h>
 #include <string.h>
@@ -7,17 +6,16 @@
 int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_location am_file, FILE * proc_src ){
     char raw_instruction[MAX_LINE_LENGTH];
     char label_name[MAX_LINE_LENGTH];
-    char * instruction;
     int PC = IC_INITIAL;
     char directive_definition[MAX_LINE_LENGTH];
-    char * directive_name;
+    char * instruction,*directive_name, *ptr , *temp;
     char file_no_extension[256];  
     char entry_output_name[260];  
     char extern_output_name[260];
     char object_output_name[260];
     int extern_opened = 0;
     int panic_mode = 0;
-
+    int Label_Definition, status, entry_status,parsing_status;
     /* Copy filename and remove the ".am" extension*/
     strncpy(file_no_extension, am_file.filename, strlen(am_file.filename) - 3); 
     file_no_extension[strlen(am_file.filename) - 3] = '\0';  
@@ -36,29 +34,29 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 	    continue;
 	}
 
-	char* ptr = raw_instruction; 
+	ptr = raw_instruction; 
 	skipWhitespace(&ptr);  /* Modify the line so it's easier to parse without errors. */
 	removeTrailingNewline(raw_instruction); /* Far easier to do parsing without the newline delimiter.*/
 
-	int Label_Definition  = (strchr(raw_instruction, ':') && sscanf(raw_instruction, "%[^:]:", label_name) == 1);
+	Label_Definition  = (strchr(raw_instruction, ':') && sscanf(raw_instruction, "%[^:]:", label_name) == 1);
 
 	if(Label_Definition) { 
 	    instruction = skip_label(&raw_instruction[0]);
 	} else{
 	    instruction = &raw_instruction[0];
 	}
-	    char * temp = strchr(instruction, '.');
+	    temp = strchr(instruction, '.');
 	    int isDirective = temp!=NULL;
 	if(isDirective){
 	    strcpy(directive_definition,temp);
-	    int status = isValidDirective(directive_definition);
+	    status = isValidDirective(directive_definition);
 	    if(status!=ENTRY_DIRECTIVE){
 		continue;
 		/* We can do an else  block here immediately because if it was of any other undefined directive type,
 		     * it would have been discovered in the first pass.*/
 	    } else{
 		printf("entry detected! Looking for its address....\n");
-		int entry_status = setEntryAddress(directive_name, Head);
+		entry_status = setEntryAddress(directive_name, Head);
 		if(entry_status== NO_SUCH_LABEL){
 		    print_assemble_time_error(NO_SUCH_LABEL, am_file);
 		    panic_mode = 1;
@@ -66,35 +64,36 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 	    }
 	} else{
 	    printf("PC: %d\n",PC);
-	    int parsing_status = parseRemainingInstruction(&PC, Code, instruction, am_file,Head, extern_output_name,&extern_opened);
-	    if(parsing_status==GLOBAL_EXIT_FAILURE){
-		return GLOBAL_EXIT_FAILURE;
+	    parsing_status = parseRemainingInstruction(&PC, Code, instruction, am_file,Head, extern_output_name,&extern_opened);
+	    if(parsing_status==LEXER_EXIT_FAIL){
+		panic_mode =1;
+		break;
 	    }
 
-	    /* while i'm completing the rest of words of the instruction, if I find that the label referenced is external, I should also at that moment mark the external label with the address it was called from. */
-	    /* We will modify the function behaviour, such that if it finds that the currently referenced label is external, the address it writes is special.*/
 	}
 	am_file.line_number++;
 	} 
     /* TODO: Create the output files
-     * External : setting the address of the external temporarily to where it was called from*/ 
+     * Object : setting the address of the external temporarily to where it was called from*/ 
 
 
-    int i;
-    for(i =100 ; i<120; i++){
-	printf("%d: ",i);
-	printBinary(Code[i].SecondByte);
-	printBinary(Code[i].FirstByte);
-	printf("\n");
-    }
 
     if(panic_mode!=1){
+	int i;
+	for(i =100 ; i<120; i++){
+	    printf("%d: ",i);
+	    printBinary(Code[i].SecondByte);
+	    printBinary(Code[i].FirstByte);
+	    printf("\n");
+	}
 	createEntryOutput(Head, entry_output_name);
+	createObjectOutput(object_output_name,Code,DC, IC);
+	return SECOND_PASS_EXIT_SUCESS;
     } else{
-	printf("An error was encountered. Deleting .ext file.\n");
 	if(extern_opened==1){
 	    deleteExternOutput(Head,extern_output_name);
 	}
+	return SECOND_PASS_EXIT_FAIL;
     }
 }
 

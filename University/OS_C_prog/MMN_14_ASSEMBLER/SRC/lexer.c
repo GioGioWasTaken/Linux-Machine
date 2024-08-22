@@ -145,7 +145,7 @@ char * removeDirectiveType(char * directive_definition,code_location am_file){
 
 int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_location am_file){
     char * Token;
-
+    int status_add;
     if (*directive_definition=='\0'){
 	/* invalid .data definition
 	* .data     (without any arguments) isn't valid.*/
@@ -159,7 +159,7 @@ int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_loc
 
     Token = strtok(directive_definition, ",");
     while(Token != NULL){
-	int status_add = addNumber(DC,Data,Token);
+	status_add = addNumber(DC,Data,Token);
 	if(status_add==INTEGER_OVERFLOW){
 	    print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
 
@@ -290,17 +290,21 @@ int isSavedLanguageWord(char * word_to_check) {
 int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head, char * extern_name, int * externOpened){
     int addressing_methods[] = {NO_OPERAND_ADDRESSING, NO_OPERAND_ADDRESSING}; 
     /* If this value is read at the end, it means that either the source or dest operand don't exist. */
-    int read_status = readAddressingMethods(addressing_methods, Instructions, *PC);
+    readAddressingMethods(addressing_methods, Instructions, *PC);
     cleanCommas(instruction_definition);
     printf("operands definition: '%s'\n", instruction_definition);
-    printf("source: %d, dest :%d\n", addressing_methods[0],addressing_methods[1]);
+    printf("source: %d, dest :%d, PC:%d\n", addressing_methods[0],addressing_methods[1], *PC);
+
     if(addressing_methods[0] == NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	(*PC)++;
 	return LEXER_EXIT_SUCESS;
     } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
 	int source_addressing = addressing_methods[0];
 	/* NOTE: the state expected is "Operand".*/
-	buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	if(status!=LEXER_EXIT_SUCESS){
+	    return LEXER_EXIT_FAIL;
+	}
 	(*PC)+=2;
     } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]!=NO_OPERAND_ADDRESSING){
 	int source_addressing = addressing_methods[0];
@@ -322,11 +326,17 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
 	    (*PC)+=3;
 	} else{
 	    char * Second_operand;
-	    buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	    int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	    if(status!=LEXER_EXIT_SUCESS){
+		return LEXER_EXIT_FAIL;
+	    }
 	    (*PC)+=1;
 	    strtok(instruction_definition,",");
 	    Second_operand= strtok(NULL,",");
-	    buildOperand(destination_addressing, extern_name, Instructions, am_file, Head, externOpened, Second_operand, PC);
+	    status = buildOperand(destination_addressing, extern_name, Instructions, am_file, Head, externOpened, Second_operand, PC);
+	    if(status!=LEXER_EXIT_SUCESS){
+		return LEXER_EXIT_FAIL;
+	    }
 	    (*PC)+=2;
 	}
     }
@@ -406,6 +416,7 @@ int getLabelAddress(char * label_name, symbol_node ** Head){
      * If it finds it's a label, whether it's an entry or not is insignificant, because the address is the same.*/
     symbol_node * current = *Head;
     while(current!=NULL){
+	printf("not null: %s",label_name);
 	if(strcmp(label_name, current->symbol.label_name) == 0){
 	    if(current->symbol.is_external_line){
 		return -1;

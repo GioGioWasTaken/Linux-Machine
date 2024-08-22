@@ -6,23 +6,14 @@
 #include "../Headers/utils.h"
 #include "../Headers/exit.h"
 
-#include <ctype.h>
-#include <stdio.h>
 
 void create_file(FILE *file) {
+    int fd;
     fflush(file);  /* Flush the file stream buffer to the file */
-    int fd = fileno(file);  /* Get the file descriptor from the FILE* pointer */
+    fd = fileno(file);  /* Get the file descriptor from the FILE* pointer */
     fsync(fd);  /* Sync the file descriptor to disk */
 }
 
-
-int isIllegalName(char * macroName) {
-    return 0;
-}
-
-int line_too_long_exists(char * file_name){
-    return 0;
-}
 
 void print_assemble_time_error(int error_code, code_location am_file){
     printf("\n\nError found in %s", am_file.filename);
@@ -110,9 +101,6 @@ void removeTrailingNewline(char *str) {
     }
 }
 
-/* This function takes a string as a parameter and returns a boolean value
- * TRUE or 1 if it's only made out of alpha numeric characters, and FALSE or 0 otherwise.*/
-
 int isAlphaNumericString(char * str) {
     char * local_str = str;
     char current_char = *local_str;
@@ -133,4 +121,31 @@ void printBinary(char byte) {
     for (i = 7; i >= 0; i--) {
         printf("%d", (byte >> i) & 1);
     }
+}
+
+
+int line_too_long_exists(char *file_name) {
+    FILE *file = fopen(file_name, "r");
+    char line[MAX_LINE_LENGTH+1];  /* Buffer size: MAX_LINE_LENGTH, defined in globals.h. +1 , in case it exceeds the length*/
+
+    if (file == NULL) {
+        perror("Error opening file");
+        return 0;  /* Assume no lines exceed the length if the file cannot be opened */
+    }
+
+
+    while (fgets(line, sizeof(line), file)) {
+        if (strlen(line) >= MAX_LINE_LENGTH ) {
+            /* If the length is bigger than MAX_LINE_LENGTH   */
+            rewind(file);
+            fclose(file);
+            return TRUE;
+        }
+    }
+
+    /* Rewind the file to the beginning */
+    rewind(file);
+
+    fclose(file);
+    return FALSE;
 }
