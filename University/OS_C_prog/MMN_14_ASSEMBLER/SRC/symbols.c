@@ -71,12 +71,11 @@ int setEntryAddress(char * directive_name, symbol_node ** Head){
             int label_found = 0;
 
             while (Current_instruction != NULL) {
-                if (is_not_instruction_label) {
+                if (is_entry_or_extern) {
                     Current_instruction = Current_instruction->Next;
                 } else if (strcmp(Current_instruction->symbol.label_name, Current->symbol.label_name) == 0) {
                     /* Found matching label*/
                     Current->symbol.address = Current_instruction->symbol.address;
-                    printf("Found matching label for entry %s. The address %d was allocated.\n", Current->symbol.label_name, Current_instruction->symbol.address);
                     label_found = 1;
                     break;
                 } else {
@@ -114,7 +113,6 @@ void createObjectOutput(char * object_name, MemoryCell Code[], int DC, int IC){
     fprintf(obj_file, "   %d %d\n", IC-100, DC);
     for(i=100; i<IC+DC; i++){
         value = readWord(Code[i]);
-        printf("value: %d\n",value);
         fprintf(obj_file, "%04d %05o\n", i, value);
     }
 

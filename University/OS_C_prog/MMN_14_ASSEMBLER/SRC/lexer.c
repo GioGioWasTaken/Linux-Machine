@@ -49,7 +49,6 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
     for (i = 0; i < 16; i++) {
         if (mnemonic && strcmp(mnemonic, OPCODES[i].mnemonic) == 0) {
             opcode = OPCODES[i].opcode;
-            printf("Opcode detected for line: %d\n", opcode);
 
             /* Restore the delimiter by finding the end of the mnemonic token*/
             char *end = mnemonic + strlen(mnemonic);
@@ -65,9 +64,11 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 
 int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file){
     char *mnemonic, *Token;
-    int opcode, arg_count, args_provided, ARE;
+    int opcode, arg_count, args_provided, ARE, first_reg_found, second_reg_found;
     int args_addressing[2] = {-100, -100};
     args_provided = 0;
+    first_reg_found = 0;
+    second_reg_found = 0;
     char * inst =  instruction_definition;
 
     /* Determine opcode*/
@@ -95,6 +96,12 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    /* Since I am using the same function for the other case as well,
 		    the function should assume the same state. I will pass the first char of the register in both Tokenances*/
 		    if(isRegister(Token+1, Registers)){
+			/* This is to make sure we don't accidently allocate 2 cells instead of 1.*/
+			if(args_provided==0){
+			    first_reg_found =1;
+			} else if(first_reg_found){
+			    second_reg_found =1;
+			}
 			args_addressing[args_provided]=INDIRECT_REGISTER_ADDRESSING;
 		    } else{
 			print_assemble_time_error(NO_SUCH_REGISTER, am_file);
@@ -103,14 +110,17 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 		    break;
 		case '#':
 		    args_addressing[args_provided]=ABSOLUTE_ADDRESSING;
-		    printf("absolute addressing\n");
 		    break;
 		default:
 		    if(isRegister(Token, Registers)){
 			args_addressing[args_provided]=DIRECT_REGISTER_ADDRESSING;
+			if(args_provided==0){
+			    first_reg_found =1;
+			} else if(first_reg_found){
+			    second_reg_found =1;
+			}
 		    } else{
 			args_addressing[args_provided]=DIRECT_ADDRESSING;
-			printf("label addressing\n");
 		    }
 		    break;
 	    }
@@ -122,7 +132,18 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 
     /* Add the instruction to memory */
     ARE = 2; /*  This method will only be used for the first word of the instruction, so it's always going to be 2*/
-    *Current_IC=addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
+    if(arg_count==1){
+	/* If there are two arguments, the first one is source and the second is dest.*/
+	/* If there is one argument, its dest.*/
+	args_addressing[1] = args_addressing[0];
+	args_addressing[0] = -100;
+    }
+    if(second_reg_found){
+	arg_count = 1;
+	*Current_IC=addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
+    } else{
+	*Current_IC=addInstruction(IC, Instructions,opcode, arg_count, args_addressing, ARE);
+    }
     return LEXER_EXIT_SUCESS;
 }
 
@@ -171,7 +192,7 @@ int addNumbers(int *DC,MemoryCell Data[], char * directive_definition , code_loc
 }
 
 int addString(int * DC,MemoryCell Data[], char * directive_definition, code_location am_file){
-    /* NOTE: I heard some other sutdents saying that a string with a " character inside it is valid,
+    /* NOTE: I heard some other students saying that a string with a " character inside it is valid,
      * but that seemed quite undefined to me so I decided to not include it in this implementation 
      * I hope that wasn't the actual thing we were supposed to do as it wasn't directly included in the instructions :0 */
     char *Token;
@@ -183,7 +204,7 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
 
     /* Extract the directive (e.g., .data) and skip it */
     Token = strtok(string_definition, " ");
-    Token = strtok(NULL, "\""); 
+    Token = strtok(NULL, "\"");  /* this depends on your text editor, because there are seemingly multiple types of opening quotes...*/
     if(Token==NULL){
 	print_assemble_time_error(UNCLOSED_STRING_ERROR, am_file);
 	return UNCLOSED_STRING_ERROR;
@@ -289,51 +310,51 @@ int isSavedLanguageWord(char * word_to_check) {
 /* NOTE: I refer to the current IC as PC here, since we are essentially going instruction by instruction now. */
 int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instruction_definition , code_location am_file, symbol_node ** Head, char * extern_name, int * externOpened){
     int addressing_methods[] = {NO_OPERAND_ADDRESSING, NO_OPERAND_ADDRESSING}; 
+    char *first_operand,*second_operand;
     /* If this value is read at the end, it means that either the source or dest operand don't exist. */
     readAddressingMethods(addressing_methods, Instructions, *PC);
     cleanCommas(instruction_definition);
-    printf("operands definition: '%s'\n", instruction_definition);
-    printf("source: %d, dest :%d, PC:%d\n", addressing_methods[0],addressing_methods[1], *PC);
-
     if(addressing_methods[0] == NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
+	/* No operands*/
 	(*PC)++;
 	return LEXER_EXIT_SUCESS;
-    } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]==NO_OPERAND_ADDRESSING){
-	int source_addressing = addressing_methods[0];
-	/* NOTE: the state expected is "Operand".*/
-	int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+    } else if(addressing_methods[1] != NO_OPERAND_ADDRESSING && addressing_methods[0]==NO_OPERAND_ADDRESSING){
+	/* One operand*/
+	int dest_addressing = addressing_methods[1];
+	int status = buildOperand(dest_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC, 1,0);
 	if(status!=LEXER_EXIT_SUCESS){
 	    return LEXER_EXIT_FAIL;
 	}
 	(*PC)+=2;
     } else if(addressing_methods[0] != NO_OPERAND_ADDRESSING && addressing_methods[1]!=NO_OPERAND_ADDRESSING){
+	/* Two operands */
 	int source_addressing = addressing_methods[0];
 	int destination_addressing = addressing_methods[1];
+
 	if(source_addressing == destination_addressing && source_addressing == 2 || source_addressing == destination_addressing&& source_addressing== 3 || source_addressing + destination_addressing == 5){
 	    /* If they are both 2, both 3, or either one of them is 2 with the other being 3: */
 	    /* They will share a word, and the instruction will be two words long. (The unused space that was allocated in advance, will be set 0)*/
-	    printf("2 register operands used in one go\n");
 	    fflush(stdout);
 	    if(*instruction_definition=='*'){
 		instruction_definition++;
 	    }
 	    instruction_definition+=1;
-	    int first_register_num = (*instruction_definition) -'0';
+	    int source_register_num = (*instruction_definition) -'0';
 	    instruction_definition+=3;
-	    int second_register_num = (*instruction_definition) -'0';
+	    int dest_register_num = (*instruction_definition) -'0';
 
-	    writeRegisterNumber(&Instructions[*PC+1], first_register_num, second_register_num);
-	    (*PC)+=3;
+	    writeRegisterNumber(&Instructions[*PC+1], source_register_num, dest_register_num);
+	    (*PC)+=2;
 	} else{
-	    char * Second_operand;
-	    int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, instruction_definition, PC);
+	    first_operand = strtok(instruction_definition, ",");
+	    second_operand = strtok(NULL, "\n");
+
+	    int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, first_operand, PC, 0, 0);
 	    if(status!=LEXER_EXIT_SUCESS){
 		return LEXER_EXIT_FAIL;
 	    }
 	    (*PC)+=1;
-	    strtok(instruction_definition,",");
-	    Second_operand= strtok(NULL,",");
-	    status = buildOperand(destination_addressing, extern_name, Instructions, am_file, Head, externOpened, Second_operand, PC);
+	    status = buildOperand(destination_addressing, extern_name, Instructions, am_file, Head, externOpened, second_operand, PC, 0, 1);
 	    if(status!=LEXER_EXIT_SUCESS){
 		return LEXER_EXIT_FAIL;
 	    }
@@ -343,7 +364,7 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
     return LEXER_EXIT_SUCESS;
 }
 
-int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC){
+int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC, int is_only_operand, int is_second_operand){
     int num_read;
     char * label_name;
 	switch (operand_addressing) {
@@ -361,7 +382,7 @@ int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instru
 		int label_address = getLabelAddress(label_name, Head);
 
 		if(label_address==NO_SUCH_LABEL){
-		    printf("Error when using absolute addressed value\n");
+		    printf("No such label \n");
 		    print_assemble_time_error(INVALID_ADDRESSING_METHOD ,am_file);
 		    return INVALID_ADDRESSING_METHOD;
 		} 
@@ -390,9 +411,10 @@ int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instru
 			fclose(extern_OUT);
 		    }
 		    writeExternAddress(&Instructions[*PC+1], am_file);
-		}
+	    } else{
 		/* Otherwise we simply write the address to memory. */
 		writeLabelAddress(&Instructions[*PC+1], am_file, label_address);
+	    }
 		break;
 	    /* NOTE: Intentional case fallthrough: Here the register is the first operand , so bits 6-8 hold the register number for both 2 & 3. */
 	    case INDIRECT_REGISTER_ADDRESSING:
@@ -402,7 +424,13 @@ int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instru
 		}
 		instruction_definition+=1;
 		int register_num = atoi(instruction_definition);
+	    if(is_only_operand || is_second_operand){
+		/* if it's the only operand, it's always the destination operand*/
+		/* If it's the second operand, it's always the destination operand*/
+		writeRegisterNumber(&Instructions[*PC+1], -1, register_num);
+	    } else{
 		writeRegisterNumber(&Instructions[*PC+1], register_num, -1);
+	    }
 		break;
 	    default:
 		return INVALID_ADDRESSING_METHOD;
@@ -416,7 +444,6 @@ int getLabelAddress(char * label_name, symbol_node ** Head){
      * If it finds it's a label, whether it's an entry or not is insignificant, because the address is the same.*/
     symbol_node * current = *Head;
     while(current!=NULL){
-	printf("not null: %s",label_name);
 	if(strcmp(label_name, current->symbol.label_name) == 0){
 	    if(current->symbol.is_external_line){
 		return -1;

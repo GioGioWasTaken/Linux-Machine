@@ -1,6 +1,7 @@
 #include "../Headers/preprocessor.h"
 #include "../Headers/globals.h"
 #include "../Headers/exit.h"
+#include <linux/limits.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -44,7 +45,6 @@ int preprocessor(char * src, macroNames ** StringHead){
     }
 
     /* Step 2 & 3: Remove all macro declarations and replace all macro calls with macro definitions */
-    printf("Current Head: %p\n", Head);
     preprocessed_file = writeMacros(&Head, &macro_count, src_file,src);
     if (!preprocessed_file) {
         fprintf(stderr, "An error was encountered.\nFailed to create preprocessed file.\n Most likely attempted to create a label with a macro name, Or vise versa.\n");
@@ -81,7 +81,6 @@ int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count,
 		return INVALID_MACRO_FORMAT_ERROR;
 	    }
     
-	    /* BUG: is here, function to write to file is never called if no macro is detected*/
 	    add_macro_status = Add_macro(Head,StringHead, macroName, src_file);
 	    if(add_macro_status!=PREPROCESSOR_EXIT_SUCESSS){
 		return add_macro_status;
@@ -210,12 +209,10 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     }
 
     /* Iterate through each line of the source file */
-    printf("Writing Macros: \n");
     while (fgets(line, sizeof(line), src_file)) {
         int macro_found = 0;
 	int j;
-	char * fileName;
-	/* BUG: fileName declared without malloc*/
+	char fileName[MAX_INPUT];
 	if(Current_macro ==NULL){
 	    /* No macro was defined, so we should just write all the lines.*/
 	    fprintf(temp_file, "%s", line);
@@ -248,7 +245,7 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 	    if (strstr(line, Current_macro->macro.name) != NULL) {
 		macro_found = 1;
 		for (j = 0; j < Current_macro->macro.line_count; j++) {
-		    fprintf(temp_file, "%s\n", Current_macro->macro.lines[j]);
+		    fprintf(temp_file, "%s", Current_macro->macro.lines[j]);
 		}
 		break;
 	    } else{
@@ -286,9 +283,7 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 
 
     fully_processed_file = fopen(fileName, "w");
-    printf("Preprocessed file: \n");
     while (fgets(line, sizeof(line), temp_file)) {
-	printf("%s\n",line );
 	fprintf(fully_processed_file, "%s", line);
     }
 

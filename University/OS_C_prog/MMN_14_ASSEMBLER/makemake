@@ -9,7 +9,7 @@ if [ $? -eq 0 ]; then
 
     make clean
     source ~/.zshrc
-    AwesomeAssembler Tests/file2
+    AwesomeAssembler Tests/file
 else
     make clean
     echo "--------------------------------------------

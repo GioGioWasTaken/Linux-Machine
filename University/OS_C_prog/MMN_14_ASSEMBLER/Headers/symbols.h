@@ -6,8 +6,7 @@
 #include "exit.h"
 #include "memory.h"
 
-#define is_not_instruction_label (Current_instruction->symbol.is_entry_line == 1 || \
-                                  Current_instruction->symbol.is_data_line == 1 || \
+#define is_entry_or_extern (Current_instruction->symbol.is_entry_line == 1 || \
                                   Current_instruction->symbol.is_external_line == 1)
 
 /* this macro is used for more orderly boolean conditions */

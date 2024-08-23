@@ -123,7 +123,7 @@ int parseRemainingInstruction(int *PC, MemoryCell Instructions[], char *instruct
  * This function processes an operand based on its addressing method and writes the corresponding 
  * value to the instruction memory. It handles different addressing methods including absolute, 
  * direct, and register addressing. The function also manages external labels and creates or 
- * appends to an external file if necessary.
+ * appends more data to an existing external file if necessary.
  *
  * @param operand_addressing The addressing method for the operand. It can be one of the following:
  *        - `ABSOLUTE_ADDRESSING`
@@ -137,9 +137,15 @@ int parseRemainingInstruction(int *PC, MemoryCell Instructions[], char *instruct
  * @param externOpened Flag indicating if an external file was already made
  * @param instruction_definition The definition of the operand to be processed.
  * @param PC Pointer to the program counter, which is updated based on the operand's length.
+ *
+ * @param is_only_operand Flag indicating if it's the only operand of the expression
+ * @param is_second_operand Flag indicating if it's the second Operand of the expression
+ *
+ * Together, these two flags let use determine how to set the first and second word in case a register is one of those words.
+ *
  * @return int Returns `LEXER_EXIT_SUCESS` upon successful processing and writing of the operand. 
  *         Returns an error code if an issue is encountered, such as `INTEGER_OVERFLOW` or `INVALID_ADDRESSING_METHOD`.
  */
-int buildOperand(int operand_addressing, char *extern_name, MemoryCell Instructions[], code_location am_file, symbol_node **Head, int *externOpened, char *instruction_definition, int *PC);
+int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC, int is_only_operand, int is_second_operand);
 
 #endif

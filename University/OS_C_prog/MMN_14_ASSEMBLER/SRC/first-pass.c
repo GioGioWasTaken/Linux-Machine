@@ -30,10 +30,7 @@ int first_pass(char * file_name, macroNames ** StringHead){
     if(line_too_long_exists(file_name)){
 	printf("Error: A line longer than the max length of %d was detected. Will continue parsing but won't prduce output files.\n",MAX_LINE_LENGTH);
 	panic_mode = 1;
-    } else{
-	printf("proper length\n");
-    }
-
+    } 
     /* processed src file*/
     FILE * proc_src = fopen(file_name, "r");
     if(proc_src==NULL){
@@ -115,7 +112,6 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	    if(isDirective){
 		/* Directives without labels */
 		strcpy(directive_definition, temp);
-		printf("this is a directive: %s\n", directive_definition);
 		int status = isValidDirective(temp);
 		if(status!=NO_SUCH_DIRECTIVE && status!=INVALID_DIRECTIVE){
 		    if(status == DATA_DIRECTIVE || status == STRING_DIRECTIVE){
@@ -149,7 +145,6 @@ int first_pass(char * file_name, macroNames ** StringHead){
 		if(parseInstruction(&Current_IC,&IC, Instructions, raw_instruction, am_file) != LEXER_EXIT_SUCESS){
 		    panic_mode= 1;
 		}
-		printf("Current IC: %d\n",IC);
 	    }
 
 	    am_file.line_number++;
@@ -160,7 +155,7 @@ int first_pass(char * file_name, macroNames ** StringHead){
     /* Now that we know the size of all instructions and the size of all data, we can safely move them to the same memory image. 
      * To do that, We will relocate all Data symbols to their current address + (IC+100) (or in my case IC)*/
 
-    if(IC+DC+1>IC_MAX-IC_INITIAL){
+    if(IC+DC>IC_MAX-IC_INITIAL){
 	return RUN_OUT_OF_MEMORY;
     }
 
@@ -172,9 +167,6 @@ int first_pass(char * file_name, macroNames ** StringHead){
     rewind(proc_src);
 
 
-    /* free the symbol table*/
-    freeSymbols(&Head);
-
 
     if(panic_mode!=1){
 	am_file.line_number= 0;
@@ -182,15 +174,18 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	int second_pass_status = secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
 	if(second_pass_status!=SECOND_PASS_EXIT_SUCESS){
 	    printf("an error was encountered during the second-pass stage.\n");
+	    /* free the symbol table*/
+	    freeSymbols(&Head);
 	    return SECOND_PASS_EXIT_FAIL;
 	}
     } else{
 	printf("One or more errors have been detected in this file. Exiting without producing .obj .extern or .entry files.\n ");
+	/* free the symbol table*/
+	freeSymbols(&Head);
 	return FIRST_PASS_EXIT_FAIL;
     }
     return FIRST_PASS_EXIT_SUCESSS;
 }
-
 
 
 int isValidDirective(char * str){
@@ -222,7 +217,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	newNode->symbol.label_name = (char *)malloc(strlen(label_name) * sizeof(char) +1);
 	strcpy(newNode->symbol.label_name, label_name);
 	if(labelExists(label_name,directive_type,Head)){
-	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    printf("%s Is an invalid label. %s with type %d was already defined. \nInvalid Label: Duplicate labels are not allowed.\n", label_name, label_name, directive_type);
 	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
 	    return FIRST_PASS_EXIT_FAIL;
 	} 
@@ -232,7 +227,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	strcpy(newNode->symbol.label_name,extern_entry_name );
 
 	if(labelExists(newNode->symbol.label_name,directive_type,Head)){
-	    printf("Invalid Label: Duplicate labels are not allowed.\n");
+	    printf("Invalid entry or external Label: Duplicate labels are not allowed.\n");
 	    print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
 	    return FIRST_PASS_EXIT_FAIL;
 	} 
@@ -255,10 +250,7 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 
 	if(add_numbers_status!=LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
-	} else{
-	    printf("DC's current value : %d\n",*DC);
-	}
-
+	} 
     } else if(directive_type==STRING_DIRECTIVE){
 	newNode->symbol.is_data_line =1;
 	newNode->symbol.address=*DC;
@@ -314,7 +306,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 int isComment(char * instruction){
     skipWhitespace(&instruction);
     if(*instruction==';'){
-	printf("Comment detected\n");
 	fflush(stdout);
 	return TRUE;
     }
@@ -372,12 +363,9 @@ int allocateDirective(int directive_type , int * DC, code_location am_file, char
     if(directive_type==DATA_DIRECTIVE){
 	cleanCommas(directive_definition);
 	int add_numbers_status = addNumbers(DC, Data,directive_definition,am_file);
-	(*DC)++; /* addNumbers will move DC to the last element, we are now pointing it to one memory address after the last allocated element.*/
 	if(add_numbers_status!=LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
 	    print_assemble_time_error(INTEGER_OVERFLOW, am_file);
-	} else{
-	    printf("DC's current value : %d\n",*DC);
 	}
     } else if(directive_type==STRING_DIRECTIVE){
 	addString(DC, Data,directive_definition,am_file);
@@ -396,8 +384,7 @@ void updateDataSymbols(symbol_node ** Head, int IC){
     symbol_node *current  = *Head;
     while(current!=NULL){
 	if(current->symbol.is_data_line==1){
-	    current->symbol.address+=IC+1;
-	    printf("Updated %s to address %d\n", current->symbol.label_name,current->symbol.address);
+	    current->symbol.address+=IC;
 	}
 	current=current->Next;
     }
@@ -408,7 +395,7 @@ void updateDataSymbols(symbol_node ** Head, int IC){
 void mergeMemoryImages(MemoryCell Data[], MemoryCell Instructions[], int IC, int DC) {
     int i;
     for (i = 0; i < DC; i++) {
-	Instructions[IC + i + 1] = Data[i];  /* Adjusted indexing to start from IC*/
+	Instructions[IC + i] = Data[i];  /* Adjusted indexing to start from IC*/
     }
 }
 
@@ -419,12 +406,12 @@ int labelExists(char * label_query,int query_directive_type, symbol_node ** HEAD
 	fflush(stdout);
 	if(strcmp(current->symbol.label_name,label_query) == 0){
 	    /* NOTE: An entry line decleration and a label that points to an instruction is the only two symbol combination that allows and even forces use of the same label name.*/
-	    if(current->symbol.is_entry_line==0 && query_directive_type==ENTRY_DIRECTIVE){
-		/* The current symbol is an instruction that an entry was already defined for*/
+	    if(current->symbol.is_entry_line==0 && current->symbol.is_external_line==0 && query_directive_type==ENTRY_DIRECTIVE){
+		/* The symbol attempted to be added is an entry for an already defined label, that isn't an entry or an external*/
 		current= current->Next;
 		continue;
-	    }  else if(current->symbol.is_entry_line==1 && query_directive_type==NO_DIRECTIVE){
-		/* Current is entry, an instruction label was already defined.*/
+	    }  else if(current->symbol.is_entry_line==1 && query_directive_type!=ENTRY_DIRECTIVE && query_directive_type!=EXTERNAL_DIRECTIVE){
+		/* The symbol attempted to be added is a label for which an entry was already defined . */
 		current= current->Next;
 		continue;
 	    }
@@ -439,20 +426,20 @@ int labelExists(char * label_query,int query_directive_type, symbol_node ** HEAD
 char *skip_label(char * str) {
     /* Skip leading spaces*/
     skipWhitespace(&str);
-    
+
     /* Skip until the colon*/
     while (*str != ':' && *str != '\0') {
-        str++;
+	str++;
     }
-    
+
     /* If the colon was found, move past it*/
     if (*str == ':') {
-        str++;
+	str++;
     }
-    
+
     /* Skip any spaces after the colon*/
     skipWhitespace(&str);
-    
+
     /* Return pointer to the first character of content*/
     return str;
 }

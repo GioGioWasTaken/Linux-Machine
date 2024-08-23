@@ -15,7 +15,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
     char object_output_name[260];
     int extern_opened = 0;
     int panic_mode = 0;
-    int Label_Definition, status, entry_status,parsing_status;
+    int Label_Definition, status, entry_status,parsing_status, i;
     /* Copy filename and remove the ".am" extension*/
     strncpy(file_no_extension, am_file.filename, strlen(am_file.filename) - 3); 
     file_no_extension[strlen(am_file.filename) - 3] = '\0';  
@@ -55,7 +55,6 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 		/* We can do an else  block here immediately because if it was of any other undefined directive type,
 		     * it would have been discovered in the first pass.*/
 	    } else{
-		printf("entry detected! Looking for its address....\n");
 		entry_status = setEntryAddress(directive_name, Head);
 		if(entry_status== NO_SUCH_LABEL){
 		    print_assemble_time_error(NO_SUCH_LABEL, am_file);
@@ -63,7 +62,6 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 		}
 	    }
 	} else{
-	    printf("PC: %d\n",PC);
 	    parsing_status = parseRemainingInstruction(&PC, Code, instruction, am_file,Head, extern_output_name,&extern_opened);
 	    if(parsing_status==LEXER_EXIT_FAIL){
 		panic_mode =1;
@@ -79,13 +77,6 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 
 
     if(panic_mode!=1){
-	int i;
-	for(i =100 ; i<120; i++){
-	    printf("%d: ",i);
-	    printBinary(Code[i].SecondByte);
-	    printBinary(Code[i].FirstByte);
-	    printf("\n");
-	}
 	createEntryOutput(Head, entry_output_name);
 	createObjectOutput(object_output_name,Code,DC, IC);
 	return SECOND_PASS_EXIT_SUCESS;

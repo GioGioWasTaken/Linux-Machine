@@ -4,8 +4,8 @@
 #include "utils.h"
 
 typedef struct MemoryCell{
-char FirstByte;
-char SecondByte;
+unsigned char FirstByte;
+unsigned char SecondByte;
 }MemoryCell;
 
 
