@@ -1,3 +1,8 @@
+# NOTE (VERY IMPORTANT!!!!!!!): 
+
+- When compiled, the file shows a few "implicit function declerations" warnings. THOSE HEADERS WERE INCLUDED. Both inside, and outside my own header files. This warning won't go away no matter what I try.
+
+
 # Why did I not have enough time?
 
 I do understand and accept completely that this won't make my point penality any lower, but I still wanted to explain myself: 
@@ -15,7 +20,7 @@ I do understand and accept completely that this won't make my point penality any
 
 Leaving me with 1 week to finish the rest of the project...
 
-
+Still, it was fun to make, so I decided to name it AwesomeAssembler (see make file).
 
 
 

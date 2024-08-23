@@ -1,8 +1,5 @@
 #include "../Headers/second_pass.h"
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
+int snprintf(char *str, size_t size, const char *format, ...);
 int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_location am_file, FILE * proc_src ){
     char raw_instruction[MAX_LINE_LENGTH];
     char label_name[MAX_LINE_LENGTH];
@@ -15,7 +12,8 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
     char object_output_name[260];
     int extern_opened = 0;
     int panic_mode = 0;
-    int Label_Definition, status, entry_status,parsing_status, i;
+    int Label_Definition, status, entry_status,parsing_status;
+    directive_name = NULL;
     /* Copy filename and remove the ".am" extension*/
     strncpy(file_no_extension, am_file.filename, strlen(am_file.filename) - 3); 
     file_no_extension[strlen(am_file.filename) - 3] = '\0';  
@@ -26,6 +24,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
     snprintf(object_output_name, sizeof(object_output_name), "%s.ob", file_no_extension);
 
     while(fgets(raw_instruction, sizeof(raw_instruction), proc_src) !=NULL){
+	int isDirective;
 	if(strcmp(raw_instruction, "\n") ==0){
 	    /* \n lines are allowed and are ignored*/
 	    continue;
@@ -45,8 +44,8 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 	} else{
 	    instruction = &raw_instruction[0];
 	}
-	    temp = strchr(instruction, '.');
-	    int isDirective = temp!=NULL;
+	temp = strchr(instruction, '.');
+	isDirective = temp!=NULL;
 	if(isDirective){
 	    strcpy(directive_definition,temp);
 	    status = isValidDirective(directive_definition);
@@ -70,7 +69,7 @@ int secondPass(MemoryCell Code[], int IC, int DC, symbol_node ** Head, code_loca
 
 	}
 	am_file.line_number++;
-	} 
+    } 
     /* TODO: Create the output files
      * Object : setting the address of the external temporarily to where it was called from*/ 
 

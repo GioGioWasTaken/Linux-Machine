@@ -1,14 +1,14 @@
+#include <stdio.h>
 #include "../Headers/memory.h"
 #include "../Headers/exit.h"
 #include "../Headers/utils.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 
 
 int setMemoryCell(int *DC, MemoryCell *Cell, int value) {
     if (value < -16384 || value > 16383) {
-        return INTEGER_OVERFLOW;
+	return INTEGER_OVERFLOW;
     }
 
     /* Store the least significant 8 bits in FirstByte */
@@ -19,7 +19,7 @@ int setMemoryCell(int *DC, MemoryCell *Cell, int value) {
 
     /* If the value is negative, set the sign bit in SecondByte */
     if (value < 0) {
-        Cell->SecondByte |= 0x80; /* 0x80 = 1000 0000 */
+	Cell->SecondByte |= 0x80; /* 0x80 = 1000 0000 */
     }
 
     (*DC)++;
@@ -59,9 +59,9 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     int address_src_bit = 7 + address_src;
     int address_dest_bit = 3 + address_dest;
     int ARE_bit = ARE;
-
-    unsigned char * LSB = &(Cell->FirstByte);          /* Least significant 8 bits */
-    unsigned char * MSB = &(Cell->SecondByte);         /* Most significant 8 bits (7 bits are used) */
+    unsigned char * LSB, *MSB;
+    LSB = &(Cell->FirstByte);          /* Least significant 8 bits */
+    MSB = &(Cell->SecondByte);         /* Most significant 8 bits (7 bits are used) */
 
     /* Clear the LSB and MSB to avoid unwanted set bits */
     *LSB = 0;
@@ -74,11 +74,11 @@ int setInstructionBits( MemoryCell * Cell, int opcode, int address_src, int addr
     if(address_src_bit<0){
     } else{
 
-    if (address_src_bit < 8) {
-        *LSB |= (SET_BIT << address_src_bit);
-    } else {
-        *MSB |= (SET_BIT << (address_src_bit - 8));
-    }
+	if (address_src_bit < 8) {
+	    *LSB |= (SET_BIT << address_src_bit);
+	} else {
+	    *MSB |= (SET_BIT << (address_src_bit - 8));
+	}
 
     }
 
@@ -129,7 +129,7 @@ void readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], 
 	    address_dest_bit = DIRECT_REGISTER_ADDRESSING;
 	    break;
 	case 4: 
-	/* 0000 0100, etc... */ 
+	    /* 0000 0100, etc... */ 
 	    address_dest_bit = INDIRECT_REGISTER_ADDRESSING;
 	    break;
 	case 2:
@@ -140,7 +140,7 @@ void readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], 
 	    break;
 	case 0:
 	    address_dest_bit = NO_OPERAND_ADDRESSING;
-	}
+    }
     /* Extract address_src_bits from bits 7-10 in MSB */
     if(LSB>>7 & 0xFF){
 	/* adressing method 0  of the source bit is kept in the LSB*/
@@ -172,18 +172,18 @@ void readAddressingMethods(int addressing_methods[], MemoryCell Instructions[], 
 int writeAbsoluteValue(MemoryCell *Cell, code_location am_file, int num_read) {
     int SET_BIT = 1;
     int ARE = 2;
-
+    unsigned char *LSB, *MSB;
     if (num_read > 2047 || num_read < -2048) {
-        /* signed 12 bit number limit */
-        return INTEGER_OVERFLOW;
+	/* signed 12 bit number limit */
+	return INTEGER_OVERFLOW;
     }
 
-    unsigned char *LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
-    unsigned char *MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    MSB = &(Cell->SecondByte); /* Most significant 8 bits */
 
     /* If the number is negative, convert it to two's complement */
     if (num_read < 0) {
-        num_read = (num_read & 0xFFF);  /* Mask to ensure it's within 12 bits */
+	num_read = (num_read & 0xFFF);  /* Mask to ensure it's within 12 bits */
     }
 
     /* Set the ARE bit */
@@ -194,7 +194,7 @@ int writeAbsoluteValue(MemoryCell *Cell, code_location am_file, int num_read) {
     *MSB |= ((num_read >> 5) & 0x7F);  /* Store the remaining 7 bits in MSB */
 
     /* If the number is negative, the sign bit will be automatically handled by the two's complement representation */
-    
+
 
     return GLOBAL_EXIT_SUCESSS;
 }
@@ -207,7 +207,6 @@ void writeExternAddress(MemoryCell * Cell,  code_location am_file){
     int ARE = 0;
 
     unsigned char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
-    unsigned char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
     /* Set the ARE bit */
     *LSB |= (SET_BIT << ARE);
 
@@ -217,14 +216,14 @@ void writeExternAddress(MemoryCell * Cell,  code_location am_file){
 int writeLabelAddress(MemoryCell * Cell,  code_location am_file, int address){
     int SET_BIT = 1;
     int ARE = 1;
-
+    unsigned char * LSB, *MSB;
     if(address > 4095 ){
 	/* signed 12 bit number limit*/
 	return INTEGER_OVERFLOW;
     }
 
-    unsigned char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
-    unsigned char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    MSB = &(Cell->SecondByte); /* Most significant 8 bits */
     /* Set the ARE bit */
     *LSB |= (SET_BIT << ARE);
 
@@ -239,9 +238,10 @@ int writeLabelAddress(MemoryCell * Cell,  code_location am_file, int address){
 void writeRegisterNumber(MemoryCell * Cell,int source_num,int dest_num){
     int SET_BIT = 1;
     int ARE = 2;
+    unsigned char * LSB, *MSB;
 
-    unsigned char * LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
-    unsigned char * MSB = &(Cell->SecondByte); /* Most significant 8 bits */
+    LSB = &(Cell->FirstByte);  /* Least significant 8 bits */
+    MSB = &(Cell->SecondByte); /* Most significant 8 bits */
     /* Set the ARE bit */
     *LSB |= (SET_BIT << ARE);
 

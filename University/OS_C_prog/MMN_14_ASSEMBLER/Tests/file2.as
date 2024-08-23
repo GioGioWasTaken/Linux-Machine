@@ -1,4 +1,5 @@
 macr printA
+
 prn #65
 endmacr
 

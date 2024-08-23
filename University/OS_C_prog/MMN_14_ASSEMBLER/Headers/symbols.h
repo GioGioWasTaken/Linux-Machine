@@ -24,13 +24,13 @@ typedef struct label_t {
 } label_t;
 
 
-/* Forward declaration of Macro_node */
+/* Forward declaration of Symbol_node */
 typedef struct symbol_node symbol_node;
 
-typedef struct symbol_node {
+struct symbol_node {
     label_t symbol;
     symbol_node * Next;
-}symbol_node;
+};
 
 
 /**

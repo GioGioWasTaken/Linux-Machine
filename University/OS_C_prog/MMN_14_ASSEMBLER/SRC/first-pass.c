@@ -1,21 +1,26 @@
-#include "../Headers/first_pass.h"
 #include <stdio.h>
+#include "../Headers/first_pass.h"
 
 int first_pass(char * file_name, macroNames ** StringHead){
     int exit_code, panic_mode, IC, DC;
 
     /* If panic mode is set, an error has been encountered somewhere in the file and no output files shall be produced.*/
     /* The assembler will do its best to report as many errors as possible before it exists. Hence, "Panic" mode.*/
-
-
+    int Label_Definition;
     char raw_instruction[MAX_LINE_LENGTH]; /* This is the line read with no modifications*/
     char label_name[MAX_LINE_LENGTH];
     /* See my comment in the label struct definition(first_pass.h) as to why the label_name size is MAX_LINE_LENGTH and not 31. */
     char directive_definition[MAX_LINE_LENGTH]; /* This is the definition of the directive, without the label*/
-
-    char * temp,*instruction_definition; /* This is an instruction definition, without the label*/
+    FILE * proc_src;
+    char * temp,*instruction_definition, *ptr; /* This is an instruction definition, without the label*/
     MemoryCell Data[4096];
     MemoryCell Instructions[4096];
+    code_location am_file;
+    /* Allocate space for the symbol table*/
+    symbol_node * Head = NULL;
+
+
+
     memset(&Data, 0, sizeof(MemoryCell)* 4096);
     memset(&Instructions, 0, sizeof(MemoryCell)* 4096);
 
@@ -32,17 +37,14 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	panic_mode = 1;
     } 
     /* processed src file*/
-    FILE * proc_src = fopen(file_name, "r");
+    proc_src = fopen(file_name, "r");
     if(proc_src==NULL){
 	printf("am file %s doesn't exist. Can't continue. Exiting.\n",file_name);
 	return NO_SUCH_FILE;
     }
-    code_location am_file;
     am_file.line_number = 1;
     am_file.filename=file_name;
 
-    /* Allocate space for the symbol table*/
-    symbol_node * Head = NULL;
 
     while(fgets(raw_instruction, sizeof(raw_instruction), proc_src) !=NULL && IC+DC+1<=IC_MAX-IC_INITIAL){
 	/* + 1 because if IC is 100, since we use 0-based-indexing, it actually has allocated space for 100 words.*/
@@ -53,17 +55,17 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	if(isComment(raw_instruction)){
 	    continue;
 	}
-
-	char* ptr = raw_instruction; 
+	ptr = raw_instruction; 
 	skipWhitespace(&ptr);  /* Modify the line so it's easier to parse without errors. */
 	removeTrailingNewline(raw_instruction); /* Far easier to do parsing without the newline delimiter.*/
 	/* An implication of this is that when a label is preceeded by whitespaces it'll still be a valid label and those won't count as part of its definition
 	 * which seems valid to me*/
 
-	int Label_Definition  = (strchr(raw_instruction, ':') && sscanf(raw_instruction, "%[^:]:", label_name) == 1);
+	Label_Definition  = (strchr(raw_instruction, ':') && sscanf(raw_instruction, "%[^:]:", label_name) == 1);
 
 	if(Label_Definition) { 
 	    int isValidLabelStatus = isValidLabel(label_name, &Head,StringHead);
+	    int isDirective;
 	    if(!isValidLabelStatus){
 		/* If the label is invalid, we skip it altogether and don't bother adding it to the table. */
 		print_assemble_time_error(INVALID_LABEL_ERROR, am_file);
@@ -71,11 +73,12 @@ int first_pass(char * file_name, macroNames ** StringHead){
 		panic_mode = 1;
 	    } else{
 		temp = strchr(raw_instruction, '.');
-		int isDirective = temp!=NULL;
+		isDirective = temp!=NULL;
 		if(isDirective){
+		    int status;
 		    /* Directives with labels */
 		    strcpy(directive_definition,temp);
-		    int status = isValidDirective(directive_definition);
+		    status = isValidDirective(directive_definition);
 		    if(status!=NO_SUCH_DIRECTIVE && status!=INVALID_DIRECTIVE){
 
 			int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, directive_definition,&exit_code,Data, Instructions, label_name);
@@ -95,10 +98,11 @@ int first_pass(char * file_name, macroNames ** StringHead){
 			/* Code should no longer assemble*/
 		    }
 		} else{
+		    int allocate_symbol_status;
 		    /* Instructions with labels*/
 		    int status = NO_DIRECTIVE;
 		    instruction_definition = skip_label(&raw_instruction[0]);
-		    int allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, instruction_definition,&exit_code,Data, Instructions, label_name);
+		    allocate_symbol_status = allocateSymbol(status, &Head,&IC,&DC, am_file, instruction_definition,&exit_code,Data, Instructions, label_name);
 		    if(allocate_symbol_status == FIRST_PASS_EXIT_FAIL || exit_code == FIRST_PASS_EXIT_FAIL){
 			panic_mode = 1;
 		    }
@@ -110,9 +114,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 	    char * temp = strchr(raw_instruction, '.');
 	    int isDirective = temp!=NULL;
 	    if(isDirective){
+		int status;
 		/* Directives without labels */
 		strcpy(directive_definition, temp);
-		int status = isValidDirective(temp);
+		status = isValidDirective(temp);
 		if(status!=NO_SUCH_DIRECTIVE && status!=INVALID_DIRECTIVE){
 		    if(status == DATA_DIRECTIVE || status == STRING_DIRECTIVE){
 			int allocate_directive_status = allocateDirective(status , &DC, am_file,directive_definition, &exit_code, Data);
@@ -139,9 +144,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 		    panic_mode = 1;
 		}
 	    } else {
+		int Current_IC;
 		/* Instructions without labels*/
 		fflush(stdout);
-		int Current_IC = IC;
+		Current_IC = IC;
 		if(parseInstruction(&Current_IC,&IC, Instructions, raw_instruction, am_file) != LEXER_EXIT_SUCESS){
 		    panic_mode= 1;
 		}
@@ -169,9 +175,10 @@ int first_pass(char * file_name, macroNames ** StringHead){
 
 
     if(panic_mode!=1){
+	int second_pass_status;
 	am_file.line_number= 0;
 	rewind(proc_src); 
-	int second_pass_status = secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
+	second_pass_status = secondPass(Instructions, IC, DC, &Head, am_file, proc_src);
 	if(second_pass_status!=SECOND_PASS_EXIT_SUCESS){
 	    printf("an error was encountered during the second-pass stage.\n");
 	    /* free the symbol table*/
@@ -189,8 +196,8 @@ int first_pass(char * file_name, macroNames ** StringHead){
 
 
 int isValidDirective(char * str){
-    skipWhitespace(&str);
     int directive_type = NO_SUCH_DIRECTIVE;
+    skipWhitespace(&str);
     if(strncmp(str, ".data",5) ==0){
 	directive_type = DATA_DIRECTIVE;
     } else if(strncmp(str, ".string",7)==0){
@@ -241,11 +248,11 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	}
 	newNode->symbol.address=Current_IC;
     } else if(directive_type==DATA_DIRECTIVE){
-
+	int add_numbers_status;
 	newNode->symbol.is_data_line =1;
 	cleanCommas(instruction_definition);
 	newNode->symbol.address=*DC;
-	int add_numbers_status = addNumbers(DC, Data,instruction_definition,am_file);
+	add_numbers_status = addNumbers(DC, Data,instruction_definition,am_file);
 	(*DC)++; /* addNumbers will move DC to the last element, we are now pointing it to one memory address after the last allocated element.*/
 
 	if(add_numbers_status!=LEXER_EXIT_SUCESS){
@@ -361,8 +368,9 @@ int isValidLabel(char * label_name, symbol_node ** Head, macroNames ** StringHea
 /* This function allocates a directive without adding it to the symbol table */
 int allocateDirective(int directive_type , int * DC, code_location am_file, char* directive_definition, int * exit_fail, MemoryCell Data[] ){
     if(directive_type==DATA_DIRECTIVE){
+	int add_numbers_status;
 	cleanCommas(directive_definition);
-	int add_numbers_status = addNumbers(DC, Data,directive_definition,am_file);
+	add_numbers_status = addNumbers(DC, Data,directive_definition,am_file);
 	if(add_numbers_status!=LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
 	    print_assemble_time_error(INTEGER_OVERFLOW, am_file);

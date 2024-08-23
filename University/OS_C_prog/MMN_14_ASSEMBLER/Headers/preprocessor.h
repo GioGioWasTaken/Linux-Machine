@@ -1,12 +1,14 @@
 #ifndef PREPROCESSOR_H
 #define PREPROCESSOR_H
+#include <stdio.h>
+
+
 #include "utils.h"
 #include "lexer.h"
 #include "globals.h"
 #include "exit.h"
 
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdlib.h>
@@ -31,10 +33,10 @@ typedef struct {
 typedef struct Macro_node Macro_node_t;
 
 /* We want it to be dynamic, so again a linked list suffices nicely.*/
-typedef struct Macro_node {
+struct Macro_node {
     Macro macro;
     Macro_node_t *Next;
-} Macro_node_t;
+};
 
 
 /**

@@ -35,7 +35,7 @@ void createEntryOutput(symbol_node **Head, char *entry_name) {
     while (current != NULL) {
         if (current->symbol.is_entry_line == 1) {
             if (!file_created) {
-		printf("Creating .ent file...\n");
+                printf("Creating .ent file...\n");
                 /* Create the entry output file only once */
                 entryOUT = fopen(entry_name, "w");
                 if (entryOUT == NULL) {
@@ -53,7 +53,6 @@ void createEntryOutput(symbol_node **Head, char *entry_name) {
 
     /* Close the file if it was created */
     if (file_created) {
-	create_file(entryOUT);
         fclose(entryOUT);
     }
 }
@@ -102,9 +101,9 @@ void deleteExternOutput(symbol_node **Head, char *output_name) {
 
 
 void createObjectOutput(char * object_name, MemoryCell Code[], int DC, int IC){
-    printf("Creating .ob file...\n");
     FILE * obj_file = fopen(object_name, "w");
     int i, value;
+    printf("Creating .ob file...\n");
     if (obj_file == NULL) {
         perror("Error opening object file\n");
         return;

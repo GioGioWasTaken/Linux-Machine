@@ -4,15 +4,8 @@
  * and only serve my comfort and your ease of reading through my code. */
 
 #include "../Headers/utils.h"
+#include <unistd.h>
 #include "../Headers/exit.h"
-
-
-void create_file(FILE *file) {
-    int fd;
-    fflush(file);  /* Flush the file stream buffer to the file */
-    fd = fileno(file);  /* Get the file descriptor from the FILE* pointer */
-    fsync(fd);  /* Sync the file descriptor to disk */
-}
 
 
 void print_assemble_time_error(int error_code, code_location am_file){
@@ -82,8 +75,8 @@ void print_assembler_warning(int error_code, code_location am_file){
     printf("Warning in file %s ", am_file.filename);
     printf("in line %d: ", am_file.line_number);
     switch (error_code) {
-    case UNDEFINED_LABEL_WARNING:
-	    printf("assigning a label to .extern or .entry is meaningless and the assembler ignores this.\n");
+        case UNDEFINED_LABEL_WARNING:
+            printf("assigning a label to .extern or .entry is meaningless and the assembler ignores this.\n");
     };
 }
 
@@ -104,7 +97,7 @@ void removeTrailingNewline(char *str) {
 int isAlphaNumericString(char * str) {
     char * local_str = str;
     char current_char = *local_str;
-    
+
     while (current_char != '\0') {
         if (!isalnum((unsigned char) current_char)) {
             return FALSE;  /* Return FALSE if any character is not alphanumeric*/

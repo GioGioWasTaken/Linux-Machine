@@ -2,9 +2,8 @@
 #include "../Headers/globals.h"
 #include "../Headers/exit.h"
 #include <linux/limits.h>
-#include <stdio.h>
 #include <string.h>
-
+int snprintf(char *str, size_t size, const char *format, ...);
 int preprocessor(char * src, macroNames ** StringHead){
     Macro_node_t *Head;
     int macro_count, status_save_macros;
@@ -13,8 +12,8 @@ int preprocessor(char * src, macroNames ** StringHead){
     /* Load file */
     src_file = fopen(src, "r");
     if (!src_file) {
-        fprintf(stderr, "Source file %s doesn't exist.\n", src);
-        return PREPROCESSOR_EXIT_FAIL;
+	fprintf(stderr, "Source file %s doesn't exist.\n", src);
+	return PREPROCESSOR_EXIT_FAIL;
     }
 
     Head = NULL;
@@ -24,39 +23,37 @@ int preprocessor(char * src, macroNames ** StringHead){
     status_save_macros = Save_macros(&Head,StringHead ,&macro_count, src_file);
 
     switch (status_save_macros) {
-        case OPEN_ENDED_MACRO_ERROR:
-            printf("Error: Open-ended macro detected.\n");
-            goto cleanup;
-        case INVALID_MACRO_ERROR:
-            printf("Error: Invalid macro.\n");
-            goto cleanup;
-        case INVALID_MACRO_FORMAT_ERROR:
-            printf("Error: Invalid macro format.\n");
+	case OPEN_ENDED_MACRO_ERROR:
+	    printf("Error: Open-ended macro detected.\n");
 	    goto cleanup;
-        case DUPLICATE_MACRO_ERROR:
+	case INVALID_MACRO_ERROR:
+	    printf("Error: Invalid macro.\n");
+	    goto cleanup;
+	case INVALID_MACRO_FORMAT_ERROR:
+	    printf("Error: Invalid macro format.\n");
+	    goto cleanup;
+	case DUPLICATE_MACRO_ERROR:
 	    printf("Error: Duplicate macro.\n"); 
 	    goto cleanup;
-        case MEMORY_ALLOCATION_ERROR:
-            printf("Error: Memory allocation failure.\n");
+	case MEMORY_ALLOCATION_ERROR:
+	    printf("Error: Memory allocation failure.\n");
 	    goto cleanup;
-        default:
-            /* No errors, continue processing */
-            break;
+	default:
+	    /* No errors, continue processing */
+	    break;
     }
 
     /* Step 2 & 3: Remove all macro declarations and replace all macro calls with macro definitions */
     preprocessed_file = writeMacros(&Head, &macro_count, src_file,src);
     if (!preprocessed_file) {
-        fprintf(stderr, "An error was encountered.\nFailed to create preprocessed file.\n Most likely attempted to create a label with a macro name, Or vise versa.\n");
-        goto cleanup;
+	fprintf(stderr, "An error was encountered.\nFailed to create preprocessed file.\n Most likely attempted to create a label with a macro name, Or vise versa.\n");
+	goto cleanup;
     }
-    create_file(preprocessed_file);
-
 cleanup:
     freeMacros(&Head);
     fclose(src_file);
     if (preprocessed_file) {
-        fclose(preprocessed_file);
+	fclose(preprocessed_file);
 	return status_save_macros;
     } else{
 	return PREPROCESSOR_EXIT_FAIL;
@@ -66,21 +63,22 @@ cleanup:
 
 int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count, FILE* src_file){
     char line[MAX_LINE_LENGTH];
+    char * line_ptr = line;
     int add_macro_status;
-
     while(fgets(line,sizeof(line), src_file)){
-        if (strncmp(line, "macr ", 5) == 0){
+	skipWhitespace(&line_ptr);
+	if (strncmp(line, "macr ", 5) == 0){
 	    char macroName[MAX_MACRO_NAME];
 
 	    if(sscanf(line, "macr %s", macroName) == 1){
 		if(!isValidMacro(macroName, StringHead)){
 		    return INVALID_MACRO_ERROR;
 		} 
-	} else {
+	    } else {
 		/* Handle case where macro name is not provided*/
 		return INVALID_MACRO_FORMAT_ERROR;
 	    }
-    
+
 	    add_macro_status = Add_macro(Head,StringHead, macroName, src_file);
 	    if(add_macro_status!=PREPROCESSOR_EXIT_SUCESSS){
 		return add_macro_status;
@@ -200,40 +198,39 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
     Macro_node_t * Current_macro = *Head;
     FILE * fully_processed_file;
-    char * fileName; 
-
+    char fileName[MAX_INPUT];
+    size_t len;
 
     if (!temp_file) {
-        fprintf(stderr, "Could not create temporary file for preprocessing.\n");
-        return NULL;
+	fprintf(stderr, "Could not create temporary file for preprocessing.\n");
+	return NULL;
     }
 
     /* Iterate through each line of the source file */
     while (fgets(line, sizeof(line), src_file)) {
-        int macro_found = 0;
+	int macro_found = 0;
 	int j;
-	char fileName[MAX_INPUT];
 	if(Current_macro ==NULL){
 	    /* No macro was defined, so we should just write all the lines.*/
 	    fprintf(temp_file, "%s", line);
 	}
 
-        /* Check if the line contains the start of a macro definition */
-        if (strncmp(line, "macr ", 5) == 0) {
-            insideMacro = 1;
+	/* Check if the line contains the start of a macro definition */
+	if (strncmp(line, "macr ", 5) == 0) {
+	    insideMacro = 1;
 	    continue;
-        }
+	}
 
-        /* Check if the line contains the end of a macro definition */
-        if (insideMacro && strncmp(line, "endmacr", 7) == 0) {
-            insideMacro = 0;
-            continue; /* Skip this line as well */
-        }
+	/* Check if the line contains the end of a macro definition */
+	if (insideMacro && strncmp(line, "endmacr", 7) == 0) {
+	    insideMacro = 0;
+	    continue; /* Skip this line as well */
+	}
 
-        /* If inside a macro definition, skip the line */
-        if (insideMacro) {
-            continue;
-        }
+	/* If inside a macro definition, skip the line */
+	if (insideMacro) {
+	    continue;
+	}
 
 	/* Check if the line contains a macro call and replace it */
 	while(Current_macro!=NULL){
@@ -272,7 +269,7 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 
 
 
-    size_t len = (int)strlen(src_name);
+    len = (int)strlen(src_name);
 
     strncpy(fileName, src_name, len-3);
     fileName[len-3] = '\0';  

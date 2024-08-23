@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -8,7 +9,6 @@
 #include <string.h>
 #include "globals.h"
 #include <ctype.h>
-#include <stdio.h>
 
 
 typedef struct code_location{
@@ -16,16 +16,6 @@ char * filename;
 int line_number;
 } code_location;
 
-
-/**
- * @brief Flushes and synchronizes a file stream to disk.
- *
- * This function ensures that the content of a file stream is written to the file and fully synchronized to disk. 
- * It first flushes the file stream buffer to the file and then syncs the file descriptor to ensure all changes are physically written to disk.
- *
- * @param file A pointer to the `FILE` structure representing the file to be flushed and synced.
- */
-void create_file(FILE *file);
 
 /**
  * @brief Prints an assembly time error message based on the given error code and code location.

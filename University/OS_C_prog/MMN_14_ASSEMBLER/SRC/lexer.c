@@ -1,6 +1,6 @@
+#include <stdio.h>
 #include "../Headers/lexer.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 /* NOTE:  Might be broken if the addsymbols function doesn't expect the instruction to be without the label make sure lalter*/
 
@@ -47,15 +47,16 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 
     /* Iterate through OPCODES to find a match */
     for (i = 0; i < 16; i++) {
-        if (mnemonic && strcmp(mnemonic, OPCODES[i].mnemonic) == 0) {
-            opcode = OPCODES[i].opcode;
+	if (mnemonic && strcmp(mnemonic, OPCODES[i].mnemonic) == 0) {
+	    char *end;
+	    opcode = OPCODES[i].opcode;
 
-            /* Restore the delimiter by finding the end of the mnemonic token*/
-            char *end = mnemonic + strlen(mnemonic);
-            *end = ' ';  /* Set the last character to the delimiter, so the state is preserved*/
+	    /* Restore the delimiter by finding the end of the mnemonic token*/
+	    end = mnemonic + strlen(mnemonic);
+	    *end = ' ';  /* Set the last character to the delimiter, so the state is preserved*/
 
-            return opcode;  /* Return the opcode for the matched mnemonic */
-        }
+	    return opcode;  /* Return the opcode for the matched mnemonic */
+	}
     }
 
     printf("Faulty Opcode mnemonic detected: '%s'\n", mnemonic);
@@ -63,13 +64,13 @@ int determine_opcode(char *str, const instruction_t OPCODES[]) {
 }
 
 int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * instruction_definition , code_location am_file){
-    char *mnemonic, *Token;
+    char *Token, *inst;
     int opcode, arg_count, args_provided, ARE, first_reg_found, second_reg_found;
     int args_addressing[2] = {-100, -100};
     args_provided = 0;
     first_reg_found = 0;
     second_reg_found = 0;
-    char * inst =  instruction_definition;
+    inst=instruction_definition;
 
     /* Determine opcode*/
     opcode = determine_opcode(inst, OPCODES);
@@ -128,7 +129,7 @@ int parseInstruction(int *Current_IC,int *IC,MemoryCell Instructions[], char * i
 	    Token = strtok(NULL, ",");
 	}
     } 
-    
+
 
     /* Add the instruction to memory */
     ARE = 2; /*  This method will only be used for the first word of the instruction, so it's always going to be 2*/
@@ -213,7 +214,7 @@ int addString(int * DC,MemoryCell Data[], char * directive_definition, code_loca
     i = 0;
     /* We also want to pass the null byte into the function. So we'll use <= */
     while(i<=strlen(Token)){
-	int status_add = addChar(DC,Data,Token[i]);
+	addChar(DC,Data,Token[i]);
 	i++;
     }
     return LEXER_EXIT_SUCESS;
@@ -331,25 +332,28 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
 	int source_addressing = addressing_methods[0];
 	int destination_addressing = addressing_methods[1];
 
-	if(source_addressing == destination_addressing && source_addressing == 2 || source_addressing == destination_addressing&& source_addressing== 3 || source_addressing + destination_addressing == 5){
+	if (((source_addressing == destination_addressing) && (source_addressing == 2)) ||
+	    ((source_addressing == destination_addressing) && (source_addressing == 3)) ||
+	    (source_addressing + destination_addressing == 5)) {
 	    /* If they are both 2, both 3, or either one of them is 2 with the other being 3: */
 	    /* They will share a word, and the instruction will be two words long. (The unused space that was allocated in advance, will be set 0)*/
-	    fflush(stdout);
+	    int source_register_num, dest_register_num;
 	    if(*instruction_definition=='*'){
 		instruction_definition++;
 	    }
 	    instruction_definition+=1;
-	    int source_register_num = (*instruction_definition) -'0';
+	    source_register_num = (*instruction_definition) -'0';
 	    instruction_definition+=3;
-	    int dest_register_num = (*instruction_definition) -'0';
+	    dest_register_num = (*instruction_definition) -'0';
 
 	    writeRegisterNumber(&Instructions[*PC+1], source_register_num, dest_register_num);
 	    (*PC)+=2;
 	} else{
+	    int status;
 	    first_operand = strtok(instruction_definition, ",");
 	    second_operand = strtok(NULL, "\n");
 
-	    int status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, first_operand, PC, 0, 0);
+	    status = buildOperand(source_addressing, extern_name, Instructions, am_file, Head, externOpened, first_operand, PC, 0, 0);
 	    if(status!=LEXER_EXIT_SUCESS){
 		return LEXER_EXIT_FAIL;
 	    }
@@ -367,63 +371,65 @@ int parseRemainingInstruction(int * PC,  MemoryCell Instructions[], char * instr
 int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instructions[], code_location am_file, symbol_node ** Head, int * externOpened, char * instruction_definition, int * PC, int is_only_operand, int is_second_operand){
     int num_read;
     char * label_name;
-	switch (operand_addressing) {
-	    case ABSOLUTE_ADDRESSING:
-		num_read = atoi(instruction_definition+1);
-		int write_status = writeAbsoluteValue(&Instructions[*PC+1], am_file, num_read); /* PC +1 Since PC points to the first word. */
-		if(write_status==INTEGER_OVERFLOW){
-		    printf("Error when using absolute addressed value\n");
-		    print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
+    int write_status, label_address, register_num;
+    switch (operand_addressing) {
+	case ABSOLUTE_ADDRESSING:
+	    num_read = atoi(instruction_definition+1);
+	    write_status = writeAbsoluteValue(&Instructions[*PC+1], am_file, num_read); /* PC +1 Since PC points to the first word. */
+	    if(write_status==INTEGER_OVERFLOW){
+		printf("Error when using absolute addressed value\n");
+		print_assemble_time_error(INTEGER_OVERFLOW ,am_file);
 		return INTEGER_OVERFLOW;
-		}
-		break;
-	    case DIRECT_ADDRESSING:
-		label_name = instruction_definition;
-		int label_address = getLabelAddress(label_name, Head);
+	    }
+	    break;
+	case DIRECT_ADDRESSING:
+	    label_name = instruction_definition;
+	    label_address = getLabelAddress(label_name, Head);
 
-		if(label_address==NO_SUCH_LABEL){
-		    printf("No such label \n");
-		    print_assemble_time_error(INVALID_ADDRESSING_METHOD ,am_file);
-		    return INVALID_ADDRESSING_METHOD;
-		} 
+	    if(label_address==NO_SUCH_LABEL){
+		printf("No such label \n");
+		print_assemble_time_error(INVALID_ADDRESSING_METHOD ,am_file);
+		return INVALID_ADDRESSING_METHOD;
+	    } 
 
-		if(label_address==-1){
-		    /* Extern label*/
-		    if(*externOpened==0){
-			/* File was not made yet*/
-			printf("Creating .ext file...\n");
-			FILE * extern_OUT = fopen(extern_name, "w");
-			if (extern_OUT == NULL) {
-			    perror("Fatal Error: Error creating .ext file\n");
-			    return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
-			}
-			writeExtern(extern_OUT, label_name, *PC);
-			*externOpened=1;
-			fclose(extern_OUT);
-		    } else if (*externOpened ==1){
-			/* File was made, so append to it.*/
-			FILE * extern_OUT = fopen(extern_name, "a");
-			if (extern_OUT == NULL) {
-			    perror("Fatal Error: .ext file cannot be found.\n");
-			    return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
-			}
-			writeExtern(extern_OUT, label_name, *PC);
-			fclose(extern_OUT);
+	    if(label_address==-1){
+		/* Extern label*/
+		if(*externOpened==0){
+		    FILE * extern_OUT;
+		    /* File was not made yet*/
+		    printf("Creating .ext file...\n");
+		    extern_OUT = fopen(extern_name, "w");
+		    if (extern_OUT == NULL) {
+			perror("Fatal Error: Error creating .ext file\n");
+			return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
 		    }
-		    writeExternAddress(&Instructions[*PC+1], am_file);
+		    writeExtern(extern_OUT, label_name, *PC);
+		    *externOpened=1;
+		    fclose(extern_OUT);
+		} else if (*externOpened ==1){
+		    /* File was made, so append to it.*/
+		    FILE * extern_OUT = fopen(extern_name, "a");
+		    if (extern_OUT == NULL) {
+			perror("Fatal Error: .ext file cannot be found.\n");
+			return GLOBAL_EXIT_FAILURE; /* or handle the error as needed */
+		    }
+		    writeExtern(extern_OUT, label_name, *PC);
+		    fclose(extern_OUT);
+		}
+		writeExternAddress(&Instructions[*PC+1], am_file);
 	    } else{
 		/* Otherwise we simply write the address to memory. */
 		writeLabelAddress(&Instructions[*PC+1], am_file, label_address);
 	    }
-		break;
-	    /* NOTE: Intentional case fallthrough: Here the register is the first operand , so bits 6-8 hold the register number for both 2 & 3. */
-	    case INDIRECT_REGISTER_ADDRESSING:
-	    case DIRECT_REGISTER_ADDRESSING:
-		if(*instruction_definition=='*'){
-		    instruction_definition++;
-		}
-		instruction_definition+=1;
-		int register_num = atoi(instruction_definition);
+	    break;
+	/* NOTE: Intentional case fallthrough: Here the register is the first operand , so bits 6-8 hold the register number for both 2 & 3. */
+	case INDIRECT_REGISTER_ADDRESSING:
+	case DIRECT_REGISTER_ADDRESSING:
+	    if(*instruction_definition=='*'){
+		instruction_definition++;
+	    }
+	    instruction_definition+=1;
+	    register_num = atoi(instruction_definition);
 	    if(is_only_operand || is_second_operand){
 		/* if it's the only operand, it's always the destination operand*/
 		/* If it's the second operand, it's always the destination operand*/
@@ -431,10 +437,10 @@ int buildOperand(int operand_addressing , char * extern_name,  MemoryCell Instru
 	    } else{
 		writeRegisterNumber(&Instructions[*PC+1], register_num, -1);
 	    }
-		break;
-	    default:
-		return INVALID_ADDRESSING_METHOD;
-	}
+	    break;
+	default:
+	    return INVALID_ADDRESSING_METHOD;
+    }
     return LEXER_EXIT_SUCESS;
 } 
 
