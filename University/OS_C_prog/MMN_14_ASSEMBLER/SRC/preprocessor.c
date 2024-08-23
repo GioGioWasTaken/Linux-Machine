@@ -67,10 +67,10 @@ int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count,
     int add_macro_status;
     while(fgets(line,sizeof(line), src_file)){
 	skipWhitespace(&line_ptr);
-	if (strncmp(line, "macr ", 5) == 0){
+	if (strncmp(line_ptr, "macr ", 5) == 0){
 	    char macroName[MAX_MACRO_NAME];
 
-	    if(sscanf(line, "macr %s", macroName) == 1){
+	    if(sscanf(line_ptr, "macr %s", macroName) == 1){
 		if(!isValidMacro(macroName, StringHead)){
 		    return INVALID_MACRO_ERROR;
 		} 
@@ -96,6 +96,7 @@ int Save_macros(Macro_node_t **Head,  macroNames **StringHead,int * Macro_count,
 
 int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FILE* src_file){
     char macr_line[MAX_LINE_LENGTH];
+    char * macr_line_ptr;
     Macro_node_t * newMacroNode = (Macro_node_t *) malloc(sizeof(Macro_node_t));
     macroNames * newStringNode = (macroNames *) malloc(sizeof(Macro_node_t));
     int lines_until_end, i;
@@ -123,7 +124,10 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
     /* src_file is currently winded to the line after macr macrname */
     lines_until_end = 0;	
     while(fgets(macr_line,sizeof(macr_line), src_file)){
-	if(strncmp(macr_line, "endmacr\n", 8) == 0){
+	macr_line_ptr = macr_line;
+	skipWhitespace(&macr_line_ptr);
+
+	if(strncmp(macr_line_ptr, "endmacr\n", 8) == 0){
 	    break;
 	}
 	i = newMacroNode->macro.line_count;
@@ -139,12 +143,12 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
 	    printf("Fatal error: failed allocating value for macro node.\nCan't continue. Exiting.\n");
 	    return GLOBAL_EXIT_FAILURE;
 	}
-	strcpy(newMacroNode->macro.lines[i], macr_line);
+	strcpy(newMacroNode->macro.lines[i], macr_line_ptr);
 	newMacroNode->macro.line_count++;
 	lines_until_end++;
     }
-    if(strcmp("endmacr\n",macr_line) != 0){
-	printf("expected endmacr but got '%s' instead.\n",macr_line);
+    if(strcmp("endmacr\n",macr_line_ptr) != 0){
+	printf("expected endmacr but got '%s' instead.\n",macr_line_ptr);
 	return OPEN_ENDED_MACRO_ERROR;
     }
 
@@ -194,6 +198,7 @@ int Add_macro(Macro_node_t **Head,macroNames **StringHead,  char * macr_name, FI
 
 FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* src_name) {
     char line[MAX_LINE_LENGTH];
+    char * line_ptr;
     int insideMacro = 0;
     FILE *temp_file = tmpfile(); /* Temporary file to store preprocessed content */
     Macro_node_t * Current_macro = *Head;
@@ -210,29 +215,32 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
     while (fgets(line, sizeof(line), src_file)) {
 	int macro_found = 0;
 	int j;
+	line_ptr = line;
+	skipWhitespace(&line_ptr);
+
 	if(Current_macro ==NULL){
-	    /* No macro was defined, so we should just write all the lines.*/
-	    fprintf(temp_file, "%s", line);
+	    /* No macro was defined, so we should just write all the line_ptrs.*/
+	    fprintf(temp_file, "%s", line_ptr);
 	}
 
-	/* Check if the line contains the start of a macro definition */
-	if (strncmp(line, "macr ", 5) == 0) {
+	/* Check if the line_ptr contains the start of a macro definition */
+	if (strncmp(line_ptr, "macr ", 5) == 0) {
 	    insideMacro = 1;
 	    continue;
 	}
 
-	/* Check if the line contains the end of a macro definition */
-	if (insideMacro && strncmp(line, "endmacr", 7) == 0) {
+	/* Check if the line_ptr contains the end of a macro definition */
+	if (insideMacro && strncmp(line_ptr, "endmacr", 7) == 0) {
 	    insideMacro = 0;
-	    continue; /* Skip this line as well */
+	    continue; /* Skip this line_ptr as well */
 	}
 
-	/* If inside a macro definition, skip the line */
+	/* If inside a macro definition, skip the line_ptr */
 	if (insideMacro) {
 	    continue;
 	}
 
-	/* Check if the line contains a macro call and replace it */
+	/* Check if the line_ptr contains a macro call and replace it */
 	while(Current_macro!=NULL){
 	    char MistakenLabelAsMacro[MAX_MACRO_NAME+1];
 	    snprintf(MistakenLabelAsMacro, sizeof(MistakenLabelAsMacro), "%s:", Current_macro->macro.name);
@@ -256,9 +264,9 @@ FILE * writeMacros(Macro_node_t **Head, int *Macro_count, FILE* src_file, char* 
 	Current_macro = *Head;
 	/* Reset current_macro to point to Head. */
 
-	/* If no macro call was found, and we are not inside a macro definition (but there exists some macro) write the original line to the temp file */
+	/* If no macro call was found, and we are not inside a macro definition (but there exists some macro) write the original line_ptr to the temp file */
 	if (!macro_found && Current_macro!=NULL) {
-	    fprintf(temp_file, "%s", line);
+	    fprintf(temp_file, "%s", line_ptr);
 	}
     }
 

@@ -253,7 +253,6 @@ int allocateSymbol(int directive_type, symbol_node ** Head ,int * IC, int * DC, 
 	cleanCommas(instruction_definition);
 	newNode->symbol.address=*DC;
 	add_numbers_status = addNumbers(DC, Data,instruction_definition,am_file);
-	(*DC)++; /* addNumbers will move DC to the last element, we are now pointing it to one memory address after the last allocated element.*/
 
 	if(add_numbers_status!=LEXER_EXIT_SUCESS){
 	    *exit_fail = FIRST_PASS_EXIT_FAIL;
