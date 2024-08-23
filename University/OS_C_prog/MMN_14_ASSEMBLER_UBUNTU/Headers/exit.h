@@ -1,0 +1,92 @@
+#ifndef EXIT_H
+#define EXIT_H
+
+/* Exit codes for different parts of the assembler*/
+
+#define GLOBAL_EXIT_SUCESSS 1
+
+#define GLOBAL_EXIT_FAILURE 0
+
+#define FALSE 0;
+
+#define TRUE 1;
+
+
+#define PREPROCESSOR_EXIT_SUCESSS 1
+
+#define FIRST_PASS_EXIT_SUCESSS 1
+
+#define PREPROCESSOR_EXIT_FAIL -1
+
+#define FIRST_PASS_EXIT_FAIL -1
+
+#define LEXER_EXIT_SUCESS 1
+
+#define LEXER_EXIT_FAIL -1
+
+#define SECOND_PASS_EXIT_SUCESS 1
+
+#define SECOND_PASS_EXIT_FAIL -1
+
+/* Errors: */
+
+#define INVALID_MACRO_ERROR -2
+
+#define INVALID_MACRO_FORMAT_ERROR -3
+
+#define DUPLICATE_MACRO_ERROR -4
+
+#define NO_SUCH_FILE -5
+
+#define MEMORY_ALLOCATION_ERROR -6
+
+#define LINE_TOO_LONG_ERROR -7
+
+#define OPEN_ENDED_MACRO_ERROR -8
+
+#define NO_SUCH_DIRECTIVE -9
+
+
+
+#define INVALID_DIRECTIVE_DEFINITION_NO_ARGS -11
+
+#define INVALID_DIRECTIVE_DEFINITION_NO_SPACE -12
+
+#define INVALID_DIRECTIVE_SAVED_WORD -13
+
+#define INVALID_DIRECTIVE -14
+
+#define UNCLOSED_STRING_ERROR -15
+
+
+#define INTEGER_OVERFLOW -16
+
+#define INVALID_LABEL_ERROR -17
+
+#define NO_SUCH_OPCODE -18
+
+#define TOO_MANY_ARGUMENTS -19
+
+#define NO_SUCH_REGISTER -20
+
+#define RUN_OUT_OF_MEMORY -21
+
+#define NO_SUCH_LABEL -22
+
+#define INVALID_ADDRESSING_METHOD -23
+
+/* Addressing methods */
+#define NO_OPERAND_ADDRESSING -1
+
+#define ABSOLUTE_ADDRESSING 0
+
+#define DIRECT_ADDRESSING 1
+
+#define INDIRECT_REGISTER_ADDRESSING 2
+
+#define DIRECT_REGISTER_ADDRESSING 3
+
+/* Warnings: */
+#define UNDEFINED_LABEL_WARNING -100
+
+#endif

@@ -1,0 +1,7 @@
+.entry hi
+hi: prn #40
+inc r6
+lea r6, r7
+mov r1, r2
+mov *r0, fn1
+.extern fn1
