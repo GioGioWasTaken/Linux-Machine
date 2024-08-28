@@ -21,8 +21,8 @@ parts that encode different types of information.
 	- Effective address = 1 ∗ (12 ∗ n) + base
 	- Base is the starting address
 	- We can observe the same thing, in C, when dereferencing a pointer. E.g.
-		```C
-	int num[4]= {1,2,3,4}) ;
-	num[1] -> *(num+1*elementsize)
+	```C
+int num[4]= {1,2,3,4}) ;
+num[1] -> *(num+1*elementsize)
 	```
 - ![[Pasted image 20240627180329.png]]

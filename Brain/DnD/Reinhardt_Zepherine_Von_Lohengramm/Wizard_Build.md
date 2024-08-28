@@ -29,10 +29,6 @@
 
 as one DM on reddit put it : "It does whatever wizardy thing you can do to, to make you appear wizardy, within reason."
 
-### Point to discuss:
-
-A variation on my initial request of the feat. This time it'll be something like  Discuss details in call.
-
 
 ## Note 2
 
@@ -63,7 +59,7 @@ Let's say that my character got rich by selling weapons to one political faction
 - and (within reason) proficiency in 1 language of my choice.
 
 ## Equipment:
-
+wiz
 - Money: 10 GP , 7 Silver
 - A Navy coloured suit with golden straps. It shines gloriously as it basks in the sun, as if Jove himself wills my overwhelming rein over the heavens
 - A golden pocket watch

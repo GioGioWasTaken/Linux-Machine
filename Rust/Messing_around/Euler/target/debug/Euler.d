@@ -1,0 +1,1 @@
+/home/Ningen/Desktop/Linux-Machine/Rust/Messing_around/Euler/target/debug/Euler: /home/Ningen/Desktop/Linux-Machine/Rust/Messing_around/Euler/src/euler_1.rs /home/Ningen/Desktop/Linux-Machine/Rust/Messing_around/Euler/src/main.rs

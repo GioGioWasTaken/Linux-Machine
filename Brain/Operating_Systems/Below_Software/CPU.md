@@ -12,7 +12,7 @@
 
 -  The CPU is the only direct device a programmer can use and the only device that can understand code written by a programmer.
 
-- In a CPU, many OS concepts are already implemented directly in hard- ware, e.g. task switching, paging. A kernel programmer needs to know how to use the hardware features, to avoid duplicating such concepts in software, thus wasting computer resources.
+- In a CPU, many OS concepts are already implemented directly in hardware, e.g. task switching, paging. A kernel programmer needs to know how to use the hardware features, to avoid duplicating such concepts in software, thus wasting computer resources.
 
 - To effectively use the CPU, a programmer needs to understand the documentation provided from CPU manufacturer. For example, `Intel® 64 and IA-32 Architectures Software Developer Manuals`.
 

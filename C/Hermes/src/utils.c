@@ -28,7 +28,6 @@ void ReadFlags(int argc, char **argv){
 		switch (opt) {
 			case 'n':
 				mark_number = atoi(optarg);
-				printf("atoi: %d\n", mark_number);
 
 
 				if (optind < argc && argv[optind][0] != '-') {

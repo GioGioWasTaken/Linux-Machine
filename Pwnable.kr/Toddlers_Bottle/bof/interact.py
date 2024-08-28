@@ -1,7 +1,6 @@
 # /usr/bin/python3
 import sys
 import pexpect
-import time
 if sys.argv[1] == "mock":
     target = "./bof"
 if sys.argv[1] == "target":
