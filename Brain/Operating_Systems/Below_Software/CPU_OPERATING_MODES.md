@@ -17,10 +17,12 @@ hex((0x2000 << 4) + 0x0010)
 '0x20010' 
 ```
 *NOTE*: shifting 4 bits to the left (<<) is akin to multipling by 16, since we are shifting in base 2.
+
+
 **Use Case**: BIOS initialization, DOS-based systems, and early boot stages of modern operating systems. Some kernel code is written in `real` mode, before the kernel moves to protected mode.
 
 ### System Management Mode:
-- The most privilged mode. Its memory is protected even from the OS. Its job is to stuff almost exclusively on hardware. E.g. Power management. 
+- The most privilged mode. Its memory is protected even from the OS. Its job is to do stuff almost exclusively on hardware. E.g. Power management. 
 
 ### Protected mode
 *NOTE* : `virtual-8086` mode isn't actually a mode. It's an attribute that can be enabled from within protected mode. It allows running `Real Mode` inside `protected mode`, for backwards comptability with older programs.

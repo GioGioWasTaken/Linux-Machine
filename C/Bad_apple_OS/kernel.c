@@ -1,55 +1,30 @@
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#include "Headers/kernel.h"
 
 /* Check if the compiler thinks you are targeting the wrong operating system.
  * These lines of code will trigger a compile time warning if the compiler mistakes the target system.*/
 #if defined(__linux__)
-#error "You are not using a cross-compiler, you will most certainly run into trouble"
+#error "You are not using a cross-compiler, you will most certainly run into trouble!"
 #endif
 
 /* This tutorial will only work for the 32-bit ix86 targets. */
 #if !defined(__i386__)
-#error "This tutorial needs to be compiled with a ix86-elf compiler"
+#error "The target architecutre is ix86-elf"
 #endif
 
 /* Hardware text mode color constants. */
-enum vga_color {
-	VGA_COLOR_BLACK = 0,
-	VGA_COLOR_BLUE = 1,
-	VGA_COLOR_GREEN = 2,
-	VGA_COLOR_CYAN = 3,
-	VGA_COLOR_RED = 4,
-	VGA_COLOR_MAGENTA = 5,
-	VGA_COLOR_BROWN = 6,
-	VGA_COLOR_LIGHT_GREY = 7,
-	VGA_COLOR_DARK_GREY = 8,
-	VGA_COLOR_LIGHT_BLUE = 9,
-	VGA_COLOR_LIGHT_GREEN = 10,
-	VGA_COLOR_LIGHT_CYAN = 11,
-	VGA_COLOR_LIGHT_RED = 12,
-	VGA_COLOR_LIGHT_MAGENTA = 13,
-	VGA_COLOR_LIGHT_BROWN = 14,
-	VGA_COLOR_WHITE = 15,
-};
 
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) 
+static inline uint8_t vga_entry_color(vga_color fg, vga_color bg) 
 {
 	return fg | bg << 4;
 }
 
 static inline uint16_t vga_entry(unsigned char uc, uint8_t color) 
 {
+	/* uc: the character to write
+	* color: the color byte as defined by VGA video mode 3*/
 	return (uint16_t) uc | (uint16_t) color << 8;
 }
 
-size_t strlen(const char* str) 
-{
-	size_t len = 0;
-	while (str[len])
-		len++;
-	return len;
-}
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -87,7 +62,13 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 void terminal_putchar(char c) 
 {
 	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-	if (++terminal_column == VGA_WIDTH) {
+	if(c=='\n'){
+		terminal_column=0;
+		if(++terminal_row == VGA_HEIGHT){
+			terminal_row = 0;
+		}
+	}
+	else if (++terminal_column == VGA_WIDTH) {
 		terminal_column = 0;
 		if (++terminal_row == VGA_HEIGHT)
 			terminal_row = 0;
@@ -112,4 +93,5 @@ void kernel_main(void)
 
 	/* Newline support is left as an exercise. */
 	terminal_writestring("Hello, kernel World!\n");
+	terminal_writestring("Open the steins;gate.\n");
 }
