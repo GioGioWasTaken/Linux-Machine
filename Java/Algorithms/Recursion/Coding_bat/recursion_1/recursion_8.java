@@ -6,7 +6,8 @@ public class recursion_8 {
       else
         return 0;
     else {
-      if (count8((n / 10) % 10) == 1 && count8(n % 10) == 1) {
+      int next_call = n / 10;
+      if (count8((next_call) % 10) == 1 && count8(n % 10) == 1) {
         return count8(n % 10) + count8(n / 10) + 1;
       } else {
         return count8(n % 10) + count8(n / 10);
