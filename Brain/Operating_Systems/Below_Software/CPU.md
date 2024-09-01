@@ -20,4 +20,3 @@
 - The CPU has different operating modes. Read more [here](CPU_OPERATING_MODES.md)
 ### Reference to:
  - [[BINARY_DECODERS]]
- 

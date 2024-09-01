@@ -1,13 +1,4 @@
 public class recursion_5 {
-  public static void main(String[] args) {
-    int[] arr1 = { 2, 2 };
-    int[] arr2 = { -5, 0, 0, -2, -3 };
-    int[] arr3 = { -2, -7 };
-    System.out.println(splitArray(arr1));
-    System.out.println(splitArray(arr2));
-    System.out.println(splitArrry(arr3));
-  }
-
   public static boolean splitArray(int[] nums) {
     int sum = getSum(0, nums);
     if (sum % 2 != 0) {

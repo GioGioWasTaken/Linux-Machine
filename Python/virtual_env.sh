@@ -1,2 +1,2 @@
 #!/bin/bash
-source virtual_python/bin/activate
+source ~/Desktop/virtual_python/bin/activate
