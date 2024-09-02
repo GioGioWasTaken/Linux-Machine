@@ -9,6 +9,7 @@ public class Q1 {
       return isJump(str1.substring(step), str2.substring(1), step);
 
     return false;
+  }
     public static int strStep(String str1, String str2) {
       return strStep(str1, str2, 1);
     }
