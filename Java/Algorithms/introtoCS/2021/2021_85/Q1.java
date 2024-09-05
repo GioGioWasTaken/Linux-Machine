@@ -20,6 +20,15 @@ public class Q1 {
     }
     int option1 = mat[row][col]+ minPrice(mat, row + 1, col + 1);
     int option2 = minPrice(mat, row, col + 1);
+    if(option1 == 0){
+      option1 = Integer.MAX_VALUE;
+    }
+
+
+    if(option2 == 0){
+      option2 = Integer.MAX_VALUE;
+    }
+
     return Math.min(option1, option2); 
   }
 
