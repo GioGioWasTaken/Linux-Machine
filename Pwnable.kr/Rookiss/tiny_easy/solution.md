@@ -1,5 +1,4 @@
-Consturct an env varible such that, the value we get, when treated the hex
-value of this env variable as a pointer, is the address of code we want to call.
+Consturct an env varible such that, the value we get, when treating the hex value of this env variable as a pointer, is the address of code we want to call.
 
 Maybe a possible approach would be to store shellcode at an env var such that 
 that shellcode is put into EAX

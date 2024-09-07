@@ -50,13 +50,17 @@ Naturally, assembly instructions using the smaller registers only need to specif
 Using the AL, BL, CL, or DL register will put the correct least significant
 byte into the corresponding extended register without creating any null bytes in the machine code. This makes them ideal for shellcode writing.
 # C Code as it is seen in assembly
-- Function arguments follow the following rule:
-    `RDI`: First argument
-    `RSI`: Second argument
-    `RDX`: Third argument
-    `RCX`: Fourth argument
-    `R8`: Fifth argument
-    `R9`: Sixth argument
+- X86_64 parameter call convention is as follows: 
+
+| Register | Argument|
+|----------|----------|
+| 1. `RDI`    | First argument|
+| 2. `RSI`    | Second argument|
+| 3. `RDX`    | Third argument |
+| 4. `RCX`    | Fourth argument|
+| 5. `R8`     | Fifth argument |
+| 6. `R9`     | Sixth argument |
+
 - GDB has an option to deobscuify CPP function names. Use it.
 
 - Since function arguments are also passed on the stack, there needs to be space for any that this function wants to pass to another.  So while a function might only need x amount of bytes for local variables, $esp is often decremented by a bigger bytesize so that there is space for function arguments.
@@ -79,3 +83,7 @@ byte into the corresponding extended register without creating any null bytes in
 
 
 [Reverse engineering Resource list](https://gist.github.com/DtxdF/9c9297945bd7165c53b264ec597a9c39)
+
+
+[ dotfiles ]( https://github.com/GioGioWasTaken/Dotfiles )
+[ wallpaper ]( https://wall.alphacoders.com/big.php?i=1356519 )
