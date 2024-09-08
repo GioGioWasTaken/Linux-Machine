@@ -1,4 +1,4 @@
 file echo1
-b *0x400A55
-b *echo1
+b *get_input 
+# destination buffer of second write primitive
 r 

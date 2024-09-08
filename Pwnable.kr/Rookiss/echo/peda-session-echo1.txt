@@ -1,3 +1,37 @@
-break *0x400A55
-break *echo1
+break *get_input
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -8,6 +8,7 @@ irrelvant to this.
 - buffer overflow primitive after echo is called
 ## Plan
 - redirect control flow to my name primitive 
+- 0x7fffffffe2b0 we write to this address
 - use it as a ROP gadget
 
 [!TIP] Just to have it on standby:
@@ -19,3 +20,5 @@ irrelvant to this.
 | 4. `RCX`    | Fourth argument|
 | 5. `R8`     | Fifth argument |
 | 6. `R9`     | Sixth argument |
+
+
