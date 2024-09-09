@@ -3,7 +3,7 @@ public class findmaxPath {
   }
 
   public static int maxPath(int[][] mat) {
-    return maxPath(mat, 0, 0);
+    return maxPath(mat, 0, 0, 0);
   }
 
   public static int maxPath(int[][] mat, int row, int col, int sum) {
@@ -18,7 +18,7 @@ public class findmaxPath {
     int Ones = mat[row][col] % 10;
 
     int currentVal = mat[row][col];
-    boolean move1isValid = (row + Tens < mat.length && col + ones < mat[0].length);
+    boolean move1isValid = (row + Tens < mat.length && col + Ones < mat[0].length);
     boolean move2isValid = (row + Ones < mat.length && col + Tens < mat[0].length);
     int Option1 = Integer.MIN_VALUE;
     int Option2 = Integer.MIN_VALUE;
