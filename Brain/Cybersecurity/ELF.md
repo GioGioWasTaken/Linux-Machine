@@ -69,9 +69,10 @@ We define a `segment` as an array that contains the following: (I will not be wr
 
 
 ## An ELF's sections
-- For an executable program, an ELF header and a segment are the bare minimum, with sections being optional.
 
-**Note** : even so, it's common for an executable to have a ".text" section for the code and ".data" section for initialized data.
+[!note] Note: For an executable program, an ELF header and a segment are the bare minimum, with sections being optional.
+
+[!Attention] But even so, it's common for an executable to have a ".text" section for the code and ".data" section for initialized data.
 
 - Libraries don't have segments, but only sections because they are used for linking purposes.
 
