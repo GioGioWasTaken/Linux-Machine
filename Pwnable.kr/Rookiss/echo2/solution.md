@@ -1,7 +1,8 @@
 # Primitives
 
 - FSB of size 0x20(32 decimal):
-    * `libc.so.6 : 0x7ffff7f57e43 --> 0x68732f6e69622f ('/bin/sh')` we will leak the addresses of this string and `system` function using the FSB.
+    * `libc.so.6 : 0x7ffff7f57e43 --> 0x68732f6e69622f ('/bin/sh')` we will leak the addresses of this string
+    * and `system` function using the FSB: `0x7ffff7df9c30`
 - UAF: 
     - Free up `o`
     - call 3
