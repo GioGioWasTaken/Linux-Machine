@@ -1,0 +1,56 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+
+Yeheli I have a headache and it won't go away so i can't actually study
+
+This is actually so bad, i didn't study yesterday, and i barely studied the day before yesterday, as well as the day before that one.
+
+And I am doing this instead of trying to study anyway ;-;
+
+
+anyways, enjoy
+
+
+In a parallel circuit with resistors \( R_1, R_2, \ldots, R_n \), the total resistance \( R_{\text{tot}} \) is given by:
+
+\[
+\frac{1}{R_{\text{tot}}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n}
+\]
+
+Let \( R_{\text{min}} \) be the smallest resistance among \( R_1, R_2, \ldots, R_n \). Since all resistances \( R_i \) are positive, each term \( \frac{1}{R_i} \) is positive. Therefore:
+
+\[
+\frac{1}{R_i} \geq \frac{1}{R_{\text{min}}} \text{ for all } i
+\]
+
+Summing these inequalities gives:
+
+\[
+\frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n} \geq \frac{n}{R_{\text{min}}}
+\]
+
+Since the total resistance \( \frac{1}{R_{\text{tot}}} \) is the sum of these reciprocals:
+
+\[
+\frac{1}{R_{\text{tot}}} \geq \frac{1}{R_{\text{min}}}
+\]
+
+However, this sum is always greater than the reciprocal of the smallest resistance:
+
+\[
+\frac{1}{R_{\text{tot}}} > \frac{1}{R_{\text{min}}}
+\]
+
+Taking the reciprocal of both sides (which reverses the inequality):
+
+\[
+R_{\text{tot}} < R_{\text{min}}
+\]
+
+Thus, the total resistance \( R_{\text{tot}} \) in a parallel circuit is always less than the smallest resistance \( R_{\text{min}} \) among the resistors.
+
+\end{document}

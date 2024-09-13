@@ -16,7 +16,7 @@ public class Q2 {
       if(a[i] <0 && isNegative==0){
         count++;
         isNegative =1;
-      } else if(a[i] > 0 && isNegative==1;){
+      } else if(a[i] > 0 && isNegative==1){
         count++;
         isNegative = 0;
       } else{
