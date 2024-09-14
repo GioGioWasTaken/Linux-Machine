@@ -1,4 +1,3 @@
-
 # The primitive is GOD
 - Rememeber your primitives. All of them.
 -  If you have a primitive, don't get lost in the other details of the binary file.
