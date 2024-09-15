@@ -7,7 +7,6 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 
 - Uni-Studying:
-    * 2 binary tree follow-code questions
     * 1 more linked list follow-code quesiton
     * do 1 full test preferably 2024 July
     * more TC questions
