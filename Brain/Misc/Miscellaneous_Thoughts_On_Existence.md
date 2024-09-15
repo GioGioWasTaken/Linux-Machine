@@ -1,5 +1,3 @@
-Definition of art:
-A mode of creating, that has no regard for efficiency or any utilitarian need, but does something, out of the reason, and only of the reason, that it is beautiful. Anything that can be done beautifully is art, and all art is useless and must be useless.
 
 
 I sincerely doubt the premise that there exists deep blissful meaning in anything other than the relationships one fosters. A man completely isolated from the world has not a thing to live for, he only has the primordial instinct to survive.
