@@ -5,7 +5,21 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 - Uni-Studying:
     * Do every question that appears in 2024 tests
-    * If you still want to prepare after this, do more TC questions.
+        + Binary search tree
+        + array question 1
+
+        You may stop here
+
+        + linked list question 1
+
+
+        Good job!
+
+        + array question 2
+        + linked list question 2 
+
+        Woah....
+
 
 - KMonad
     *  read [this](https://wiki.nikiv.dev/macOS/apps/karabiner/#my-personal-karabiner-setup). Try to do something similar with KMonad. Also remap hjkl to arrow keys, and get the caps lock home rebinding done through KMonad, in hope that it fucking loads on startup properly unlike xmodmap
