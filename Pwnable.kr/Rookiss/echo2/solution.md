@@ -18,8 +18,12 @@
 - the address it's referencing, o, now points to the newly allocated address that I control :)
 - we will point it at the stack address of `name`, to call the shellcode stored there.
     * for that we need to find the address of name. First we leak main's `RBP`, from which it is in offset 0x20.
-    * *Then, we try to figure out why this doesn't work. **
-
+    * shellcode gets injected at expected location, control flow is redirected
+VICTORYYYYYYYYYYYYYYYYYYYYYYY
+VICTORYYYYYYYYYYYYYYYYYYYYYYY
+VICTORYYYYYYYYYYYYYYYYYYYYYYY
+VICTORYYYYYYYYYYYYYYYYYYYYYYY
+VICTORYYYYYYYYYYYYYYYYYYYYYYY
 
 ## check out
 
