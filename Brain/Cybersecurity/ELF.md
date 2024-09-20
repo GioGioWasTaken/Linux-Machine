@@ -90,6 +90,7 @@ A compiled program’s memory is (mainly) divided into five sections: `text`, `d
     - `data` has initialized globals, while `bss` has uninitiliazed globals (globals that are not initiliazed with any data.)
     - this is why global and static variables persist throughout the lifetime of the program -- they have their own memory sections.
     - the `data` and `bss` sections, also have a fixed size. `If it has a fixed size, it can be overflowed.`
+
 - You are already very familiar with `The Heap` and `The Stack` so there is no need to mention them.
 - Finally, one can assume what happens when `The Heap` and `The Stack` meet!
 	![[Pasted image 20240607151555.png]]
