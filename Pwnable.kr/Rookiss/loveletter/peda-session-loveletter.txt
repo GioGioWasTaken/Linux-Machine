@@ -1,4 +1,4 @@
-break *0x0804864d
-
-
+break *0x080486ff
+break *0x080487f4
+break *0x080486e1
 
