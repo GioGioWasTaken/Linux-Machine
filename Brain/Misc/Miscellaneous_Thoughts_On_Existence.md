@@ -34,3 +34,12 @@ When one has an obsession for any subject or person, he will start to lead an un
 
 "שמאל וימין הם שני צדדים של אותו מטבע"
 "לא, שמאל וימין הם שני צדדים של אותה פלטת צואה של חמור"
+
+
+"In the darkest times, hope is something you give yourself. That is the meaning of self preservation."
+- Iroh
+
+"Pride is not the opposite of shame, but its source."
+- Iroh
+
+"Never make decisions when you're suffering. Only make decisions while you are comfortamble and relaxed. When you're you're sufferring, execute. Follow your own predetermined will as if it's orders."

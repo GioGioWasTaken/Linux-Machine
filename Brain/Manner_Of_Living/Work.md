@@ -3,7 +3,7 @@
 - If you do not want to work after having worked, then take a breath. Rest. 
 - If you do not want to work, simply out of your own laziness, ask yourself if you were made to rot in bed.
 
-[!QUOTE] Marcus aurelius once said:
+[!QUOTE] Marcus Aurelius once said:
 ```
 "In the morning, when thou risest unwillingly, let this thought be present: I am rising to the work of a human being. Why then am I dissatisfied if I am going to do the things for which I exist and for which I was brought into the world? Or have I been made for this, to lie in the bedclothes and keep myself warm?
 
