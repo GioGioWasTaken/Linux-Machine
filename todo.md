@@ -4,7 +4,6 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 
 - Hacking:
-    * solve calc
     * make a reddit post asking about the most mouseless way to reverse enginneer-- specifically in the context of navigating ida-pro 
     * make a reddit post in tmux checking the most vimlike way possible to yank text.
     * learn the remaining knowledge you need to solve asm.
