@@ -4,21 +4,12 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 
 - Hacking:
-<<<<<<< HEAD
-    * make a reddit post asking about the most mouseless way to reverse enginneer-- specifically in the context of navigating ida-pro 
-    * make a reddit post in tmux checking the most vimlike way possible to yank text.
-=======
->>>>>>> c1a2dda (merge after a week)
+    * practice writing ROP exploits
     * learn the remaining knowledge you need to solve asm.
     * solve asm
 
-
-
-
 - KMonad
-    *  read [this](https://wiki.nikiv.dev/macOS/apps/karabiner/#my-personal-karabiner-setup). Try to do something similar with KMonad. Also remap hjkl to arrow keys, and get the caps lock home rebinding done through KMonad, in hope that it fucking loads on startup properly unlike xmodmap
-        + alt + q = esc
-        + caps lock = home key, home key = caps lock
+    *  read [this](https://wiki.nikiv.dev/macOS/apps/karabiner/#my-personal-karabiner-setup). Try to do something similar with KMonad. Also remap hjkl to arrow keys, and get the caps lock home rebinding done through KMonad, in hope that it fucking loads on startup properly unlike xmodmap alt + q = esc caps lock = home key, home key = caps lock
 
 - Books: 
     * centralize all ebooks in github

@@ -97,3 +97,44 @@ A compiled program’s memory is (mainly) divided into five sections: `text`, `d
 
 Helpful information curated:
 [ELF binary cheatsheet](https://gist.github.com/DtxdF/e6d940271e0efca7e0e2977723aec360)
+
+
+### ReadELF output:
+
+E.X:
+
+
+`
+LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+0x000000000000073c 0x000000000000073c  R E    0x200000
+`
+
+- Interpretation: 
+	* file Offset (0x0000000000000000):
+
+	    * This tells you where in the file this segment begins. In this case, it starts at offset 0 in the ELF file, meaning it's the first segment loaded into memory.
+
+	- Virtual Address (0x0000000000400000):
+
+	    * This is where the segment is loaded into memory. Here, it starts at the virtual address 0x400000. This is the memory address where the executable (or the program) will place this segment.
+
+	- Physical Address (0x0000000000400000):
+
+	    *This field is generally used by systems with physical memory addressing (like embedded systems). In most user-level ELF files on modern systems (like Linux on x86-64), this field is not used and mirrors the virtual address (0x400000).
+
+	- File Size (`FileSiz` = 0x000000000000073c):
+
+	    * This is the size of the segment on disk. The value 0x73c means 1,860 bytes are present in the file.
+	    Typically, this segment contains the code section (.text), which is why it's marked R E (Read, Execute). It means this part of the binary contains executable code.
+
+	- Memory Size (`MemSiz` = 0x000000000000073c):
+
+	    *This is the size of the segment in memory. In this case, MemSiz matches FileSiz (0x73c), which means the entire segment is loaded into memory, with no additional space required.
+	    This is typical for the code section, which doesn't need extra memory for uninitialized data.
+
+	- And lastly, `Align` (0x200000).
+
+#### Misc: 
+
+- The BSS section immediately follows the .data section in memory. 
+- The memory range for .bss starts after .data and occupies the extra space defined by MemSiz - FileSiz
