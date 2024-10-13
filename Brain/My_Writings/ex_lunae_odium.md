@@ -1,35 +1,42 @@
-Once below a full-moon lit night 
+Once below a full-moon lit night
+A young priest again preached, ah what a sight!
+And Dantamiya, who beheld the scene,
+Couldn’t help but intervene.
 
-A young priest again preached, ah what a sight
+And so, he brought woe upon the priest,
+Into the shape of a turtle, he turned amiss.
+Great Theramesius, oh so grim,
+Wept the fate of his disciple’s whim.
 
-and Dantamiya, who beheld the scene
+But when his tears had dried away,
+His anger grew, with hell to pay!
+Dantamiya, sensing doom,
+Prostrated before Tsukigami’s bloom.
 
-couldn't help but intervene
+“In her foolish temper,” he said with flair,
+“She’ll save me once more—what do I care?”
+And though it happened many times before,
+The goddess, once again, fell for his lore.
 
-and so he brought woe upon the priest
+And so, with her pale, gentle glow,
+Tsukigami wept, but none would know,
+Her love, though foolish, bloomed forlorn,
+A curse eternal she’d silently mourn.
 
-and into the shape of a turtle he turned amiss.
+Once a month, her light would shine,
+But never could she make him hers or mine.
+And though Dantamiya escaped unscathed,
+He felt an emptiness never waived.
 
-Great Theramesius, Oh So awful
+For though the moon glared down each night,
+Her light could never warm his plight.
+And Theramesius, in his silent pride,
+Let the whims of fate decide.
 
-wept the fate of his disciple, so terrible!
-
-and so when his tears dried and his woe, aside
-
-his rage grew, until yet, untried
-
-Dantamiya who sensed the peril
-
-Prostated to Tsukigami, shouting, "My dear!"
-
-And in her foolish temper akin to a rose
-
-She heeded Dantamiya, "This mustn't be a ruse!"
-
-And though it happened again and again afore
-
-The goddess again fell for his words 
-
+Or so the fools would have you think—
+Theramesius never gave a wink!
+*He roared with might, no weakling god,*
+*Who'd let some turtle-schemer trod!*
 
 
 

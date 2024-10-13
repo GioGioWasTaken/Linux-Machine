@@ -23,12 +23,8 @@
             "id": "782871990ec94234",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Operating_Systems/Below_Software/floppy_disk.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -55,12 +51,8 @@
             "id": "207df879080defc8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "D&D Character.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -70,7 +62,7 @@
               "type": "markdown",
               "state": {
                 "file": "Cybersecurity/ELF.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -213,6 +205,8 @@
   },
   "active": "1416922ac6e724eb",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Cybersecurity/ELF.md",
     "Operating_Systems/Software/Segmentation.md",
     "Operating_Systems/Software/Protected_Mode.md",
     "Operating_Systems/Software/Paging.md",
@@ -231,7 +225,6 @@
     "Race.md",
     "D&D Character.md",
     "Class.md",
-    "Cybersecurity/ELF.md",
     "Linux/Virtual memory.md",
     "Media/Pasted image 20240630114454.png",
     "Cybersecurity/Rootkits.md",
@@ -239,7 +232,6 @@
     "Operating_Systems/Below_Software/LOGIC_GATES.md",
     "Cybersecurity/SYSCALL exploits.md",
     "Linux/What-Builds-A-Distro?.md",
-    "Stoicidivinism/ex_lunae_odium.md",
     "Programming/VIM.md~",
     "Media/Pasted image 20240628222545.png",
     "Media/Pasted image 20240628195931.png",

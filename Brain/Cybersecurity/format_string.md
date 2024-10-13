@@ -3,6 +3,7 @@
 - Leak the nth address of size %x. E.G:
      * %<n>$X —> : ("%3$d", var1, var2, var3) —> Access to var3
 
+- It is possible to trigger a `malloc` call with a FSB. If we write more bytes then the size of the stack, the program will start allocating memory on the heap.
 
 ## Different modifiers and their sizes:
 
@@ -15,3 +16,5 @@
 - %p —> Pointer
 - %n —> Number of written bytes
 - %hn —> Occupies 2 bytes instead of 4
+
+

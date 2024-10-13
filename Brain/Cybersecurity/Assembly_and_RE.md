@@ -36,13 +36,19 @@ _start:
     xor ebx, ebx        ; Exit code 0
     int 0x80            ; Invoke the system call
 ```
+
 # Register variations
-The EAX, EBX, ECX, EDX, ESI, EDI, EBP, and ESP registers are 32 bits
-in width. 
+
+The EAX, EBX, ECX, EDX, ESI, EDI, EBP, and ESP registers are 32 bits in width. 
+
 The E stands for extended, because these were originally 16-bit registers called AX, BX, CX, DX, SI, DI, BP, and SP.
+
 These original 16-bit versions of the registers can still be used for accessing the first 16 bits of each corresponding 32-bit register.
 
 Furthermore, the individual bytes of the AX, BX, CX, and DX registers can be accessed as 8-bit registers called AL, AH, BL, BH, CL, CH, DL, and DH, where L stands for low byte and H for high byte.
+
+A lower, A higher
+B lower, B higher... etc. The registers, at the start, were just , then, register A, B, C ....
 
 Naturally, assembly instructions using the smaller registers only need to specify operands up to the register’s bit width. The three variations of a mov instruction are shown below.
 
@@ -66,7 +72,7 @@ byte into the corresponding extended register without creating any null bytes in
 - Since function arguments are also passed on the stack, there needs to be space for any that this function wants to pass to another.  So while a function might only need x amount of bytes for local variables, $esp is often decremented by a bigger bytesize so that there is space for function arguments.
 # More assembly instructions
 
-- `sete`, `setl`, `setge`, all check the result of the previous `cmp` operation, and respectively store the result in the operand passed to it(set equal, set less, set greater equal )
+- `sete`, `setl`, `setge`, all check the result of the previous `cmp` operation, stored in the CPU flags, and respectively store the result in the operand passed to it(set equal, set less, set greater equal )
 - `shl` and `shr` are used to shift bits left and right. 
 - `movzx` is a `mov` instruction that also pads the remaining bytes with zeros. 
 
@@ -77,13 +83,11 @@ byte into the corresponding extended register without creating any null bytes in
 
 - In assembly, the OS expects some values, depending on their size, to be aligned in some specific manner. 4 byte values must end in a hex digit that's divisible by 4, and the same goes for 8 byte values such as ESP. More info about stack alignment right below.  
 	- This can be beaten by chaining a return addresses into the payload, before the target address, thus moving ESP to a location so that it's properly aligned and a segfault doesn't occur.
-- Remember that not only stack allignment matters, but also ESP. In some rare instances, your shellcode has potential to move ESP to a location such that it overwrites itself on the stack. 
+
+- Remember that not only stack allignment matters, but also ESP. In some instances, your shellcode has potential to move ESP to a location such that it overwrites itself on the stack. 
 
 
 
 
 [Reverse engineering Resource list](https://gist.github.com/DtxdF/9c9297945bd7165c53b264ec597a9c39)
 
-
-[ dotfiles ]( https://github.com/GioGioWasTaken/Dotfiles )
-[ wallpaper ]( https://wall.alphacoders.com/big.php?i=1356519 )

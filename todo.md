@@ -4,16 +4,11 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 
 - Hacking:
-    * make a reddit post asking about the most mouseless way to reverse enginneer-- specifically in the context of navigating ida-pro 
-    * make a reddit post in tmux checking the most vimlike way possible to yank text.
+    * relearn GOT and PLT properly. Re-solve passcode.
+    * solve unexploitable. (on both pwnable.kr and pwnable.tw)
     * learn the remaining knowledge you need to solve asm.
     * solve asm
 
-
-
-
-- KMonad
-    *  read [this](https://wiki.nikiv.dev/macOS/apps/karabiner/#my-personal-karabiner-setup). Try to do something similar with KMonad. Also remap hjkl to arrow keys, and get the caps lock home rebinding done through KMonad, in hope that it fucking loads on startup properly unlike xmodmap
 
 - Books: 
     * centralize all ebooks in github
@@ -21,3 +16,4 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 - General: 
     * Start working towards a "second brain". I really like the idea. Especially inspired by [this guy](https://wiki.nikiv.dev/). 
+    * make a reddit post in tmux checking the most vimlike way possible to yank text.

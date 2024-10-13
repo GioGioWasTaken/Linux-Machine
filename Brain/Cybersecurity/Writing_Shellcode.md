@@ -1,4 +1,5 @@
-- learning to write your own shellcode is integral for any attacker. Writing your own shellcode will allow you to do whatever you want to a compromised system. Want to add a new admin user to the target computer? Want it to recurisvely send its data to you, and then delete it? Shellcode, (from here the term payload comes) is the endgame of any attack.
+- learning to write your own shellcode is integral for any attacker. Writing your own shellcode will allow you to do whatever you want to a compromised system. Want to add a new admin user to the target computer? Want it to recursively send its data to you, and then delete it? Shellcode, (from here the term payload comes) is the endgame of any attack.
+
 - Shellcode must be self contained, in other words it must be PIC (Position Independent Code).
 - To give an example, an ASM hello world program can store its "Hello, World!" string in the `.data` segment. We don't have that luxary.
     - In shellcode, the bytes for the string "Hello, world!" must be mixed together with the bytes for the assembly instructions, since there aren’t definable or predictable memory segments.

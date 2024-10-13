@@ -1,5 +1,3 @@
-
-
 I sincerely doubt the premise that there exists deep blissful meaning in anything other than the relationships one fosters. A man completely isolated from the world has not a thing to live for, he only has the primordial instinct to survive.
 
 
@@ -43,3 +41,6 @@ When one has an obsession for any subject or person, he will start to lead an un
 - Iroh
 
 "Never make decisions when you're suffering. Only make decisions while you are comfortamble and relaxed. When you're you're sufferring, execute. Follow your own predetermined will as if it's orders."
+
+
+"In my opinion, if a character in any medium of a story is worth shedding tears over, they are no longer a character but a person I don't know. "
