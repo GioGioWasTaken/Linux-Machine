@@ -30,6 +30,7 @@ import time
 
 context.arch="amd64"
 context.kernel="amd64"
+context.os="linux"
 
 
 binary_name = "[Enter Name]"
@@ -60,9 +61,9 @@ def main():
 
             # or if using ssh:
             # s = ssh(user='',host='pwnable.kr',port=2222,password='guest') 
-            # p= s.process("./{binary_name}") 
+            # p= s.process(f"./{binary_name}") 
         elif(sys.argv[1] == "gdb"):
-            p = gdb.debug(f"./{binary_name}", """ """, aslr=False)
+            p = gdb.debug(f"./{binary_name}", gdbscript="b *", aslr=False)
         else:
             p = process(f"./{binary_name}")
 main()
