@@ -22,7 +22,7 @@ read@plt:
 ; In the GOT (Global Offset Table)
 read@got: 
     .quad 0x4141414141414141  ; Initially points back to PLT, later filled with actual address
-
+    ;  ...or  .quad [jmp .resolve]
 ``````
 
 

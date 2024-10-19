@@ -15,4 +15,7 @@ A PIE executable is an ELF shared object (like a .so), as opposed to an ELF "exe
 
 # Bypass
 
-See: [[ GOT_PLT ]]
+See: [[GOT_PLT]]
+
+
+Article about ASLR in modern linux systems [here](http://rk700.github.io/2016/11/22/mmap-aslr/)

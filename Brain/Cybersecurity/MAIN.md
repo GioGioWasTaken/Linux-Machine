@@ -21,7 +21,9 @@
   * Make sure you trace everything to its root.
 
 
-# For efficiency, A template for binary exploitation scripts using pwntools: 
+# Templates
+
+## Pwntools template
 
 ```python
 from pwn import *
@@ -33,9 +35,11 @@ context.kernel="amd64"
 context.os="linux"
 
 
+libc_name="[ENTER NAME]"
 binary_name = "[Enter Name]"
 e  = ELF(binary_name, checksec=True)
 rop = ROP(binary_name)
+libc=e.libc # So long as i'm not running against the remote target, use the local libc
 
 REMOTE = "nc [IP] [PORT]"
 
@@ -52,12 +56,15 @@ sn  = lambda *x, **y: p.send(*x, **y)
 
 def main():
     if(len(sys.argv) <2):
-        print("Need to specify target.")
+        print("Running locally")
+        p = process(f"./{binary_name}")
     else:
         if(sys.argv[1] == "remote"):
             ip, port = REMOTE.replace("nc ", "").split(" ")[0]
             port = int(port)
             p = remote(ip, port)
+            libc = ELF(f"./{libc_name}")
+
 
             # or if using ssh:
             # s = ssh(user='',host='pwnable.kr',port=2222,password='guest') 
@@ -68,3 +75,12 @@ def main():
             p = process(f"./{binary_name}")
 main()
 
+
+
+```
+## GDB
+
+in `.gdbinit` I have
+`source run.gdb`, Which will be a file created in every binary exploitation project.
+
+`run.gdb` will contain every other file i'd like sourced in my gdb sessions

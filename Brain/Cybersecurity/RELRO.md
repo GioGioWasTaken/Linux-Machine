@@ -1,6 +1,7 @@
 ## RELRO:
 
 ## Full RELRO
+
 Stands for `Relocation Read-Only`
 Makes some areas in memory, most notably the `GOT table`, only readable and not writable.
 setting the `LD_BIND_NOW` env var seems to have the same effect.

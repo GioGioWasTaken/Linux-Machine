@@ -1,0 +1,368 @@
+Dump of assembler code for function __vdso_clock_gettime:
+   0xf77086a0 <+0>:     push   ebp
+   0xf77086a1 <+1>:     mov    ebp,esp
+   0xf77086a3 <+3>:     push   edi
+   0xf77086a4 <+4>:     push   esi
+   0xf77086a5 <+5>:     push   ebx
+   0xf77086a6 <+6>:     lea    ebx,ds:0xffffcd88
+   0xf77086ac <+12>:    call   0xf7708b14
+   0xf77086b1 <+17>:    add    edi,0xfffffc47
+   0xf77086b7 <+23>:    sub    esp,0x14
+   0xf77086ba <+26>:    cmp    DWORD PTR [ebp+0x8],0x1
+   0xf77086be <+30>:    mov    esi,DWORD PTR [ebp+0xc]
+   0xf77086c1 <+33>:    je     0xf7708723 <__vdso_clock_gettime+131>
+   0xf77086c3 <+35>:    jle    0xf77087ec <__vdso_clock_gettime+332>
+   0xf77086c9 <+41>:    cmp    DWORD PTR [ebp+0x8],0x5
+   0xf77086cd <+45>:    je     0xf7708705 <__vdso_clock_gettime+101>
+   0xf77086cf <+47>:    cmp    DWORD PTR [ebp+0x8],0x6
+   0xf77086d3 <+51>:    jne    0xf77087d1 <__vdso_clock_gettime+305>
+   0xf77086d9 <+57>:    mov    eax,DWORD PTR [edi-0x3278]
+   0xf77086df <+63>:    test   al,0x1
+   0xf77086e1 <+65>:    jne    0xf770894c <__vdso_clock_gettime+684>
+   0xf77086e7 <+71>:    mov    edx,DWORD PTR [ebx+edi*1+0x50---Type <return> to continue, or q <return> to quit---
+]
+   0xf77086eb <+75>:    mov    DWORD PTR [esi],edx
+   0xf77086ed <+77>:    mov    edx,DWORD PTR [ebx+edi*1+0x58]
+   0xf77086f1 <+81>:    mov    DWORD PTR [esi+0x4],edx
+   0xf77086f4 <+84>:    cmp    eax,DWORD PTR [ebx+edi*1]
+   0xf77086f7 <+87>:    jne    0xf77086d9 <__vdso_clock_gettime+57>
+   0xf77086f9 <+89>:    add    esp,0x14
+   0xf77086fc <+92>:    xor    eax,eax
+   0xf77086fe <+94>:    pop    ebx
+   0xf77086ff <+95>:    pop    esi
+   0xf7708700 <+96>:    pop    edi
+   0xf7708701 <+97>:    pop    ebp
+   0xf7708702 <+98>:    ret
+   0xf7708703 <+99>:    pause
+   0xf7708705 <+101>:   mov    eax,DWORD PTR [edi-0x3278]
+   0xf770870b <+107>:   test   al,0x1
+   0xf770870d <+109>:   jne    0xf7708703 <__vdso_clock_gettime+99>
+   0xf770870f <+111>:   mov    edx,DWORD PTR [ebx+edi*1+0x40]
+   0xf7708713 <+115>:   mov    DWORD PTR [esi],edx
+   0xf7708715 <+117>:   mov    edx,DWORD PTR [ebx+edi*1+0x48]
+   0xf7708719 <+121>:   mov    DWORD PTR [esi+0x4],edx
+   0xf770871c <+124>:   cmp    eax,DWORD PTR [ebx+edi*1]
+---Type <return> to continue, or q <return> to quit---
+   0xf770871f <+127>:   je     0xf77086f9 <__vdso_clock_gettime+89>
+   0xf7708721 <+129>:   jmp    0xf7708705 <__vdso_clock_gettime+101>
+   0xf7708723 <+131>:   mov    eax,DWORD PTR [edi-0x3278]
+   0xf7708729 <+137>:   test   al,0x1
+   0xf770872b <+139>:   mov    DWORD PTR [ebp-0x14],eax
+   0xf770872e <+142>:   jne    0xf770890f <__vdso_clock_gettime+623>
+   0xf7708734 <+148>:   mov    eax,DWORD PTR [ebx+edi*1+0x4]
+   0xf7708738 <+152>:   mov    edx,DWORD PTR [ebp+0xc]
+   0xf770873b <+155>:   mov    DWORD PTR [ebp-0x18],eax
+   0xf770873e <+158>:   mov    eax,DWORD PTR [ebx+edi*1+0x30]
+   0xf7708742 <+162>:   mov    DWORD PTR [edx],eax
+   0xf7708744 <+164>:   mov    ecx,DWORD PTR [ebx+edi*1+0x4]
+   0xf7708748 <+168>:   mov    eax,DWORD PTR [ebx+edi*1+0x38]
+   0xf770874c <+172>:   mov    edx,DWORD PTR [ebx+edi*1+0x3c]
+   0xf7708750 <+176>:   cmp    ecx,0x1
+   0xf7708753 <+179>:   mov    DWORD PTR [ebp-0x20],eax
+   0xf7708756 <+182>:   mov    DWORD PTR [ebp-0x1c],edx
+   0xf7708759 <+185>:   je     0xf7708908 <__vdso_clock_gettime+616>
+---Type <return> to continue, or q <return> to quit---
+   0xf770875f <+191>:   cmp    ecx,0x2
+   0xf7708762 <+194>:   je     0xf77088d5 <__vdso_clock_gettime+565>
+   0xf7708768 <+200>:   xor    eax,eax
+   0xf770876a <+202>:   xor    edx,edx
+   0xf770876c <+204>:   cmp    ecx,0x3
+   0xf770876f <+207>:   je     0xf7708937 <__vdso_clock_gettime+663>
+   0xf7708775 <+213>:   mov    ecx,DWORD PTR [ebx+edi*1+0x1c]
+   0xf7708779 <+217>:   mov    esi,DWORD PTR [ebp-0x14]
+   0xf770877c <+220>:   cmp    esi,DWORD PTR [ebx+edi*1]
+   0xf770877f <+223>:   jne    0xf7708723 <__vdso_clock_gettime+131>
+   0xf7708781 <+225>:   add    eax,DWORD PTR [ebp-0x20]
+   0xf7708784 <+228>:   mov    esi,DWORD PTR [ebp+0xc]
+   0xf7708787 <+231>:   adc    edx,DWORD PTR [ebp-0x1c]
+   0xf770878a <+234>:   xor    ebx,ebx
+   0xf770878c <+236>:   shrd   eax,edx,cl
+   0xf770878f <+239>:   shr    edx,cl
+   0xf7708791 <+241>:   test   cl,0x20
+   0xf7708794 <+244>:   cmovne eax,edx
+   0xf7708797 <+247>:   cmovne edx,ebx
+   0xf770879a <+250>:   cmp    edx,0x0
+   0xf770879d <+253>:   ja     0xf77087a8 <__vdso_clock_gettime+264>
+   0xf770879f <+255>:   xor    ecx,ecx
+---Type <return> to continue, or q <return> to quit---
+   0xf77087a1 <+257>:   cmp    eax,0x3b9ac9ff
+   0xf77087a6 <+262>:   jbe    0xf77087c1 <__vdso_clock_gettime+289>
+   0xf77087a8 <+264>:   xor    ecx,ecx
+   0xf77087aa <+266>:   add    eax,0xc4653600
+   0xf77087af <+271>:   adc    edx,0xffffffff
+   0xf77087b2 <+274>:   add    ecx,0x1
+   0xf77087b5 <+277>:   cmp    edx,0x0
+   0xf77087b8 <+280>:   ja     0xf77087aa <__vdso_clock_gettime+266>
+   0xf77087ba <+282>:   cmp    eax,0x3b9ac9ff
+   0xf77087bf <+287>:   ja     0xf77087aa <__vdso_clock_gettime+266>
+   0xf77087c1 <+289>:   mov    edi,DWORD PTR [ebp-0x18]
+   0xf77087c4 <+292>:   add    DWORD PTR [esi],ecx
+   0xf77087c6 <+294>:   mov    DWORD PTR [esi+0x4],eax
+   0xf77087c9 <+297>:   test   edi,edi
+   0xf77087cb <+299>:   jne    0xf77086f9 <__vdso_clock_gettime+89>
+   0xf77087d1 <+305>:   mov    ecx,esi
+   0xf77087d3 <+307>:   mov    eax,0x109
+   0xf77087d8 <+312>:   mov    edx,ebx
+   0xf77087da <+314>:   mov    ebx,DWORD PTR [ebp+0x8]
+   0xf77087dd <+317>:   call   0xf7708b50 <__kernel_vsyscall>
+   0xf77087e2 <+322>:   mov    ebx,edx
+   0xf77087e4 <+324>:   add    esp,0x14
+   0xf77087e7 <+327>:   pop    ebx
+   0xf77087e8 <+328>:   pop    esi
+   0xf77087e9 <+329>:   pop    edi
+   0xf77087ea <+330>:   pop    ebp
+   0xf77087eb <+331>:   ret
+   0xf77087ec <+332>:   mov    eax,DWORD PTR [ebp+0x8]
+   0xf77087ef <+335>:   test   eax,eax
+   0xf77087f1 <+337>:   jne    0xf77087d1 <__vdso_clock_gettime+305>
+   0xf77087f3 <+339>:   mov    DWORD PTR [ebp+0xc],esi
+   0xf77087f6 <+342>:   mov    eax,DWORD PTR [edi-0x3278]
+   0xf77087fc <+348>:   test   al,0x1
+   0xf77087fe <+350>:   mov    DWORD PTR [ebp-0x14],eax
+   0xf7708801 <+353>:   jne    0xf7708923 <__vdso_clock_gettime+643>
+   0xf7708807 <+359>:   mov    eax,DWORD PTR [ebx+edi*1+0x4]
+   0xf770880b <+363>:   mov    edx,DWORD PTR [ebp+0xc]
+   0xf770880e <+366>:   mov    DWORD PTR [ebp-0x18],eax
+   0xf7708811 <+369>:   mov    eax,DWORD PTR [ebx+edi*1+0x28]
+   0xf7708815 <+373>:   mov    DWORD PTR [edx],eax
+   0xf7708817 <+375>:   mov    ecx,DWORD PTR [ebx+edi*1+0x4]
+   0xf770881b <+379>:   mov    eax,DWORD PTR [ebx+edi*1+0x20]
+   0xf770881f <+383>:   mov    edx,DWORD PTR [ebx+edi*1+0x24---Type <return> to continue, or q <return> to quit---
+]
+   0xf7708823 <+387>:   cmp    ecx,0x1
+   0xf7708826 <+390>:   mov    DWORD PTR [ebp-0x20],eax
+   0xf7708829 <+393>:   mov    DWORD PTR [ebp-0x1c],edx
+   0xf770882c <+396>:   je     0xf7708901 <__vdso_clock_gettime+609>
+   0xf7708832 <+402>:   cmp    ecx,0x2
+   0xf7708835 <+405>:   je     0xf77088a9 <__vdso_clock_gettime+521>
+   0xf7708837 <+407>:   xor    eax,eax
+   0xf7708839 <+409>:   xor    edx,edx
+   0xf770883b <+411>:   cmp    ecx,0x3
+   0xf770883e <+414>:   je     0xf7708940 <__vdso_clock_gettime+672>
+   0xf7708844 <+420>:   mov    ecx,DWORD PTR [ebx+edi*1+0x1c]
+   0xf7708848 <+424>:   mov    esi,DWORD PTR [ebp-0x14]
+   0xf770884b <+427>:   cmp    DWORD PTR [ebx+edi*1],esi
+   0xf770884e <+430>:   jne    0xf77087f6 <__vdso_clock_gettime+342>
+   0xf7708850 <+432>:   add    eax,DWORD PTR [ebp-0x20]
+   0xf7708853 <+435>:   mov    esi,DWORD PTR [ebp+0xc]
+   0xf7708856 <+438>:   adc    edx,DWORD PTR [ebp-0x1c]
+   0xf7708859 <+441>:   xor    ebx,ebx
+   0xf770885b <+443>:   shrd   eax,edx,cl
+   0xf770885e <+446>:   shr    edx,cl
+   0xf7708860 <+448>:   test   cl,0x20
+---Type <return> to continue, or q <return> to quit---
+   0xf7708863 <+451>:   cmovne eax,edx
+   0xf7708866 <+454>:   cmovne edx,ebx
+   0xf7708869 <+457>:   cmp    edx,0x0
+   0xf770886c <+460>:   ja     0xf770887b <__vdso_clock_gettime+475>
+   0xf770886e <+462>:   xor    ecx,ecx
+   0xf7708870 <+464>:   cmp    eax,0x3b9ac9ff
+   0xf7708875 <+469>:   jbe    0xf77087c1 <__vdso_clock_gettime+289>
+   0xf770887b <+475>:   xor    ecx,ecx
+   0xf770887d <+477>:   add    eax,0xc4653600
+   0xf7708882 <+482>:   adc    edx,0xffffffff
+   0xf7708885 <+485>:   add    ecx,0x1
+   0xf7708888 <+488>:   cmp    edx,0x0
+   0xf770888b <+491>:   ja     0xf770887d <__vdso_clock_gettime+477>
+   0xf770888d <+493>:   cmp    eax,0x3b9ac9ff
+   0xf7708892 <+498>:   ja     0xf770887d <__vdso_clock_gettime+477>
+   0xf7708894 <+500>:   mov    edi,DWORD PTR [ebp-0x18]
+   0xf7708897 <+503>:   add    DWORD PTR [esi],ecx
+   0xf7708899 <+505>:   mov    DWORD PTR [esi+0x4],eax
+   0xf770889c <+508>:   test   edi,edi
+   0xf770889e <+510>:   je     0xf77087d1 <__vdso_clock_gettime+305>
+   0xf77088a4 <+516>:   jmp    0xf77086f9 <__vdso_clock_gettime+89>
+---Type <return> to continue, or q <return> to quit---
+   0xf77088a9 <+521>:   mov    eax,DWORD PTR [edi-0x2208]
+   0xf77088af <+527>:   xor    edx,edx
+   0xf77088b1 <+529>:   sub    eax,DWORD PTR [ebx+edi*1+0x8]
+   0xf77088b5 <+533>:   mov    esi,DWORD PTR [ebx+edi*1+0x10]
+   0xf77088b9 <+537>:   sbb    edx,DWORD PTR [ebx+edi*1+0xc]
+   0xf77088bd <+541>:   mov    ecx,DWORD PTR [ebx+edi*1+0x14]
+   0xf77088c1 <+545>:   and    esi,eax
+   0xf77088c3 <+547>:   mov    eax,DWORD PTR [ebx+edi*1+0x18]
+   0xf77088c7 <+551>:   and    ecx,edx
+   0xf77088c9 <+553>:   imul   ecx,eax
+   0xf77088cc <+556>:   mul    esi
+   0xf77088ce <+558>:   add    edx,ecx
+   0xf77088d0 <+560>:   jmp    0xf7708844 <__vdso_clock_gettime+420>
+   0xf77088d5 <+565>:   mov    eax,DWORD PTR [edi-0x2208]
+   0xf77088db <+571>:   xor    edx,edx
+   0xf77088dd <+573>:   sub    eax,DWORD PTR [ebx+edi*1+0x8]
+   0xf77088e1 <+577>:   mov    esi,DWORD PTR [ebx+edi*1+0x10]
+   0xf77088e5 <+581>:   sbb    edx,DWORD PTR [ebx+edi*1+0xc]
+---Type <return> to continue, or q <return> to quit---
+   0xf77088e9 <+585>:   mov    ecx,DWORD PTR [ebx+edi*1+0x14]
+   0xf77088ed <+589>:   and    esi,eax
+   0xf77088ef <+591>:   mov    eax,DWORD PTR [ebx+edi*1+0x18]
+   0xf77088f3 <+595>:   and    ecx,edx
+   0xf77088f5 <+597>:   imul   ecx,eax
+   0xf77088f8 <+600>:   mul    esi
+   0xf77088fa <+602>:   add    edx,ecx
+   0xf77088fc <+604>:   jmp    0xf7708775 <__vdso_clock_gettime+213>
+   0xf7708901 <+609>:   call   0xf7708660
+   0xf7708906 <+614>:   jmp    0xf77088b1 <__vdso_clock_gettime+529>
+   0xf7708908 <+616>:   call   0xf7708660
+   0xf770890d <+621>:   jmp    0xf77088dd <__vdso_clock_gettime+573>
+   0xf770890f <+623>:   pause
+   0xf7708911 <+625>:   mov    eax,DWORD PTR [edi-0x3278]
+   0xf7708917 <+631>:   test   al,0x1
+   0xf7708919 <+633>:   jne    0xf770890f <__vdso_clock_gettime+623>
+   0xf770891b <+635>:   mov    DWORD PTR [ebp-0x14],eax
+   0xf770891e <+638>:   jmp    0xf7708734 <__vdso_clock_gettime+148>
+   0xf7708923 <+643>:   pause
+   0xf7708925 <+645>:   mov    eax,DWORD PTR [edi-0x3278]
+---Type <return> to continue, or q <return> to quit---
+   0xf770892b <+651>:   test   al,0x1
+   0xf770892d <+653>:   jne    0xf7708923 <__vdso_clock_gettime+643>
+   0xf770892f <+655>:   mov    DWORD PTR [ebp-0x14],eax
+   0xf7708932 <+658>:   jmp    0xf7708807 <__vdso_clock_gettime+359>
+   0xf7708937 <+663>:   mov    DWORD PTR [ebp-0x18],0x0
+   0xf770893e <+670>:   jmp    0xf77088dd <__vdso_clock_gettime+573>
+   0xf7708940 <+672>:   mov    DWORD PTR [ebp-0x18],0x0
+   0xf7708947 <+679>:   jmp    0xf77088b1 <__vdso_clock_gettime+529>
+   0xf770894c <+684>:   pause
+   0xf770894e <+686>:   jmp    0xf77086d9 <__vdso_clock_gettime+57>
+
+Dump of assembler code for function __vdso_time:
+   0xf7708ae0 <+0>:     push   ebp
+   0xf7708ae1 <+1>:     call   0xf7708b08
+   0xf7708ae6 <+6>:     add    eax,0xfffff812
+   0xf7708aeb <+11>:    mov    ebp,esp
+   0xf7708aed <+13>:    push   ebx
+   0xf7708aee <+14>:    mov    edx,DWORD PTR [ebp+0x8]
+   0xf7708af1 <+17>:    mov    ecx,DWORD PTR [eax-0x3250]
+   0xf7708af7 <+23>:    mov    ebx,DWORD PTR [eax-0x324c]
+   0xf7708afd <+29>:    test   edx,edx
+   0xf7708aff <+31>:    mov    eax,ecx
+   0xf7708b01 <+33>:    je     0xf7708b05 <__vdso_time+37>
+   0xf7708b03 <+35>:    mov    DWORD PTR [edx],ecx
+   0xf7708b05 <+37>:    pop    ebx
+   0xf7708b06 <+38>:    pop    ebp
+   0xf7708b07 <+39>:    ret
+
+Dump of assembler code for function __vdso_gettimeofday:
+   0xf7708960 <+0>:     push   ebp
+   0xf7708961 <+1>:     mov    ebp,esp
+   0xf7708963 <+3>:     push   edi
+   0xf7708964 <+4>:     push   esi
+   0xf7708965 <+5>:     push   ebx
+   0xf7708966 <+6>:     call   0xf7708b10
+   0xf770896b <+11>:    add    esi,0xfffff98d
+   0xf7708971 <+17>:    sub    esp,0x14
+   0xf7708974 <+20>:    mov    ebx,DWORD PTR [ebp+0x8]
+   0xf7708977 <+23>:    test   ebx,ebx
+   0xf7708979 <+25>:    je     0xf7708a3e <__vdso_gettimeofday+222>
+   0xf770897f <+31>:    lea    edi,ds:0xffffcd88
+   0xf7708985 <+37>:    mov    eax,DWORD PTR [esi-0x3278]
+   0xf770898b <+43>:    test   al,0x1
+   0xf770898d <+45>:    mov    DWORD PTR [ebp-0x14],eax
+   0xf7708990 <+48>:    jne    0xf7708a8f <__vdso_gettimeofday+303>
+   0xf7708996 <+54>:    mov    eax,DWORD PTR [edi+esi*1+0x4]
+   0xf770899a <+58>:    mov    edx,DWORD PTR [ebp+0x8]
+   0xf770899d <+61>:    mov    DWORD PTR [ebp-0x18],eax
+   0xf77089a0 <+64>:    mov    eax,DWORD PTR [edi+esi*1+0x28]
+   0xf77089a4 <+68>:    mov    DWORD PTR [edx],eax
+   0xf77089a6 <+70>:    mov    ecx,DWORD PTR [edi+esi*1+0x4]---Type <return> to continue, or q <return> to quit---
+
+   0xf77089aa <+74>:    mov    eax,DWORD PTR [edi+esi*1+0x20]
+   0xf77089ae <+78>:    mov    edx,DWORD PTR [edi+esi*1+0x24]
+   0xf77089b2 <+82>:    cmp    ecx,0x1
+   0xf77089b5 <+85>:    mov    DWORD PTR [ebp-0x20],eax
+   0xf77089b8 <+88>:    mov    DWORD PTR [ebp-0x1c],edx
+   0xf77089bb <+91>:    je     0xf7708aa3 <__vdso_gettimeofday+323>
+   0xf77089c1 <+97>:    cmp    ecx,0x2
+   0xf77089c4 <+100>:   je     0xf7708a5a <__vdso_gettimeofday+250>
+   0xf77089ca <+106>:   xor    eax,eax
+   0xf77089cc <+108>:   xor    edx,edx
+   0xf77089ce <+110>:   cmp    ecx,0x3
+   0xf77089d1 <+113>:   je     0xf7708a86 <__vdso_gettimeofday+294>
+   0xf77089d7 <+119>:   mov    ecx,DWORD PTR [edi+esi*1+0x1c]
+   0xf77089db <+123>:   mov    ebx,DWORD PTR [ebp-0x14]
+   0xf77089de <+126>:   cmp    ebx,DWORD PTR [edi+esi*1]
+   0xf77089e1 <+129>:   jne    0xf7708985 <__vdso_gettimeofday+37>
+   0xf77089e3 <+131>:   add    eax,DWORD PTR [ebp-0x20]
+   0xf77089e6 <+134>:   mov    ebx,DWORD PTR [ebp+0x8]
+   0xf77089e9 <+137>:   adc    edx,DWORD PTR [ebp-0x1c]
+---Type <return> to continue, or q <return> to quit---
+   0xf77089ec <+140>:   xor    edi,edi
+   0xf77089ee <+142>:   shrd   eax,edx,cl
+   0xf77089f1 <+145>:   shr    edx,cl
+   0xf77089f3 <+147>:   test   cl,0x20
+   0xf77089f6 <+150>:   cmovne eax,edx
+   0xf77089f9 <+153>:   cmovne edx,edi
+   0xf77089fc <+156>:   cmp    edx,0x0
+   0xf77089ff <+159>:   jbe    0xf7708a4f <__vdso_gettimeofday+239>
+   0xf7708a01 <+161>:   xor    ecx,ecx
+   0xf7708a03 <+163>:   add    eax,0xc4653600
+   0xf7708a08 <+168>:   adc    edx,0xffffffff
+   0xf7708a0b <+171>:   add    ecx,0x1
+   0xf7708a0e <+174>:   cmp    edx,0x0
+   0xf7708a11 <+177>:   ja     0xf7708a03 <__vdso_gettimeofday+163>
+   0xf7708a13 <+179>:   cmp    eax,0x3b9ac9ff
+   0xf7708a18 <+184>:   ja     0xf7708a03 <__vdso_gettimeofday+163>
+   0xf7708a1a <+186>:   mov    edi,DWORD PTR [ebp-0x18]
+   0xf7708a1d <+189>:   add    DWORD PTR [ebx],ecx
+   0xf7708a1f <+191>:   mov    ecx,eax
+   0xf7708a21 <+193>:   mov    DWORD PTR [ebx+0x4],eax
+   0xf7708a24 <+196>:   test   edi,edi
+   0xf7708a26 <+198>:   je     0xf7708ac0 <__vdso_gettimeofday+352>
+   0xf7708a2c <+204>:   mov    edx,0x10624dd3
+---Type <return> to continue, or q <return> to quit---
+   0xf7708a31 <+209>:   sar    ecx,0x1f
+   0xf7708a34 <+212>:   imul   edx
+   0xf7708a36 <+214>:   sar    edx,0x6
+   0xf7708a39 <+217>:   sub    edx,ecx
+   0xf7708a3b <+219>:   mov    DWORD PTR [ebx+0x4],edx
+   0xf7708a3e <+222>:   mov    edx,DWORD PTR [ebp+0xc]
+   0xf7708a41 <+225>:   xor    eax,eax
+   0xf7708a43 <+227>:   test   edx,edx
+   0xf7708a45 <+229>:   jne    0xf7708aaa <__vdso_gettimeofday+330>
+   0xf7708a47 <+231>:   add    esp,0x14
+   0xf7708a4a <+234>:   pop    ebx
+   0xf7708a4b <+235>:   pop    esi
+   0xf7708a4c <+236>:   pop    edi
+   0xf7708a4d <+237>:   pop    ebp
+   0xf7708a4e <+238>:   ret
+   0xf7708a4f <+239>:   xor    ecx,ecx
+   0xf7708a51 <+241>:   cmp    eax,0x3b9ac9ff
+   0xf7708a56 <+246>:   jbe    0xf7708a1a <__vdso_gettimeofday+186>
+   0xf7708a58 <+248>:   jmp    0xf7708a01 <__vdso_gettimeofday+161>
+   0xf7708a5a <+250>:   mov    eax,DWORD PTR [esi-0x2208]
+   0xf7708a60 <+256>:   xor    edx,edx
+   0xf7708a62 <+258>:   sub    eax,DWORD PTR [edi+esi*1+0x8]
+   0xf7708a66 <+262>:   mov    ebx,DWORD PTR [edi+esi*1+0x10---Type <return> to continue, or q <return> to quit---
+]
+   0xf7708a6a <+266>:   sbb    edx,DWORD PTR [edi+esi*1+0xc]
+   0xf7708a6e <+270>:   mov    ecx,DWORD PTR [edi+esi*1+0x14]
+   0xf7708a72 <+274>:   and    ebx,eax
+   0xf7708a74 <+276>:   mov    eax,DWORD PTR [edi+esi*1+0x18]
+   0xf7708a78 <+280>:   and    ecx,edx
+   0xf7708a7a <+282>:   imul   ecx,eax
+   0xf7708a7d <+285>:   mul    ebx
+   0xf7708a7f <+287>:   add    edx,ecx
+   0xf7708a81 <+289>:   jmp    0xf77089d7 <__vdso_gettimeofday+119>
+   0xf7708a86 <+294>:   mov    DWORD PTR [ebp-0x18],0x0
+   0xf7708a8d <+301>:   jmp    0xf7708a62 <__vdso_gettimeofday+258>
+   0xf7708a8f <+303>:   pause
+   0xf7708a91 <+305>:   mov    eax,DWORD PTR [esi-0x3278]
+   0xf7708a97 <+311>:   test   al,0x1
+   0xf7708a99 <+313>:   jne    0xf7708a8f <__vdso_gettimeofday+303>
+   0xf7708a9b <+315>:   mov    DWORD PTR [ebp-0x14],eax
+   0xf7708a9e <+318>:   jmp    0xf7708996 <__vdso_gettimeofday+54>
+   0xf7708aa3 <+323>:   call   0xf7708660
+   0xf7708aa8 <+328>:   jmp    0xf7708a62 <__vdso_gettimeofd---Type <return> to continue, or q <return> to quit---
+ay+258>
+   0xf7708aaa <+330>:   mov    edx,DWORD PTR [esi-0x3218]
+   0xf7708ab0 <+336>:   mov    edi,DWORD PTR [ebp+0xc]
+   0xf7708ab3 <+339>:   mov    DWORD PTR [edi],edx
+   0xf7708ab5 <+341>:   mov    edx,DWORD PTR [esi-0x3214]
+   0xf7708abb <+347>:   mov    DWORD PTR [edi+0x4],edx
+   0xf7708abe <+350>:   jmp    0xf7708a47 <__vdso_gettimeofday+231>
+   0xf7708ac0 <+352>:   mov    eax,0x4e
+   0xf7708ac5 <+357>:   mov    ecx,DWORD PTR [ebp+0xc]
+   0xf7708ac8 <+360>:   mov    edx,ebx
+   0xf7708aca <+362>:   mov    ebx,ebx
+   0xf7708acc <+364>:   call   0xf7708b50 <__kernel_vsyscall>
+   0xf7708ad1 <+369>:   mov    ebx,edx
+   0xf7708ad3 <+371>:   jmp    0xf7708a47 <__vdso_gettimeofday+231>

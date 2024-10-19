@@ -4,20 +4,14 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
 
 
 - Hacking:
-<<<<<<< HEAD
-    * relearn GOT and PLT properly. Re-solve passcode.
-    * solve unexploitable. (on both pwnable.kr and pwnable.tw)
+    * md5 calc, note, rsa calc
     * learn the remaining knowledge you need to solve asm.
-    * solve asm
-
-=======
     * practice writing ROP exploits
-    * learn the remaining knowledge you need to solve asm.
     * solve asm
+    * learn the remaining knowledge you need to solve asm.
 
 - KMonad
     *  read [this](https://wiki.nikiv.dev/macOS/apps/karabiner/#my-personal-karabiner-setup). Try to do something similar with KMonad. Also remap hjkl to arrow keys, and get the caps lock home rebinding done through KMonad, in hope that it fucking loads on startup properly unlike xmodmap alt + q = esc caps lock = home key, home key = caps lock
->>>>>>> 8877309a6fac3cb84a530330c34da9c6cf224ce1
 
 - Books: 
     * centralize all ebooks in github

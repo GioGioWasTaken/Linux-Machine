@@ -10,6 +10,13 @@ When the Linux kernel is compiled with CONFIG_COMPAT_VDSO, a local attacker can,
 This is useful in terms of design, for Virtual syscalls.
 
 
+There never was a physical linux-vdso.so.1 binary in the filesystem, it's a virtual shared object. 
+
+The instructions or "gadgets" found in the VDSO, will vary depending on the CPU arch and OS .
+
+The virtual file name also changes depending on CPU architecture. For example , common virtual filenames of vDSO include vdso64.so, vdso32.so, vdsox32.so, and are typically linked in the kernel module filesystem.
+
+
 # Ret2vDSO:
 
 We can use some gadgets found in this memory region in order to construct a rop attack.

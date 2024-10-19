@@ -1,0 +1,28 @@
+A \textbf{Hilbert space} is a complete inner product space. Formally, a Hilbert space \( \mathcal{H} \) is a vector space over a field \( \mathbb{F} \) (either \( \mathbb{R} \) or \( \mathbb{C} \)) equipped with an inner product \( \langle \cdot, \cdot \rangle \), which satisfies the following properties:
+
+\begin{enumerate}
+    \item \textbf{Inner Product}: For all \( x, y, z \in \mathcal{H} \) and \( \alpha \in \mathbb{F} \), the inner product \( \langle x, y \rangle \) satisfies:
+    \begin{itemize}
+        \item \textbf{Conjugate Symmetry}:
+        \[
+        \langle x, y \rangle = \overline{\langle y, x \rangle}
+        \]
+        \item \textbf{Linearity in the first argument}:
+        \[
+        \langle \alpha x + z, y \rangle = \alpha \langle x, y \rangle + \langle z, y \rangle
+        \]
+        \item \textbf{Positivity}:
+        \[
+        \langle x, x \rangle \geq 0, \quad \text{and} \quad \langle x, x \rangle = 0 \iff x = 0
+        \]
+    \end{itemize}
+    
+    \item \textbf{Completeness}: The space \( \mathcal{H} \) is complete with respect to the norm induced by the inner product, i.e., for a Cauchy sequence \( \{x_n\} \subset \mathcal{H} \), there exists an element \( x \in \mathcal{H} \) such that:
+    \[
+    \lim_{n \to \infty} \|x_n - x\| = 0
+    \]
+    where the norm is defined by:
+    \[
+    \|x\| = \sqrt{\langle x, x \rangle}
+    \]
+\end{enumerate}

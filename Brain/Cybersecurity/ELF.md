@@ -17,6 +17,7 @@
 - The linker uses `sections` to build `segments`. Object files, are ELFs before the linking stage. They are made of `sections`.
 
 ## ELF header
+
 - All of this information can be viewed by running: `readelf -h <filename>`
 
 ![[Pasted image 20240628190409.png]]
