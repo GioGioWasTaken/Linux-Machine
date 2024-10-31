@@ -1,0 +1,66 @@
+%! TEX root = ./Q_is_field.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\begin {document}
+
+
+\section{About}
+\textit{This} will be my first proof done in Latex!
+
+
+\section{The proof to be done}
+
+Proof that ($\mathbb{Q}, +, \cdot$) is a Field 
+
+\section{Axioms}
+
+The set of integers \(\mathbb{Z}\) forms a group under addition, denoted as \((\mathbb{Z}, +)\). It is also closed under multiplication.
+
+\section{The proof itself:}
+To prove that \((\mathbb{Q}, +, \cdot)\) is a field, we will verify that the set of rational numbers \(\mathbb{Q}\) satisfies the field axioms under the operations of addition \(+\) and multiplication \(\cdot\), and has an identity e.
+
+\subsection*{1. Closure}
+
+Let $a, b \in \mathbb{Q}$. Then $a = \frac{m}{n}$ and $b = \frac{p}{q}$, for some numbers $p,q,m,n\in\mathbb{Z}$:
+
+\subsubsection*{Addition: }
+\[
+a + b = \frac{m}{n} + \frac{p}{q} = \frac{mq + np}{nq} \in \mathbb{Q}
+\]
+Seeing as $(\cdot,+)$ are closed under $\mathbb{Z}$. And $n,q \neq0$
+
+\subsubsection*{Multiplication: }
+
+Trivially the same.
+
+\section{trivial stuff, gonna skip }
+
+\section{Distributivity}
+
+\subsection{Addition}
++ Distirbutes over $\cdot$ :
+
+$
+\frac{a}{b} \left(\frac{x_1}{y_1}+\frac{x_2}{y_2}\right) = \frac{a}{b} \frac{x_1 y_2 + x_2 y_1}{y_1 y_2} = \frac{a \left(x_1 y_2 + x_2 y_1\right)}{b y_1 y_2}
+$
+
+
+\subsection{Multiplication}
+
+$
+\frac{a}{b} \frac{x_1}{y_1} + \frac{a}{b} \frac{x_2}{y_2} = \frac{a x_1}{b y_1} + \frac{a x_2}{b y_2} = \frac{a x_1 b y_2 + b y_1 a x_2}{b^2 y_1 y_2} = \frac{a x_1 y_2 + a y_1 x_2}{b y_1 y_2}
+$
+
+\section{maybe not so trivial}
+
+All nonzero fractions have inverses under multiplication since if $\frac{a}{b}$  is not 0, then it has an inverse $\frac{b}{a}$. Which exists since $a\neq0$.
+
+Overall this was really awful to write. Writing latex feels slow as shit and I  never want to do it again. Looks pretty though. $\frac{a}{b}$
+
+
+$
+$
+
+\end{document}

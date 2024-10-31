@@ -20,6 +20,10 @@
       + sometimes, you renamed a variable the wrong way and you're misleading yourself
   * Make sure you trace everything to its root.
 
+# Do not make the exploit, before you verify that all its constraints are met! even if it feels like the most trivial of all constraints
+
+- Remember that missing `pop eax` case? don't make ROP chains before you verify that you control the registers you need to control!
+
 
 # Templates
 
@@ -60,7 +64,7 @@ def main():
         p = process(f"./{binary_name}")
     else:
         if(sys.argv[1] == "remote"):
-            ip, port = REMOTE.replace("nc ", "").split(" ")[0]
+            ip, port = REMOTE.replace("nc ", "").split(" ")
             port = int(port)
             p = remote(ip, port)
             libc = ELF(f"./{libc_name}")

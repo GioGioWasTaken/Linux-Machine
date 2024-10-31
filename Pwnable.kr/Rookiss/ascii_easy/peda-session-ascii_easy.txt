@@ -1,2 +1,4 @@
-break *0x08048585
+break *0x0804856b
+break *vuln
+hbreak *0x556a5642
 

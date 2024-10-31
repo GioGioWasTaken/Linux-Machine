@@ -1,0 +1,58 @@
+%! TEX root = ./Z_construction.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin {document}
+
+
+\section{Preface}
+The set of integers $\mathbb{Z}$ can be constructed from the set of natural numbers $ \mathbb{N}$ by introducing the concept of ordered pairs to represent negative numbers and zero.
+
+We let $R \subseteq N\times N $ be an equivalence relation on it. Defined as:
+\\
+$
+(a,b)R(c,d) \iff a-b = c-d
+$
+\\
+\\
+Which neccesitates:
+\\
+$
+-1 := \{ (2,3), (3,4), \dots, (n, n+1) \}
+$
+\\
+
+Similarily:
+\\
+1 := \{ (3,2), (4,3), \dots, (n+1, n) \}
+
+\section{Operations}
+
+\subsection{Addition}
+
+Therefore, It will be defined using the equivalence relationship previously established, that:
+
+$
+a,b \in Z,$ and $p,q,m,c\in \mathbb{N}$ s.t. $a=(p,q), b=(m,c) \subseteq R$  a+b= $(p+m, q+c)$
+$
+
+Since: 
+
+$
+(a,b) +(c,d) = (a-b) + (c-d) = a+b -(c+d)
+$
+
+\subsection{Multiplication}
+
+Similarily:
+
+$(p-q) \cdot (m-c) = (pm-pc-qm+qc) = (pm+qc) -(pc+qm) $
+\\
+Therefore:
+
+$ a\cdot b = (pm+qc, pc+qm)$
+
+$ \qed $
+\end{document}
