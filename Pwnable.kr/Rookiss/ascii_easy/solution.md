@@ -10,13 +10,14 @@ But wait... 0x5555e000 will always not be possible to input with printable ascii
 
 `gdb-peda$ print &system
 $1 = (<text variable, no debug info> *) 0x3eed0 <system>`
- 0x5555e000+0x3eed0= 0x5594CD0 fuck. It seems the author intentionally prevented us access to the system function
+ 0x5555e000+0x3eed0= 0x5594CD0 fuck. It seems the author intentionally prevented us access to the system function.
+
+Okay, well, we can still look for other functions in libc. We don't have to jump at their start, either.
 
 ```bash
 rop ascii_easy | grep "pop edi" | awk '{print $1}'  > pop_edi_addr.txt
 ```
 first run this command, to see if we have some printable pop edi gadgets. 
-
 
 
 
