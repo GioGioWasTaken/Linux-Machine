@@ -1,0 +1,45 @@
+%! TEX root = ./{filename}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin {document}
+
+\section{Contents}
+
+I will prove the sum of the Nth roots of unity is 0 for any n.
+
+\section{Proof}
+
+So we will say that $\zeta_1$ is the first Nth root of unity if and only if:
+$\zeta_1^n =1$.\bigskip
+
+It is known that for any complex number z, there are n Nth roots. Therefore, this also holds for 1.
+
+So there are n Nth roots of unity. We will try to show that for the roots of unity their sum is always 0.
+We can find the Nth roots of a complex number Z by this formula:
+
+$
+\sqrt[n]{z} = \sqrt[n]{r} \cdot \text{cis} \left( \frac{\theta + 2k\pi}{n} \right)
+$
+The polar represenation of 1 is $ 1cis(0) $. So this simplifies to:
+
+$ \sqrt[n]{1} = 1\cdot \text{cis} \left( \frac{2k\pi}{n} \right)$
+
+It is proven that $ \frac{cis(a)}{cis(b)} = cis(a-b)$. Therefore:
+
+$
+\frac{cis(\frac{2k\pi}{n})}{cis(\frac{2(k+1)\pi}{n})}=
+cis(\frac{2k\pi}{n} - (\frac{(2k+2)\pi} {n})) =
+cis(\frac{2\pi}{n})
+$
+
+So in general the w Nth root of unity is: 
+
+$ a_w =  cis(0)\cdot cis(\frac{2\pi}{n})^{w-1} $
+
+
+
+\end {document}
+

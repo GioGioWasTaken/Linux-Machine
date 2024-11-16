@@ -1,0 +1,836 @@
+What is this?
+
+This file will show the git commit history, and makes some explainations about it.
+
+I've run the command:
+git log --pretty=fuller --stat -- OS_C_prog/
+
+
+Something of note is that the git repo linked includes many unrelated files and directories, since it's the repo I use for everything. The only directory relevant to the course is OS_C_prog/ , the others are either other courses, or unrelated personal projects of mine.
+
+
+Before you look at this, the first two commits in this history, the one from Oct 7, and the one from Aug 28, are both completely unrelated to any work, I just happened to run a make clean(Aug 28) and a compile(Oct 7) on those days for no reason. This of course can be proven by checking the git repositery that has been linked, you will see that no changes have been made to any source files. Furthermore, the messages on these commits make no sense, since the messages were aimed at other things I did in this directory. Again, if you take a look at the changes for these commits, you will see that none of the source files changed at all, and that the commits had entirely different purposes.
+
+Overall this .txt file contains all changes I ever made to this directory from the start of the course. Feel free to look at any commit you like and confirm that the commit message and the changes made are indeed the same.
+
+
+
+commit 8574c4d648bbc46ec6c1d45b51b0a199b61a940e
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Mon Oct 7 18:22:04 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Mon Oct 7 18:22:04 2024 +0300
+
+    merge
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.o       | Bin 0 -> 7888 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler  | Bin 0 -> 72824 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.o  | Bin 0 -> 21976 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.o       | Bin 0 -> 22552 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.o      | Bin 0 -> 9872 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.o       | Bin 0 -> 17592 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.o | Bin 0 -> 10488 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.o     | Bin 0 -> 9920 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.o       | Bin 0 -> 12976 bytes
+ 9 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 7e6e30d504d6c88686f2a912d98d62becfad0125
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 28 18:34:12 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Wed Aug 28 18:34:12 2024 +0300
+
+    rust, and some obsidian notes
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.o       | Bin 7896 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler  | Bin 72800 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.o  | Bin 21976 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.o       | Bin 22560 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.o      | Bin 9872 -> 0 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.o       | Bin 17600 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.o | Bin 10488 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.o     | Bin 9928 -> 0 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.o       | Bin 12976 -> 0 bytes
+ 9 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ea620714e4cff44258184138928c3fd72744f414
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 23 21:50:43 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Fri Aug 23 21:50:43 2024 +0300
+
+    DONE
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  11 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.o  | Bin 0 -> 7896 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/AwesomeAssembler    | Bin 0 -> 72800 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.o    | Bin 0 -> 21976 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |   2 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.o  | Bin 0 -> 22560 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.o | Bin 0 -> 9872 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  18 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.o  | Bin 0 -> 17600 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.o   | Bin 0 -> 10488 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.o       | Bin 0 -> 9928 bytes
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.o  | Bin 0 -> 12976 bytes
+ .../MMN_14_ASSEMBLER/Screenshots/Errors.png        | Bin 0 -> 290352 bytes
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.ob      |   3 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file3.am      |   7 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file3.as      |   6 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file4.am      |   7 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file4.as      |   7 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file5.as      |   4 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.am      |  15 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.as      |  18 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.ob      |  35 --
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/Assembler.c  |  76 ++++
+ .../MMN_14_ASSEMBLER_UBUNTU/AwesomeAssembler       | Bin 0 -> 63112 bytes
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/assembler.h    |  36 ++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/exit.h         |  92 ++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/first_pass.h   | 232 ++++++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/globals.h      |  22 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/lexer.h        | 151 +++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/memory.h       | 182 ++++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/preprocessor.h | 156 +++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/second_pass.h  |  11 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/symbols.h      | 103 +++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Headers/utils.h        |  92 ++++
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/README.md    |  63 +++
+ .../MMN_14_ASSEMBLER_UBUNTU/SRC/first-pass.c       | 469 +++++++++++++++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/SRC/lexer.c  | 463 ++++++++++++++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/SRC/memory.c | 256 +++++++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/SRC/preprocessor.c     | 355 ++++++++++++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/SRC/second-pass.c      |  90 ++++
+ .../MMN_14_ASSEMBLER_UBUNTU/SRC/symbols.c          | 118 ++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/SRC/utils.c  | 144 +++++++
+ .../MMN_14_ASSEMBLER_UBUNTU/Screenshots/Errors.png | Bin 0 -> 290352 bytes
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file.am          |  22 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file.as          |  23 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file.ent         |   2 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file.ext         |   4 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file.ob          |  42 ++
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file2.am         |   6 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file2.as         |  11 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file2.ob         |  13 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file3.am         |   7 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file3.as         |   6 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file4.am         |   7 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file4.as         |   7 +
+ .../MMN_14_ASSEMBLER_UBUNTU/Tests/file5.as         |   4 +
+ .../OS_C_prog/MMN_14_ASSEMBLER_UBUNTU/makefile     |  34 ++
+ .../OS_C_prog/{MMN_14_ASSEMBLER => }/makemake      |   0
+ .../zip_files/MMN_14_ASSEMBLER_UBUNTU.zip          | Bin 0 -> 198 bytes
+ 59 files changed, 3354 insertions(+), 78 deletions(-)
+
+commit 202ed453daff911406f0fbd118a74b6ead16fac2
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 23 20:40:18 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Fri Aug 23 20:40:18 2024 +0300
+
+    fixed macro spacing, fixed off by 1 DC
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  1 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 42 +++++++++++++---------
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  1 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ob       | 10 +++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.am      |  2 --
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.am      |  7 ++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.ob      | 35 ++++++++++++++++++
+ 7 files changed, 66 insertions(+), 32 deletions(-)
+
+commit caa61ac836f19836bbe3d4fc22720d0c180d4550
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 23 20:11:35 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Fri Aug 23 20:11:35 2024 +0300
+
+    ready to send
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  19 ++-
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |   8 +-
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |   4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/symbols.h   |   6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |  12 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |   7 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  52 ++++---
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 150 +++++++++++----------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  52 +++----
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  91 ++++++-------
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  15 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.c       |   5 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  15 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.am      |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.as      |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.am      |  18 +++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/prog1.as      |  18 +++
+ 17 files changed, 259 insertions(+), 215 deletions(-)
+
+commit 836bb89d8fa7ca8f9b06922eadb05e428f567add
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 23 18:30:01 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Fri Aug 23 18:30:01 2024 +0300
+
+    fixed every single issue with binary code generation. Only thing left to do is make everything comply under C90
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |  10 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/symbols.h   |   3 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |  24 +++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  55 ++++------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  83 +++++++++------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c | 111 +++++++++------------
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  11 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  11 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.c       |   4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |   9 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |   9 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ent      |   3 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ext      |   4 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ob       |  91 ++++++++---------
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.am      |  10 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.as      |  13 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.ob      |  22 ++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/docker_make.sh      |  10 ++
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   2 +-
+ University/OS_C_prog/docker_make.sh                |  10 ++
+ 21 files changed, 269 insertions(+), 230 deletions(-)
+
+commit a5b4bec566ee0cba384e4b60d6143a114521c66b
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 22 23:37:19 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Thu Aug 22 23:37:19 2024 +0300
+
+    documentation+ standard cleanup, obj print
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  24 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/assembler.h |  25 +++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          | 173 ++++++++++++++++++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   |   4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     | 132 +++++++++++++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    | 162 ++++++++++++++++++-
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        | 120 +++++++++++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/symbols.h   |  62 +++++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |  81 ++++++++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  33 ++--
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  25 ++-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  25 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  41 ++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  45 +++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.c       |  27 +++-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  43 +++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  20 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  20 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ext      |   1 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ob       |  55 +++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.am      |   3 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.as      |   3 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file2.ob      |   8 +
+ University/OS_C_prog/MMN_14_ASSEMBLER/makefile     |   2 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   2 +-
+ 25 files changed, 967 insertions(+), 169 deletions(-)
+
+commit 4be47a3210f8b881d6a5378c45a6e28e5d1673ce
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 21 21:36:55 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Wed Aug 21 21:36:55 2024 +0300
+
+    finished writing all the code !!!!! All that's left to do is some error correction and printing the object file
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |  3 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/symbols.h   |  1 +
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |  2 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 68 ++++++++++++++--------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  8 +++
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.c       |  2 +
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  4 ++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  8 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  8 +--
+ 10 files changed, 73 insertions(+), 37 deletions(-)
+
+commit fd5fc5f9934e3435dced5adb4019f73d9628711b
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 21 18:52:57 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Wed Aug 21 18:52:57 2024 +0300
+
+    finished building the second word for one operand types, commit before refactor
+
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  21 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   7 +
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/symbols.h   |  45 +++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |   9 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |   9 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 146 ++++++++++++++-------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c | 108 ++++++++++++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |   6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   | 113 +++-------------
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/symbols.c       |  98 ++++++++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  10 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |   7 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ext      |   1 +
+ 15 files changed, 393 insertions(+), 203 deletions(-)
+
+commit 398e3ba89680b19ee42e55eb344641b0103a09ed
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Tue Aug 20 20:52:26 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Tue Aug 20 20:52:26 2024 +0300
+
+    started building the instruction binary code
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  13 +++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |  13 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   5 +-
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |   3 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |   2 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  11 +--
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 100 +++++++++++++++++----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  91 ++++++++++++++++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  49 +++++-----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  13 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  12 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ent      |   4 -
+ 14 files changed, 242 insertions(+), 83 deletions(-)
+
+commit 20ed2dbfdd75905175a8dc7c8f018145527c520d
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Mon Aug 19 23:35:04 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Mon Aug 19 23:35:04 2024 +0300
+
+    fixed entry table bugs.
+
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 120 +++++++++------------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  13 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  54 +++++-----
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  13 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  13 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ent      |   5 +
+ 7 files changed, 106 insertions(+), 113 deletions(-)
+
+commit 6b6fd581a2ca262f5840559f11d84d5bd777150e
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Mon Aug 19 18:48:19 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Mon Aug 19 18:49:40 2024 +0300
+
+    commit before trying to refactor duplicate label check
+
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |   4 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 154 ++++++++++++++++-----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  75 ++++++----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |   4 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.ent      |   0
+ 7 files changed, 170 insertions(+), 69 deletions(-)
+
+commit cbfa90dc99753639b596d9c4d40fc23f395a3420
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Sun Aug 18 19:41:07 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Sun Aug 18 19:41:07 2024 +0300
+
+    there is a n issue with entry where the assembler thinks it's an instruction
+
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |  5 ++
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |  5 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 21 ++++--
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  3 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   | 77 ++++++++++++++++++++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  8 +--
+ University/OS_C_prog/MMN_14_ASSEMBLER/cat          |  0
+ 9 files changed, 106 insertions(+), 23 deletions(-)
+
+commit 586c79551fd6f0481c120b867a52246f8d843c4b
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Sun Aug 18 16:00:39 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Sun Aug 18 16:00:39 2024 +0300
+
+    finished first pass, fixed macro issues, fixed preprocessor issues, did so fucking much, break time and then ill finish second-pass
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  35 +++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/assembler.h |  11 ++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  15 +++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  20 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |   3 +
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  25 +++-
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |   2 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |   2 +
+ University/OS_C_prog/MMN_14_ASSEMBLER/README.md    |  43 ++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 145 ++++++++++++++-------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  97 +++++++++-----
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 139 ++++++++++++--------
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  30 ++++-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  20 +++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  16 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  10 +-
+ .../MMN_14_ASSEMBLER/implementation_details.md     |   8 +-
+ 17 files changed, 447 insertions(+), 174 deletions(-)
+
+commit fbe0f9aef12b5de03a83cfab82a1690c3eb4bb7e
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Sat Aug 17 20:14:18 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Sat Aug 17 20:14:18 2024 +0300
+
+    finished first-pass (almost need to implement 3 functions) and started second pass skeleton. Almsot doneeeeee
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |   4 +
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  10 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |   5 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   2 +-
+ .../MMN_14_ASSEMBLER/Headers/second_pass.h         |   9 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 228 ++++++++++++++-------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 118 ++++++++---
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  58 +++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |   2 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/second-pass.c   |  53 +++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  22 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |   8 +-
+ 14 files changed, 401 insertions(+), 134 deletions(-)
+
+commit 9865c5c591bb55f82b96cb456d1d7bccf0b8a080
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 16 19:49:10 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Fri Aug 16 19:49:10 2024 +0300
+
+    almost done implementing the instruction parsing
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  21 +++-
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |   7 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |   6 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 138 +++++++++++++++------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  97 ++++++++++++++-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  37 +++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |   2 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  37 +++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |  16 +--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  11 +-
+ .../MMN_14_ASSEMBLER/implementation_details.md     |  23 +++-
+ 13 files changed, 327 insertions(+), 77 deletions(-)
+
+commit aeafee6bef06783a86d8468123bb0bfb5ccebefc
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 15 23:14:32 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Thu Aug 15 23:14:32 2024 +0300
+
+    Dnd character
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit e2dfa3ef61a5fc3d776769237d938b5297695725
+Author:     Iyar Desktop Mom <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 15 19:45:43 2024 +0300
+Commit:     Iyar Desktop Mom <iyar.segev@gmail.com>
+CommitDate: Thu Aug 15 19:45:43 2024 +0300
+
+    first-pass coded addNumbers, addNumber, comma parsing, fixed header issues
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  10 +-
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  28 +++--
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     |  12 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    |   5 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |   8 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 120 +++++++++++++++------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  |  84 ++++++++++++---
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c |  47 +++++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.am       |   6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |   4 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/cat          |   0
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   7 +-
+ 12 files changed, 256 insertions(+), 75 deletions(-)
+
+commit 172f7d0b1cbd49f01ad2745e713b6913b87650c7
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 14 12:56:11 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Wed Aug 14 12:56:11 2024 +0300
+
+    added data.h working on some parsing of directives
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  5 +++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  2 --
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     | 13 ++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/memory.h    | 17 ++++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/tables.h    |  7 ----
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    |  2 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 39 ++++++++++++++++++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/memory.c | 11 ++++++
+ .../MMN_14_ASSEMBLER/implementation_details.md     |  5 ++-
+ 9 files changed, 90 insertions(+), 11 deletions(-)
+
+commit 4afee4494682dd1518df9417ad213e79c6317a5b
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Tue Aug 13 22:47:00 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Tue Aug 13 22:47:00 2024 +0300
+
+    made a lot of progress in the first-pass of the assembler. I'm starting to catch momentum!
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/.gdb_history |  16 +++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |   8 ++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          |  33 +++++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   |   2 +-
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  11 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/tables.h    |   3 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |   9 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 115 ++++++++++++++++-----
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  |  40 +++----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  25 ++++-
+ .../{preprocessed.am => Tests/file.am}             |  24 ++---
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  18 ++--
+ .../MMN_14_ASSEMBLER/implementation_details.md     |   4 +-
+ .../peda-session-AwesomeAssembler.txt              |   6 ++
+ University/OS_C_prog/MMN_14_ASSEMBLER/run.gdb      |   2 -
+ 15 files changed, 228 insertions(+), 88 deletions(-)
+
+commit 75e32491ff46ea757f9a1225e507eb9d4f491257
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Sun Aug 11 19:52:57 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Sun Aug 11 19:52:57 2024 +0300
+
+    some progress on first pass
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  | 29 +++++----
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  6 ++
+ .../MMN_14_ASSEMBLER/Headers/first_pass.h          | 28 ++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   |  9 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/lexer.h     | 10 +++
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        | 22 +++----
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/tables.h    | 10 +++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |  3 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/.gdb_history    |  4 --
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c    | 75 ++++++++++++++++++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/lexer.c  | 22 +++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 25 ++++----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  | 11 ++++
+ .../MMN_14_ASSEMBLER/implementation_details.md     | 55 ++++++++++++++++
+ 14 files changed, 265 insertions(+), 44 deletions(-)
+
+commit c00695e032854648b3ed20622b5ddbf515e64997
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Sat Aug 10 14:56:19 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Sat Aug 10 14:56:19 2024 +0300
+
+    started planning the first pass
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h        |  6 ++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/first-pass.c       | 12 ++++++++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c     |  6 +-----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c            |  9 +++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/implementation_details.md     |  0
+ 5 files changed, 28 insertions(+), 5 deletions(-)
+
+commit be9315a80b4208301b09ae3a2d22f8bb7108ae52
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Sat Aug 10 01:04:30 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Sat Aug 10 01:04:30 2024 +0300
+
+    small change
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit fb1eea5bf7b2e42915f72f11d73fe912d535a22f
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Fri Aug 9 20:09:26 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Fri Aug 9 20:09:26 2024 +0300
+
+    preprocessor tentatively finished!
+
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  10 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 189 ++++++++++++---------
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |   2 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/preprocessed.am     |  30 ++++
+ 4 files changed, 146 insertions(+), 85 deletions(-)
+
+commit 689de9b0a59d5543a13a182665dd286170770302
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 8 19:33:40 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Thu Aug 8 19:33:40 2024 +0300
+
+    add_macro without sideffects
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 74 ++++++++++++----------
+ .../OS_C_prog/MMN_14_ASSEMBLER/preprocessed.am     |  0
+ 2 files changed, 40 insertions(+), 34 deletions(-)
+
+commit 19eb77d629fcfd80a6e0466cfddabb185d45c0aa
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 8 18:58:10 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Thu Aug 8 18:58:10 2024 +0300
+
+    commiting before i have a heartattack
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/.gdb_history |  31 ++
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |   2 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |   2 +
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |   9 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 225 +++++++--------
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |   1 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  15 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/makefile     |   3 +-
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   8 +-
+ .../peda-session-AwesomeAssembler.txt              |   3 -
+ .../OS_C_prog/MMN_14_ASSEMBLER/preprocessed.am     |  24 --
+ University/OS_C_prog/preprocessor.c                | 313 +++++++++++++++++++++
+ 12 files changed, 471 insertions(+), 165 deletions(-)
+
+commit d6a45c38c786ebae5f0d6cea2d22cdd55f2a01d9
+Merge: af36609 efb8206
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 7 22:42:33 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Wed Aug 7 22:42:33 2024 +0300
+
+    weird merge
+
+commit af366096e9d2f26d26d67a6666d1413e26c8f448
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 7 22:40:02 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Wed Aug 7 22:40:02 2024 +0300
+
+    no idea
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+
+commit efb820664f7f1f3efaccbd91c53e40d4c48b32ae
+Author:     Iyar Laptop <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 7 19:37:51 2024 +0300
+Commit:     Iyar Laptop <iyar.segev@gmail.com>
+CommitDate: Wed Aug 7 19:37:51 2024 +0300
+
+    fuck my life
+
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 39 +++++++++++++---------
+ .../OS_C_prog/MMN_14_ASSEMBLER/preprocessed.am     | 24 +++++++++++++
+ 2 files changed, 48 insertions(+), 15 deletions(-)
+
+commit d5a7bf90118b172d22c7d1b3791d9a9382bf025f
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 7 18:46:21 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Wed Aug 7 18:46:21 2024 +0300
+
+    more processer progress, commit before restart
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/.gdb_history | 92 ++++++++++++++++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  3 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   |  4 +-
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/.gdb_history    |  4 +
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 69 +++++++++++++++-
+ .../MMN_14_ASSEMBLER/Tests/preprocessed.am         | 12 ---
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     | 10 ++-
+ University/OS_C_prog/MMN_14_ASSEMBLER/run.gdb      |  1 +
+ 9 files changed, 179 insertions(+), 20 deletions(-)
+
+commit 71fa9d7d3b863fc11c8dec1d7776241490b9ed16
+Author:     Iyar, Dad's house <iyar.segev@gmail.com>
+AuthorDate: Wed Aug 7 12:49:49 2024 +0300
+Commit:     Iyar, Dad's house <iyar.segev@gmail.com>
+CommitDate: Wed Aug 7 12:49:49 2024 +0300
+
+    Converted to linked list, fixing parsing bug rn
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/.gdb_history |  26 +++++
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  17 ++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 114 ++++++++++++++-------
+ .../MMN_14_ASSEMBLER/Tests/preprocessed.am         |  12 +++
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   2 +-
+ .../peda-session-AwesomeAssembler.txt              |   3 +
+ University/OS_C_prog/MMN_14_ASSEMBLER/run.gdb      |   3 +
+ 7 files changed, 134 insertions(+), 43 deletions(-)
+
+commit 9522ccb4fb079c378351c3a27a65ec0c6201aa81
+Author:     Iyar Laptop <iyar.segev@gmail.com>
+AuthorDate: Tue Aug 6 14:47:37 2024 +0300
+Commit:     Iyar Laptop <iyar.segev@gmail.com>
+CommitDate: Tue Aug 6 14:47:45 2024 +0300
+
+    preproccessor almost finished
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/.gdb_history |   9 ++
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  24 +++-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      |  10 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   |   5 +-
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |   7 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     |   4 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 139 +++++++++++++++++----
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  |  12 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Tests/file.as       |  11 ++
+ .../MMN_14_ASSEMBLER/Tests/preprocessed.am         |   0
+ University/OS_C_prog/MMN_14_ASSEMBLER/makefile     |  35 ++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/makemake     |   4 +
+ 12 files changed, 219 insertions(+), 41 deletions(-)
+
+commit f4097824e6913bad58a545c088f61c7fd1e2d40f
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Sat Aug 3 13:22:15 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Sat Aug 3 13:22:15 2024 +0300
+
+    commiting frozen progress
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  |  2 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/exit.h      | 11 ++++
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        |  6 +-
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 66 +++++++++++++++++++---
+ 4 files changed, 75 insertions(+), 10 deletions(-)
+
+commit d296e609b1bf7015eab3e371ac2688ab2641a52a
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Thu Aug 1 18:38:22 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Thu Aug 1 18:38:22 2024 +0300
+
+    started working on the assembler
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/Assembler.c  | 21 +++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/globals.h   | 14 ++++++
+ .../MMN_14_ASSEMBLER/Headers/preprocessor.h        | 21 +++++++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/Headers/utils.h     | 11 +++++
+ .../OS_C_prog/MMN_14_ASSEMBLER/SRC/preprocessor.c  | 55 ++++++++++++++++++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/SRC/utils.c  | 15 ++++++
+ University/OS_C_prog/MMN_14_ASSEMBLER/main.c       |  1 -
+ University/OS_C_prog/MMN_14_ASSEMBLER/makefile     |  0
+ 8 files changed, 137 insertions(+), 1 deletion(-)
+
+commit 7c00ae709defc1048a42a37f9e5ede46d8d0c25b
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Mon Jul 8 14:52:31 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Mon Jul 8 14:52:31 2024 +0300
+
+    notime
+
+ University/OS_C_prog/Exam/exec.sh      |   3 +++
+ University/OS_C_prog/Exam/exec_long.sh |   4 ++++
+ University/OS_C_prog/Exam/file         | Bin 0 -> 15608 bytes
+ University/OS_C_prog/Exam/file.c       |  21 +++++++++++++++++++++
+ University/OS_C_prog/Exam/long.c       |   5 +++++
+ University/OS_C_prog/Exam/s.txt        |   1 +
+ 6 files changed, 34 insertions(+)
+
+commit 0b3ba4cd8ce8b565e583b30125f7a7542dc99340
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Sat Jun 8 20:57:54 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Sat Jun 8 20:57:54 2024 +0300
+
+    nvim config
+
+ University/OS_C_prog/MMN_14_ASSEMBLER/main.c       |   1 +
+ University/OS_C_prog/MMN_23_OS/hash.c              |  52 +++++++++++++++++++++
+ University/OS_C_prog/{ => zip_files}/MMN_11_OS.zip | Bin
+ University/OS_C_prog/{ => zip_files}/MMN_12_OS.zip | Bin
+ 4 files changed, 53 insertions(+)
+
+commit e6b39129076082a4662e58eb8a562743bc16fb8d
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Fri May 10 19:10:34 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Fri May 10 19:10:34 2024 +0300
+
+    Uni
+
+ University/OS_C_prog/MMN_11_OS.zip                 | Bin 0 -> 1333810 bytes
+ .../OS_C_prog/MMN_11_OS/my_add/make_file_add       |   2 +
+ University/OS_C_prog/MMN_11_OS/my_add/my_add       | Bin 0 -> 15704 bytes
+ University/OS_C_prog/MMN_11_OS/my_add/my_add.c     |  90 +++++++++++++++++++++
+ .../my_add/my_add_pics/Shot-2024-04-12-205213.png  | Bin 0 -> 287399 bytes
+ .../my_add/my_add_pics/Shot-2024-04-12-205306.png  | Bin 0 -> 300343 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/make_file_suffix |   2 +
+ University/OS_C_prog/MMN_11_OS/my_suffix/my_suffix | Bin 0 -> 15800 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/my_suffix.c      |  88 ++++++++++++++++++++
+ .../my_suffix_pics/Shot-2024-04-12-202914.png      | Bin 0 -> 80 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203039.png      | Bin 0 -> 198370 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203127.png      | Bin 0 -> 188612 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203159.png      | Bin 0 -> 193780 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203229.png      | Bin 0 -> 219152 bytes
+ University/OS_C_prog/MMN_12_OS.zip                 | Bin 0 -> 94717 bytes
+ .../OS_C_prog/MMN_12_OS/partialSums/makefile.exe   |   2 +
+ .../OS_C_prog/MMN_12_OS/partialSums/partialSums    | Bin 0 -> 9000 bytes
+ .../OS_C_prog/MMN_12_OS/partialSums/partialSums.c  |  82 +++++++++++++++++++
+ .../partialSums_images/Shot-2024-05-10-184441.png  | Bin 0 -> 55352 bytes
+ .../partialSums_images/Shot-2024-05-10-184544.png  | Bin 0 -> 39426 bytes
+ .../MMN_12_OS/ubantu_partialSums/makefile.exe      |   2 +
+ .../MMN_12_OS/ubantu_partialSums/partialSums.c     |  82 +++++++++++++++++++
+ 22 files changed, 350 insertions(+)
+
+commit 39f88d37946333b76018b759985facebab564c00
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Fri May 10 19:09:42 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Fri May 10 19:09:42 2024 +0300
+
+    Uni
+
+ University/OS_C_prog/MMN_11_OS.zip                 | Bin 1333810 -> 0 bytes
+ .../OS_C_prog/MMN_11_OS/my_add/make_file_add       |   2 -
+ University/OS_C_prog/MMN_11_OS/my_add/my_add       | Bin 15704 -> 0 bytes
+ University/OS_C_prog/MMN_11_OS/my_add/my_add.c     |  90 ---------------------
+ .../my_add/my_add_pics/Shot-2024-04-12-205213.png  | Bin 287399 -> 0 bytes
+ .../my_add/my_add_pics/Shot-2024-04-12-205306.png  | Bin 300343 -> 0 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/make_file_suffix |   2 -
+ University/OS_C_prog/MMN_11_OS/my_suffix/my_suffix | Bin 15800 -> 0 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/my_suffix.c      |  88 --------------------
+ .../my_suffix_pics/Shot-2024-04-12-202914.png      | Bin 80 -> 0 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203039.png      | Bin 198370 -> 0 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203127.png      | Bin 188612 -> 0 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203159.png      | Bin 193780 -> 0 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203229.png      | Bin 219152 -> 0 bytes
+ 14 files changed, 182 deletions(-)
+
+commit 379bceedccfd6902a894a0ba35ccb9353dae4f8f
+Author:     GioGioWasTaken <iyar.segev@gmail.com>
+AuthorDate: Mon Apr 15 18:00:56 2024 +0300
+Commit:     GioGioWasTaken <iyar.segev@gmail.com>
+CommitDate: Mon Apr 15 18:00:56 2024 +0300
+
+    Uni MMN11 intro to systems
+
+ University/OS_C_prog/MMN_11_OS.zip                 | Bin 0 -> 1333810 bytes
+ .../OS_C_prog/MMN_11_OS/my_add/make_file_add       |   2 +
+ University/OS_C_prog/MMN_11_OS/my_add/my_add       | Bin 0 -> 15704 bytes
+ University/OS_C_prog/MMN_11_OS/my_add/my_add.c     |  90 +++++++++++++++++++++
+ .../my_add/my_add_pics/Shot-2024-04-12-205213.png  | Bin 0 -> 287399 bytes
+ .../my_add/my_add_pics/Shot-2024-04-12-205306.png  | Bin 0 -> 300343 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/make_file_suffix |   2 +
+ University/OS_C_prog/MMN_11_OS/my_suffix/my_suffix | Bin 0 -> 15800 bytes
+ .../OS_C_prog/MMN_11_OS/my_suffix/my_suffix.c      |  88 ++++++++++++++++++++
+ .../my_suffix_pics/Shot-2024-04-12-202914.png      | Bin 0 -> 80 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203039.png      | Bin 0 -> 198370 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203127.png      | Bin 0 -> 188612 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203159.png      | Bin 0 -> 193780 bytes
+ .../my_suffix_pics/Shot-2024-04-12-203229.png      | Bin 0 -> 219152 bytes
+ 14 files changed, 182 insertions(+)

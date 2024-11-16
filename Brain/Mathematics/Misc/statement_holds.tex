@@ -1,0 +1,89 @@
+%! TEX root = ./statement_holds.tex
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin {document}
+
+\section{Preface}
+
+So I had this question in my mind today, of whether or not it can be proven that if a theorem about some operation holds true for 2 operands, it also holds true for infinitely many operands.
+
+Upon some thinking the answer I reached was hell no!
+
+So, what else is required, then?
+
+\section{Proof}
+
+Let \( H \) be a set with an associative operation \( * \) such that for all \( a, b, c \in H \), we have
+\[
+(a * b) * c = a * (b * c).
+\]
+Suppose also that for all \( a, b \in H \), the operation satisfies \( a * b = d \) for some fixed element \( d \in H \).
+
+We aim to show by induction that for any \( N \)-operand expression of the form
+\[
+a * b * c * \dots * z,
+\]
+where \( z \) is the \( N \)-th operand, the result of the operation is \( d \).
+
+\subsection{Base Case}
+For the base case of two operands, we are given that for any \( a, b \in H \), 
+\[
+a * b = d.
+\]
+Thus, the base case holds.
+
+\subsection{Inductive Hypothesis}
+Assume that for any \( k \) elements \( a_1, a_2, \ldots, a_k \in H \), we have
+\[
+a_1 * a_2 * \dots * a_k = d.
+\]
+This is our inductive hypothesis.
+
+\subsection{Inductive Step}
+We must show that if the hypothesis holds for \( k \) operands, then it also holds for \( k+1 \) operands. That is, we want to prove
+\[
+a_1 * a_2 * \dots * a_k * a_{k+1} = d.
+\]
+
+Using associativity, we can group the expression as follows:
+\[
+a_1 * a_2 * \dots * a_k * a_{k+1} = (a_1 * a_2 * \dots * a_k) * a_{k+1}.
+\]
+By the inductive hypothesis, we know that \( a_1 * a_2 * \dots * a_k = d \). Substituting this into the expression, we get:
+\[
+(a_1 * a_2 * \dots * a_k) * a_{k+1} = d * a_{k+1}.
+\]
+Finally, by the given assumption that \( a * b = d \) for all \( a, b \in H \), we know that \( d * a_{k+1} = d \).
+
+Thus, we have shown:
+\[
+a_1 * a_2 * \dots * a_k * a_{k+1} = d.
+\]
+
+\subsection{Conclusion}
+By induction, we have proven that for any \( N \)-operand expression \( a * b * c * \dots * z \) with \( a, b, c, \dots, z \in H \), the result of the operation is \( d \). Therefore,
+\[
+a * b * c * \dots * z = d
+\]
+for any finite number of operands in \( H \), which completes the proof.
+
+\subsection{Multiplication of Complex Numbers in Polar Form}
+Let us also consider the multiplication of two complex numbers in polar form. 
+
+If we have two complex numbers given by:
+\[
+z_1 = r_1 \text{cis}(\theta_1) \quad \text{and} \quad z_2 = r_2 \text{cis}(\theta_2),
+\]
+where \( r_1 \) and \( r_2 \) are the magnitudes (moduli) and \( \theta_1 \) and \( \theta_2 \) are the angles (arguments), the multiplication is given by:
+\[
+z_1 * z_2 = (r_1 \text{cis}(\theta_1)) * (r_2 \text{cis}(\theta_2)) = r_1 r_2 \text{cis}(\theta_1 + \theta_2).
+\]
+
+Now this by itself is quite useful, but given multiplication is associative in $\mathbb{C}$ as it is a field, we can now multiply however many complex numbers we like!
+
+
+\end {document}
+

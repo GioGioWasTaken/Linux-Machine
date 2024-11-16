@@ -1,0 +1,92 @@
+%! TEX root = ./{filename}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin {document}
+
+\section{Contents}
+
+Here I will prove and dicuss some proprities of polynomials, for fun and learning.
+
+\section{Polynomials}
+
+We define a polynomial as an algebraic expression consisting of one or more terms, where each term has a constant coefficient, and an unknown raised to some natural number n. 
+
+Ex.1: $P(x) = -4x^3 + 2x^2 + 4x + 3$ Where $ x\in\mathbb{R}$
+
+Ex.2: $P(z) = -3iz^3 + 2z^2 + 4z + (i+1) $ where $z \in\mathbb{C}$.
+
+Generally, a polynomial P is defined as:
+
+$ P(x) := a_n\cdot x^{n} + a_{n-1}\cdot x^{n-1}\dots a_2\cdot x^2 + a_1\cdot x + a_0$  $(n\in\mathbb{N})$\bigskip
+
+\subsection{Degree, leading coefficient}
+
+Where n is said to be the degree of the polynomial, and $a_n$ is called the leading coefficient.
+
+The leading coefficient cannot be 0, since that cleary defines a lower degree polynomial. This is true in all cases but in the case:
+$P(x)= 0$.
+\\
+In this case we say the degree of the polynomial is $-\infty$ or we say it has no degree. In any case, we permit this case to still be considered a polynomial
+
+\section{Addition}
+
+\subsection{Theorem 1}
+Theorem: Addition of a polynomial $P_1$ to a different polynomial $P_2$ will always result in a polynomial whose degree is smaller or equal to that of the higher degreed polynomial.  
+
+Proof:
+Let $ P_1$ be a general polynomial of degree n. Let $P_2$ be a general polynomial of degree k. Then:
+
+$P_3 = P_1 + P_2 =a_n\cdot x^{n} + a_{n-1}\cdot x^{n-1}\dots + a_k\cdot x^{k} + a_{k-1}\cdot x^{k-1}\dots $
+
+Then it will be seen clearly that if $k>n$ then k is the degree and vise versa, but if k=n then it might be that the terms cancel out.
+
+\subsection{Theorem 2}
+Theorem: Polynomials are closed under addition
+
+To prove that polynomials are closed under addition, we need to show that the sum of any two polynomials is also a polynomial.
+
+\begin{enumerate}
+    \[
+    f(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0,
+    \]
+    where \( a_i \) are constants (coefficients) and \( n \) is a non-negative integer (degree of the polynomial).
+    
+    Similarly, let \( g(x) \) be another polynomial:
+    \[
+    g(x) = b_m x^m + b_{m-1} x^{m-1} + \dots + b_1 x + b_0,
+    \]
+    where \( b_i \) are constants and \( m \) is a non-negative integer.
+    
+    \item \textbf{Adding the Polynomials}: The sum of \( f(x) \) and \( g(x) \) is:
+    \[
+    f(x) + g(x) = \left( a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 \right) + \left( b_m x^m + b_{m-1} x^{m-1} + \dots + b_1 x + b_0 \right).
+    \]
+    
+    \item \textbf{Combine Like Terms}: When we add these two polynomials, we add the coefficients of terms with the same powers of \( x \). This gives us a new polynomial:
+    \[
+    h(x) = c_k x^k + c_{k-1} x^{k-1} + \dots + c_1 x + c_0,
+    \]
+    where each \( c_i \) is the sum of the corresponding coefficients from \( f(x) \) and \( g(x) \):
+    \[
+    c_i = a_i + b_i.
+    \]
+    
+    \item \textbf{Conclusion}: Since each \( c_i \) is a sum of constants (which is also a constant), \( h(x) \) is also a polynomial. The degree of \( h(x) \) will be at most \( \max(n, m) \), which is a non-negative integer.
+
+\end{enumerate}
+
+Therefore, the sum \( f(x) + g(x) \) is a polynomial, proving that polynomials are \textbf{closed under addition}.
+
+
+\subsection{Multiplicative commutativity}
+
+$
+\frac A B
+$
+
+
+\end {document}
+
