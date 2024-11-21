@@ -20,8 +20,12 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
    - Reverse engineering: (beyond just parsing assembly when given a pwn challenge...)
        * solve aeg
        * find a better source of rev challs
-       * 
    - Game RE, embedded RE, this is cool, but for the future, maybe in the course?!?!
+
+- Math:
+    * Improve complex numbers algebra skill up to at least school level. 
+    * Convince yourself of the truth of several theorems.
+    * Improve trig skills and learn radians.
     
 - Programming: 
     * Either continue your compiler, or your OSdev :)
