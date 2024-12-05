@@ -1,0 +1,165 @@
+%! TEX root = ./{filename}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\begin {document}
+
+\section{Why?}
+
+Because it stroke me as interesting in math class! hehe.
+
+Also, I might have misused the term "well-defined", not sure.
+
+\section*{Function Composition and Constraints via Systems of Equations}
+
+Let \( n \) functions \( f_1, f_2, \dots, f_n \) be defined as:
+\[
+f_i: X_i \to X_{i+1}, \quad \text{for } i = 1, 2, \dots, n,
+\]
+where \( X_i \) denotes the domain of \( f_i \), and \( X_{i+1} \) denotes its codomain.
+
+\subsection*{Composite Function:}
+The composite function \( h \) is defined as:
+\[
+h(x) = f_n(f_{n-1}(\cdots f_1(x) \cdots)),
+\]
+where \( x \in X_1 \). The evaluation of \( h(x) \) imposes the following constraints:
+\begin{enumerate}
+    \item \( x \in X_1 \), such that \( f_1(x) \) is well-defined.
+    \item \( f_1(x) \in X_2 \), such that \( f_2(f_1(x)) \) is well-defined.
+    \item More generally, for \( i = 1, 2, \dots, n-1 \):
+    \[
+    f_i(f_{i-1}(\cdots f_1(x) \cdots)) \in X_{i+1}.
+    \]
+    \item Finally, \( f_n(f_{n-1}(\cdots f_1(x) \cdots)) \in X_{n+1} \).
+\end{enumerate}
+
+\subsection*{Equivalent System of Equations:}
+The constraints imposed by \( h(x) \) are equivalent to solving the system of equations:
+\[
+\begin{aligned}
+y_1 &= f_1(x), \\
+y_2 &= f_2(y_1), \\
+y_3 &= f_3(y_2), \\
+&\vdots \\
+y_n &= f_n(y_{n-1}),
+\end{aligned}
+\]
+where \( y_i \in X_{i+1} \) for \( i = 1, 2, \dots, n \). The solution set to this system is the same as the set of inputs \( x \in X_1 \) for which \( h(x) \) is defined and satisfies all constraints. This is because we can substitute each variable $Y_i_$ into the next equation.
+
+\subsection*{Generalization:}
+For any finite sequence of \( n \) functions \( f_1, f_2, \dots, f_n \), the constraints imposed by their composition can always be expressed as a system of \( n \) equations:
+\[
+y_i = f_i(y_{i-1}), \quad \text{where } y_0 = x \text{ and } i = 1, 2, \dots, n.
+\]
+Each equation in the system introduces a new constraint that must be satisfied for \( x \) to be a valid input to the composed function.
+
+Therefore, The process of composing functions inherently ties the output of one function to the domain of the next, effectively constraining the system to values that align with both functions' rules!
+
+\section*{Properties of Function Composition and Systems of Equations}
+
+\subsection*{One-to-One Mapping}
+
+So as we said: 
+For every valid \( x \) in the domain of the composition, there is exactly one corresponding solution to the system of equations:
+\[
+\begin{aligned}
+y_1 &= f_1(x), \\
+y_2 &= f_2(y_1), \\
+y_3 &= f_3(y_2), \\
+&\vdots \\
+y_n &= f_n(y_{n-1}).
+\end{aligned}
+\]
+Here, \( y_i \in X_{i+1} \) for \( i = 1, 2, \dots, n \), and \( h(x) = f_n(f_{n-1}(\dots f_1(x) \dots)) \) is the final output.
+
+Similarly, every solution of the system maps back to a valid evaluation of the composite function \( h(x) \), ensuring a one-to-one correspondence between the two representations.
+
+\subsection*{Reversibility}
+The process of converting a function composition into a system of equations is invertible, meaning the two representations are structurally equivalent. Specifically:
+\begin{itemize}
+    \item Given the composite function \( h(x) \), the equivalent system of equations can be constructed by breaking down each step of the composition.
+    \item furthermore, given the system of equations, the composite function \( h(x) \) can be recovered by substituting sequentially through the equations:
+    \[
+    h(x) = f_n(f_{n-1}(\dots f_1(x) \dots)).
+    \]
+\end{itemize}
+
+Thus, the equivalence ensures that the two frameworks describe the same relationships between inputs and outputs.
+
+\subsection*{1. Associativity of Function Composition}
+Let \( f: X \to Y \), \( g: Y \to Z \), and \( h: Z \to W \). Then:
+\[
+(h \circ g) \circ f = h \circ (g \circ f).
+\]
+
+\paragraph{Proof:} Using the system of equations:
+\begin{itemize}
+    \item For \( (h \circ g) \circ f \):
+    \[
+    \begin{aligned}
+    y_1 &= f(x), \\
+    y_2 &= g(y_1), \\
+    y_3 &= h(y_2).
+    \end{aligned}
+    \]
+    \item For \( h \circ (g \circ f) \):
+    \[
+    \begin{aligned}
+    y_1 &= f(x), \\
+    y_2 &= g(y_1), \\
+    y_3 &= h(y_2).
+    \end{aligned}
+    \]
+\end{itemize}
+In both cases, \( y_3 \) is computed identically, proving that \( (h \circ g) \circ f = h \circ (g \circ f) \).
+
+\subsection*{2. Identity Function}
+Let \( f: X \to Y \), and let \( \text{id}_X(x) = x \) and \( \text{id}_Y(y) = y \) be the identity functions on \( X \) and \( Y \), respectively. Then:
+\[
+f \circ \text{id}_X = f \quad \text{and} \quad \text{id}_Y \circ f = f.
+\]
+
+\paragraph{Proof:}
+\begin{itemize}
+    \item For \( f \circ \text{id}_X \):
+    \[
+    \begin{aligned}
+    y_1 &= \text{id}_X(x) = x, \\
+    y_2 &= f(y_1) = f(x).
+    \end{aligned}
+    \]
+    Thus, \( f \circ \text{id}_X = f \).
+    \item For \( \text{id}_Y \circ f \):
+    \[
+    \begin{aligned}
+    y_1 &= f(x), \\
+    y_2 &= \text{id}_Y(y_1) = y_1 = f(x).
+    \end{aligned}
+    \]
+    Thus, \( \text{id}_Y \circ f = f \).
+\end{itemize}
+
+\subsection*{3. Domain and Range Constraints}
+The domain of \( f \circ g \) is constrained by both \( g \) and \( f \):
+\[
+\text{Domain}(f \circ g) = \{ x \in \text{Domain}(g) \mid g(x) \in \text{Domain}(f) \}.
+\]
+
+\paragraph{Proof:}
+\begin{itemize}
+    \item \( y_1 = g(x) \) is well-defined if \( x \in \text{Domain}(g) \).
+    \item \( y_2 = f(y_1) \) is well-defined if \( y_1 \in \text{Domain}(f) \).
+\end{itemize}
+Thus, \( f \circ g \) is defined only when \( g(x) \in \text{Domain}(f) \), which constrains \( x \) to the given set.
+
+\section{Is this useful?}
+
+This might be completely elementary. I don't know enough math to say. But to me, it looked interesting and fun to take a look at.
+
+
+
+\end{document}
+

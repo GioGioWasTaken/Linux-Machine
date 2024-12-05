@@ -1,7 +1,9 @@
 # Stack pivoting
+
 Stack pivoting, is a general name for any exploitation technique that relies on moving ESP to a new address. This can have many uses.
 
 (The below is in 32 bit. Of course, the numbers vary in 64 bit systems.)
+
 ## EBP2RET 
 Situation: One can overwrite the saved `EBP` of the previous stack frame, but not the return address. We want to jump to `0xDEADBEEF`. 
 
@@ -25,5 +27,3 @@ ret:
     jmp [ESP] // ESP = 0xCAFEBABE now, and it points to our target address.
 
 ```
-
-

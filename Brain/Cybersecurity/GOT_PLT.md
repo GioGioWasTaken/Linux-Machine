@@ -32,7 +32,7 @@ read@got:
 
 With PIE disabled, the GOT's location is fixed and known.
 However, the contents of the GOT (addresses in libc) are still randomized by ASLR.
-Essentially, while I know statically the value of func@got, I don't know the value of *func@got.
+Essentially, while I know statically the value of func@got(a fixed memory address), I don't know the value of *func@got.
 
 
 ## The Attacker's Challenge:

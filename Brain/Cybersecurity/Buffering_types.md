@@ -14,3 +14,23 @@
 
     -  the function can also take a parameter fully buffered, `referred to as _IOFBF`
 - The function `fflush` may be used to force  the  block  out  early.
+
+- They of course each have numerical values:
+    * IONBF: 0 (Unbuffered):
+	+ Since this one is unbuffered, a null pointer, and a size of 0 are passed as parameters.
+    * IOLBF: 1 (Line buffered)
+    * IOFBF: 2 (Fully buffered)
+
+- Why use buffers?
+ * Buffers reduce the number of read() and write() system calls, improving performance by minimizing the overhead of kernel-user space transitions.
+
+
+
+# Write order
+
+
+Buffers, in general, are written in memory from lower to higher memory. Seeing as the stack grows downwards, if we overflow a buffer at the top of the stack, it will reach higher and higher addresses.
+
+
+
+![buffers write demonstration:](assets/buffer_write_order.png)

@@ -1,0 +1,165 @@
+%! TEX root = ./{matrix_first_definitions.tex}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\begin{document}
+
+\section{Definition of a Matrix}
+
+A \textbf{matrix} is a rectangular array of numbers, symbols, or expressions, arranged in rows and columns. It is typically denoted as $A = [a_{ij}]$, where $a_{ij}$ represents the element in the $i$-th row and $j$-th column.
+
+\subsection{Size of a matrix}
+
+A matrix's size is denoted in terms of its rows and columsn. So:
+
+$M_{m \times n}$ 
+
+
+\subsection{Diagonal in a Matrix}
+In a matrix $A = [a_{ij}]$, the \textbf{diagonal} refers to the elements $a_{ii}$ where the row index equals the column index. For example, in a square matrix, the diagonal runs from the top-left to the bottom-right of the matrix:
+\[
+\text{Diagonal elements: } a_{11}, a_{22}, a_{33}, \ldots, a_{nn}.
+\]
+
+\subsection{Square Matrix}
+A \textbf{square matrix} is a matrix with the same number of rows and columns, i.e., if the matrix $A$ is of order $n \times n$. For example:
+\[
+A =
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{bmatrix}
+\]
+is a square matrix of order $3 \times 3$.
+
+\section{Different Matrices}
+
+\subsection{Identity Matrix}
+An \textbf{identity matrix} is a square matrix $I_n$ of order $n$ with ones on the main diagonal and zeros elsewhere:
+\[
+I_n =
+\begin{bmatrix}
+1 & 0 & 0 & \cdots & 0 \\
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1
+\end{bmatrix}.
+\]
+
+\subsection{Zero Matrix}
+A \textbf{zero matrix} is a matrix in which all elements are zero. For a matrix of size $m \times n$, it is denoted as $O_{m \times n}$:
+\[
+O_{m \times n} =
+\begin{bmatrix}
+0 & 0 & \cdots & 0 \\
+0 & 0 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 0
+\end{bmatrix}.
+\]
+
+\subsection{Scalar Matrix}
+A \textbf{scalar matrix} is a square matrix in which all the diagonal elements are equal and all off-diagonal elements are zero. For a scalar $c$, it is represented as:
+\[
+S = c I_n = 
+\begin{bmatrix}
+c & 0 & 0 & \cdots & 0 \\
+0 & c & 0 & \cdots & 0 \\
+0 & 0 & c & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & c
+\end{bmatrix}.
+\]
+
+\subsection{Transpose of a Matrix}
+The \textbf{transpose} of a matrix $A$, denoted $A^\top$, is obtained by interchanging its rows and columns. For $A = [a_{ij}]$, the transpose $A^\top = [a_{ji}]$. For example:
+\[
+A =
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{bmatrix}, \quad
+A^\top =
+\begin{bmatrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6
+\end{bmatrix}.
+\]
+
+\subsection{Symmetric Matrix}
+A \textbf{symmetric matrix} is a square matrix $A$ that satisfies $A^\top = A$, where $A^\top$ is the transpose of $A$. For example:
+\[
+A =
+\begin{bmatrix}
+a & b & c \\
+b & d & e \\
+c & e & f
+\end{bmatrix}, \quad \text{where } A^\top = 
+\begin{bmatrix}
+a & b & c \\
+b & d & e \\
+c & e & f
+\end{bmatrix}.
+\]
+
+So, for a matrix to be symmetric, it must be a square matrix, and must also meet the condition that:
+$\forall i,j: a_{ij} =a_{ji}$
+
+\subsection{Skew-Symmetric Matrix}
+A \textbf{skew-symmetric matrix} is a square matrix $A$ that satisfies $A^\top = -A$. Additionally, all diagonal elements of a skew-symmetric matrix must be zero. For example:
+\[
+A =
+\begin{bmatrix}
+0 & a & b \\
+-a & 0 & c \\
+-b & -c & 0
+\end{bmatrix}.
+\]
+
+similarily, here it must meet the condition
+$\forall i,j: a_{ij} =-a_{ji}$
+
+\subsection{Upper Triangular Matrix}
+An \textbf{upper triangular matrix} is a square matrix in which all elements below the main diagonal are zero. For example:
+\[
+U =
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+0 & a_{22} & a_{23} & \cdots & a_{2n} \\
+0 & 0 & a_{33} & \cdots & a_{3n} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & a_{nn}
+\end{bmatrix}.
+\]
+
+Therefore it must be that:
+$\forall i,j, i>j, a_{ij} = 0$
+
+\subsubsection{Lower Triangular Matrix}
+A \textbf{lower triangular matrix} is a square matrix in which all elements above the main diagonal are zero. For example:
+\[
+L =
+\begin{bmatrix}
+a_{11} & 0 & 0 & \cdots & 0 \\
+a_{21} & a_{22} & 0 & \cdots & 0 \\
+a_{31} & a_{32} & a_{33} & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & a_{n3} & \cdots & a_{nn}
+\end{bmatrix}.
+\]
+\section{Operations on matrices}
+
+\subsection{Addition}
+
+\subsubsection{Subtraction}
+
+Similarily,
+
+\subsection{Multiplication}
+
+\end{document}
