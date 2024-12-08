@@ -75,6 +75,9 @@ We define a `segment` as an array that contains the following: (I will not be wr
 
 [!Attention] But even so, it's common for an executable to have a ".text" section for the code and ".data" section for initialized data.
 
+
+Sections can be viewed with `objdump <binary> -h`
+
 - Libraries don't have segments, but only sections because they are used for linking purposes.
 
 A compiled program’s memory is (mainly) divided into five sections: `text`, `data`, `bss`, `heap`, and `stack`. Each segment represents a special portion of memory that is set aside for a certain purpose.
@@ -102,6 +105,9 @@ Helpful information curated:
 
 ### ReadELF output:
 
+`
+readelf -l <binary>
+`
 E.X:
 
 `
@@ -133,6 +139,72 @@ LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
 	    This is typical for the code section, which doesn't need extra memory for uninitialized data.
 
 	- And lastly, `Align` (0x200000).
+
+
+
+```
+
+readelf -lW lnstat (W for wide, better output)
+
+Elf file type is DYN (Position-Independent Executable file)
+Entry point 0x1c00
+There are 9 program headers, starting at offset 64
+
+Program Headers:
+Type           Offset   VirtAddr           PhysAddr           FileSiz  MemSiz   Flg Align
+PHDR           0x000040 0x0000000000000040 0x0000000000000040 0x0001f8 0x0001f8 R   0x8
+INTERP         0x000238 0x0000000000000238 0x0000000000000238 0x00001b 0x00001b R   0x1
+[Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+LOAD           0x000000 0x0000000000000000 0x0000000000000000 0x003f7c 0x003f7c R E 0x10000
+LOAD           0x00fc48 0x000000000001fc48 0x000000000001fc48 0x000528 0x001190 RW  0x10000
+DYNAMIC        0x00fc58 0x000000000001fc58 0x000000000001fc58 0x000200 0x000200 RW  0x8
+NOTE           0x000254 0x0000000000000254 0x0000000000000254 0x0000e0 0x0000e0 R   0x4
+GNU_EH_FRAME   0x003610 0x0000000000003610 0x0000000000003610 0x0001b4 0x0001b4 R   0x4
+GNU_STACK      0x000000 0x0000000000000000 0x0000000000000000 0x000000 0x000000 RW  0x10
+GNU_RELRO      0x00fc48 0x000000000001fc48 0x000000000001fc48 0x0003b8 0x0003b8 R   0x1
+
+ Section to Segment mapping:
+ Segment Sections...
+ 00     
+ 01     .interp 
+ 02     .interp .note.gnu.build-id .note.ABI-tag .note.package .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .text .fini .rodata .eh_frame_hdr .eh_frame 
+ 03     .init_array .fini_array .dynamic .got .data .bss 
+ 04     .dynamic 
+ 05     .note.gnu.build-id .note.ABI-tag .note.package 
+ 06     .eh_frame_hdr 
+ 07     
+ 08     .init_array .fini_array .dynamic .got 
+
+```
+The above program has 9 program headers, then, the segment mapping indicates in which program header (from 00 to 08) each section is located.
+
+PHDR = 00
+Dynamic = 05, etc.
+
+### An ELF's Segments:
+
+#### PHDR:
+
+Program HeaDeR, for its metadata and the header tables.
+
+#### INTRP
+
+Indicates the path of the loader to use to load the binary into memory.
+
+#### LOAD
+
+These headers are used to indicate how to load a binary into memory. Each LOAD header indicates a region of memory (size, permissions and alignment) and indicates the bytes of the ELF binary to copy in there.
+
+Breakdown example:
+
+the second one has a size of 0x1190, should be located at 0x1fc48 with permissions read and write and will be filled with 0x528 from the offset 0xfc48 (it doesn't fill all the reserved space). This memory will contain the sections : `.init_array .fini_array .dynamic .got .data .bss`
+
+#### Dynamic
+
+This header helps to link programs to their library dependencies and apply relocations. Check the 
+`.dynamic` section, which is the only section mapped to the segment.
+
+More info found [here](https://book.hacktricks.xyz/binary-exploitation/basic-stack-binary-exploitation-methodology/elf-tricks).
 
 #### Misc: 
 

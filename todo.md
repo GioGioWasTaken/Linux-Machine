@@ -1,6 +1,6 @@
 # Gio's Amazing Todo-list
 
-I gave height a try but I didn't particuarily enjoy it. I like to keep things simple, and don't use most of its functionality, so I decided something that I can use within vim is perfect, hate leaving vim anyways :)
+I gave Height a try but I didn't particuarily enjoy it. I like to keep things simple, and don't use most of its functionality, so I decided something that I can use within vim is perfect, hate leaving vim anyways :)
 
 - Hacking:
    - Classic Binary exploitation: 
@@ -14,19 +14,14 @@ I gave height a try but I didn't particuarily enjoy it. I like to keep things si
        * solve syscall
        * solve rootkit
        * softmmu, towelroot, kcrc, exynos
-       * [mega](https://github.com/xairy/linux-kernel-exploitation?tab=readme-ov-file#practice) thread
-   - Heap exploitation:
+       * [mega thread](https://github.com/xairy/linux-kernel-exploitation?tab=readme-ov-file#practice) thread
+   - Heap exploitation
        * 
    - Reverse engineering: (beyond just parsing assembly when given a pwn challenge...)
        * solve aeg
        * find a better source of rev challs
    - Game RE, embedded RE, this is cool, but for the future, maybe in the course?!?!
 
-- Math:
-    * Improve complex numbers algebra skill up to at least school level. 
-    * Convince yourself of the truth of several theorems.
-    * Improve trig skills and learn radians.
-    
 - Programming: 
     * Either continue your compiler, or your OSdev :)
 

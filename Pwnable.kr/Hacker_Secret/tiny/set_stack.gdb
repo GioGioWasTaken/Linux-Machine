@@ -1,27 +1,22 @@
-set *(int*)0xffffde84 = *(int*)0xffffde88
-set *(int*)0xffffde88 = *(int*)0xffffde8c
-set *(int*)0xffffde8c = *(int*)0xffffde90
-set *(int*)0xffffde90 = *(int*)0xffffde94
-set *(int*)0xffffde94 = *(int*)0xffffde98
-set *(int*)0xffffde98 = *(int*)0xffffde9c
-set *(int*)0xffffde9c = *(int*)0xffffdea0
-set *(int*)0xffffdea0 = *(int*)0xffffdea4
-set *(int*)0xffffdea4 = *(int*)0xffffdea8
-set *(int*)0xffffdea8 = *(int*)0xffffdeac
-set *(int*)0xffffdeac = *(int*)0xffffdeb0
-set *(int*)0xffffdeb0 = *(int*)0xffffdeb4
-set *(int*)0xffffdeb4 = *(int*)0xffffdeb8
-set *(int*)0xffffdeb8 = *(int*)0xffffdebc
-set *(int*)0xffffdebc = *(int*)0xffffdec0
-set *(int*)0xffffdec0 = *(int*)0xffffdec4
-set *(int*)0xffffdec4 = *(int*)0xffffdec8
-set *(int*)0xffffdec8 = *(int*)0xffffdecc
-set *(int*)0xffffdecc = *(int*)0xffffded0
-set *(int*)0xffffded0 = *(int*)0xffffded4
 set *(int*)0xffffded4 = *(int*)0xffffded8
 set *(int*)0xffffded8 = *(int*)0xffffdedc
-
-
-set *(int*) 0xffffdfde= 0x6e69622f
-
-
+set *(int*)0xffffdedc = *(int*)0xffffdee0
+set *(int*)0xffffdee0 = *(int*)0xffffdee4
+set *(int*)0xffffdee4 = *(int*)0xffffdee8
+set *(int*)0xffffdee8 = *(int*)0xffffdeec
+set *(int*)0xffffdeec = *(int*)0xffffdef0
+set *(int*)0xffffdef0 = *(int*)0xffffdef4
+set *(int*)0xffffdef4 = *(int*)0xffffdef8
+set *(int*)0xffffdef8 = *(int*)0xffffdefc
+set *(int*)0xffffdefc = *(int*)0xffffdf00
+set *(int*)0xffffdf00 = *(int*)0xffffdf04
+set *(int*)0xffffdf04 = *(int*)0xffffdf08
+set *(int*)0xffffdf08 = *(int*)0xffffdf0c
+set *(int*)0xffffdf0c = *(int*)0xffffdf10
+set *(int*)0xffffdf10 = *(int*)0xffffdf14
+set *(int*)0xffffdf14 = *(int*)0xffffdf18
+set *(int*)0xffffdf18 = *(int*)0xffffdf1c
+set *(int*)0xffffdf1c = *(int*)0xffffdf20
+set *(int*)0xffffdf20 = *(int*)0xffffdf24
+set *(int*)0xffffdf24 = *(int*)0xffffdf28
+set *(int*)0xffffdf28 = *(int*)0xffffdf2c
