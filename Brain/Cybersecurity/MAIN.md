@@ -37,6 +37,7 @@ import time
 context.arch="amd64"
 context.kernel="amd64"
 context.os="linux"
+context.log_level="debug"
 
 
 binary_name = "[Enter Name]"

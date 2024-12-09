@@ -1,5 +1,26 @@
 # Program flow
 
+## canary leak with My_hash
+The program is using the rand() function wrong, which will always return the same number when not provided a seed.
+
+the seed of rand, set by srand() is time(0). This means we can compute on our side 8 values for the current time (in seconds), using the same pseudo-random generator, and use this info to get the stack canary, which will be constant across the entire binary.
+
+For my comfort of calculation, i'll refer to the vars as var\[1,7]
+
+sum of :
+
+First: var\_1 + var\_5
+second: var\_2- var\_3 
+Third:  var\_7 +canary
+Fourth: var\_4 - var_\6
+
+(var_1 + var_5) + (var_2 -var_3) + (var_7 +canary) + (var_4 -var_6) = total
+canary = (total +var_6 +var_3) -(var_2  +var_7 +var_4+ var_1 + var_5) )
+
+
+
+
+## overflow
 After some reversing, this is the "original code" i believe was there: 
 
 ```C
@@ -14,12 +35,13 @@ unsigned int process_hash()
     memset(decoded_buf, 0, sizeof(decoded_buf));
     while ( getchar() != '\n' )
         ;
+    // base 64 input is in the .bss section, and is 0x400 in size.
     memset(base_64_input, 0, sizeof(base_64_input));
     fgets(base_64_input, 1024, stdin);
     memset(decoded_buf, 0, sizeof(decoded_buf));
     length = Base64Decode(base_64_input, decoded_buf);
-    ptr = calc_md5(decoded_buf, length);
-    printf("MD5(data) : %s\n", ptr);
+    str_ptr = calc_md5(decoded_buf, length);
+    printf("MD5(data) : %s\n", str_ptr);
     free(ptr);
     return __readgsdword(0x14u) ^ canary;
 }
@@ -85,3 +107,5 @@ int __cdecl Base64Decode(const char *base_64_input, int decoded_buf)
 ```
 
 Ah!, Bio_read doesn't have any length check. it just assumes the decoded value will fit inside the buffer given to it. 
+
+All we need to do is figure out the offset, and provide our input. We will leak the libc base with a classic `ret2plt` and then call `system` with /bin/sh to get a shell.
