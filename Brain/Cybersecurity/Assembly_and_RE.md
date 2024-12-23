@@ -70,6 +70,53 @@ byte into the corresponding extended register without creating any null bytes in
 - GDB has an option to deobscuify CPP function names. Use it.
 
 - Since function arguments are also passed on the stack, there needs to be space for any that this function wants to pass to another.  So while a function might only need x amount of bytes for local variables, $esp is often decremented by a bigger bytesize so that there is space for function arguments.
+- 
+
+
+## Distinguishing Signed and Unsigned Comparisons
+
+After cmp, the processor uses different conditional jump instructions to handle signed and unsigned comparisons:
+
+Unsigned Conditional Jumps:
+`
+ja (jump above): For > in unsigned terms.
+jae (jump above or equal): For >= in unsigned terms.
+jb (jump below): For < in unsigned terms.
+jbe (jump below or equal): For <= in unsigned terms.
+`
+
+Signed Conditional Jumps:
+`
+jg (jump greater): For > in signed terms.
+jge (jump greater or equal): For >= in signed terms.
+jl (jump less): For < in signed terms.
+jle (jump less or equal): For <= in signed terms.
+`
+#### C Code example
+```c
+if (x > 500) {
+    // Do something
+}```
+will turn into: 
+`
+cmp x, 500       ; Compare x with 500
+jg signed_jump   ; Jump if x > 500 (interpreted as signed)
+`
+
+```C
+
+if ((unsigned)x > 500) {
+    // Do something
+}
+
+```
+will turn into:
+`
+cmp x, 500       ; Compare x with 500
+ja unsigned_jump ; Jump if x > 500 (interpreted as unsigned)
+`
+
+
 # More assembly instructions
 
 - `sete`, `setl`, `setge`, all check the result of the previous `cmp` operation, stored in the CPU flags, and respectively store the result in the operand passed to it(set equal, set less, set greater equal )
