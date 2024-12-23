@@ -2,15 +2,15 @@ from z3 import *
 
 def main():
     # Variables
-    public_key = Int("public_key")
-    private_key = Int("private_key")
+    p_var = Int("p_var")
+    q_var = Int("q_var")
     e_exponent = Int("e_exponent")
     d_exponent = Int("d_exponent")
 
     # combininations of existing vars
-    keys_product = public_key * private_key
+    keys_product = p_var * q_var
     
-    product_off1 = ( public_key -1) *(private_key-1)
+    product_off1 = ( p_var -1) *(q_var-1)
 
     # Constraints
     condition1 = e_exponent < product_off1
@@ -23,13 +23,9 @@ def main():
     condition4= keys_product>0xFF
 
     s = Solver()
-    s.add(negative_constraint)
+    # s.add(negative_constraint)
+    s.add(e_exponent > product_off1)
     s.add(condition4)
-
-    block_solution = [private_key != -128, d_exponent != 1, e_exponent != 388, public_key != -2,]
-
-    for block in block_solution:
-        s.add(block)
 
     if s.check() == sat:
         model = s.model()
