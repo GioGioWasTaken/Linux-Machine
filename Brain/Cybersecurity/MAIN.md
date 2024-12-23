@@ -25,6 +25,10 @@
 - Remember that missing `pop eax` case? don't make ROP chains before you verify that you control the registers you need to control!
 
 
+If you are running into issues of technicality, refer to (this note)[exploit_pitfalls.md]
+
+
+
 # Templates
 
 ## Pwntools template
