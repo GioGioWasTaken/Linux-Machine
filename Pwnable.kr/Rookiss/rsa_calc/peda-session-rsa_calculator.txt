@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-break *0x0000000000400DAF
-=======
-break *0x400F94
->>>>>>> 6bbca1b (merging ras calc)
+break *0x000000000400F6E
 

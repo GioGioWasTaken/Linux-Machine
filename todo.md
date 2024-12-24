@@ -5,7 +5,6 @@ I gave Height a try but I didn't particuarily enjoy it. I like to keep things si
 - Hacking:
    - Classic Binary exploitation: 
         *  note, rsa calc
-        *  master the decompiler.
    - Writing shellcode : 
         + learn the remaining knowledge you need to solve asm.
         + solve asm
@@ -35,4 +34,3 @@ I gave Height a try but I didn't particuarily enjoy it. I like to keep things si
 
 - General: 
     * Start working towards a "second brain". I really like the idea. Especially inspired by [this guy](https://wiki.nikiv.dev/). 
-    * make a reddit post in tmux checking the most vimlike way possible to yank text.
