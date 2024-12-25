@@ -23,8 +23,7 @@ def main():
     condition4= keys_product>0xFF
 
     s = Solver()
-    # s.add(negative_constraint)
-    s.add(e_exponent > product_off1)
+    s.add(negative_constraint)
     s.add(condition4)
 
     if s.check() == sat:
