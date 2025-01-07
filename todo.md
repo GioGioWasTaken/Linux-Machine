@@ -4,7 +4,7 @@ I gave Height a try but I didn't particuarily enjoy it. I like to keep things si
 
 - Hacking:
    - Classic Binary exploitation: 
-        *  note, rsa calc
+        *  note
    - Writing shellcode : 
         + learn the remaining knowledge you need to solve asm.
         + solve asm
