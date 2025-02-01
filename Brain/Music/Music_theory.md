@@ -11,7 +11,7 @@ This is a garbled mess of my current understanding of music theory, as tailored 
 ## The white keys
 It starts with 7 key cycles. We will take the C key as an example given that that's the example I was first intorduced with. A piano is divided into multiple such sets of keys.
 
-The first one starting from the left will be given a letter [A,G], depending on the piano, and the number 1. The next letter which equals 1 when its position (1 indexed) is modulo'd with 7, will be given the letter and the number 2. So key 8 would be A2, since 8%7=1=A. This repeats all throughout the white keys of the piano. The difference between two such notes(e.g. A1 and A2), is that A2 is one octave higher then A1. This means that its frequency is twice as large.
+The first one starting from the left will be given a letter \[A,G], depending on the piano, and the number 1. The next letter which equals 1 when its position (1 indexed) is modulo'd with 7, will be given the letter and the number 2. So key 8 would be A2, since 8%7=1=A. This repeats all throughout the white keys of the piano. The difference between two such notes(e.g. A1 and A2), is that A2 is one octave higher then A1. This means that its frequency is twice as large.
 
 ## The black keys
 
@@ -73,6 +73,18 @@ that is to say the difference between C to D is W, a whole step, D-> E W, E-> F 
 
 C1, D1, E1, F1, G1, A1, B1, C2 would be one specific version of the C major scale.
 C2, D2, E2, F2, G2, A2, B2, C3 would be another version of the same scale, just an octave higher.
+
+
+The reason we have scales in the first place, is so that we can (almost accurately) constrain the amount of keys one would need to press in order to play a certain song, (we would say that song is in that scale). [[Might be wrong]]
+
+
+Songs that are written to be in a specific scale, tend to evoke similar impressions.
+
+
+
+## Whats a chord?
+
+
 
 
 ### Why start at C?
