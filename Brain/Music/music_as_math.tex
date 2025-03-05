@@ -1,0 +1,114 @@
+%! TEX root = ./{filename}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\title{A Mathematical Framework for Music}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Foundations}
+It starts with a single note, which we shall call $A_1$, vibrating at a frequency $X$. Shortly after, a note $A_2$ follows, vibrating at a frequency $2X$. The difference between $A_1$ and $A_2$ is an \textbf{octave}.
+
+We find notes with simple frequency ratios (small integer numerators and denominators) pleasing to the ear.
+
+
+\begin{equation}
+    q = 2^{1/n}
+\end{equation}
+
+Where $n$ is the number of notes per octave. Any note on the instrument can be located within a geometric series, one with ratio $q$ and one with ratio $1/q$. Each octave on the instrument corresponds to one such geometric series, and the set of all octaves forms the complete set of such series.
+
+
+It will follow that q is a semi-tone, and that the first number in such a series, $A_1$ is the tonal center. our "base note".
+
+\section{Notes and Scales}
+Each note's frequency is given by:
+
+\begin{equation}
+    f_k = A \cdot q^k
+\end{equation}
+
+where $k$ is the note index. 
+
+Scales are subsets of this sequence. For example, in a 12-tone equal temperament system, the major scale consists of the indices:
+
+\begin{equation}
+    \{0, 2, 4, 5, 7, 9, 11\}
+\end{equation}
+
+relative to the starting note.
+
+\section{Harmonic Intervals}
+Two notes $f_k$ and $f_m$ form a ratio:
+
+\begin{equation}
+    r = \frac{f_m}{f_k} = q^{m-k}
+\end{equation}
+
+which can be approximated by simple fractions:
+
+\begin{itemize}
+    \item Octave: $2/1$
+    \item Perfect Fifth: $3/2$
+    \item Perfect Fourth: $4/3$
+    \item Major Third: $5/4$
+    \item Minor Third: $6/5$
+\end{itemize}
+
+So, for example:
+
+We know that \( 1.059 \approx 2^{1/12} \).
+
+\[
+3/2 = 1.5 = (1.059)^{m-k}
+\]
+
+Taking the logarithm of both sides:
+
+\[
+\log(1.5) = (m-k) \cdot \log(1.059)
+\]
+
+Solving for \( m-k \):
+
+\[
+m-k \approx \frac{\log(1.5)}{\log(1.059)} \approx 7
+\]
+ 
+Which is perfectly consistant with reality, given that it's exactly 7 half steps away on a piano!
+
+
+\section{Chords as Frequency Sets}
+A chord is a set of notes whose frequencies maintain harmonic relationships. For example:
+
+\begin{itemize}
+    \item \textbf{Major Chord} (C-E-G): Frequencies in $4:5:6$ ratio.
+    \item \textbf{Minor Chord} (C-E$\flat$-G): Frequencies in $10:12:15$.
+    \item \textbf{Diminished Chord} (C-E$\flat$-G$\flat$): Frequencies in $160:192:231$.
+\end{itemize}
+
+\section{Modulation as a Transform}
+Modulation (changing keys) can be described as shifting all notes by $m$ semitones:
+
+\begin{equation}
+    f_k' = A \cdot q^{k+m}
+\end{equation}
+
+which is equivalent to multiplying all frequencies by $q^m$.
+
+\section{Definitions of Musical Terms}
+\textbf{Key}: A key defines the tonal center and set of notes forming a scale in a piece of music.
+
+\textbf{Consonance}: The quality of notes sounding stable or pleasant together, often corresponding to simple frequency ratios.
+
+\textbf{Dissonance}: The quality of notes sounding unstable or tense, often corresponding to more complex frequency ratios.
+
+\textbf{Perfect Fifth}: The interval between two notes with a frequency ratio of $3/2$. It is called ``perfect'' due to its strong harmonic stability and is one of the fundamental building blocks of Western harmony.
+
+\end{document}
