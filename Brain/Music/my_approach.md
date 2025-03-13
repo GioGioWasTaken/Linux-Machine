@@ -32,7 +32,7 @@ practice that's Only technical will not bring you very far and will be very very
 
 ###  Immersion(repertoire practice):
 
-Like I said before, this is where the real learning happens(from what I currently know about learning anything). Breaking pieaces that i want to play into smaller chunks, and minimizing my mistakes. 
+Like I said before, this is where the real learning happens(from what I currently know about learning anything). Breaking pieces that i want to play into smaller chunks, and minimizing my mistakes. 
 
 - In order to maximise a positive feedback loop (play correct and your muscles will get used to playing correct), it is essential that i stop before playing mistakes, that I play slow at first, prioritising accuracy over speed. 
     * think of this like gradient descent. The cost function is stopping to play, and it tunes your muscles slowly to not repeat those movements which make you stop playing.
